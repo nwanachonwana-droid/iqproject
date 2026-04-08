@@ -1,8 +1,9 @@
 {
   "schema_version": "1.0",
   "sport": "soccer",
-  "generated_at": "2026-04-08T14:06:09.134981Z",
+  "generated_at": "2026-04-08T15:08:25.896021Z",
   "data_date": "2026-04-08",
+  "model_version": "v1.0",
   "status": "ACTIVE",
   "picks": [],
   "summary": {

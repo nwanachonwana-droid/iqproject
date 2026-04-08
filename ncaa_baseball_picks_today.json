@@ -1,8 +1,9 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-04-08T14:06:09.132706Z",
+  "generated_at": "2026-04-08T15:08:25.893450Z",
   "data_date": "2026-04-08",
+  "model_version": "v1.0",
   "status": "PROVEN",
   "picks": [
     {
@@ -17,10 +18,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
       "result": null,
-      "outcome": null
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847628",
@@ -34,10 +37,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054461Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847971",
@@ -51,10 +56,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054508Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847282",
@@ -68,10 +75,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054517Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401848153",
@@ -85,10 +94,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054524Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401849907",
@@ -102,10 +113,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054536Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847075",
@@ -119,10 +132,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054544Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847409",
@@ -136,10 +151,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054552Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401853425",
@@ -153,10 +170,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054558Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401848481",
@@ -170,10 +189,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054564Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401848434",
@@ -187,10 +208,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
       "result": null,
-      "outcome": null
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847130",
@@ -204,10 +227,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054569Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401858044",
@@ -221,10 +246,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054575Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847366",
@@ -238,10 +265,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054582Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847531",
@@ -255,10 +284,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054588Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401858061",
@@ -272,10 +303,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054594Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847324",
@@ -289,10 +322,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054601Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401854423",
@@ -306,10 +341,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054606Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401853679",
@@ -323,10 +360,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054613Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401853516",
@@ -340,10 +379,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054620Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401852349",
@@ -357,10 +398,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054627Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847599",
@@ -374,10 +417,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054633Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401851917",
@@ -391,10 +436,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054640Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401850052",
@@ -408,10 +455,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054647Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401848048",
@@ -425,10 +474,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054654Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847687",
@@ -442,10 +493,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054660Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401853449",
@@ -459,10 +512,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-08T15:08:26.054667Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401856315",
@@ -476,10 +531,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
       "result": null,
-      "outcome": null
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-08-401856191",
@@ -493,10 +550,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
       "result": null,
-      "outcome": null
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-08-401857284",
@@ -510,10 +569,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
       "result": null,
-      "outcome": null
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-08-401850084",
@@ -527,10 +588,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054674Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401854425",
@@ -544,10 +607,12 @@
       "market_prob_home": null,
       "market_prob_away": null,
       "market_line_home": null,
+      "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-08T15:08:26.054680Z"
     }
   ],
   "summary": {
