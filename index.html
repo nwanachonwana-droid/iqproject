@@ -55,7 +55,7 @@ body{font-family:var(--F);background:var(--bg);color:var(--ink);min-height:100vh
 /* TABLE */
 .tw{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:720px}
-thead tr{border-bottom:1px solid var(--rule);background:var(--bg2);position:sticky;top:52px;z-index:9}
+thead tr{border-bottom:1px solid var(--rule);background:var(--bg2);position:sticky;top:90px;z-index:9}
 thead th{font-family:var(--M);font-size:.56rem;font-weight:500;color:var(--ink4);text-transform:uppercase;letter-spacing:.14em;padding:.6rem 1rem;text-align:left;white-space:nowrap;border-right:1px solid var(--rule)}
 thead th:last-child{border-right:none}
 th.r,td.r{text-align:right}
@@ -64,8 +64,8 @@ tbody tr{border-bottom:1px solid var(--rule);animation:ap .2s ease both}
 tbody tr:hover{background:var(--bg2)}
 tbody td{padding:.82rem 1rem;vertical-align:middle;border-right:1px solid var(--rule);font-size:.81rem}
 tbody td:last-child{border-right:none}
-.c-sport{width:110px}.c-game{min-width:190px}.c-pick{width:130px}
-.c-model{width:100px}.c-mkt{width:100px}.c-edge{width:85px}.c-tier{width:95px}.c-res{width:76px}
+.c-sport{width:100px}.c-game{min-width:180px}.c-pick{min-width:160px;width:180px}
+.c-model{width:95px}.c-mkt{width:95px}.c-edge{width:80px}.c-tier{width:90px}.c-res{width:72px}
 
 /* CELL PARTS */
 .badge{font-family:var(--M);font-size:.54rem;text-transform:uppercase;letter-spacing:.1em;padding:.1rem .38rem;border-radius:2px;display:inline-block;font-weight:500}
@@ -168,6 +168,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
     <div class="blbl" id="today-lbl">—</div>
     <div class="filts">
       <button class="filt on" onclick="setF('all',this)">All sports</button>
+      <button class="filt" onclick="setF('nba',this)">NBA</button>
       <button class="filt" onclick="setF('ncaa_basketball',this)">NCAA Basketball</button>
       <button class="filt" onclick="setF('mlb',this)">MLB</button>
       <button class="filt" onclick="setF('nhl',this)">NHL</button>
@@ -208,7 +209,8 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   <div class="bar">
     <div class="blbl">Live record — from site launch</div>
     <div class="filts">
-      <button class="filt on" onclick="setPS('ncaa_basketball',this)">NCAA Basketball</button>
+      <button class="filt on" onclick="setPS('nba',this)">NBA</button>
+      <button class="filt" onclick="setPS('ncaa_basketball',this)">NCAA Basketball</button>
       <button class="filt" onclick="setPS('mlb',this)">MLB</button>
       <button class="filt" onclick="setPS('nhl',this)">NHL</button>
       <button class="filt" onclick="setPS('ncaa_baseball',this)">NCAA Baseball</button>
@@ -283,7 +285,7 @@ const META={
     sources:['PrizePicks / Underdog - prop lines, free public API','NBA Stats API - player splits, free','Baseball Savant - Statcast player splits, free'],
     limits:['NBA props market highly efficient - 5% edge required','Marcel blend needs 10+ GP for meaningful credibility weight','Injury status must be confirmed pre-game']},
 };
-const SPORTS=Object.keys(META).filter(s=>s!=='props');
+const SPORTS=Object.keys(META).filter(s=>s!=='props').concat(['nba']);
 
 let PICKS=[],PROPS=[],PERF={},AF='all',PS='ncaa_basketball';
 
@@ -310,7 +312,7 @@ function renderProps(){
     return`<tr style="animation-delay:${i*.03}s">
       <td class="c-sport"><div><span class="badge b-active">PROPS</span></div><div class="stag">MLB · SP Strikeouts</div></td>
       <td class="c-game"><div class="gm">${p.game}</div><div class="gt">HP Ump: ${ump} (${p.ump_adj>=0?'+':''}${p.ump_adj})</div></td>
-      <td class="c-pick"><div class="pn">${p.pick}</div><div class="pl">Proj: ${p.proj_k} Ks</div></td>
+      <td class="c-pick" style="white-space:normal"><div class="pn">${p.pick}</div><div class="pl">Proj: ${p.proj_k} Ks</div></td>
       <td class="c-model r"><div class="prob">${(p.model_prob*100).toFixed(1)}%</div><div class="pbar"><div class="pf m" style="width:${p.model_prob*100}%"></div></div></td>
       <td class="c-mkt r"><div class="prob">${(p.market_prob*100).toFixed(1)}%</div><div class="pbar"><div class="pf" style="width:${p.market_prob*100}%"></div></div></td>
       <td class="c-edge r"><span class="edge ${ec}">${estr}</span></td>
