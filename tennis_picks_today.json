@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "sport": "tennis",
+  "generated_at": "2026-04-08T04:00:29.777409Z",
+  "data_date": "2026-04-08",
+  "status": "ACTIVE",
+  "picks": [],
+  "summary": {
+    "total_picks": 0,
+    "high_confidence": 0,
+    "avg_edge_pp": 0
+  }
+}

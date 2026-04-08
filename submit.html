@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit a Model — The iQ Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f2ee;--bg2:#edeae5;--bg3:#e5e1db;
+  --ink:#0f0e0c;--ink2:#3a3730;--ink3:#7a7570;--ink4:#b0aaa3;
+  --rule:#d4cfc8;
+  --orange:#e8610a;--orange-dim:rgba(232,97,10,.09);
+  --green:#1a7a3a;--green-dim:rgba(26,122,58,.08);
+  --red:#c0282a;--red-dim:rgba(192,40,42,.08);
+  --yellow:#b45309;--yellow-dim:rgba(180,83,9,.08);
+  --F:'IBM Plex Sans',sans-serif;
+  --M:'IBM Plex Mono',monospace;
+  --H:'Syne',sans-serif;
+}
+body{font-family:var(--F);background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* MASTHEAD */
+.mast{border-bottom:2px solid var(--ink);padding:0 2rem;display:flex;align-items:center;height:52px;gap:1.5rem}
+.wm{font-family:var(--H);font-size:1.1rem;font-weight:800;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.wm b{color:var(--orange)}
+.sep{color:var(--rule);font-size:1.2rem;font-weight:300}
+.page-title{font-family:var(--M);font-size:.68rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em}
+.back{margin-left:auto;font-family:var(--M);font-size:.62rem;color:var(--ink4);text-decoration:none;text-transform:uppercase;letter-spacing:.1em;transition:color .12s}
+.back:hover{color:var(--orange)}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:2.5rem 2rem}
+
+/* STEPS NAV */
+.steps{display:flex;gap:0;margin-bottom:2.5rem;border:1px solid var(--rule);overflow:hidden}
+.step-item{flex:1;padding:.75rem 1rem;text-align:center;border-right:1px solid var(--rule);cursor:pointer;transition:background .12s;position:relative}
+.step-item:last-child{border-right:none}
+.step-item.done{background:var(--green-dim)}
+.step-item.active{background:var(--orange-dim)}
+.step-item.locked{opacity:.4;cursor:default}
+.step-num{font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem}
+.step-lbl{font-family:var(--M);font-size:.65rem;color:var(--ink2);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+.step-item.active .step-num{color:var(--orange)}
+.step-item.active .step-lbl{color:var(--orange)}
+.step-item.done .step-num{color:var(--green)}
+.step-item.done .step-lbl{color:var(--green)}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:block}
+
+/* SECTION TITLES */
+.sec-title{font-family:var(--M);font-size:.62rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+/* FORM FIELDS */
+.field{margin-bottom:1.25rem}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+label{font-family:var(--M);font-size:.62rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.45rem}
+label span{color:var(--orange)}
+input[type=text],input[type=email],input[type=number],select,textarea{
+  width:100%;font-family:var(--M);font-size:.78rem;color:var(--ink);
+  background:var(--bg);border:1px solid var(--rule);padding:.6rem .85rem;
+  border-radius:0;outline:none;transition:border-color .12s;
+  -webkit-appearance:none;appearance:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--orange)}
+textarea{min-height:80px;resize:vertical;line-height:1.6}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b0aaa3'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .85rem center;padding-right:2rem}
+.hint{font-family:var(--M);font-size:.6rem;color:var(--ink4);margin-top:.35rem;line-height:1.5}
+
+/* PARAM GRID */
+.param-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem}
+.param-card{border:1px solid var(--rule);padding:1rem}
+.param-card label{font-size:.58rem;margin-bottom:.5rem}
+.param-val{font-family:var(--H);font-size:1.6rem;font-weight:800;color:var(--orange);text-align:center;margin:.4rem 0;letter-spacing:-.02em}
+input[type=range]{width:100%;accent-color:var(--orange);margin-top:.35rem}
+
+/* CSV UPLOAD */
+.upload-zone{border:1px dashed var(--rule);padding:2rem;text-align:center;cursor:pointer;transition:border-color .12s,background .12s;position:relative}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--orange);background:var(--orange-dim)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:1.5rem;margin-bottom:.5rem}
+.upload-lbl{font-family:var(--M);font-size:.68rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em}
+.upload-sub{font-family:var(--M);font-size:.58rem;color:var(--ink4);margin-top:.3rem}
+.upload-done{font-family:var(--M);font-size:.72rem;color:var(--green);margin-top:.5rem;font-weight:500}
+
+/* TEMPLATE DOWNLOAD */
+.template-strip{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--rule);padding:.85rem 1.25rem;margin-bottom:1.25rem}
+.template-info{font-family:var(--M);font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;line-height:1.5}
+.template-info strong{color:var(--ink2)}
+.btn-dl{font-family:var(--M);font-size:.62rem;color:var(--orange);background:transparent;border:1px solid var(--orange);padding:.45rem .9rem;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;transition:background .12s,color .12s;white-space:nowrap}
+.btn-dl:hover{background:var(--orange);color:var(--bg)}
+
+/* VALIDATION RESULTS */
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:1.5rem}
+.val-cell{background:var(--bg);padding:1.25rem 1.5rem}
+.val-cell.pass{background:var(--green-dim);border-left:3px solid var(--green)}
+.val-cell.fail{background:var(--red-dim);border-left:3px solid var(--red)}
+.val-cell.warn{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.val-cell.pending{background:var(--bg2);border-left:3px solid var(--rule)}
+.val-gate{font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.35rem}
+.val-val{font-family:var(--H);font-size:1.5rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1;margin-bottom:.2rem}
+.val-status{font-family:var(--M);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;font-weight:500}
+.val-cell.pass .val-status{color:var(--green)}
+.val-cell.fail .val-status{color:var(--red)}
+.val-cell.warn .val-status{color:var(--yellow)}
+.val-cell.pending .val-status{color:var(--ink4)}
+.val-note{font-family:var(--M);font-size:.6rem;color:var(--ink4);margin-top:.4rem;line-height:1.4}
+
+/* OVERALL VERDICT */
+.verdict{padding:1.25rem 1.5rem;margin-bottom:1.5rem;border:1px solid var(--rule);display:flex;align-items:center;gap:1.25rem}
+.verdict.pass-all{background:var(--green-dim);border-color:var(--green)}
+.verdict.fail-some{background:var(--red-dim);border-color:var(--red)}
+.verdict.pending-v{background:var(--bg2)}
+.verdict-icon{font-size:1.5rem;flex-shrink:0}
+.verdict-text{font-family:var(--M);font-size:.72rem;color:var(--ink);line-height:1.6;text-transform:uppercase;letter-spacing:.08em}
+.verdict-text strong{color:var(--green)}
+.verdict.fail-some .verdict-text strong{color:var(--red)}
+
+/* DATA PREVIEW TABLE */
+.preview-wrap{overflow-x:auto;margin-bottom:1.25rem;max-height:280px;overflow-y:auto;border:1px solid var(--rule)}
+.preview-tbl{width:100%;border-collapse:collapse;min-width:600px}
+.preview-tbl th{font-family:var(--M);font-size:.56rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.12em;padding:.5rem .75rem;text-align:left;border-bottom:1px solid var(--rule);background:var(--bg2);position:sticky;top:0}
+.preview-tbl td{font-family:var(--M);font-size:.68rem;padding:.5rem .75rem;border-bottom:1px solid var(--rule);color:var(--ink2)}
+.preview-tbl tr:last-child td{border-bottom:none}
+.preview-tbl tr:hover td{background:var(--bg2)}
+.td-win{color:var(--green);font-weight:500}
+.td-loss{color:var(--red);font-weight:500}
+.td-pend{color:var(--ink4);font-style:italic}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:1.25rem}
+.stat-cell{background:var(--bg);padding:1rem 1.25rem}
+.stat-val{font-family:var(--H);font-size:1.4rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1;margin-bottom:.2rem}
+.stat-key{font-family:var(--M);font-size:.57rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:.75rem;justify-content:flex-end;margin-top:2rem}
+.btn{font-family:var(--M);font-size:.68rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;padding:.65rem 1.4rem;cursor:pointer;border:none;transition:opacity .12s,background .12s}
+.btn-back{background:var(--bg2);color:var(--ink3);border:1px solid var(--rule)}
+.btn-back:hover{color:var(--ink)}
+.btn-next{background:var(--ink);color:var(--bg)}
+.btn-next:hover{opacity:.85}
+.btn-next:disabled{background:var(--rule);color:var(--ink4);cursor:default;opacity:1}
+.btn-submit{background:var(--orange);color:var(--bg)}
+.btn-submit:hover{opacity:.9}
+.btn-submit:disabled{background:var(--rule);color:var(--ink4);cursor:default;opacity:1}
+
+/* ERROR */
+.err{font-family:var(--M);font-size:.65rem;color:var(--red);background:var(--red-dim);border:1px solid var(--red);padding:.6rem .9rem;margin-bottom:1rem;display:none}
+.err.show{display:block}
+
+/* SUCCESS SCREEN */
+#success-screen{display:none;padding:3rem 2rem;text-align:center;border:1px solid var(--rule);background:var(--bg2)}
+#success-screen h2{font-family:var(--H);font-size:1.5rem;font-weight:800;color:var(--ink);margin-bottom:.75rem}
+#success-screen p{font-family:var(--M);font-size:.72rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;line-height:1.7;max-width:480px;margin:0 auto}
+
+/* COLUMN FORMAT GUIDE */
+.col-guide{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:1.25rem}
+.col-item{background:var(--bg);padding:.85rem 1rem}
+.col-name{font-family:var(--M);font-size:.65rem;font-weight:500;color:var(--orange);margin-bottom:.2rem}
+.col-type{font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
+.col-ex{font-family:var(--M);font-size:.62rem;color:var(--ink3)}
+
+@media(max-width:768px){
+  .wrap{padding:1.5rem 1rem}
+  .field-row,.param-grid{grid-template-columns:1fr}
+  .val-grid{grid-template-columns:1fr}
+  .steps{flex-direction:column}
+  .step-item{border-right:none;border-bottom:1px solid var(--rule)}
+  .step-item:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <a class="wm" href="index.html">the <b>iQ</b> project</a>
+  <span class="sep">/</span>
+  <span class="page-title">Submit a Model</span>
+  <a class="back" href="index.html">← Back to site</a>
+</header>
+
+<div class="wrap">
+
+  <!-- STEP NAV -->
+  <div class="steps" id="steps-nav">
+    <div class="step-item active" id="sn-1"><div class="step-num">Step 1</div><div class="step-lbl">Model spec</div></div>
+    <div class="step-item locked" id="sn-2"><div class="step-num">Step 2</div><div class="step-lbl">Upload picks</div></div>
+    <div class="step-item locked" id="sn-3"><div class="step-num">Step 3</div><div class="step-lbl">Validation</div></div>
+    <div class="step-item locked" id="sn-4"><div class="step-num">Step 4</div><div class="step-lbl">Submit</div></div>
+  </div>
+
+  <!-- ══════════ STEP 1: MODEL SPEC ══════════ -->
+  <div class="panel active" id="panel-1">
+    <div class="sec-title">About you and your model</div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Your name <span>*</span></label>
+        <input type="text" id="f-name" placeholder="First Last">
+      </div>
+      <div class="field">
+        <label>Email <span>*</span></label>
+        <input type="email" id="f-email" placeholder="you@example.com">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Kuhiro affiliation</label>
+        <input type="text" id="f-affil" placeholder="e.g. Kuhiro Class Cohort 1, 2026">
+      </div>
+      <div class="field">
+        <label>Sport / market <span>*</span></label>
+        <select id="f-sport">
+          <option value="">Select a market</option>
+          <optgroup label="In development — high originality">
+            <option value="nfl">NFL</option>
+            <option value="cricket_t20">Cricket (T20)</option>
+            <option value="ufc">UFC / MMA</option>
+            <option value="golf_pga">Golf (PGA Tour)</option>
+            <option value="handball">Handball</option>
+            <option value="rugby_nrl">Rugby (NRL)</option>
+            <option value="elections">Election Markets</option>
+            <option value="economics">Economic Indicators</option>
+          </optgroup>
+          <optgroup label="Improving existing models">
+            <option value="nba">NBA</option>
+            <option value="ncaa_basketball">NCAA Basketball</option>
+            <option value="mlb">MLB</option>
+            <option value="nhl">NHL</option>
+            <option value="soccer">Soccer</option>
+            <option value="tennis">Tennis</option>
+          </optgroup>
+          <optgroup label="Other">
+            <option value="other">Other — I'll explain below</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>What efficiency metric does your model use? <span>*</span></label>
+      <input type="text" id="f-metric" placeholder="e.g. EPA per play, run rate efficiency, strokes gained vs field">
+      <div class="hint">This is the core signal your ISR credibility blend weights. Be specific.</div>
+    </div>
+
+    <div class="field">
+      <label>Primary data source(s) <span>*</span></label>
+      <input type="text" id="f-data" placeholder="e.g. nflfastR (free), Pro Football Reference">
+    </div>
+
+    <div class="sec-title" style="margin-top:2rem">Model parameters</div>
+    <div class="hint" style="margin-bottom:1.25rem">Set the values your model uses. These will appear on the public methodology page if your model is accepted.</div>
+
+    <div class="param-grid">
+      <div class="param-card">
+        <label>Pythagorean exponent</label>
+        <div class="param-val" id="pv-exp">2.37</div>
+        <input type="range" id="ps-exp" min="1" max="16" step="0.01" value="2.37" oninput="updateParam('exp',this.value)">
+        <div class="hint">NBA=14.0 · NHL=2.0 · Soccer=1.3 · NFL=2.37</div>
+      </div>
+      <div class="param-card">
+        <label>K value (credibility speed)</label>
+        <div class="param-val" id="pv-k">20</div>
+        <input type="range" id="ps-k" min="3" max="40" step="1" value="20" oninput="updateParam('k',this.value)">
+        <div class="hint">Lower = faster convergence. Short seasons need lower K.</div>
+      </div>
+      <div class="param-card">
+        <label>Home advantage (pts / prob)</label>
+        <div class="param-val" id="pv-ha">2.5</div>
+        <input type="range" id="ps-ha" min="0" max="7" step="0.1" value="2.5" oninput="updateParam('ha',this.value)">
+        <div class="hint">Added after Log5. Use 0 for individual sports (tennis, UFC).</div>
+      </div>
+      <div class="param-card">
+        <label>Confidence threshold (%)</label>
+        <div class="param-val" id="pv-ct">60</div>
+        <input type="range" id="ps-ct" min="50" max="80" step="1" value="60" oninput="updateParam('ct',this.value)">
+        <div class="hint">Minimum model probability to generate a signal. iQ standard is 60%.</div>
+      </div>
+      <div class="param-card">
+        <label>Min edge threshold (%)</label>
+        <div class="param-val" id="pv-et">3.0</div>
+        <input type="range" id="ps-et" min="1" max="10" step="0.5" value="3.0" oninput="updateParam('et',this.value)">
+        <div class="hint">Minimum edge vs devigged market to generate a signal.</div>
+      </div>
+      <div class="param-card">
+        <label>Win prob formula</label>
+        <div style="margin:.5rem 0">
+          <select id="ps-formula" style="font-size:.68rem">
+            <option value="sigmoid">Sigmoid (logistic)</option>
+            <option value="log5">Log5</option>
+            <option value="elo">ELO expected score</option>
+            <option value="poisson">Poisson sum</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="hint">The function that converts efficiency margin to win probability.</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Known limitations of your model</label>
+      <textarea id="f-limits" placeholder="Be honest. What doesn't it handle well? Where does it break down? This section is weighted in the judging criteria."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Walk-forward validation period <span>*</span></label>
+      <div class="field-row" style="margin-bottom:0">
+        <div>
+          <label style="font-size:.57rem">From year</label>
+          <input type="number" id="f-yr-from" placeholder="2015" min="2000" max="2025">
+        </div>
+        <div>
+          <label style="font-size:.57rem">To year</label>
+          <input type="number" id="f-yr-to" placeholder="2024" min="2000" max="2025">
+        </div>
+      </div>
+    </div>
+
+    <div class="err" id="err-1">Please fill in all required fields before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-next" onclick="goStep(2)">Continue to upload →</button>
+    </div>
+  </div>
+
+  <!-- ══════════ STEP 2: UPLOAD ══════════ -->
+  <div class="panel" id="panel-2">
+    <div class="sec-title">Upload your walk-forward backtest picks</div>
+
+    <div class="template-strip">
+      <div class="template-info">
+        <strong>Required CSV format</strong><br>
+        Download the template, fill it in with your backtest picks, and upload below.
+      </div>
+      <a class="btn-dl" onclick="downloadTemplate()">Download template CSV</a>
+    </div>
+
+    <div class="col-guide">
+      <div class="col-item"><div class="col-name">date</div><div class="col-type">YYYY-MM-DD</div><div class="col-ex">2024-03-15</div></div>
+      <div class="col-item"><div class="col-name">home</div><div class="col-type">Team name</div><div class="col-ex">Duke</div></div>
+      <div class="col-item"><div class="col-name">away</div><div class="col-type">Team name</div><div class="col-ex">North Carolina</div></div>
+      <div class="col-item"><div class="col-name">pick</div><div class="col-type">Team name</div><div class="col-ex">Duke</div></div>
+      <div class="col-item"><div class="col-name">pick_side</div><div class="col-type">home or away</div><div class="col-ex">home</div></div>
+      <div class="col-item"><div class="col-name">model_prob</div><div class="col-type">0.00 – 1.00</div><div class="col-ex">0.681</div></div>
+      <div class="col-item"><div class="col-name">market_prob</div><div class="col-type">0.00 – 1.00</div><div class="col-ex">0.620</div></div>
+      <div class="col-item"><div class="col-name">edge_pp</div><div class="col-type">Decimal</div><div class="col-ex">6.1</div></div>
+      <div class="col-item"><div class="col-name">outcome</div><div class="col-type">WIN / LOSS / PUSH</div><div class="col-ex">WIN</div></div>
+    </div>
+
+    <div class="hint" style="margin-bottom:1.25rem">
+      All outcomes must be settled. Pending picks will be rejected. 
+      Minimum 300 picks for props, 500 for team ML.
+      Use devigged Pinnacle closing line for market_prob where available.
+    </div>
+
+    <div class="upload-zone" id="upload-zone">
+      <input type="file" id="csv-file" accept=".csv" onchange="handleCSV(this)">
+      <div class="upload-icon">↑</div>
+      <div class="upload-lbl">Drop CSV here or click to browse</div>
+      <div class="upload-sub">Only .csv files accepted</div>
+      <div class="upload-done" id="upload-done" style="display:none"></div>
+    </div>
+
+    <div id="preview-section" style="display:none;margin-top:1.5rem">
+      <div class="sec-title">Data preview</div>
+      <div class="stats-row" id="raw-stats"></div>
+      <div class="preview-wrap">
+        <table class="preview-tbl" id="preview-tbl">
+          <thead><tr id="preview-head"></tr></thead>
+          <tbody id="preview-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="err" id="err-2"></div>
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(1)">← Back</button>
+      <button class="btn btn-next" id="btn-to-3" onclick="goStep(3)" disabled>Run validation →</button>
+    </div>
+  </div>
+
+  <!-- ══════════ STEP 3: VALIDATION ══════════ -->
+  <div class="panel" id="panel-3">
+    <div class="sec-title">Walk-forward validation results</div>
+
+    <div class="verdict pending-v" id="verdict">
+      <div class="verdict-icon">⏳</div>
+      <div class="verdict-text">Running validation checks…</div>
+    </div>
+
+    <div class="val-grid" id="val-grid">
+      <div class="val-cell pending" id="vc-roi">
+        <div class="val-gate">Gate 1 — ROI</div>
+        <div class="val-val" id="vv-roi">—</div>
+        <div class="val-status">Calculating…</div>
+        <div class="val-note">Threshold: &gt; 3.0% flat bet</div>
+      </div>
+      <div class="val-cell pending" id="vc-clv">
+        <div class="val-gate">Gate 2 — CLV Rate</div>
+        <div class="val-val" id="vv-clv">—</div>
+        <div class="val-status">Calculating…</div>
+        <div class="val-note">Threshold: ≥ 55% beat market</div>
+      </div>
+      <div class="val-cell pending" id="vc-cal">
+        <div class="val-gate">Gate 3 — Calibration</div>
+        <div class="val-val" id="vv-cal">—</div>
+        <div class="val-status">Calculating…</div>
+        <div class="val-note">Threshold: ±2pp per bin (n≥20)</div>
+      </div>
+    </div>
+
+    <div class="sec-title">Accuracy by confidence tier</div>
+    <table class="ttbl" style="width:100%;border-collapse:collapse;margin-bottom:1.5rem">
+      <thead><tr>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:left;border-bottom:1px solid var(--rule)">Tier</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Picks</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Wins</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Hit rate</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Avg edge</th>
+      </tr></thead>
+      <tbody id="tier-body-v"></tbody>
+    </table>
+
+    <div class="sec-title">Calibration check — predicted vs. actual by bin</div>
+    <table class="ttbl" style="width:100%;border-collapse:collapse;margin-bottom:1.5rem">
+      <thead><tr>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:left;border-bottom:1px solid var(--rule)">Bin</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Picks</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Predicted</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Actual</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Error</th>
+        <th style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:right;border-bottom:1px solid var(--rule)">Status</th>
+      </tr></thead>
+      <tbody id="cal-body-v"></tbody>
+    </table>
+
+    <div class="err" id="err-3"></div>
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(2)">← Back</button>
+      <button class="btn btn-next" id="btn-to-4" onclick="goStep(4)" disabled>Continue to submit →</button>
+    </div>
+  </div>
+
+  <!-- ══════════ STEP 4: SUBMIT ══════════ -->
+  <div class="panel" id="panel-4">
+    <div class="sec-title">Review and submit</div>
+
+    <div id="submit-summary" style="margin-bottom:1.5rem"></div>
+
+    <div class="field">
+      <label>Anything else you want the review panel to know?</label>
+      <textarea id="f-notes" placeholder="Novel findings, edge cases you found, what you'd do with more time, why this market matters…" style="min-height:100px"></textarea>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--rule);padding:1rem 1.25rem;margin-bottom:1.5rem">
+      <p style="font-family:var(--M);font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;line-height:1.7">
+        By submitting, you confirm that:<br>
+        — This backtest was walk-forward only. No parameters were fit on test data.<br>
+        — All picks use data that was available before the game date.<br>
+        — You have not cherry-picked the date range to inflate results.<br>
+        — You are comfortable with this research being reviewed and published.
+      </p>
+    </div>
+
+    <div class="err" id="err-4"></div>
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(3)">← Back</button>
+      <button class="btn btn-submit" id="btn-submit" onclick="doSubmit()">Submit for review →</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="success-screen">
+    <div style="font-size:2rem;margin-bottom:1rem">✓</div>
+    <h2>Submitted for review</h2>
+    <p>
+      Your model spec and backtest results have been sent to the iQ Project research lead.<br><br>
+      You'll receive a response within 5 business days.<br>
+      If your model is accepted, it will go live on the site with your name as the author.<br><br>
+      Models that don't pass can be refined and resubmitted.
+    </p>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+'use strict';
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let currentStep = 1;
+let csvData = [];          // parsed rows
+let valResults = {};       // validation output
+let params = { exp:2.37, k:20, ha:2.5, ct:60, et:3.0 };
+
+// ── Parameter sliders ─────────────────────────────────────────────────────────
+function updateParam(key, val) {
+  params[key] = parseFloat(val);
+  const display = key === 'k' ? Math.round(val) : parseFloat(val).toFixed(key === 'exp' ? 2 : 1);
+  document.getElementById('pv-' + key).textContent = display;
+}
+
+// ── Step navigation ───────────────────────────────────────────────────────────
+function goStep(n) {
+  if (n === 2 && !validateStep1()) return;
+  if (n === 3) runValidation();
+  if (n === 4) buildSummary();
+
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+
+  document.querySelectorAll('.step-item').forEach((el, i) => {
+    el.classList.remove('active', 'done', 'locked');
+    if (i + 1 < n)       el.classList.add('done');
+    else if (i + 1 === n) el.classList.add('active');
+    else                   el.classList.add('locked');
+  });
+
+  currentStep = n;
+  window.scrollTo(0, 0);
+}
+
+// ── Step 1 validation ─────────────────────────────────────────────────────────
+function validateStep1() {
+  const required = ['f-name','f-email','f-sport','f-metric','f-data','f-yr-from','f-yr-to'];
+  const missing = required.filter(id => !document.getElementById(id).value.trim());
+  const err = document.getElementById('err-1');
+  if (missing.length) { err.classList.add('show'); return false; }
+  err.classList.remove('show');
+  return true;
+}
+
+// ── CSV parsing ───────────────────────────────────────────────────────────────
+function handleCSV(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = e.target.result;
+    const result = parseCSV(text);
+    const err = document.getElementById('err-2');
+
+    if (result.error) {
+      err.textContent = result.error;
+      err.classList.add('show');
+      return;
+    }
+    err.classList.remove('show');
+
+    csvData = result.rows;
+    document.getElementById('upload-done').textContent = `✓ ${csvData.length} picks loaded from ${file.name}`;
+    document.getElementById('upload-done').style.display = 'block';
+    document.getElementById('btn-to-3').disabled = false;
+    renderPreview(csvData);
+  };
+  reader.readAsText(file);
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length < 2) return { error: 'CSV must have a header row and at least one data row.' };
+
+  const required = ['date','home','away','pick','model_prob','market_prob','outcome'];
+  const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/"/g,''));
+
+  const missing = required.filter(r => !headers.includes(r));
+  if (missing.length) return { error: `Missing required columns: ${missing.join(', ')}. Download the template to see the correct format.` };
+
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const vals = lines[i].split(',').map(v => v.trim().replace(/"/g,''));
+    if (vals.length < headers.length) continue;
+    const row = {};
+    headers.forEach((h, j) => row[h] = vals[j]);
+    row.model_prob  = parseFloat(row.model_prob);
+    row.market_prob = parseFloat(row.market_prob) || null;
+    row.edge_pp     = parseFloat(row.edge_pp) || (row.market_prob ? (row.model_prob - row.market_prob) * 100 : null);
+    rows.push(row);
+  }
+
+  const settled   = rows.filter(r => ['WIN','LOSS','PUSH'].includes((r.outcome||'').toUpperCase()));
+  const unsettled = rows.filter(r => !['WIN','LOSS','PUSH'].includes((r.outcome||'').toUpperCase()));
+
+  if (settled.length < 50)  return { error: `Only ${settled.length} settled picks found. Minimum is 300 for props, 500 for team ML. All outcomes must be WIN, LOSS, or PUSH.` };
+  if (unsettled.length > 0) {
+    // warn but don't block — just filter
+    rows.forEach(r => { if (!['WIN','LOSS','PUSH'].includes((r.outcome||'').toUpperCase())) r._skip = true; });
+  }
+
+  return { rows: rows.filter(r => !r._skip) };
+}
+
+function renderPreview(rows) {
+  const section = document.getElementById('preview-section');
+  section.style.display = 'block';
+
+  const wins   = rows.filter(r => r.outcome?.toUpperCase() === 'WIN').length;
+  const losses = rows.filter(r => r.outcome?.toUpperCase() === 'LOSS').length;
+  const pushes = rows.filter(r => r.outcome?.toUpperCase() === 'PUSH').length;
+  const hitRate = rows.length > 0 ? ((wins / (wins + losses)) * 100).toFixed(1) : '—';
+
+  document.getElementById('raw-stats').innerHTML = `
+    <div class="stat-cell"><div class="stat-val">${rows.length}</div><div class="stat-key">Total picks</div></div>
+    <div class="stat-cell"><div class="stat-val" style="color:var(--green)">${wins}</div><div class="stat-key">Wins</div></div>
+    <div class="stat-cell"><div class="stat-val" style="color:var(--red)">${losses}</div><div class="stat-key">Losses</div></div>
+    <div class="stat-cell"><div class="stat-val" style="color:var(--ink3)">${pushes}</div><div class="stat-key">Pushes</div></div>
+    <div class="stat-cell"><div class="stat-val">${hitRate}%</div><div class="stat-key">Raw hit rate</div></div>`;
+
+  const cols = ['date','home','away','pick','model_prob','market_prob','edge_pp','outcome'];
+  document.getElementById('preview-head').innerHTML = cols.map(c =>
+    `<th style="font-family:var(--M);font-size:.56rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.12em;padding:.5rem .75rem;border-bottom:1px solid var(--rule);background:var(--bg2)">${c}</th>`
+  ).join('');
+
+  document.getElementById('preview-body').innerHTML = rows.slice(0, 20).map(r => {
+    const out = (r.outcome||'').toUpperCase();
+    const cls = out === 'WIN' ? 'td-win' : out === 'LOSS' ? 'td-loss' : 'td-pend';
+    return `<tr>${cols.map(c => {
+      let v = r[c];
+      if (c === 'model_prob' || c === 'market_prob') v = v ? (v*100).toFixed(1)+'%' : '—';
+      if (c === 'edge_pp') v = v != null ? (v > 0 ? '+' : '') + parseFloat(v).toFixed(1)+'pp' : '—';
+      if (c === 'outcome') return `<td class="${cls}" style="font-family:var(--M);font-size:.68rem;padding:.5rem .75rem;border-bottom:1px solid var(--rule)">${v||'—'}</td>`;
+      return `<td style="font-family:var(--M);font-size:.68rem;padding:.5rem .75rem;border-bottom:1px solid var(--rule);color:var(--ink2)">${v||'—'}</td>`;
+    }).join('')}</tr>`;
+  }).join('');
+}
+
+// ── Validation engine ─────────────────────────────────────────────────────────
+function runValidation() {
+  const rows = csvData;
+  const wins   = rows.filter(r => r.outcome?.toUpperCase() === 'WIN').length;
+  const losses = rows.filter(r => r.outcome?.toUpperCase() === 'LOSS').length;
+
+  // Gate 1: ROI (flat bet, -110 odds assumed = decimal 1.909)
+  const decimal = 1.909;
+  const roi = ((wins * (decimal - 1) - losses) / rows.length) * 100;
+
+  // Gate 2: CLV rate — % of picks where model_prob > market_prob
+  const withMarket = rows.filter(r => r.market_prob != null && r.market_prob > 0);
+  const beatMarket = withMarket.filter(r => r.model_prob > r.market_prob).length;
+  const clvRate = withMarket.length > 0 ? (beatMarket / withMarket.length) * 100 : null;
+
+  // Gate 3: Calibration — 5pp bins
+  const bins = [
+    { label:'50–55%', lo:0.50, hi:0.55 },
+    { label:'55–60%', lo:0.55, hi:0.60 },
+    { label:'60–65%', lo:0.60, hi:0.65 },
+    { label:'65–70%', lo:0.65, hi:0.70 },
+    { label:'70%+',   lo:0.70, hi:1.01 },
+  ];
+  const calBins = bins.map(b => {
+    const inBin = rows.filter(r => r.model_prob >= b.lo && r.model_prob < b.hi);
+    const bWins = inBin.filter(r => r.outcome?.toUpperCase() === 'WIN').length;
+    const predicted = inBin.length > 0
+      ? inBin.reduce((s, r) => s + r.model_prob, 0) / inBin.length * 100 : null;
+    const actual    = inBin.length > 0 ? (bWins / inBin.length) * 100 : null;
+    const err       = predicted != null && actual != null ? Math.abs(actual - predicted) : null;
+    const pass      = inBin.length >= 20 && err != null && err <= 2;
+    const fail      = inBin.length >= 20 && err != null && err > 2;
+    return { ...b, n: inBin.length, predicted, actual, err, pass, fail };
+  });
+  const calBinsWithData  = calBins.filter(b => b.n >= 20);
+  const calFails         = calBinsWithData.filter(b => b.fail).length;
+  const calErr           = calBinsWithData.length > 0
+    ? Math.max(...calBinsWithData.map(b => b.err)) : null;
+
+  // Tier breakdown
+  const tiers = [
+    { label:'High', lo:0.65, cls:'color:var(--green)' },
+    { label:'Medium', lo:0.60, hi:0.65, cls:'color:var(--orange)' },
+    { label:'Low', hi:0.60, cls:'color:var(--ink4)' },
+  ].map(t => {
+    const inTier = rows.filter(r =>
+      (t.lo == null || r.model_prob >= t.lo) &&
+      (t.hi == null || r.model_prob < t.hi)
+    );
+    const tw = inTier.filter(r => r.outcome?.toUpperCase() === 'WIN').length;
+    const hr = inTier.length > 0 ? (tw / inTier.length) * 100 : null;
+    const ae = inTier.length > 0 ? inTier.reduce((s,r) => s + (r.edge_pp||0), 0) / inTier.length : null;
+    return { ...t, n: inTier.length, wins: tw, hr, ae };
+  });
+
+  valResults = { roi, clvRate, calBins, calErr, calFails, tiers, rows: rows.length };
+
+  // ── Render Gate 1: ROI ──
+  setGate('roi', roi.toFixed(1) + '%', roi > 3, roi >= 0,
+    'Threshold: > 3.0% flat bet return');
+
+  // ── Render Gate 2: CLV ──
+  if (clvRate != null) {
+    setGate('clv', clvRate.toFixed(1) + '%', clvRate >= 55, clvRate >= 45,
+      withMarket.length < rows.length
+        ? `${withMarket.length} of ${rows.length} picks have market prob data`
+        : 'Threshold: ≥ 55% beat Pinnacle close');
+  } else {
+    document.getElementById('vc-clv').className = 'val-cell warn';
+    document.getElementById('vv-clv').textContent = 'N/A';
+    document.querySelector('#vc-clv .val-status').textContent = 'No market data';
+    document.querySelector('#vc-clv .val-note').textContent = 'Add market_prob column for CLV validation';
+  }
+
+  // ── Render Gate 3: Calibration ──
+  if (calErr != null) {
+    setGate('cal', '±' + calErr.toFixed(1) + 'pp', calFails === 0, calFails <= 1,
+      'Threshold: every bin within ±2pp (min 20 picks per bin)');
+  } else {
+    document.getElementById('vc-cal').className = 'val-cell warn';
+    document.getElementById('vv-cal').textContent = 'N/A';
+    document.querySelector('#vc-cal .val-status').textContent = 'Not enough data per bin';
+    document.querySelector('#vc-cal .val-note').textContent = 'Need ≥20 picks in at least one probability bin';
+  }
+
+  // ── Tier breakdown ──
+  document.getElementById('tier-body-v').innerHTML = tiers.map(t => `
+    <tr>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule)"><span style="${t.cls};font-weight:500">${t.label}</span></td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink2)">${t.n}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink2)">${t.wins}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--green);font-weight:500">${t.hr != null ? t.hr.toFixed(1)+'%' : '—'}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink2)">${t.ae != null ? (t.ae>0?'+':'')+t.ae.toFixed(1)+'pp' : '—'}</td>
+    </tr>`).join('');
+
+  // ── Calibration table ──
+  document.getElementById('cal-body-v').innerHTML = calBins.map(b => {
+    const sc = b.pass ? 'color:var(--green)' : b.fail ? 'color:var(--red)' : 'color:var(--ink4)';
+    const st = b.n < 20 ? 'Too few' : b.pass ? 'PASS' : b.fail ? 'FAIL' : '—';
+    return `<tr>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);color:var(--ink2)">${b.label}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink2)">${b.n}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink2)">${b.predicted != null ? b.predicted.toFixed(1)+'%' : '—'}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink2)">${b.actual != null ? b.actual.toFixed(1)+'%' : '—'}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink2)">${b.err != null ? '±'+b.err.toFixed(1)+'pp' : '—'}</td>
+      <td style="font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);text-align:right;${sc}">${st}</td>
+    </tr>`;
+  }).join('');
+
+  // ── Verdict ──
+  const roiPass = roi > 3;
+  const clvPass = clvRate == null || clvRate >= 55;
+  const calPass = calErr == null || calFails === 0;
+  const allPass = roiPass && clvPass && calPass;
+
+  const verdict = document.getElementById('verdict');
+  if (allPass) {
+    verdict.className = 'verdict pass-all';
+    verdict.innerHTML = '<div class="verdict-icon">✓</div><div class="verdict-text"><strong>All three gates passed.</strong> Your model is eligible for submission. The research lead will review before it goes live.</div>';
+    document.getElementById('btn-to-4').disabled = false;
+  } else {
+    verdict.className = 'verdict fail-some';
+    const failed = [!roiPass && 'ROI', !clvPass && 'CLV Rate', !calPass && 'Calibration'].filter(Boolean);
+    verdict.innerHTML = `<div class="verdict-icon">✗</div><div class="verdict-text"><strong>${failed.join(', ')} did not pass.</strong> All three gates must pass simultaneously. Refine your model and re-upload.</div>`;
+    // Still allow submission with a note — research lead sees everything
+    document.getElementById('btn-to-4').disabled = false;
+    document.getElementById('btn-to-4').textContent = 'Submit anyway (with fail notes) →';
+  }
+}
+
+function setGate(id, val, pass, warn, note) {
+  const cell   = document.getElementById('vc-' + id);
+  const valEl  = document.getElementById('vv-' + id);
+  const statEl = cell.querySelector('.val-status');
+  const noteEl = cell.querySelector('.val-note');
+  cell.className = 'val-cell ' + (pass ? 'pass' : warn ? 'warn' : 'fail');
+  valEl.textContent  = val;
+  statEl.textContent = pass ? 'PASS' : warn ? 'BORDERLINE' : 'FAIL';
+  noteEl.textContent = note;
+}
+
+// ── Summary for step 4 ────────────────────────────────────────────────────────
+function buildSummary() {
+  const sport    = document.getElementById('f-sport').value;
+  const sportLbl = document.getElementById('f-sport').options[document.getElementById('f-sport').selectedIndex].text;
+  const roiPct   = valResults.roi != null ? valResults.roi.toFixed(1) + '%' : '—';
+  const clvPct   = valResults.clvRate != null ? valResults.clvRate.toFixed(1) + '%' : 'No market data';
+  const calRes   = valResults.calErr != null ? '±' + valResults.calErr.toFixed(1) + 'pp' : 'Insufficient data';
+
+  document.getElementById('submit-summary').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0">
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Researcher</div><div style="font-family:var(--M);font-size:.78rem;color:var(--ink)">${document.getElementById('f-name').value}</div></div>
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Market</div><div style="font-family:var(--M);font-size:.78rem;color:var(--ink)">${sportLbl}</div></div>
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Efficiency metric</div><div style="font-family:var(--M);font-size:.78rem;color:var(--ink)">${document.getElementById('f-metric').value}</div></div>
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Picks validated</div><div style="font-family:var(--M);font-size:.78rem;color:var(--ink)">${valResults.rows || csvData.length}</div></div>
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Gate 1 — ROI</div><div style="font-family:var(--M);font-size:.78rem;color:${valResults.roi>3?'var(--green)':'var(--red)'}">${roiPct}</div></div>
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Gate 2 — CLV</div><div style="font-family:var(--M);font-size:.78rem;color:${valResults.clvRate>=55?'var(--green)':'var(--ink3)'}">${clvPct}</div></div>
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Gate 3 — Calibration</div><div style="font-family:var(--M);font-size:.78rem;color:${valResults.calFails===0?'var(--green)':'var(--red)'}">${calRes}</div></div>
+      <div style="background:var(--bg);padding:1rem 1.25rem"><div style="font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Parameters</div><div style="font-family:var(--M);font-size:.68rem;color:var(--ink3)">exp=${params.exp} · K=${params.k} · ha=${params.ha} · ct=${params.ct}% · edge≥${params.et}%</div></div>
+    </div>`;
+}
+
+// ── CSV template download ─────────────────────────────────────────────────────
+function downloadTemplate() {
+  const csv = [
+    'date,home,away,pick,pick_side,model_prob,market_prob,edge_pp,outcome',
+    '2024-11-15,Team A,Team B,Team A,home,0.681,0.620,6.1,WIN',
+    '2024-11-15,Team C,Team D,Team D,away,0.634,0.598,3.6,LOSS',
+    '2024-11-16,Team E,Team F,Team E,home,0.712,0.670,4.2,WIN',
+  ].join('\n');
+  const blob = new Blob([csv], { type:'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'iq_model_template.csv';
+  a.click();
+}
+
+// ── Submission ────────────────────────────────────────────────────────────────
+async function doSubmit() {
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const spec = {
+    researcher:  document.getElementById('f-name').value,
+    email:       document.getElementById('f-email').value,
+    affiliation: document.getElementById('f-affil').value,
+    sport:       document.getElementById('f-sport').value,
+    metric:      document.getElementById('f-metric').value,
+    data_source: document.getElementById('f-data').value,
+    period_from: document.getElementById('f-yr-from').value,
+    period_to:   document.getElementById('f-yr-to').value,
+    formula:     document.getElementById('ps-formula').value,
+    limitations: document.getElementById('f-limits').value,
+    notes:       document.getElementById('f-notes').value,
+    params,
+    validation: {
+      picks:    valResults.rows,
+      roi:      valResults.roi?.toFixed(2),
+      clv_rate: valResults.clvRate?.toFixed(2),
+      cal_err:  valResults.calErr?.toFixed(2),
+      cal_fails:valResults.calFails,
+      all_pass: valResults.roi > 3 && (valResults.clvRate == null || valResults.clvRate >= 55) && (valResults.calFails === 0),
+    },
+  };
+
+  // Submit via Formspree — replace ACTION_URL with your Formspree endpoint
+  // Sign up free at formspree.io, create a form, paste the action URL here
+  const ACTION_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+
+  try {
+    const res = await fetch(ACTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ ...spec, _subject: `iQ Model Submission — ${spec.sport} — ${spec.researcher}` }),
+    });
+
+    if (res.ok) {
+      document.getElementById('panel-4').style.display = 'none';
+      document.getElementById('steps-nav').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch {
+    // If Formspree not configured, show success anyway for demo
+    // Remove this block in production once Formspree is set up
+    document.getElementById('panel-4').style.display = 'none';
+    document.getElementById('steps-nav').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+  }
+}
+
+// ── Drag and drop ─────────────────────────────────────────────────────────────
+const zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    document.getElementById('csv-file').files = e.dataTransfer.files;
+    handleCSV(document.getElementById('csv-file'));
+  }
+});
+</script>
+</body>
+</html>

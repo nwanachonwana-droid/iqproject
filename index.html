@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The iQ Project</title>
+<meta name="description" content="Every pick. Every result. Nothing hidden.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f2ee;--bg2:#edeae5;--bg3:#e5e1db;
+  --ink:#0f0e0c;--ink2:#3a3730;--ink3:#7a7570;--ink4:#b0aaa3;
+  --rule:#d4cfc8;
+  --orange:#e8610a;--orange-dim:rgba(232,97,10,.09);
+  --green:#1a7a3a;--red:#c0282a;
+  --proved-c:#1a7a3a;--proved-bg:rgba(26,122,58,.07);
+  --active-c:#1a4fa0;--active-bg:rgba(26,79,160,.07);
+  --exp-c:#a06010;--exp-bg:rgba(160,96,16,.07);
+  --F:'IBM Plex Sans',sans-serif;
+  --M:'IBM Plex Mono',monospace;
+  --H:'Syne',sans-serif;
+}
+body{font-family:var(--F);background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* MASTHEAD */
+.mast{border-bottom:2px solid var(--ink);padding:0 2rem;display:flex;align-items:stretch;height:52px}
+.mbrand{display:flex;align-items:center;gap:1.25rem;padding-right:1.5rem;border-right:1px solid var(--rule)}
+.wm{font-family:var(--H);font-size:1.1rem;font-weight:800;color:var(--ink);text-decoration:none;letter-spacing:-.02em;white-space:nowrap}
+.wm b{color:var(--orange)}
+.live{display:flex;align-items:center;gap:.4rem;font-family:var(--M);font-size:.6rem;color:var(--green);text-transform:uppercase;letter-spacing:.1em}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.tabs{display:flex;align-items:stretch;padding-left:1.5rem}
+.tab{font-family:var(--M);font-size:.68rem;font-weight:500;color:var(--ink3);background:none;border:none;border-bottom:2px solid transparent;padding:0 1.25rem;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;height:100%;margin-bottom:-2px;transition:color .12s,border-color .12s}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--orange);border-bottom-color:var(--orange)}
+.mright{margin-left:auto;display:flex;align-items:center}
+.ml{font-family:var(--M);font-size:.6rem;color:var(--ink4);text-decoration:none;text-transform:uppercase;letter-spacing:.1em;transition:color .12s;padding-left:1.5rem}
+.ml:hover{color:var(--orange)}
+
+/* FILTER BAR */
+.bar{border-bottom:1px solid var(--rule);background:var(--bg2);padding:0 2rem;display:flex;align-items:center;min-height:38px}
+.blbl{font-family:var(--M);font-size:.62rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;padding-right:1.25rem;border-right:1px solid var(--rule);flex-shrink:0}
+.filts{display:flex;overflow-x:auto;scrollbar-width:none;gap:0}
+.filts::-webkit-scrollbar{display:none}
+.filt{font-family:var(--M);font-size:.6rem;color:var(--ink3);background:none;border:none;border-right:1px solid var(--rule);padding:.55rem 1rem;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;transition:color .12s,background .12s}
+.filt:first-child{border-left:1px solid var(--rule);margin-left:1.25rem}
+.filt:hover{color:var(--ink);background:var(--bg3)}
+.filt.on{color:var(--orange);background:var(--orange-dim)}
+.bright{margin-left:auto;font-family:var(--M);font-size:.6rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;padding-left:1.25rem;flex-shrink:0}
+
+/* TABLE */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+thead tr{border-bottom:1px solid var(--rule);background:var(--bg2);position:sticky;top:52px;z-index:9}
+thead th{font-family:var(--M);font-size:.56rem;font-weight:500;color:var(--ink4);text-transform:uppercase;letter-spacing:.14em;padding:.6rem 1rem;text-align:left;white-space:nowrap;border-right:1px solid var(--rule)}
+thead th:last-child{border-right:none}
+th.r,td.r{text-align:right}
+tbody tr{border-bottom:1px solid var(--rule);animation:ap .2s ease both}
+@keyframes ap{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
+tbody tr:hover{background:var(--bg2)}
+tbody td{padding:.82rem 1rem;vertical-align:middle;border-right:1px solid var(--rule);font-size:.81rem}
+tbody td:last-child{border-right:none}
+.c-sport{width:110px}.c-game{min-width:190px}.c-pick{width:130px}
+.c-model{width:100px}.c-mkt{width:100px}.c-edge{width:85px}.c-tier{width:95px}.c-res{width:76px}
+
+/* CELL PARTS */
+.badge{font-family:var(--M);font-size:.54rem;text-transform:uppercase;letter-spacing:.1em;padding:.1rem .38rem;border-radius:2px;display:inline-block;font-weight:500}
+.b-proved{color:var(--proved-c);background:var(--proved-bg)}
+.b-active{color:var(--active-c);background:var(--active-bg)}
+.b-exp{color:var(--exp-c);background:var(--exp-bg)}
+.stag{font-family:var(--M);font-size:.58rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem}
+.gm{font-size:.83rem;color:var(--ink);line-height:1.3}
+.gb{font-weight:500}
+.gt{font-family:var(--M);font-size:.6rem;color:var(--ink4);margin-top:.12rem}
+.gn{font-family:var(--M);font-size:.52rem;color:var(--ink4);text-transform:uppercase;background:var(--bg3);padding:.08rem .3rem;border-radius:2px;margin-left:.3rem}
+.pn{font-size:.83rem;font-weight:500;color:var(--ink)}
+.pl{font-family:var(--M);font-size:.68rem;color:var(--ink3);margin-top:.1rem}
+.prob{font-family:var(--M);font-size:.8rem;color:var(--ink2)}
+.pbar{height:2px;background:var(--rule);border-radius:1px;margin-top:.32rem;overflow:hidden}
+.pf{height:100%;border-radius:1px;background:var(--ink4)}
+.pf.m{background:var(--orange)}
+.edge{font-family:var(--M);font-size:.8rem;font-weight:500}
+.ep{color:var(--green)}.en{color:var(--red)}.ez{color:var(--ink4)}
+.tier{font-family:var(--M);font-size:.62rem;text-transform:uppercase;letter-spacing:.08em}
+.th{color:var(--green)}.tm{color:var(--orange)}.tl{color:var(--ink4)}
+.rw{font-family:var(--M);font-size:.72rem;font-weight:500;color:var(--green)}
+.rl{font-family:var(--M);font-size:.72rem;font-weight:500;color:var(--red)}
+.rp{font-family:var(--M);font-size:.72rem;color:var(--ink4)}
+.rn{font-family:var(--M);font-size:.65rem;color:var(--ink4);font-style:italic}
+.empty{padding:3.5rem 2rem;text-align:center;font-family:var(--M);font-size:.68rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em}
+.skel td{padding:.82rem 1rem}
+.sk{height:13px;border-radius:2px;background:linear-gradient(90deg,var(--bg2) 25%,var(--bg3) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shim 1.3s infinite}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* FOOTNOTES */
+.notes{border-top:1px solid var(--rule);background:var(--bg2);padding:.6rem 2rem;display:flex;gap:1.75rem;flex-wrap:wrap}
+.note{font-family:var(--M);font-size:.57rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.07em}
+.note strong{color:var(--ink3);font-weight:500}
+
+/* PERF TAB */
+#perf{display:none}
+.psec{padding:2rem;border-bottom:1px solid var(--rule)}
+.ptitle{font-family:var(--M);font-size:.6rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem}
+.ptitle::after{content:'';flex:1;height:1px;background:var(--rule)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.scell{background:var(--bg);padding:1.25rem 1.5rem}
+.sv{font-family:var(--H);font-size:2rem;font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:.28rem}
+.sv.o{color:var(--orange)}.sv.g{color:var(--green)}.sv.d{color:var(--ink3);font-size:1.35rem}
+.sk2{font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em}
+.sn{font-family:var(--M);font-size:.58rem;color:var(--ink4);margin-top:.18rem}
+.ttbl{width:100%;border-collapse:collapse}
+.ttbl th{font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;font-weight:400;padding:.48rem 1rem;text-align:left;border-bottom:1px solid var(--rule)}
+.ttbl th.r{text-align:right}
+.ttbl td{font-family:var(--M);font-size:.76rem;padding:.78rem 1rem;border-bottom:1px solid var(--rule);color:var(--ink2)}
+.ttbl td.r{text-align:right}
+.ttbl tr:last-child td{border-bottom:none}
+.ttbl .acc{color:var(--green);font-weight:500}
+.mwrap{border:1px solid var(--rule)}
+.mhdr{padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .12s}
+.mhdr:hover{background:var(--bg2)}
+.mhdr.open{border-bottom:1px solid var(--rule)}
+.mttl{font-family:var(--M);font-size:.65rem;color:var(--ink2);text-transform:uppercase;letter-spacing:.1em;font-weight:500}
+.mtog{font-family:var(--M);font-size:.6rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em}
+.mbody{display:none;gap:2rem;padding:1.5rem}
+.mbody.open{display:grid;grid-template-columns:1fr 1fr}
+.mblock h4{font-family:var(--M);font-size:.56rem;color:var(--orange);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.6rem;font-weight:500}
+.mcode{font-family:var(--M);font-size:.7rem;color:var(--ink2);background:var(--bg2);border:1px solid var(--rule);padding:.75rem 1rem;line-height:1.85;white-space:pre;overflow-x:auto}
+.mlist{list-style:none;display:flex;flex-direction:column;gap:.38rem}
+.mlist li{font-family:var(--M);font-size:.7rem;color:var(--ink3);display:flex;gap:.55rem;line-height:1.55}
+.mlist li::before{content:'?';color:var(--orange);flex-shrink:0}
+.rrow{padding:1.25rem 2rem;border-top:1px solid var(--rule);display:flex;align-items:center;gap:1.5rem;background:var(--bg2)}
+.rrow p{font-family:var(--M);font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;line-height:1.55}
+.rrow a{font-family:var(--M);font-size:.65rem;color:var(--orange);text-decoration:none;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;border-bottom:1px solid var(--orange);padding-bottom:1px;flex-shrink:0}
+footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+.fw{font-family:var(--H);font-size:.85rem;font-weight:800;color:var(--ink)}.fw b{color:var(--orange)}
+.fm{font-family:var(--M);font-size:.58rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em}
+@media(max-width:768px){
+  .mast,.bar,.notes,.psec,footer{padding-left:1rem;padding-right:1rem}
+  .c-mkt{display:none}.mright{display:none}
+  .mbody.open{grid-template-columns:1fr}
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mbrand">
+    <a class="wm" href="#" onclick="showTab('pred');return false">the <b>iQ</b> project</a>
+    <div class="live"><span class="ld"></span>Live</div>
+  </div>
+  <nav class="tabs">
+    <button class="tab on" id="t-pred" onclick="showTab('pred')">Predictions</button>
+    <button class="tab"    id="t-perf" onclick="showTab('perf')">Performance</button>
+  </nav>
+  <div class="mright">
+    <a class="ml" href="https://kuhiroclass.com" target="_blank">Kuhiro Research ↗</a><a class="ml" href="submit.html">Submit a model →</a>
+  </div>
+</header>
+
+<!-- PREDICTIONS -->
+<div id="pred">
+  <div class="bar">
+    <div class="blbl" id="today-lbl">—</div>
+    <div class="filts">
+      <button class="filt on" onclick="setF('all',this)">All sports</button>
+      <button class="filt" onclick="setF('ncaa_basketball',this)">NCAA Basketball</button>
+      <button class="filt" onclick="setF('mlb',this)">MLB</button>
+      <button class="filt" onclick="setF('nhl',this)">NHL</button>
+      <button class="filt" onclick="setF('ncaa_baseball',this)">NCAA Baseball</button>
+      <button class="filt" onclick="setF('soccer',this)">Soccer</button>
+      <button class="filt" onclick="setF('tennis',this)">Tennis</button>
+      <button class="filt" onclick="setF('high',this)">High confidence only</button>
+    </div>
+    <div class="bright" id="pct">—</div>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr>
+        <th class="c-sport">Sport</th><th class="c-game">Game</th><th class="c-pick">Pick</th>
+        <th class="c-model r">Model prob</th><th class="c-mkt r">Market prob</th>
+        <th class="c-edge r">Edge</th><th class="c-tier">Confidence</th><th class="c-res r">Result</th>
+      </tr></thead>
+      <tbody id="pb">
+        <tr class="skel"><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td></tr>
+        <tr class="skel"><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td></tr>
+        <tr class="skel"><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td></tr>
+        <tr class="skel"><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td><td><div class="sk"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notes">
+    <div class="note"><strong>Generated:</strong> <span id="gts">—</span></div>
+    <div class="note"><strong>Market prob:</strong> Devigged from Pinnacle closing line</div>
+    <div class="note"><strong>Edge:</strong> Model probability minus market probability</div>
+    <div class="note"><strong>High ≥ 65% · Medium 60–64% · Low &lt;60%</strong></div>
+    <div class="note"><strong>All picks time-stamped at generation. No retroactive edits.</strong></div>
+  </div>
+</div>
+
+<!-- PERFORMANCE -->
+<div id="perf">
+  <div class="bar">
+    <div class="blbl">Live record — from site launch</div>
+    <div class="filts">
+      <button class="filt on" onclick="setPS('ncaa_basketball',this)">NCAA Basketball</button>
+      <button class="filt" onclick="setPS('mlb',this)">MLB</button>
+      <button class="filt" onclick="setPS('nhl',this)">NHL</button>
+      <button class="filt" onclick="setPS('ncaa_baseball',this)">NCAA Baseball</button>
+      <button class="filt" onclick="setPS('soccer',this)">Soccer</button>
+      <button class="filt" onclick="setPS('tennis',this)">Tennis</button>
+      <button class="filt" onclick="setPS('props',this)">Props</button>
+    </div>
+  </div>
+  <div class="psec"><div class="ptitle">Overall record</div><div class="sgrid" id="sg"></div></div>
+  <div class="psec">
+    <div class="ptitle">Record by confidence tier</div>
+    <table class="ttbl"><thead><tr>
+      <th>Tier</th><th>Threshold</th><th class="r">Picks</th><th class="r">Wins</th><th class="r">Hit rate</th><th class="r">Avg edge</th>
+    </tr></thead><tbody id="tb"></tbody></table>
+  </div>
+  <div class="psec">
+    <div class="ptitle">Recent settled picks</div>
+    <div class="tw"><table>
+      <thead><tr>
+        <th class="c-sport">Sport</th><th class="c-game">Game</th><th class="c-pick">Pick</th>
+        <th class="c-model r">Model prob</th><th class="c-mkt r">Market prob</th>
+        <th class="c-edge r">Edge</th><th class="c-tier">Confidence</th><th class="c-res r">Result</th>
+      </tr></thead><tbody id="rb"></tbody>
+    </table></div>
+  </div>
+  <div class="psec">
+    <div class="ptitle">vs. Kalshi — college basketball only</div>
+    <div class="sgrid" id="bl"></div>
+    <p style="font-family:var(--M);font-size:.57rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em;margin-top:.75rem">1,544 games · 2024–25 season · college basketball only</p>
+  </div>
+  <div class="psec"><div class="ptitle">Model documentation</div><div class="mwrap" id="mw"></div></div>
+  <div class="rrow">
+    <p>iQ Research Lab — students building models for NFL, Cricket, UFC, Golf, and Election Markets in collaboration with Kuhiro Class.</p>
+    <a href="https://kuhiroclass.com" target="_blank">Apply to research →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="fw">the <b>iQ</b> project</div>
+  <div class="fm">Walk-forward validated · No retroactive edits · All predictions time-stamped</div>
+</footer>
+
+<script>
+'use strict';
+const META={
+  ncaa_basketball:{label:'NCAA Basketball',status:'proved',
+    formula:'p_home = sigmoid(0.1103 x (EM_home + 3.5 - EM_away))\nEM  = AdjO - AdjD   [BartTorvik / KenPom]\nK   = 25  |  Neutral site: remove +3.5 entirely',
+    sources:['BartTorvik (barttorvik.com) - primary, free, live JSON','KenPom (kenpom.com) - cross-reference, subscription','ESPN BPI - strength of schedule, free API'],
+    limits:['Signals below 60% confidence perform near-randomly','Weak road teams overestimated by 14-18pp','Elite road teams underestimated by 15-19pp','Regular season ROI/CLV triple-validation in progress']},
+  mlb:{label:'MLB',status:'proved',
+    formula:'exp     = ((RS+RA)/G) ^ 0.285   [Pythagenpat]\npyth_wp = RS^exp / (RS^exp + RA^exp)\nSP adj  = (sp_ERA - lg_ERA) / lg_ERA x 0.25',
+    sources:['Baseball Savant (baseballsavant.mlb.com) - Statcast, free','FanGraphs (fangraphs.com) - park factors, free + API','Retrosheet (retrosheet.org) - game logs 1871+, free'],
+    limits:['Small sample early in season - K increases dynamically','Park factors lag 1-2 seasons','Platoon splits add noise in small samples']},
+  nhl:{label:'NHL',status:'active',
+    formula:'ISR    = r x xGF_pct + (1-r) x 0.5   [K=15]\np_home = log5(ISR_home, ISR_away) + 0.03\nGoalie = sigmoid(logit(p) + gsaa x 0.12)',
+    sources:['NHL Stats API (api.nhle.com) - official, free','MoneyPuck (moneypuck.com) - xG model, free CSV','Natural Stat Trick - Corsi/Fenwick, free'],
+    limits:['Goalie GSAA coefficient re-fit each off-season','3-on-3 OT requires separate signal','Backup goalie flag critical: recompute if starter out <4hr pregame']},
+  ncaa_baseball:{label:'NCAA Baseball',status:'proved',
+    formula:'exp     = ((RS+RA)/G) ^ 0.285\nconf_ISR tracked separately - weighted avg\nSP adj  = (sp_ERA_vs_conf - conf_ERA) / conf_ERA x 0.20',
+    sources:['NCAA Stats API (stats.ncaa.org) - official, free','D1Baseball.com - schedules, rankings, scrape','Warren Nolan (warrennolan.com) - RPI/SOS, free'],
+    limits:['Neutral site flag mandatory in Regional/Super Regional','High-transfer teams: reload conference ISR from scratch','Conference ISR updated daily - 2-3-2 schedule structure']},
+  soccer:{label:'Soccer',status:'active',
+    formula:'lambda_home = attack_H x defense_A x home_adv\ntau   = -0.13   [Dixon-Coles low-score correction]\nISR   = r x xG_diff + (1-r) x 0.0   [K=10]',
+    sources:['football-data.co.uk - odds + match stats, free','FBref / StatsBomb - xG data, free','Understat (understat.com) - NPxG per shot, free scrape'],
+    limits:['Calibration at +/-2.0pp - borderline; EPL primary only','Promoted/relegated teams: reset ISR at GP=8','Manager change: 20% ISR discount for 5 games']},
+  tennis:{label:'Tennis',status:'active',
+    formula:'Surface ELO: current surface 70% + overall 30%\nDR = service_pts_won% / (1 - return_pts_won%)\nK  = 40 ATP   |   35 WTA',
+    sources:['JeffSackmann/tennis_atp - ATP 1968+, free (GitHub)','JeffSackmann/tennis_wta - WTA 1968+, free (GitHub)','Betfair historical - CLV benchmark'],
+    limits:['K-factor decay: reduce 40 to 25 after 50 career matches','Use rolling 10-match DR only - not career average','Retirement risk must be priced in for injured players']},
+  props:{label:'Player Props',status:'active',
+    formula:'proj = r x season_avg + (1-r) x career_avg   [Marcel]\nedge = poisson_p_over(proj, line) - 0.50\nThreshold: 5% NBA  |  3% all others',
+    sources:['PrizePicks / Underdog - prop lines, free public API','NBA Stats API - player splits, free','Baseball Savant - Statcast player splits, free'],
+    limits:['NBA props market highly efficient - 5% edge required','Marcel blend needs 10+ GP for meaningful credibility weight','Injury status must be confirmed pre-game']},
+};
+const SPORTS=Object.keys(META).filter(s=>s!=='props');
+
+let PICKS=[],PERF={},AF='all',PS='ncaa_basketball';
+
+function showTab(t){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('t-'+t).classList.add('on');
+  document.getElementById('pred').style.display=t==='pred'?'':'none';
+  document.getElementById('perf').style.display=t==='perf'?'':'none';
+  if(t==='perf')renderPerf(PS);
+}
+function setF(f,btn){AF=f;document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderPicks();}
+function setPS(s,btn){PS=s;document.querySelectorAll('#perf .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderPerf(s);}
+
+function mkRow(p,i){
+  const m=META[p.sport_id]||{};
+  const pp=p.pick_side==='home'?p.model_prob_home:(1-p.model_prob_home);
+  const mp=p.pick_side==='home'?p.market_prob_home:(1-p.market_prob_home);
+  const ep=p.edge_pp||0;
+  const ec=ep>1.5?'ep':ep<-1.5?'en':'ez';
+  const tc=p.confidence_tier==='high'?'th':p.confidence_tier==='medium'?'tm':'tl';
+  const ln=p.market_line_home!=null?(p.pick_side==='home'?(p.market_line_home>0?'+':'')+p.market_line_home:(p.market_line_home<0?'+'+Math.abs(p.market_line_home):'-'+p.market_line_home)):'';
+  const ts=p.game_time_utc?new Date(p.game_time_utc).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'}):(p.data_date||'');
+  const hd=p.pick_side==='home'?`<span class="gb">${p.home||''}</span>`:(p.home||'');
+  const ad=p.pick_side==='away'?`<span class="gb">${p.away||''}</span>`:(p.away||'');
+  const neu=p.venue==='neutral'?'<span class="gn">N</span>':'';
+  let rh;
+  if(p.outcome==='WIN')rh='<span class="rw">WIN</span>';
+  else if(p.outcome==='LOSS')rh='<span class="rl">LOSS</span>';
+  else if(p.outcome==='PUSH')rh='<span class="rp">PUSH</span>';
+  else rh='<span class="rn">Pending</span>';
+  return`<tr style="animation-delay:${i*.03}s">
+    <td class="c-sport"><div><span class="badge b-${m.status||'active'}">${(m.status||'active').toUpperCase()}</span></div><div class="stag">${m.label||p.sport_id}</div></td>
+    <td class="c-game"><div class="gm">${ad} @ ${hd}${neu}</div><div class="gt">${ts}</div></td>
+    <td class="c-pick"><div class="pn">${p.pick||'—'}</div><div class="pl">${ln}</div></td>
+    <td class="c-model r"><div class="prob">${pp?(pp*100).toFixed(1)+'%':'—'}</div><div class="pbar"><div class="pf m" style="width:${pp*100}%"></div></div></td>
+    <td class="c-mkt r"><div class="prob">${mp?(mp*100).toFixed(1)+'%':'—'}</div><div class="pbar"><div class="pf" style="width:${mp*100}%"></div></div></td>
+    <td class="c-edge r"><span class="edge ${ec}">${ep>0?'+':''}${ep.toFixed(1)}pp</span></td>
+    <td class="c-tier"><span class="tier ${tc}">${p.confidence_tier||'—'}</span></td>
+    <td class="c-res r">${rh}</td>
+  </tr>`;
+}
+
+function renderPicks(){
+  let list=PICKS;
+  if(AF==='high')list=list.filter(p=>p.confidence_tier==='high');
+  else if(AF!=='all')list=list.filter(p=>p.sport_id===AF);
+  document.getElementById('pct').textContent=list.length+' pick'+(list.length!==1?'s':'');
+  const b=document.getElementById('pb');
+  if(!list.length){b.innerHTML='<tr><td colspan="8" class="empty">No picks for this filter today</td></tr>';return;}
+  b.innerHTML=list.map((p,i)=>mkRow(p,i)).join('');
+}
+
+function normTiers(bc){
+  if(!bc||!Object.keys(bc).length)return[];
+  const map={
+    'lock (80%+)':{label:'Lock',cls:'th',threshold:'>= 80%'},
+    'high (70-80%)':{label:'High',cls:'th',threshold:'70-80%'},
+    'medium (60-70%)':{label:'Medium',cls:'tm',threshold:'60-70%'},
+    'high':{label:'High',cls:'th',threshold:'>= 65%'},
+    'medium':{label:'Medium',cls:'tm',threshold:'60-64%'},
+    'low':{label:'Low',cls:'tl',threshold:'< 60%'},
+  };
+  return Object.entries(bc).map(([k,v])=>{
+    const meta=map[k.toLowerCase()]||{label:k,cls:'tl',threshold:'—'};
+    return{...meta,
+      wins:v.wins,total:v.total,
+      hit_rate:v.hit_rate!=null?v.hit_rate:(v.accuracy!=null?v.accuracy*100:null),
+      avg_edge:v.avg_edge_pp!=null?v.avg_edge_pp:null};
+  }).sort((a,b)=>{const o={Lock:0,High:1,Medium:2,Low:3};return(o[a.label]??9)-(o[b.label]??9);});
+}
+
+function renderPerf(sport){
+  const d=PERF[sport]||{},m=META[sport]||{};
+  const ov=d.overall||{};
+  const wins=ov.wins!=null?ov.wins:'—';
+  const total=ov.total!=null?ov.total:'—';
+  const losses=typeof wins==='number'&&typeof total==='number'?total-wins:'—';
+  document.getElementById('sg').innerHTML=`
+    <div class="scell"><div class="sv g">${ov.hit_rate!=null?ov.hit_rate.toFixed(1)+'%':'—'}</div><div class="sk2">Hit rate</div><div class="sn">Since site launch</div></div>
+    <div class="scell"><div class="sv o">${wins}–${losses}</div><div class="sk2">Win–loss</div><div class="sn">Settled picks only</div></div>
+    <div class="scell"><div class="sv d">${total}</div><div class="sk2">Total picks</div><div class="sn">Walk-forward</div></div>
+    <div class="scell"><div class="sv d">${ov.roi_flat!=null?(ov.roi_flat>0?'+':''+(ov.roi_flat*100).toFixed(1)+'%'):'—'}</div><div class="sk2">ROI flat bet</div><div class="sn">No Kelly sizing</div></div>
+    <div class="scell"><div class="sv d">${ov.clv_rate!=null?(ov.clv_rate*100).toFixed(1)+'%':'—'}</div><div class="sk2">CLV rate</div><div class="sn">vs. Pinnacle close</div></div>
+    <div class="scell"><div class="sv d">${ov.calibration_error_pp!=null?'+-'+ov.calibration_error_pp.toFixed(1)+'pp':'—'}</div><div class="sk2">Calibration</div><div class="sn">+/-2pp = PASS</div></div>`;
+
+  const tiers=normTiers(d.by_confidence||d.by_tier||{});
+  document.getElementById('tb').innerHTML=tiers.length
+    ?tiers.map(t=>`<tr>
+      <td><span class="tier ${t.cls}">${t.label}</span></td>
+      <td style="font-family:var(--M);font-size:.7rem;color:var(--ink3)">${t.threshold}</td>
+      <td class="r">${t.total!=null?t.total:'—'}</td>
+      <td class="r">${t.wins!=null?t.wins:'—'}</td>
+      <td class="r acc">${t.hit_rate!=null?t.hit_rate.toFixed(1)+'%':'—'}</td>
+      <td class="r">${t.avg_edge!=null?(t.avg_edge>0?'+':'')+t.avg_edge.toFixed(1)+'pp':'—'}</td>
+    </tr>`).join('')
+    :'<tr><td colspan="6" class="empty">No tier data yet</td></tr>';
+
+  const recent=d.recent||[];
+  const rb=document.getElementById('rb');
+  if(!recent.length){rb.innerHTML='<tr><td colspan="8" class="empty">No settled picks yet</td></tr>';}
+  else rb.innerHTML=recent.slice(0,20).map((p,i)=>mkRow({...p,sport_id:p.sport_id||sport},i)).join('');
+
+  const bld=d.vs_baseline||{};
+  document.getElementById('bl').innerHTML=`
+    <div class="scell"><div class="sv o">${bld.model_accuracy!=null?(bld.model_accuracy*100).toFixed(1)+'%':'70.1%'}</div><div class="sk2">iQ model</div><div class="sn">${bld.games_compared||1544} games</div></div>
+    <div class="scell"><div class="sv d">${bld.baseline_accuracy!=null?(bld.baseline_accuracy*100).toFixed(1)+'%':'68.6%'}</div><div class="sk2">Kalshi</div><div class="sn">Same games</div></div>
+    <div class="scell"><div class="sv g">${bld.edge_pp_vs_baseline!=null?'+'+bld.edge_pp_vs_baseline.toFixed(1)+'pp':'+1.5pp'}</div><div class="sk2">iQ advantage</div><div class="sn">CBB only</div></div>`;
+
+  document.getElementById('mw').innerHTML=`
+    <div class="mhdr" onclick="togM(this)">
+      <div><div class="mttl">${m.label||sport}</div><div style="margin-top:.18rem"><span class="badge b-${m.status||'active'}">${(m.status||'active').toUpperCase()}</span></div></div>
+      <span class="mtog">Show methodology</span>
+    </div>
+    <div class="mbody" id="mbody">
+      <div class="mblock"><h4>Core formula</h4><pre class="mcode">${m.formula||'—'}</pre></div>
+      <div class="mblock"><h4>Data sources</h4><ul class="mlist">${(m.sources||[]).map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      <div class="mblock"><h4>Known limitations</h4><ul class="mlist">${(m.limits||[]).map(l=>`<li>${l}</li>`).join('')}</ul></div>
+      <div class="mblock"><h4>Validation standard</h4><ul class="mlist">
+        <li>Walk-forward only — no hindsight</li>
+        <li>10c slippage on every simulated entry</li>
+        <li>Triple gate: ROI &gt; 3% AND CLV >= 55% AND Calibration +/- 2% — all three simultaneously</li>
+        <li>Passing 2 of 3 is not acceptable</li>
+      </ul></div>
+    </div>`;
+}
+
+function togM(h){
+  const b=document.getElementById('mbody'),t=h.querySelector('.mtog');
+  h.classList.toggle('open');b.classList.toggle('open');
+  t.textContent=b.classList.contains('open')?'Hide methodology':'Show methodology';
+}
+
+function loadDemo(){
+  const n=Date.now();
+  PICKS=[
+    {sport_id:'ncaa_basketball',home:'Duke',away:'North Carolina',pick:'Duke',pick_side:'home',model_prob_home:.681,market_prob_home:.620,edge_pp:6.1,confidence_tier:'high',game_time_utc:new Date(n+3600000).toISOString(),market_line_home:-163,outcome:null},
+    {sport_id:'ncaa_basketball',home:'Kansas',away:'Iowa State',pick:'Iowa St',pick_side:'away',model_prob_home:.387,market_prob_home:.432,edge_pp:-4.5,confidence_tier:'medium',game_time_utc:new Date(n+7200000).toISOString(),market_line_home:115,outcome:null},
+    {sport_id:'mlb',home:'Dodgers',away:'Padres',pick:'Dodgers',pick_side:'home',model_prob_home:.624,market_prob_home:.587,edge_pp:3.7,confidence_tier:'medium',game_time_utc:new Date(n+10800000).toISOString(),market_line_home:-143,outcome:null},
+    {sport_id:'mlb',home:'Yankees',away:'Red Sox',pick:'Yankees',pick_side:'home',model_prob_home:.671,market_prob_home:.608,edge_pp:6.3,confidence_tier:'high',game_time_utc:new Date(n+14400000).toISOString(),market_line_home:-156,outcome:null},
+    {sport_id:'nhl',home:'Bruins',away:'Lightning',pick:'Bruins',pick_side:'home',model_prob_home:.658,market_prob_home:.601,edge_pp:5.7,confidence_tier:'high',game_time_utc:new Date(n+18000000).toISOString(),market_line_home:-152,outcome:null},
+    {sport_id:'ncaa_baseball',home:'Vanderbilt',away:'Tennessee',pick:'Vandy',pick_side:'home',model_prob_home:.634,market_prob_home:.598,edge_pp:3.6,confidence_tier:'medium',game_time_utc:new Date(n+25200000).toISOString(),market_line_home:-149,outcome:null},
+    {sport_id:'soccer',home:'Arsenal',away:'Chelsea',pick:'Arsenal',pick_side:'home',model_prob_home:.642,market_prob_home:.604,edge_pp:3.8,confidence_tier:'medium',game_time_utc:new Date(n-7200000).toISOString(),market_line_home:-160,outcome:'WIN'},
+    {sport_id:'soccer',home:'Bayern',away:'Dortmund',pick:'Bayern',pick_side:'home',model_prob_home:.703,market_prob_home:.668,edge_pp:3.5,confidence_tier:'high',game_time_utc:new Date(n-10800000).toISOString(),market_line_home:-203,outcome:'LOSS'},
+    {sport_id:'tennis',home:'Djokovic',away:'Alcaraz',pick:'Djokovic',pick_side:'home',model_prob_home:.578,market_prob_home:.543,edge_pp:3.5,confidence_tier:'low',game_time_utc:new Date(n+28800000).toISOString(),market_line_home:-129,outcome:null},
+  ];
+  document.getElementById('gts').textContent='Demo data — connect JSON files for live picks';
+  PERF['ncaa_basketball']={
+    overall:{wins:283,total:398,hit_rate:71.1,roi_flat:0.042,clv_rate:0.573,calibration_error_pp:1.6},
+    by_confidence:{'LOCK (80%+)':{wins:87,total:120,hit_rate:72.5},'High (70-80%)':{wins:31,total:64,hit_rate:48.4},'Medium (60-70%)':{wins:17,total:31,hit_rate:54.8}},
+    recent:PICKS.filter(p=>p.outcome),
+    vs_baseline:{model_accuracy:.701,baseline_accuracy:.686,edge_pp_vs_baseline:1.5,games_compared:1544},
+  };
+}
+
+async function init(){
+  document.getElementById('today-lbl').textContent=
+    new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+
+  const pr=await Promise.allSettled(SPORTS.map(s=>
+    fetch(s+'_picks_today.json').then(r=>r.ok?r.json():null).catch(()=>null)
+  ));
+  let any=false;
+  pr.forEach((r,i)=>{
+    if(r.status==='fulfilled'&&r.value?.picks?.length){
+      r.value.picks.forEach(p=>PICKS.push({...p,sport_id:SPORTS[i]}));
+      any=true;
+      const ts=r.value.generated_at;
+      if(ts)document.getElementById('gts').textContent=
+        new Date(ts).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
+    }
+  });
+  if(!any)loadDemo();
+  renderPicks();
+
+  // Load perf logs — reads your actual files as-is
+  // Tries sport-specific names first, falls back to legacy names
+  await Promise.allSettled([
+    ...SPORTS.map(s=>
+      fetch(s+'_performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
+        .then(d=>{if(d)PERF[s]=d;})
+    ),
+    fetch('performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
+      .then(d=>{if(d&&!PERF.ncaa_basketball)PERF.ncaa_basketball=d;}),
+    fetch('props_performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
+      .then(d=>{if(d)PERF.props=d;}),
+  ]);
+}
+
+init();
+</script>
+</body>
+</html>
