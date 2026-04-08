@@ -174,6 +174,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
       <button class="filt" onclick="setF('ncaa_baseball',this)">NCAA Baseball</button>
       <button class="filt" onclick="setF('soccer',this)">Soccer</button>
       <button class="filt" onclick="setF('tennis',this)">Tennis</button>
+      <button class="filt" onclick="setF('mlb_props',this)">MLB Props</button>
       <button class="filt" onclick="setF('high',this)">High confidence only</button>
     </div>
     <div class="bright" id="pct">—</div>
@@ -284,7 +285,7 @@ const META={
 };
 const SPORTS=Object.keys(META).filter(s=>s!=='props');
 
-let PICKS=[],PERF={},AF='all',PS='ncaa_basketball';
+let PICKS=[],PROPS=[],PERF={},AF='all',PS='ncaa_basketball';
 
 function showTab(t){
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
@@ -293,7 +294,31 @@ function showTab(t){
   document.getElementById('perf').style.display=t==='perf'?'':'none';
   if(t==='perf')renderPerf(PS);
 }
-function setF(f,btn){AF=f;document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderPicks();}
+function setF(f,btn){AF=f;document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');AF==='mlb_props'?renderProps():renderPicks();}
+
+function renderProps(){
+  const body=document.getElementById('pb');
+  document.getElementById('pct').textContent=PROPS.length+' prop'+(PROPS.length!==1?'s':'');
+  if(!PROPS.length){body.innerHTML='<tr><td colspan="8" class="empty">No props today — run pipeline after noon for umpire data</td></tr>';return;}
+  body.innerHTML=PROPS.map((p,i)=>{
+    const e=p.edge_pp;
+    const ec=e>1.5?'ep':e<-1.5?'en':'ez';
+    const star=p.confidence_tier==='high'?'★':' ';
+    const tc=p.confidence_tier==='high'?'th':p.confidence_tier==='medium'?'tm':'tl';
+    const estr=e>0?`+${e.toFixed(1)}pp`:`${e.toFixed(1)}pp`;
+    const ump=p.umpire&&p.umpire!=='Unknown'?p.umpire.split(' ').pop():'—';
+    return`<tr style="animation-delay:${i*.03}s">
+      <td class="c-sport"><div><span class="badge b-active">PROPS</span></div><div class="stag">MLB · SP Strikeouts</div></td>
+      <td class="c-game"><div class="gm">${p.game}</div><div class="gt">HP Ump: ${ump} (${p.ump_adj>=0?'+':''}${p.ump_adj})</div></td>
+      <td class="c-pick"><div class="pn">${p.pick}</div><div class="pl">Proj: ${p.proj_k} Ks</div></td>
+      <td class="c-model r"><div class="prob">${(p.model_prob*100).toFixed(1)}%</div><div class="pbar"><div class="pf m" style="width:${p.model_prob*100}%"></div></div></td>
+      <td class="c-mkt r"><div class="prob">${(p.market_prob*100).toFixed(1)}%</div><div class="pbar"><div class="pf" style="width:${p.market_prob*100}%"></div></div></td>
+      <td class="c-edge r"><span class="edge ${ec}">${estr}</span></td>
+      <td class="c-tier"><span class="tier ${tc}">${p.confidence_tier}</span></td>
+      <td class="c-res r"><span class="rn">Pending</span></td>
+    </tr>`;
+  }).join('');
+}
 function setPS(s,btn){PS=s;document.querySelectorAll('#perf .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderPerf(s);}
 
 function mkRow(p,i){
@@ -454,6 +479,10 @@ async function init(){
         new Date(ts).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
     }
   });
+  // Load props
+  fetch('mlb_props_today.json').then(r=>r.ok?r.json():null).catch(()=>null)
+    .then(d=>{if(d?.props?.length)PROPS=d.props;});
+
   if(!any)loadDemo();
   renderPicks();
 
