@@ -501,7 +501,7 @@ def _settle_mlb_props(yesterday):
                     parts = ip_str.split(".")
                     ip = int(parts[0]) + (int(parts[1]) if len(parts)>1 else 0)/3
                     # Only count starting pitchers (IP >= 1.0)
-                    if ip >= 1.0 and name:
+                    if name and (ip >= 1.0 or gs_flag):
                         pitcher_ks[name] = ks
                         # Also store last name for fuzzy match
                         pitcher_ks[name.split()[-1]] = ks
@@ -907,8 +907,11 @@ def run_mlb_props():
            "props":sorted(all_props,key=lambda x:-abs(x["edge_pp"])),
            "summary":{"total_props":len(all_props),
                       "high_confidence":sum(1 for p in all_props if p["confidence_tier"]=="high")}}
+    # Write today file + dated archive
     path = os.path.join(DATA_DIR, "mlb_props_today.json")
     with open(path,"w") as f: json.dump(out,f,indent=2)
+    archive = os.path.join(DATA_DIR, f"mlb_props_{TODAY}.json")
+    with open(archive,"w") as f: json.dump(out,f,indent=2)
     print(f"  -> {len(all_props)} props written")
 
 
