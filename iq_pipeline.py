@@ -713,212 +713,178 @@ def run_mlb_props():
     print(f"  -> {len(all_props)} props written")
 
 
-def run_nba_props():
-    """Call the existing validated nba_props_model.py and copy output to DATA_DIR."""
-    print("\n[NBA Props — pitcher strikeouts model]")
-    import subprocess, shutil
-    model_path = os.path.expanduser("~/Desktop/basketball_iq/nba_props_model.py")
-    if not os.path.exists(model_path):
-        print("  ! nba_props_model.py not found at ~/Desktop/basketball_iq/")
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOLF — Masters Tournament (DataGolf + Odds API)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+DG_KEY = os.environ.get("DATAGOLF_KEY", "26c9f2ab8405d589166a8e2fb214")
+
+AUGUSTA_FIT = {
+    "Scheffler, Scottie":  +0.40,
+    "McIlroy, Rory":       +0.35,
+    "Rahm, Jon":           +0.30,
+    "Aberg, Ludvig":       +0.28,
+    "Matsuyama, Hideki":   +0.25,
+    "Schauffele, Xander":  +0.22,
+    "Spieth, Jordan":      +0.20,
+    "Rose, Justin":        +0.18,
+    "Young, Cameron":      +0.15,
+    "Lee, Min Woo":        +0.15,
+    "DeChambeau, Bryson":  +0.12,
+    "Kim, Si Woo":         +0.12,
+    "Conners, Corey":      +0.10,
+    "Fleetwood, Tommy":    +0.10,
+    "MacIntyre, Robert":   +0.08,
+    "Straka, Sepp":        +0.08,
+    "Scott, Adam":         +0.08,
+    "Fitzpatrick, Matt":   +0.06,
+    "Reed, Patrick":       +0.06,
+    "Koepka, Brooks":      +0.05,
+    "Day, Jason":          +0.05,
+    "Morikawa, Collin":    +0.02,
+    "Hovland, Viktor":     -0.08,
+    "Hatton, Tyrrell":     -0.10,
+    "Thomas, Justin":      -0.03,
+    "Lowry, Shane":        -0.05,
+    "Cantlay, Patrick":    -0.03,
+}
+
+def run_golf_masters():
+    print("\n[Golf — Masters Tournament]")
+    if not DG_KEY:
+        print("  ! No DATAGOLF_KEY — set env var")
         return
 
-    # Run the existing model
-    result = subprocess.run(
-        ["python3", model_path],
-        capture_output=True, text=True,
-        cwd=os.path.expanduser("~/Desktop/basketball_iq"),
-        env={**os.environ, "ODDS_API_KEY": ODDS_KEY}
-    )
-    if result.returncode != 0:
-        print(f"  ! Model error: {result.stderr[-200:]}")
+    def dg_to_std(s):
+        parts = s.split(", ")
+        return f"{parts[1]} {parts[0]}" if len(parts) == 2 else s
+
+    try:
+        skills_raw = fetch(f"https://feeds.datagolf.com/preds/skill-ratings?tour=pga&file_format=json&key={DG_KEY}")
+        skills = {p["dg_id"]: p for p in skills_raw.get("players", [])}
+
+        pt = fetch(f"https://feeds.datagolf.com/preds/pre-tournament?tour=pga&odds_format=percent&file_format=json&key={DG_KEY}")
+        dg_preds = {p["dg_id"]: p for p in pt.get("baseline", [])}
+
+        ip = fetch(f"https://feeds.datagolf.com/preds/in-play?tour=pga&dead_heat=no&odds_format=percent&file_format=json&key={DG_KEY}")
+        ip_preds = {p["dg_id"]: p for p in ip.get("data", [])}
+
+        field_data = fetch(f"https://feeds.datagolf.com/field-updates?tour=pga&file_format=json&key={DG_KEY}")
+        field = field_data.get("field", [])
+        print(f"  Field: {len(field)} players | Event: {field_data.get('event_name','?')}")
+    except Exception as e:
+        print(f"  ! DataGolf fetch error: {e}")
         return
 
-    # Copy output to iQ data dir
-    src = os.path.expanduser("~/Desktop/basketball_iq/output/nba_props_today.json")
-    if os.path.exists(src):
-        dst = os.path.join(DATA_DIR, "nba_props_today.json")
-        shutil.copy2(src, dst)
-        # Load and report
-        with open(dst) as f:
-            d = json.load(f)
-        picks = d.get("picks", [])
-        print(f"  -> {len(picks)} props written  (from {len(d.get('projections',[]))} projections)")
-    else:
-        print("  ! No output file generated")
-def run_mlb_props():
-    print("\n[MLB Props — Pitcher Strikeouts]")
-    LEAGUE_K_PCT = 0.224
+    # Market odds
+    market_prob = {}; best_price = {}
+    try:
+        odds_raw = fetch(f"https://api.the-odds-api.com/v4/sports/golf_masters_tournament_winner/odds"
+                         f"?apiKey={ODDS_KEY}&regions=us,uk&markets=outrights&oddsFormat=american")
+        raw_imp = {}
+        for market in odds_raw:
+            for bk in market.get("bookmakers", []):
+                if bk["key"] not in ("pinnacle","draftkings","fanduel","betmgm","williamhill"): continue
+                for mk in bk.get("markets", []):
+                    for o in mk.get("outcomes", []):
+                        n = o["name"]; p = o["price"]
+                        if n not in raw_imp: raw_imp[n] = []
+                        raw_imp[n].append(to_imp(p))
+                        if n not in best_price or (p > 0 and (best_price[n] < 0 or p > best_price[n])):
+                            best_price[n] = p
+        total_imp = sum(sum(v)/len(v) for v in raw_imp.values())
+        market_prob = {n: sum(v)/len(v)/total_imp for n, v in raw_imp.items()}
+        print(f"  Odds: {len(market_prob)} players priced")
+    except Exception as e:
+        print(f"  ! Odds fetch error: {e}")
 
-    # Schedule with umpires
-    sched = fetch(f"https://statsapi.mlb.com/api/v1/schedule"
-                  f"?sportId=1&date={TODAY}&hydrate=probablePitcher,team,officials")
-    games = []
-    for d in sched.get("dates", []):
-        for g in d.get("games", []):
-            if g.get("status", {}).get("abstractGameState") != "Preview": continue
-            officials = g.get("officials", [])
-            hp = next((o for o in officials if o.get("officialType") == "Home Plate"), None)
-            ump = hp.get("official", {}).get("fullName", "Unknown") if hp else "Unknown"
-            games.append({
-                "game_id":  str(g.get("gamePk", "")),
-                "home":     g["teams"]["home"]["team"]["name"],
-                "home_id":  g["teams"]["home"]["team"]["id"],
-                "away":     g["teams"]["away"]["team"]["name"],
-                "away_id":  g["teams"]["away"]["team"]["id"],
-                "home_sp":  g["teams"]["home"].get("probablePitcher", {}),
-                "away_sp":  g["teams"]["away"].get("probablePitcher", {}),
-                "umpire":   ump,
-                "ump_adj":  UMP_K_ADJ.get(ump, 0.0),
-            })
+    results = []
+    for p in field:
+        dg_id = p["dg_id"]; dg_name = p["player_name"]
+        std_name = dg_to_std(dg_name)
+        ip_data = ip_preds.get(dg_id, {}); pt_data = dg_preds.get(dg_id, {})
+        sk = skills.get(dg_id, {})
 
-    # SP stats
-    sp_stats = {}
-    sp_ids = set()
-    for g in games:
-        if g["home_sp"].get("id"): sp_ids.add((g["home_sp"]["id"], g["home_sp"].get("fullName", "")))
-        if g["away_sp"].get("id"): sp_ids.add((g["away_sp"]["id"], g["away_sp"].get("fullName", "")))
-    for pid, pname in sp_ids:
-        try:
-            data = fetch(f"https://statsapi.mlb.com/api/v1/people/{pid}/stats"
-                         f"?stats=season&group=pitching&season=2026")
-            splits = data.get("stats", [{}])[0].get("splits", [])
-            if splits:
-                s = splits[0].get("stat", {})
-                ip_str = str(s.get("inningsPitched", "0.0"))
-                parts = ip_str.split(".")
-                ip = int(parts[0]) + (int(parts[1]) if len(parts) > 1 else 0) / 3
-                gs = int(s.get("gamesStarted", 0))
-                k  = int(s.get("strikeOuts", 0))
-                k9 = round(k / ip * 9, 2) if ip > 0 else 8.0
-                sp_stats[pid] = {"name": pname, "ip": ip, "gs": gs,
-                                 "k9": k9, "avg_ip": round(ip/gs, 1) if gs > 0 else 5.0}
-        except: pass
+        dg_base = ip_data.get("win", pt_data.get("win", 0)) or 0
+        fit_adj = AUGUSTA_FIT.get(dg_name, 0.0)
+        raw_model = max(0.0001, dg_base + fit_adj * 0.03)
 
-    # Team K%
-    team_k = {}
-    for g in games:
-        for tid in [g["home_id"], g["away_id"]]:
-            if tid in team_k: continue
-            try:
-                data = fetch(f"https://statsapi.mlb.com/api/v1/teams/{tid}/stats"
-                             f"?stats=season&group=hitting&season=2026")
-                s = data.get("stats", [{}])[0].get("splits", [{}])
-                if s:
-                    st = s[0].get("stat", {})
-                    ab = int(st.get("atBats", 0) or 0)
-                    so = int(st.get("strikeOuts", 0) or 0)
-                    team_k[tid] = round(so/ab, 4) if ab > 0 else LEAGUE_K_PCT
-            except:
-                team_k[tid] = LEAGUE_K_PCT
+        mkt = market_prob.get(std_name)
+        results.append({
+            "pick_id":     f"golf-masters-2026-{dg_id}",
+            "player":      std_name,
+            "dg_name":     dg_name,
+            "dg_id":       dg_id,
+            "model_prob":  raw_model,
+            "dg_base":     dg_base,
+            "market_prob": mkt,
+            "best_price":  best_price.get(std_name),
+            "edge_pp":     round((raw_model - mkt)*100, 2) if mkt else None,
+            "aug_fit":     fit_adj,
+            "sg_total":    sk.get("sg_total", 0),
+            "sg_app":      sk.get("sg_app", 0),
+            "sg_ott":      sk.get("sg_ott", 0),
+            "sg_arg":      sk.get("sg_arg", 0),
+            "sg_putt":     sk.get("sg_putt", 0),
+            "dg_top10":    ip_data.get("top_10", pt_data.get("top_10", 0)) or 0,
+            "thru":        ip_data.get("thru", 0),
+            "score":       ip_data.get("current_score", 0),
+            "today":       ip_data.get("today", 0),
+            "pos":         ip_data.get("current_pos", "--"),
+            "confidence_tier": "high" if (mkt and raw_model > mkt*1.2) else "medium",
+            "result": None, "outcome": None,
+        })
 
-    # Odds events
-    events = fetch(f"https://api.the-odds-api.com/v4/sports/baseball_mlb/events"
-                   f"?apiKey={ODDS_KEY}")
-    event_map = {}
-    for ev in events:
-        ht = ev["home_team"]; at = ev["away_team"]
-        event_map[f"{ht.split()[-1].lower()}_{at.split()[-1].lower()}"] = ev["id"]
+    # Renormalize
+    total = sum(r["model_prob"] for r in results)
+    for r in results:
+        r["model_prob"] = round(r["model_prob"]/total, 4)
+        if r["market_prob"] and r["market_prob"] > 0:
+            r["edge_pp"] = round((r["model_prob"] - r["market_prob"])*100, 2)
 
-    all_props = []
-    for g in games:
-        key = f"{g['home'].split()[-1].lower()}_{g['away'].split()[-1].lower()}"
-        event_id = event_map.get(key)
-        if not event_id: continue
-        try:
-            odds_data = fetch(f"https://api.the-odds-api.com/v4/sports/baseball_mlb"
-                              f"/events/{event_id}/odds?apiKey={ODDS_KEY}"
-                              f"&regions=us&markets=pitcher_strikeouts&oddsFormat=american")
-        except: continue
-
-        pitcher_lines = {}
-        for bk in odds_data.get("bookmakers", []):
-            if bk["key"] not in ("fanduel","draftkings","betmgm","betonlineag","fanatics"): continue
-            for mk in bk.get("markets", []):
-                if mk["key"] != "pitcher_strikeouts": continue
-                for o in mk.get("outcomes", []):
-                    pn = o.get("description", "")
-                    if pn not in pitcher_lines:
-                        pitcher_lines[pn] = {"over":[], "under":[], "line": o.get("point", 4.5)}
-                    if o["name"] == "Over":  pitcher_lines[pn]["over"].append(o["price"])
-                    if o["name"] == "Under": pitcher_lines[pn]["under"].append(o["price"])
-                    pitcher_lines[pn]["line"] = o.get("point", 4.5)
-
-        for sp_key, opp_id in [("home_sp", g["away_id"]), ("away_sp", g["home_id"])]:
-            sp = g[sp_key]
-            if not sp.get("id"): continue
-            pname = sp.get("fullName", "")
-            stats = sp_stats.get(sp["id"])
-            odds_entry = next(
-                (e for n, e in pitcher_lines.items()
-                 if pname.split()[-1].lower() in n.lower() or n.split()[-1].lower() in pname.lower()),
-                None
-            )
-            if not odds_entry or not odds_entry["over"] or not odds_entry["under"]: continue
-            if len(odds_entry["over"]) < 2: continue
-
-            line = odds_entry["line"]
-            avg_oi = sum(to_imp(p) for p in odds_entry["over"]) / len(odds_entry["over"])
-            avg_ui = sum(to_imp(p) for p in odds_entry["under"]) / len(odds_entry["under"])
-            nv_o, nv_u = devig(avg_oi, avg_ui)
-
-            k9      = stats["k9"] if stats and stats["gs"] >= 2 else 8.0
-            proj_ip = min(stats["avg_ip"], 6.0) if stats and stats["gs"] >= 2 else 5.0
-            if stats and stats["gs"] < 4: proj_ip = min(proj_ip, 5.5)
-
-            opp_kpct = team_k.get(opp_id, LEAGUE_K_PCT)
-            adj_k9   = k9 * (0.70 + 0.30 * (opp_kpct / LEAGUE_K_PCT))
-            proj_k   = (adj_k9 * proj_ip / 9) + g["ump_adj"]
-
-            mo = poisson_over(proj_k, line)
-            mu = 1 - mo
-            eo = round((mo - nv_o) * 100, 2)
-            eu = round((mu - nv_u) * 100, 2)
-
-            best_side  = "Over" if eo >= eu else "Under"
-            best_model = mo if best_side == "Over" else mu
-            best_edge  = eo if best_side == "Over" else eu
-            best_mkt   = nv_o if best_side == "Over" else nv_u
-
-            if abs(best_edge) > 20 or abs(best_edge) < 3: continue
-
-            all_props.append({
-                "pick_id":   f"mlb-props-{TODAY}-{sp['id']}-k",
-                "sport":     "mlb", "market": "pitcher_strikeouts",
-                "game":      f"{g['away']} @ {g['home']}",
-                "player":    pname,
-                "pick":      f"{pname} {best_side} {line} Ks",
-                "pick_side": best_side, "line": line,
-                "proj_k":    round(proj_k, 2),
-                "umpire":    g["umpire"], "ump_adj": g["ump_adj"],
-                "opp_k_pct": round(opp_kpct, 3),
-                "model_prob":  round(best_model, 4),
-                "market_prob": round(best_mkt, 4),
-                "edge_pp":   best_edge,
-                "confidence_tier": "high" if best_model>=0.65 else "medium" if best_model>=0.60 else "low",
-                "result": None, "outcome": None,
-            })
+    results.sort(key=lambda x: -x["model_prob"])
 
     ts = datetime.datetime.utcnow().isoformat() + "Z"
-    out = {"schema_version":"1.0","sport":"mlb","market_type":"player_props",
-           "generated_at":ts,"data_date":TODAY,
-           "props":sorted(all_props,key=lambda x:-abs(x["edge_pp"])),
-           "summary":{"total_props":len(all_props),
-                      "high_confidence":sum(1 for p in all_props if p["confidence_tier"]=="high")}}
-    path = os.path.join(DATA_DIR, "mlb_props_today.json")
-    with open(path,"w") as f: json.dump(out,f,indent=2)
-    print(f"  -> {len(all_props)} props written")
+    out = {
+        "schema_version": "1.0",
+        "sport": "golf",
+        "tournament": "Masters Tournament 2026",
+        "generated_at": ts,
+        "data_date": TODAY,
+        "status": "ACTIVE",
+        "model_version": "v0.3-dg-augmented",
+        "current_round": ip.get("info", {}).get("current_round", 1),
+        "last_updated":  ip.get("info", {}).get("last_update", ""),
+        "methodology": {
+            "base": "DataGolf in-play win probability",
+            "adjustment": "Augusta fit × 0.03 win prob delta",
+            "market": "Devigged Pinnacle/DK/FD/BetMGM outrights",
+            "note": "Run pre-round for best edge — market lags during round, model lags live scores",
+        },
+        "picks": [r for r in results if r.get("edge_pp") and r["edge_pp"] >= 1.0],
+        "field": results,
+        "summary": {
+            "total_players": len(results),
+            "positive_edge": sum(1 for r in results if r.get("edge_pp") and r["edge_pp"] > 0),
+            "top_picks": [r["player"] for r in results if r.get("edge_pp") and r["edge_pp"] >= 1.0][:5],
+        }
+    }
+    path = os.path.join(DATA_DIR, "golf_masters_picks.json")
+    with open(path, "w") as f: json.dump(out, f, indent=2)
 
-
+    picks = out["picks"]
+    print(f"  -> {len(picks)} picks with ≥1.0pp edge | {len(results)} players modeled")
+    for r in picks[:5]:
+        p = f"+{r['best_price']}" if r.get('best_price') and r['best_price']>0 else "?"
+        print(f"     ★ {r['player']:<26} model={r['model_prob']*100:.1f}% mkt={r['market_prob']*100:.1f}% edge=+{r['edge_pp']:.1f}pp @ {p}")
 def run_nba_props():
     """Call the existing validated nba_props_model.py and copy output to DATA_DIR."""
-    print("\n[NBA Props — pitcher strikeouts model]")
+    print("\n[NBA Props — backtested model]")
     import subprocess, shutil
     model_path = os.path.expanduser("~/Desktop/basketball_iq/nba_props_model.py")
     if not os.path.exists(model_path):
         print("  ! nba_props_model.py not found at ~/Desktop/basketball_iq/")
         return
-
-    # Run the existing model
     result = subprocess.run(
         ["python3", model_path],
         capture_output=True, text=True,
@@ -926,21 +892,18 @@ def run_nba_props():
         env={**os.environ, "ODDS_API_KEY": ODDS_KEY}
     )
     if result.returncode != 0:
-        print(f"  ! Model error: {result.stderr[-200:]}")
+        print(f"  ! Model error: {result.stderr[-300:]}")
         return
-
-    # Copy output to iQ data dir
     src = os.path.expanduser("~/Desktop/basketball_iq/output/nba_props_today.json")
     if os.path.exists(src):
         dst = os.path.join(DATA_DIR, "nba_props_today.json")
         shutil.copy2(src, dst)
-        # Load and report
-        with open(dst) as f:
-            d = json.load(f)
+        with open(dst) as f: d = json.load(f)
         picks = d.get("picks", [])
-        print(f"  -> {len(picks)} props written  (from {len(d.get('projections',[]))} projections)")
+        print(f"  -> {len(picks)} props written (from {len(d.get('projections',[]))} projections)")
     else:
         print("  ! No output file generated")
+
 SPORT_RUNNERS = {
     "mlb":          run_mlb,
     "nhl":          run_nhl,
@@ -949,6 +912,7 @@ SPORT_RUNNERS = {
     "nfl":          run_nfl,
     "mlb_props":   run_mlb_props,
     "nba_props":   run_nba_props,
+    "golf_masters": run_golf_masters,
 }
 
 def main():
@@ -1026,4 +990,6 @@ def poisson_over(lam, line):
     k = int(line)
     prob = sum((math.exp(-lam)*lam**i)/math.factorial(i) for i in range(k+1))
     return round(1-prob, 4)
+
+
 
