@@ -211,9 +211,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-09T14:14:56.863522Z"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401847130",

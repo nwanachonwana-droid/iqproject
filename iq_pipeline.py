@@ -549,91 +549,6 @@ def print_summary():
 # MAIN
 # ═══════════════════════════════════════════════════════════════════════════════
 
-SPORT_RUNNERS = {
-    "mlb":          run_mlb,
-    "nhl":          run_nhl,
-    "ncaa_baseball": run_ncaa_baseball,
-    "soccer":       run_soccer,
-    "nfl":          run_nfl,
-    "mlb_props":   run_mlb_props,
-}
-
-def main():
-    import argparse
-    parser = argparse.ArgumentParser(description="iQ Project Master Pipeline")
-    parser.add_argument("--picks-only",  action="store_true")
-    parser.add_argument("--settle-only", action="store_true")
-    parser.add_argument("--no-sync",     action="store_true")
-    parser.add_argument("--sport",       default="all")
-    args = parser.parse_args()
-
-    start = time.time()
-    print(f"iQ Project Pipeline — {TODAY}")
-    print("=" * 68)
-
-    if not args.settle_only:
-        print("\n── GENERATING PICKS ──")
-        if args.sport == "all":
-            for name, fn in SPORT_RUNNERS.items():
-                try:    fn()
-                except Exception as e:
-                    import traceback
-                    print(f"  ✗ {name}: {e}")
-                    traceback.print_exc()
-        else:
-            fn = SPORT_RUNNERS.get(args.sport)
-            if fn:
-                try:    fn()
-                except Exception as e:
-                    import traceback; print(f"  ✗ {args.sport}: {e}"); traceback.print_exc()
-            else:
-                print(f"Unknown sport: {args.sport}")
-                print(f"Available: {', '.join(SPORT_RUNNERS.keys())}")
-
-        print_summary()
-
-    if not args.picks_only:
-        settle_all()
-
-    if not args.no_sync:
-        sync_to_site()
-
-    elapsed = round(time.time() - start, 1)
-    print(f"\n✓ Done in {elapsed}s")
-
-if __name__ == "__main__":
-    main()
-
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# MLB PROPS — Pitcher Strikeouts
-# ═══════════════════════════════════════════════════════════════════════════════
-
-# Umpire K-rate adjustment (extra Ks per game vs league average)
-UMP_K_ADJ = {
-    "Angel Hernandez":+1.4,"CB Bucknor":+1.2,"Lance Barksdale":+1.1,
-    "James Hoye":+1.0,"Andy Fletcher":+0.9,"Jordan Baker":+0.9,
-    "Phil Cuzzi":+0.8,"Alfonso Marquez":+0.8,"Mike Everitt":+0.8,
-    "Bill Miller":+0.7,"Rob Drake":+0.7,"Dan Bellino":+0.7,
-    "Tripp Gibson":+0.6,"Ron Kulpa":+0.6,"Chris Segal":+0.6,
-    "Pat Hoberg":+0.5,"Brian Knight":+0.5,"Nic Lentz":+0.5,
-    "Ryan Additon":+0.4,"Cory Blaser":+0.4,"Shane Livensparger":+0.4,
-    "Willie Traynor":+0.2,"Scott Barry":+0.1,"Joe West":+0.1,
-    "Mark Carlson":+0.1,"Chad Fairchild":+0.1,
-    "John Libka":0.0,"Mike Muchlinski":0.0,"Manny Gonzalez":0.0,
-    "Brennan Miller":0.0,"Nick Mahrley":0.0,"Brock Ballou":0.0,
-    "Jim Reynolds":-0.1,"Ted Barrett":-0.1,"Hunter Wendelstedt":-0.1,
-    "Tony Randazzo":-0.2,"Fieldin Culbreth":-0.2,
-    "Doug Eddings":-0.5,"Ed Hickox":-0.5,"Mark Wegner":-0.5,
-    "Tim Timmons":-0.6,"Tom Hallion":-0.6,
-    "Jerry Meals":-0.7,"Sam Holbrook":-0.7,"Dan Iassogna":-0.8,
-}
-
-def poisson_over(lam, line):
-    k = int(line)
-    prob = sum((math.exp(-lam)*lam**i)/math.factorial(i) for i in range(k+1))
-    return round(1-prob, 4)
-
 def run_mlb_props():
     print("\n[MLB Props — Pitcher Strikeouts]")
     LEAGUE_K_PCT = 0.224
@@ -796,3 +711,319 @@ def run_mlb_props():
     path = os.path.join(DATA_DIR, "mlb_props_today.json")
     with open(path,"w") as f: json.dump(out,f,indent=2)
     print(f"  -> {len(all_props)} props written")
+
+
+def run_nba_props():
+    """Call the existing validated nba_props_model.py and copy output to DATA_DIR."""
+    print("\n[NBA Props — pitcher strikeouts model]")
+    import subprocess, shutil
+    model_path = os.path.expanduser("~/Desktop/basketball_iq/nba_props_model.py")
+    if not os.path.exists(model_path):
+        print("  ! nba_props_model.py not found at ~/Desktop/basketball_iq/")
+        return
+
+    # Run the existing model
+    result = subprocess.run(
+        ["python3", model_path],
+        capture_output=True, text=True,
+        cwd=os.path.expanduser("~/Desktop/basketball_iq"),
+        env={**os.environ, "ODDS_API_KEY": ODDS_KEY}
+    )
+    if result.returncode != 0:
+        print(f"  ! Model error: {result.stderr[-200:]}")
+        return
+
+    # Copy output to iQ data dir
+    src = os.path.expanduser("~/Desktop/basketball_iq/output/nba_props_today.json")
+    if os.path.exists(src):
+        dst = os.path.join(DATA_DIR, "nba_props_today.json")
+        shutil.copy2(src, dst)
+        # Load and report
+        with open(dst) as f:
+            d = json.load(f)
+        picks = d.get("picks", [])
+        print(f"  -> {len(picks)} props written  (from {len(d.get('projections',[]))} projections)")
+    else:
+        print("  ! No output file generated")
+def run_mlb_props():
+    print("\n[MLB Props — Pitcher Strikeouts]")
+    LEAGUE_K_PCT = 0.224
+
+    # Schedule with umpires
+    sched = fetch(f"https://statsapi.mlb.com/api/v1/schedule"
+                  f"?sportId=1&date={TODAY}&hydrate=probablePitcher,team,officials")
+    games = []
+    for d in sched.get("dates", []):
+        for g in d.get("games", []):
+            if g.get("status", {}).get("abstractGameState") != "Preview": continue
+            officials = g.get("officials", [])
+            hp = next((o for o in officials if o.get("officialType") == "Home Plate"), None)
+            ump = hp.get("official", {}).get("fullName", "Unknown") if hp else "Unknown"
+            games.append({
+                "game_id":  str(g.get("gamePk", "")),
+                "home":     g["teams"]["home"]["team"]["name"],
+                "home_id":  g["teams"]["home"]["team"]["id"],
+                "away":     g["teams"]["away"]["team"]["name"],
+                "away_id":  g["teams"]["away"]["team"]["id"],
+                "home_sp":  g["teams"]["home"].get("probablePitcher", {}),
+                "away_sp":  g["teams"]["away"].get("probablePitcher", {}),
+                "umpire":   ump,
+                "ump_adj":  UMP_K_ADJ.get(ump, 0.0),
+            })
+
+    # SP stats
+    sp_stats = {}
+    sp_ids = set()
+    for g in games:
+        if g["home_sp"].get("id"): sp_ids.add((g["home_sp"]["id"], g["home_sp"].get("fullName", "")))
+        if g["away_sp"].get("id"): sp_ids.add((g["away_sp"]["id"], g["away_sp"].get("fullName", "")))
+    for pid, pname in sp_ids:
+        try:
+            data = fetch(f"https://statsapi.mlb.com/api/v1/people/{pid}/stats"
+                         f"?stats=season&group=pitching&season=2026")
+            splits = data.get("stats", [{}])[0].get("splits", [])
+            if splits:
+                s = splits[0].get("stat", {})
+                ip_str = str(s.get("inningsPitched", "0.0"))
+                parts = ip_str.split(".")
+                ip = int(parts[0]) + (int(parts[1]) if len(parts) > 1 else 0) / 3
+                gs = int(s.get("gamesStarted", 0))
+                k  = int(s.get("strikeOuts", 0))
+                k9 = round(k / ip * 9, 2) if ip > 0 else 8.0
+                sp_stats[pid] = {"name": pname, "ip": ip, "gs": gs,
+                                 "k9": k9, "avg_ip": round(ip/gs, 1) if gs > 0 else 5.0}
+        except: pass
+
+    # Team K%
+    team_k = {}
+    for g in games:
+        for tid in [g["home_id"], g["away_id"]]:
+            if tid in team_k: continue
+            try:
+                data = fetch(f"https://statsapi.mlb.com/api/v1/teams/{tid}/stats"
+                             f"?stats=season&group=hitting&season=2026")
+                s = data.get("stats", [{}])[0].get("splits", [{}])
+                if s:
+                    st = s[0].get("stat", {})
+                    ab = int(st.get("atBats", 0) or 0)
+                    so = int(st.get("strikeOuts", 0) or 0)
+                    team_k[tid] = round(so/ab, 4) if ab > 0 else LEAGUE_K_PCT
+            except:
+                team_k[tid] = LEAGUE_K_PCT
+
+    # Odds events
+    events = fetch(f"https://api.the-odds-api.com/v4/sports/baseball_mlb/events"
+                   f"?apiKey={ODDS_KEY}")
+    event_map = {}
+    for ev in events:
+        ht = ev["home_team"]; at = ev["away_team"]
+        event_map[f"{ht.split()[-1].lower()}_{at.split()[-1].lower()}"] = ev["id"]
+
+    all_props = []
+    for g in games:
+        key = f"{g['home'].split()[-1].lower()}_{g['away'].split()[-1].lower()}"
+        event_id = event_map.get(key)
+        if not event_id: continue
+        try:
+            odds_data = fetch(f"https://api.the-odds-api.com/v4/sports/baseball_mlb"
+                              f"/events/{event_id}/odds?apiKey={ODDS_KEY}"
+                              f"&regions=us&markets=pitcher_strikeouts&oddsFormat=american")
+        except: continue
+
+        pitcher_lines = {}
+        for bk in odds_data.get("bookmakers", []):
+            if bk["key"] not in ("fanduel","draftkings","betmgm","betonlineag","fanatics"): continue
+            for mk in bk.get("markets", []):
+                if mk["key"] != "pitcher_strikeouts": continue
+                for o in mk.get("outcomes", []):
+                    pn = o.get("description", "")
+                    if pn not in pitcher_lines:
+                        pitcher_lines[pn] = {"over":[], "under":[], "line": o.get("point", 4.5)}
+                    if o["name"] == "Over":  pitcher_lines[pn]["over"].append(o["price"])
+                    if o["name"] == "Under": pitcher_lines[pn]["under"].append(o["price"])
+                    pitcher_lines[pn]["line"] = o.get("point", 4.5)
+
+        for sp_key, opp_id in [("home_sp", g["away_id"]), ("away_sp", g["home_id"])]:
+            sp = g[sp_key]
+            if not sp.get("id"): continue
+            pname = sp.get("fullName", "")
+            stats = sp_stats.get(sp["id"])
+            odds_entry = next(
+                (e for n, e in pitcher_lines.items()
+                 if pname.split()[-1].lower() in n.lower() or n.split()[-1].lower() in pname.lower()),
+                None
+            )
+            if not odds_entry or not odds_entry["over"] or not odds_entry["under"]: continue
+            if len(odds_entry["over"]) < 2: continue
+
+            line = odds_entry["line"]
+            avg_oi = sum(to_imp(p) for p in odds_entry["over"]) / len(odds_entry["over"])
+            avg_ui = sum(to_imp(p) for p in odds_entry["under"]) / len(odds_entry["under"])
+            nv_o, nv_u = devig(avg_oi, avg_ui)
+
+            k9      = stats["k9"] if stats and stats["gs"] >= 2 else 8.0
+            proj_ip = min(stats["avg_ip"], 6.0) if stats and stats["gs"] >= 2 else 5.0
+            if stats and stats["gs"] < 4: proj_ip = min(proj_ip, 5.5)
+
+            opp_kpct = team_k.get(opp_id, LEAGUE_K_PCT)
+            adj_k9   = k9 * (0.70 + 0.30 * (opp_kpct / LEAGUE_K_PCT))
+            proj_k   = (adj_k9 * proj_ip / 9) + g["ump_adj"]
+
+            mo = poisson_over(proj_k, line)
+            mu = 1 - mo
+            eo = round((mo - nv_o) * 100, 2)
+            eu = round((mu - nv_u) * 100, 2)
+
+            best_side  = "Over" if eo >= eu else "Under"
+            best_model = mo if best_side == "Over" else mu
+            best_edge  = eo if best_side == "Over" else eu
+            best_mkt   = nv_o if best_side == "Over" else nv_u
+
+            if abs(best_edge) > 20 or abs(best_edge) < 3: continue
+
+            all_props.append({
+                "pick_id":   f"mlb-props-{TODAY}-{sp['id']}-k",
+                "sport":     "mlb", "market": "pitcher_strikeouts",
+                "game":      f"{g['away']} @ {g['home']}",
+                "player":    pname,
+                "pick":      f"{pname} {best_side} {line} Ks",
+                "pick_side": best_side, "line": line,
+                "proj_k":    round(proj_k, 2),
+                "umpire":    g["umpire"], "ump_adj": g["ump_adj"],
+                "opp_k_pct": round(opp_kpct, 3),
+                "model_prob":  round(best_model, 4),
+                "market_prob": round(best_mkt, 4),
+                "edge_pp":   best_edge,
+                "confidence_tier": "high" if best_model>=0.65 else "medium" if best_model>=0.60 else "low",
+                "result": None, "outcome": None,
+            })
+
+    ts = datetime.datetime.utcnow().isoformat() + "Z"
+    out = {"schema_version":"1.0","sport":"mlb","market_type":"player_props",
+           "generated_at":ts,"data_date":TODAY,
+           "props":sorted(all_props,key=lambda x:-abs(x["edge_pp"])),
+           "summary":{"total_props":len(all_props),
+                      "high_confidence":sum(1 for p in all_props if p["confidence_tier"]=="high")}}
+    path = os.path.join(DATA_DIR, "mlb_props_today.json")
+    with open(path,"w") as f: json.dump(out,f,indent=2)
+    print(f"  -> {len(all_props)} props written")
+
+
+def run_nba_props():
+    """Call the existing validated nba_props_model.py and copy output to DATA_DIR."""
+    print("\n[NBA Props — pitcher strikeouts model]")
+    import subprocess, shutil
+    model_path = os.path.expanduser("~/Desktop/basketball_iq/nba_props_model.py")
+    if not os.path.exists(model_path):
+        print("  ! nba_props_model.py not found at ~/Desktop/basketball_iq/")
+        return
+
+    # Run the existing model
+    result = subprocess.run(
+        ["python3", model_path],
+        capture_output=True, text=True,
+        cwd=os.path.expanduser("~/Desktop/basketball_iq"),
+        env={**os.environ, "ODDS_API_KEY": ODDS_KEY}
+    )
+    if result.returncode != 0:
+        print(f"  ! Model error: {result.stderr[-200:]}")
+        return
+
+    # Copy output to iQ data dir
+    src = os.path.expanduser("~/Desktop/basketball_iq/output/nba_props_today.json")
+    if os.path.exists(src):
+        dst = os.path.join(DATA_DIR, "nba_props_today.json")
+        shutil.copy2(src, dst)
+        # Load and report
+        with open(dst) as f:
+            d = json.load(f)
+        picks = d.get("picks", [])
+        print(f"  -> {len(picks)} props written  (from {len(d.get('projections',[]))} projections)")
+    else:
+        print("  ! No output file generated")
+SPORT_RUNNERS = {
+    "mlb":          run_mlb,
+    "nhl":          run_nhl,
+    "ncaa_baseball": run_ncaa_baseball,
+    "soccer":       run_soccer,
+    "nfl":          run_nfl,
+    "mlb_props":   run_mlb_props,
+    "nba_props":   run_nba_props,
+}
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="iQ Project Master Pipeline")
+    parser.add_argument("--picks-only",  action="store_true")
+    parser.add_argument("--settle-only", action="store_true")
+    parser.add_argument("--no-sync",     action="store_true")
+    parser.add_argument("--sport",       default="all")
+    args = parser.parse_args()
+
+    start = time.time()
+    print(f"iQ Project Pipeline — {TODAY}")
+    print("=" * 68)
+
+    if not args.settle_only:
+        print("\n── GENERATING PICKS ──")
+        if args.sport == "all":
+            for name, fn in SPORT_RUNNERS.items():
+                try:    fn()
+                except Exception as e:
+                    import traceback
+                    print(f"  ✗ {name}: {e}")
+                    traceback.print_exc()
+        else:
+            fn = SPORT_RUNNERS.get(args.sport)
+            if fn:
+                try:    fn()
+                except Exception as e:
+                    import traceback; print(f"  ✗ {args.sport}: {e}"); traceback.print_exc()
+            else:
+                print(f"Unknown sport: {args.sport}")
+                print(f"Available: {', '.join(SPORT_RUNNERS.keys())}")
+
+        print_summary()
+
+    if not args.picks_only:
+        settle_all()
+
+    if not args.no_sync:
+        sync_to_site()
+
+    elapsed = round(time.time() - start, 1)
+    print(f"\n✓ Done in {elapsed}s")
+
+if __name__ == "__main__":
+    main()
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MLB PROPS — Pitcher Strikeouts
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Umpire K-rate adjustment (extra Ks per game vs league average)
+UMP_K_ADJ = {
+    "Angel Hernandez":+1.4,"CB Bucknor":+1.2,"Lance Barksdale":+1.1,
+    "James Hoye":+1.0,"Andy Fletcher":+0.9,"Jordan Baker":+0.9,
+    "Phil Cuzzi":+0.8,"Alfonso Marquez":+0.8,"Mike Everitt":+0.8,
+    "Bill Miller":+0.7,"Rob Drake":+0.7,"Dan Bellino":+0.7,
+    "Tripp Gibson":+0.6,"Ron Kulpa":+0.6,"Chris Segal":+0.6,
+    "Pat Hoberg":+0.5,"Brian Knight":+0.5,"Nic Lentz":+0.5,
+    "Ryan Additon":+0.4,"Cory Blaser":+0.4,"Shane Livensparger":+0.4,
+    "Willie Traynor":+0.2,"Scott Barry":+0.1,"Joe West":+0.1,
+    "Mark Carlson":+0.1,"Chad Fairchild":+0.1,
+    "John Libka":0.0,"Mike Muchlinski":0.0,"Manny Gonzalez":0.0,
+    "Brennan Miller":0.0,"Nick Mahrley":0.0,"Brock Ballou":0.0,
+    "Jim Reynolds":-0.1,"Ted Barrett":-0.1,"Hunter Wendelstedt":-0.1,
+    "Tony Randazzo":-0.2,"Fieldin Culbreth":-0.2,
+    "Doug Eddings":-0.5,"Ed Hickox":-0.5,"Mark Wegner":-0.5,
+    "Tim Timmons":-0.6,"Tom Hallion":-0.6,
+    "Jerry Meals":-0.7,"Sam Holbrook":-0.7,"Dan Iassogna":-0.8,
+}
+
+def poisson_over(lam, line):
+    k = int(line)
+    prob = sum((math.exp(-lam)*lam**i)/math.factorial(i) for i in range(k+1))
+    return round(1-prob, 4)
+

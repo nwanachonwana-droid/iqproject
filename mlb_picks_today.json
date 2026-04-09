@@ -21,9 +21,9 @@
       "market_source": "pinnacle",
       "edge_pp": 12.03,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-09T14:14:56.738959Z"
     },
     {
       "pick_id": "mlb-2026-04-08-824455",
@@ -40,9 +40,9 @@
       "market_source": "pinnacle",
       "edge_pp": 7.64,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-09T14:14:56.739010Z"
     },
     {
       "pick_id": "mlb-2026-04-08-824779",
@@ -59,9 +59,9 @@
       "market_source": "pinnacle",
       "edge_pp": 15.97,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-09T14:14:56.739020Z"
     },
     {
       "pick_id": "mlb-2026-04-08-824617",
@@ -78,9 +78,9 @@
       "market_source": "pinnacle",
       "edge_pp": -7.2,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-09T14:14:56.739029Z"
     },
     {
       "pick_id": "mlb-2026-04-08-822915",
@@ -97,9 +97,9 @@
       "market_source": "pinnacle",
       "edge_pp": 8.07,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-09T14:14:56.739038Z"
     },
     {
       "pick_id": "mlb-2026-04-08-822833",
@@ -116,9 +116,9 @@
       "market_source": "pinnacle",
       "edge_pp": 5.09,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-09T14:14:56.739046Z"
     },
     {
       "pick_id": "mlb-2026-04-08-824374",
@@ -135,9 +135,9 @@
       "market_source": "pinnacle",
       "edge_pp": 10.97,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-09T14:14:56.739053Z"
     },
     {
       "pick_id": "mlb-2026-04-08-823234",
@@ -154,9 +154,9 @@
       "market_source": "pinnacle",
       "edge_pp": 5.16,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-09T14:14:56.739059Z"
     },
     {
       "pick_id": "mlb-2026-04-08-822753",
@@ -173,9 +173,9 @@
       "market_source": "pinnacle",
       "edge_pp": 10.17,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-09T14:14:56.739065Z"
     },
     {
       "pick_id": "mlb-2026-04-08-824050",
@@ -192,9 +192,9 @@
       "market_source": "pinnacle",
       "edge_pp": 3.72,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-09T14:14:56.739071Z"
     },
     {
       "pick_id": "mlb-2026-04-08-823646",
@@ -211,9 +211,9 @@
       "market_source": "pinnacle",
       "edge_pp": 9.91,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-09T14:14:56.739078Z"
     },
     {
       "pick_id": "mlb-2026-04-08-823564",
@@ -230,9 +230,9 @@
       "market_source": "pinnacle",
       "edge_pp": 3.66,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-09T14:14:56.739085Z"
     },
     {
       "pick_id": "mlb-2026-04-08-823726",
@@ -249,9 +249,9 @@
       "market_source": "pinnacle",
       "edge_pp": 12.23,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-09T14:14:56.739092Z"
     }
   ],
   "summary": {
