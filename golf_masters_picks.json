@@ -1,0 +1,1324 @@
+{
+  "schema_version": "1.0",
+  "sport": "golf",
+  "tournament": "Masters Tournament 2026",
+  "generated_at": "2026-04-09T14:37:54.055671Z",
+  "data_date": "2026-04-09",
+  "status": "RESEARCH",
+  "model_version": "v0.1-market-baseline",
+  "methodology": {
+    "base": "Devigged market probability from Pinnacle/DraftKings/FanDuel/BetMGM",
+    "adjustments": [
+      "Augusta National course history (+0.3pp per top-10, +0.8pp per win)",
+      "World ranking (OWGR top-10: +0.4pp, 11-25: +0.2pp, 51+: -0.2pp)"
+    ],
+    "known_limitations": [
+      "No strokes gained data \u2014 upgrade with DataGolf API key",
+      "No recent form component \u2014 SG:T2G last 4 events not yet incorporated",
+      "No course fit score \u2014 Augusta-specific SG not yet incorporated",
+      "Market baseline already prices most of this signal efficiently"
+    ],
+    "next_version": "v0.2 adds SG:APP, SG:T2G, SG:ARG via DataGolf API"
+  },
+  "field": [
+    {
+      "player": "Rory McIlroy",
+      "market_prob": 4.65,
+      "model_prob": 6.66,
+      "edge_pp": 2.01,
+      "best_price": 1400,
+      "aug_adj_pp": 3.2,
+      "owgr_adj_pp": 0.4,
+      "owgr": 2,
+      "augusta_hist": {
+        "top10s": 8,
+        "wins": 1
+      }
+    },
+    {
+      "player": "Bubba Watson",
+      "market_prob": 0.02,
+      "model_prob": 1.87,
+      "edge_pp": 1.85,
+      "best_price": 325000,
+      "aug_adj_pp": 2.5,
+      "owgr_adj_pp": -0.2,
+      "owgr": 150,
+      "augusta_hist": {
+        "top10s": 3,
+        "wins": 2
+      }
+    },
+    {
+      "player": "Adam Scott",
+      "market_prob": 1.14,
+      "model_prob": 2.94,
+      "edge_pp": 1.8,
+      "best_price": 8000,
+      "aug_adj_pp": 2.3,
+      "owgr_adj_pp": 0.2,
+      "owgr": 24,
+      "augusta_hist": {
+        "top10s": 5,
+        "wins": 1
+      }
+    },
+    {
+      "player": "Jordan Spieth",
+      "market_prob": 1.74,
+      "model_prob": 3.18,
+      "edge_pp": 1.44,
+      "best_price": 4500,
+      "aug_adj_pp": 2.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 23,
+      "augusta_hist": {
+        "top10s": 4,
+        "wins": 1
+      }
+    },
+    {
+      "player": "Hideki Matsuyama",
+      "market_prob": 2.33,
+      "model_prob": 3.65,
+      "edge_pp": 1.33,
+      "best_price": 2900,
+      "aug_adj_pp": 2.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 12,
+      "augusta_hist": {
+        "top10s": 4,
+        "wins": 1
+      }
+    },
+    {
+      "player": "Jon Rahm",
+      "market_prob": 6.71,
+      "model_prob": 7.59,
+      "edge_pp": 0.89,
+      "best_price": 1000,
+      "aug_adj_pp": 2.3,
+      "owgr_adj_pp": 0.4,
+      "owgr": 4,
+      "augusta_hist": {
+        "top10s": 5,
+        "wins": 1
+      }
+    },
+    {
+      "player": "Justin Rose",
+      "market_prob": 2.11,
+      "model_prob": 2.92,
+      "edge_pp": 0.8,
+      "best_price": 3200,
+      "aug_adj_pp": 1.5,
+      "owgr_adj_pp": 0.0,
+      "owgr": 26,
+      "augusta_hist": {
+        "top10s": 5,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Xander Schauffele",
+      "market_prob": 4.9,
+      "model_prob": 5.48,
+      "edge_pp": 0.59,
+      "best_price": 1325,
+      "aug_adj_pp": 1.5,
+      "owgr_adj_pp": 0.4,
+      "owgr": 3,
+      "augusta_hist": {
+        "top10s": 5,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Patrick Reed",
+      "market_prob": 4.43,
+      "model_prob": 4.95,
+      "edge_pp": 0.52,
+      "best_price": 1475,
+      "aug_adj_pp": 1.7,
+      "owgr_adj_pp": 0.0,
+      "owgr": 35,
+      "augusta_hist": {
+        "top10s": 3,
+        "wins": 1
+      }
+    },
+    {
+      "player": "Scottie Scheffler",
+      "market_prob": 10.9,
+      "model_prob": 11.38,
+      "edge_pp": 0.48,
+      "best_price": 550,
+      "aug_adj_pp": 2.8,
+      "owgr_adj_pp": 0.4,
+      "owgr": 1,
+      "augusta_hist": {
+        "top10s": 4,
+        "wins": 2
+      }
+    },
+    {
+      "player": "Justin Thomas",
+      "market_prob": 1.13,
+      "model_prob": 1.55,
+      "edge_pp": 0.43,
+      "best_price": 7000,
+      "aug_adj_pp": 0.6,
+      "owgr_adj_pp": 0.2,
+      "owgr": 21,
+      "augusta_hist": {
+        "top10s": 2,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Jason Day",
+      "market_prob": 0.66,
+      "model_prob": 1.02,
+      "edge_pp": 0.36,
+      "best_price": 22500,
+      "aug_adj_pp": 0.6,
+      "owgr_adj_pp": 0.0,
+      "owgr": 27,
+      "augusta_hist": {
+        "top10s": 2,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Brooks Koepka",
+      "market_prob": 1.79,
+      "model_prob": 2.09,
+      "edge_pp": 0.3,
+      "best_price": 4000,
+      "aug_adj_pp": 0.6,
+      "owgr_adj_pp": 0.2,
+      "owgr": 22,
+      "augusta_hist": {
+        "top10s": 2,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Corey Conners",
+      "market_prob": 0.82,
+      "model_prob": 1.07,
+      "edge_pp": 0.25,
+      "best_price": 10000,
+      "aug_adj_pp": 0.3,
+      "owgr_adj_pp": 0.2,
+      "owgr": 25,
+      "augusta_hist": {
+        "top10s": 1,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Sepp Straka",
+      "market_prob": 0.91,
+      "model_prob": 1.13,
+      "edge_pp": 0.23,
+      "best_price": 8000,
+      "aug_adj_pp": 0.3,
+      "owgr_adj_pp": 0.2,
+      "owgr": 17,
+      "augusta_hist": {
+        "top10s": 1,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Collin Morikawa",
+      "market_prob": 1.99,
+      "model_prob": 2.17,
+      "edge_pp": 0.18,
+      "best_price": 4000,
+      "aug_adj_pp": 0.3,
+      "owgr_adj_pp": 0.4,
+      "owgr": 5,
+      "augusta_hist": {
+        "top10s": 1,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Min Woo Lee",
+      "market_prob": 1.79,
+      "model_prob": 1.85,
+      "edge_pp": 0.06,
+      "best_price": 3800,
+      "aug_adj_pp": 0.3,
+      "owgr_adj_pp": 0.2,
+      "owgr": 13,
+      "augusta_hist": {
+        "top10s": 1,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Cameron Young",
+      "market_prob": 3.99,
+      "model_prob": 4.02,
+      "edge_pp": 0.04,
+      "best_price": 1800,
+      "aug_adj_pp": 0.6,
+      "owgr_adj_pp": 0.4,
+      "owgr": 8,
+      "augusta_hist": {
+        "top10s": 2,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Si Woo Kim",
+      "market_prob": 1.27,
+      "model_prob": 1.27,
+      "edge_pp": -0.0,
+      "best_price": 5400,
+      "aug_adj_pp": 0.3,
+      "owgr_adj_pp": 0.0,
+      "owgr": 28,
+      "augusta_hist": {
+        "top10s": 1,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Tyrrell Hatton",
+      "market_prob": 0.84,
+      "model_prob": 0.84,
+      "edge_pp": -0.0,
+      "best_price": 10000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 18,
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Ryan Fox",
+      "market_prob": 0.02,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 325000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Ethan Fang",
+      "market_prob": 0.02,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 325000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Angel Cabrera",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Vijay Singh",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Pongsapak Laopakdee",
+      "market_prob": 0.02,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 350000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Carlos Ortiz",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Jose Maria Olaz\u00e1bal",
+      "market_prob": 0.02,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 450000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Aldrich Potgieter",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Brandon Holtz",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Fred Couples",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Naoyuki Kataoka",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Jackson Herrington",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Mike Weir",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Mateo Pulcini",
+      "market_prob": 0.01,
+      "model_prob": 0.01,
+      "edge_pp": -0.01,
+      "best_price": 500000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Mason Howell",
+      "market_prob": 0.03,
+      "model_prob": 0.01,
+      "edge_pp": -0.02,
+      "best_price": 250000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Brian Campbell",
+      "market_prob": 0.02,
+      "model_prob": 0.01,
+      "edge_pp": -0.02,
+      "best_price": 300000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Danny Willett",
+      "market_prob": 0.03,
+      "model_prob": 0.01,
+      "edge_pp": -0.02,
+      "best_price": 225000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Patrick Cantlay",
+      "market_prob": 1.01,
+      "model_prob": 0.98,
+      "edge_pp": -0.03,
+      "best_price": 6800,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 20,
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Nico Echavarria",
+      "market_prob": 0.04,
+      "model_prob": 0.01,
+      "edge_pp": -0.03,
+      "best_price": 180000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Haotong Li",
+      "market_prob": 0.06,
+      "model_prob": 0.01,
+      "edge_pp": -0.05,
+      "best_price": 120000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "John Keefer",
+      "market_prob": 0.06,
+      "model_prob": 0.01,
+      "edge_pp": -0.06,
+      "best_price": 110000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Nicolas Echavarria",
+      "market_prob": 0.07,
+      "model_prob": 0.01,
+      "edge_pp": -0.06,
+      "best_price": 100000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Davis Riley",
+      "market_prob": 0.08,
+      "model_prob": 0.01,
+      "edge_pp": -0.08,
+      "best_price": 100000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Rasmus Neergaard-Petersen",
+      "market_prob": 0.1,
+      "model_prob": 0.01,
+      "edge_pp": -0.09,
+      "best_price": 100000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Tommy Fleetwood",
+      "market_prob": 3.49,
+      "model_prob": 3.38,
+      "edge_pp": -0.11,
+      "best_price": 2000,
+      "aug_adj_pp": 0.3,
+      "owgr_adj_pp": 0.4,
+      "owgr": 6,
+      "augusta_hist": {
+        "top10s": 1,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Russell Henley",
+      "market_prob": 1.42,
+      "model_prob": 1.31,
+      "edge_pp": -0.11,
+      "best_price": 5500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 14,
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Charl Schwartzel",
+      "market_prob": 0.12,
+      "model_prob": 0.01,
+      "edge_pp": -0.11,
+      "best_price": 100000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Viktor Hovland",
+      "market_prob": 1.48,
+      "model_prob": 1.36,
+      "edge_pp": -0.12,
+      "best_price": 5500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 19,
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Zach Johnson",
+      "market_prob": 0.13,
+      "model_prob": 0.01,
+      "edge_pp": -0.12,
+      "best_price": 100000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Keegan Bradley",
+      "market_prob": 0.15,
+      "model_prob": 0.01,
+      "edge_pp": -0.14,
+      "best_price": 75000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Bryson DeChambeau",
+      "market_prob": 4.23,
+      "model_prob": 4.06,
+      "edge_pp": -0.17,
+      "best_price": 1800,
+      "aug_adj_pp": 0.6,
+      "owgr_adj_pp": 0.2,
+      "owgr": 11,
+      "augusta_hist": {
+        "top10s": 2,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Akshay Bhatia",
+      "market_prob": 1.7,
+      "model_prob": 1.53,
+      "edge_pp": -0.17,
+      "best_price": 4500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 15,
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Casey Jarvis",
+      "market_prob": 0.17,
+      "model_prob": 0.01,
+      "edge_pp": -0.17,
+      "best_price": 50000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Michael Brennan",
+      "market_prob": 0.18,
+      "model_prob": 0.01,
+      "edge_pp": -0.17,
+      "best_price": 50000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Sami V\u00e4lim\u00e4ki",
+      "market_prob": 0.18,
+      "model_prob": 0.01,
+      "edge_pp": -0.17,
+      "best_price": 50000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Rasmus Hojgaard",
+      "market_prob": 0.18,
+      "model_prob": 0.01,
+      "edge_pp": -0.18,
+      "best_price": 50000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Kristoffer Reitan",
+      "market_prob": 0.2,
+      "model_prob": 0.01,
+      "edge_pp": -0.19,
+      "best_price": 50000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Jake Knapp",
+      "market_prob": 1.03,
+      "model_prob": 0.83,
+      "edge_pp": -0.2,
+      "best_price": 8000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": 0.0,
+      "owgr": 30,
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Matt McCarty",
+      "market_prob": 0.25,
+      "model_prob": 0.04,
+      "edge_pp": -0.21,
+      "best_price": 35000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Tom McKibbin",
+      "market_prob": 0.24,
+      "model_prob": 0.03,
+      "edge_pp": -0.21,
+      "best_price": 50000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Andrew Novak",
+      "market_prob": 0.24,
+      "model_prob": 0.03,
+      "edge_pp": -0.21,
+      "best_price": 75000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Aaron Rai",
+      "market_prob": 0.28,
+      "model_prob": 0.06,
+      "edge_pp": -0.22,
+      "best_price": 25000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Sergio Garcia",
+      "market_prob": 0.28,
+      "model_prob": 0.06,
+      "edge_pp": -0.22,
+      "best_price": 50000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Michael Kim",
+      "market_prob": 0.3,
+      "model_prob": 0.08,
+      "edge_pp": -0.22,
+      "best_price": 75000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Dustin Johnson",
+      "market_prob": 0.38,
+      "model_prob": 0.14,
+      "edge_pp": -0.23,
+      "best_price": 22500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Wyndham Clark",
+      "market_prob": 0.33,
+      "model_prob": 0.11,
+      "edge_pp": -0.23,
+      "best_price": 22500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Sam Stevens",
+      "market_prob": 0.38,
+      "model_prob": 0.14,
+      "edge_pp": -0.23,
+      "best_price": 25000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Brian Harman",
+      "market_prob": 0.33,
+      "model_prob": 0.11,
+      "edge_pp": -0.23,
+      "best_price": 25000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Cameron Smith",
+      "market_prob": 0.41,
+      "model_prob": 0.17,
+      "edge_pp": -0.24,
+      "best_price": 17500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Alexander Noren",
+      "market_prob": 0.43,
+      "model_prob": 0.19,
+      "edge_pp": -0.24,
+      "best_price": 17500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Max Greyserman",
+      "market_prob": 0.39,
+      "model_prob": 0.15,
+      "edge_pp": -0.24,
+      "best_price": 35000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Marco Penge",
+      "market_prob": 0.48,
+      "model_prob": 0.22,
+      "edge_pp": -0.25,
+      "best_price": 14500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Harry Hall",
+      "market_prob": 0.46,
+      "model_prob": 0.21,
+      "edge_pp": -0.25,
+      "best_price": 22500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Nick Taylor",
+      "market_prob": 0.51,
+      "model_prob": 0.25,
+      "edge_pp": -0.26,
+      "best_price": 17500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Gary Woodland",
+      "market_prob": 0.58,
+      "model_prob": 0.3,
+      "edge_pp": -0.27,
+      "best_price": 12500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Ryan Gerard",
+      "market_prob": 0.6,
+      "model_prob": 0.32,
+      "edge_pp": -0.28,
+      "best_price": 12500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Sungjae Im",
+      "market_prob": 0.6,
+      "model_prob": 0.32,
+      "edge_pp": -0.28,
+      "best_price": 15000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Ben Griffin",
+      "market_prob": 0.63,
+      "model_prob": 0.35,
+      "edge_pp": -0.28,
+      "best_price": 15000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Daniel Berger",
+      "market_prob": 0.6,
+      "model_prob": 0.32,
+      "edge_pp": -0.28,
+      "best_price": 17500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Max Homa",
+      "market_prob": 0.63,
+      "model_prob": 0.35,
+      "edge_pp": -0.28,
+      "best_price": 22500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Harris English",
+      "market_prob": 0.69,
+      "model_prob": 0.4,
+      "edge_pp": -0.29,
+      "best_price": 10000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Jacob Bridgeman",
+      "market_prob": 0.78,
+      "model_prob": 0.47,
+      "edge_pp": -0.31,
+      "best_price": 10000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Maverick Mcnealy",
+      "market_prob": 0.84,
+      "model_prob": 0.52,
+      "edge_pp": -0.32,
+      "best_price": 8200,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Nicolai Hojgaard",
+      "market_prob": 0.86,
+      "model_prob": 0.53,
+      "edge_pp": -0.33,
+      "best_price": 8000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "J. J. Spaun",
+      "market_prob": 0.96,
+      "model_prob": 0.61,
+      "edge_pp": -0.35,
+      "best_price": 8000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Shane Lowry",
+      "market_prob": 2.68,
+      "model_prob": 2.33,
+      "edge_pp": -0.36,
+      "best_price": 4000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": 0.2,
+      "owgr": 16,
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Kurt Kitayama",
+      "market_prob": 1.2,
+      "model_prob": 0.81,
+      "edge_pp": -0.39,
+      "best_price": 8000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Christopher Gotterup",
+      "market_prob": 1.22,
+      "model_prob": 0.83,
+      "edge_pp": -0.4,
+      "best_price": 6000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Robert Macintyre",
+      "market_prob": 1.94,
+      "model_prob": 1.4,
+      "edge_pp": -0.54,
+      "best_price": 3500,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Sam Burns",
+      "market_prob": 1.94,
+      "model_prob": 1.4,
+      "edge_pp": -0.54,
+      "best_price": 4000,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Matthew Fitzpatrick",
+      "market_prob": 3.1,
+      "model_prob": 2.34,
+      "edge_pp": -0.76,
+      "best_price": 2200,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    },
+    {
+      "player": "Ludvig Aberg",
+      "market_prob": 3.99,
+      "model_prob": 3.06,
+      "edge_pp": -0.93,
+      "best_price": 1650,
+      "aug_adj_pp": 0.0,
+      "owgr_adj_pp": -0.2,
+      "owgr": "?",
+      "augusta_hist": {
+        "top10s": 0,
+        "wins": 0
+      }
+    }
+  ],
+  "summary": {
+    "total_players": 92,
+    "positive_edge": 18,
+    "top_value": [
+      "Rory McIlroy",
+      "Bubba Watson",
+      "Adam Scott",
+      "Jordan Spieth",
+      "Hideki Matsuyama"
+    ]
+  }
+}

@@ -175,6 +175,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
       <button class="filt" onclick="setF('ncaa_baseball',this)">NCAA Baseball</button>
       <button class="filt" onclick="setF('soccer',this)">Soccer</button>
       <button class="filt" onclick="setF('tennis',this)">Tennis</button>
+      <button class="filt" onclick="setF('golf',this)">Golf</button>
       <button class="filt" onclick="setF('mlb_props',this)">MLB Props</button>
       <button class="filt" onclick="setF('high',this)">High confidence only</button>
     </div>
@@ -285,7 +286,7 @@ const META={
     sources:['PrizePicks / Underdog - prop lines, free public API','NBA Stats API - player splits, free','Baseball Savant - Statcast player splits, free'],
     limits:['NBA props market highly efficient - 5% edge required','Marcel blend needs 10+ GP for meaningful credibility weight','Injury status must be confirmed pre-game']},
 };
-const SPORTS=Object.keys(META).filter(s=>s!=='props').concat(['nba']);
+const SPORTS=Object.keys(META).filter(s=>s!=='props').concat(['nba','golf']);
 
 let PICKS=[],PROPS=[],PERF={},AF='all',PS='ncaa_basketball';
 
