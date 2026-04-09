@@ -27,8 +27,10 @@
       "edge_pp": 17.45,
       "books": 5,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "actual_k": 1,
+      "settled_at": "2026-04-09T15:19:17.574805Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-547179-k",
@@ -52,8 +54,10 @@
       "edge_pp": 17.06,
       "books": 4,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "actual_k": 4,
+      "settled_at": "2026-04-09T15:19:17.574857Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-622663-k",
@@ -77,8 +81,10 @@
       "edge_pp": 12.13,
       "books": 4,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "actual_k": 7,
+      "settled_at": "2026-04-09T15:19:17.574868Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-656849-k",
@@ -102,8 +108,10 @@
       "edge_pp": 10.2,
       "books": 4,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "actual_k": 6,
+      "settled_at": "2026-04-09T15:19:17.574878Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-701542-k",
@@ -127,8 +135,10 @@
       "edge_pp": 10.0,
       "books": 5,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "actual_k": 5,
+      "settled_at": "2026-04-09T15:19:17.574888Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-666142-k",
@@ -177,8 +187,10 @@
       "edge_pp": 8.36,
       "books": 4,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "actual_k": 3,
+      "settled_at": "2026-04-09T15:19:17.574899Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-664285-k",
@@ -202,8 +214,10 @@
       "edge_pp": 7.56,
       "books": 4,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "actual_k": 2,
+      "settled_at": "2026-04-09T15:19:17.574907Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-672282-k",
@@ -227,8 +241,10 @@
       "edge_pp": 7.02,
       "books": 5,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "actual_k": 4,
+      "settled_at": "2026-04-09T15:19:17.574914Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-663903-k",
@@ -252,8 +268,10 @@
       "edge_pp": 5.7,
       "books": 5,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "actual_k": 3,
+      "settled_at": "2026-04-09T15:19:17.574923Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-571945-k",
@@ -277,8 +295,10 @@
       "edge_pp": 5.5,
       "books": 4,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "actual_k": 3,
+      "settled_at": "2026-04-09T15:19:17.574931Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-676282-k",
@@ -302,8 +322,10 @@
       "edge_pp": 4.51,
       "books": 5,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "actual_k": 9,
+      "settled_at": "2026-04-09T15:19:17.574940Z"
     },
     {
       "pick_id": "mlb-props-2026-04-08-693433-k",
@@ -327,8 +349,10 @@
       "edge_pp": 3.29,
       "books": 5,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "actual_k": 2,
+      "settled_at": "2026-04-09T15:19:17.574950Z"
     }
   ],
   "summary": {

@@ -389,6 +389,7 @@ def settle_all():
         "mlb":          "baseball/mlb",
         "nhl":          "hockey/nhl",
         "ncaa_baseball": "baseball/college-baseball",
+        "nba":          "basketball/nba",
     }
 
     for sport_id, espn_path in espn_paths.items():
@@ -454,6 +455,204 @@ def settle_all():
             with open(picks_path, "w") as f: json.dump(picks_data, f, indent=2)
             with open(perf_path, "w") as f: json.dump(perf, f, indent=2)
             print(f"  ✓ {sport_id}: settled {settled} picks")
+
+    # ── MLB Props settlement (pitcher strikeouts via MLB Stats API) ────────────
+    _settle_mlb_props(yesterday)
+
+    # ── NBA Props settlement (player stats via ESPN box scores) ───────────────
+    _settle_nba_props(yesterday)
+
+
+def _settle_mlb_props(yesterday):
+    """Settle pitcher strikeout props using MLB Stats API box scores."""
+    picks_path = os.path.join(DATA_DIR, "mlb_props_today.json")
+    if not os.path.exists(picks_path): return
+    with open(picks_path) as f: data = json.load(f)
+
+    pending = [p for p in data.get("props", [])
+               if p.get("outcome") is None and data.get("data_date") == yesterday]
+    if not pending:
+        return
+
+    # Fetch yesterday's MLB games with box scores
+    yesterday_compact = yesterday.replace("-","")
+    try:
+        sched = fetch(f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={yesterday}"
+                      f"&hydrate=decisions,pitchers")
+        games = [g for d in sched.get("dates",[]) for g in d.get("games",[])]
+    except Exception as e:
+        print(f"  ! mlb_props settle: {e}"); return
+
+    # Build pitcher K map: pitcher_name -> actual_k
+    pitcher_ks = {}
+    for game in games:
+        gid = game.get("gamePk")
+        try:
+            box = fetch(f"https://statsapi.mlb.com/api/v1/game/{gid}/boxscore")
+            for side in ["home","away"]:
+                pitchers = box.get("teams",{}).get(side,{}).get("pitchers",[])
+                all_players = box.get("teams",{}).get(side,{}).get("players",{})
+                for pid in pitchers:
+                    pdata = all_players.get(f"ID{pid}",{})
+                    name = pdata.get("person",{}).get("fullName","")
+                    stats = pdata.get("stats",{}).get("pitching",{})
+                    ks = int(stats.get("strikeOuts",0))
+                    ip_str = str(stats.get("inningsPitched","0.0"))
+                    parts = ip_str.split(".")
+                    ip = int(parts[0]) + (int(parts[1]) if len(parts)>1 else 0)/3
+                    # Only count starting pitchers (IP >= 1.0)
+                    if ip >= 1.0 and name:
+                        pitcher_ks[name] = ks
+                        # Also store last name for fuzzy match
+                        pitcher_ks[name.split()[-1]] = ks
+        except: continue
+
+    if not pitcher_ks:
+        print(f"  ! mlb_props: no pitcher stats found"); return
+
+    perf, perf_path = load_perf("mlb_props")
+    settled = 0
+    for pick in pending:
+        player = pick.get("player","")
+        line   = pick.get("line", 0)
+        side   = pick.get("pick_side","")
+        # Find actual Ks
+        actual_k = pitcher_ks.get(player) or pitcher_ks.get(player.split()[-1])
+        if actual_k is None: continue
+
+        if side == "Over":
+            won = actual_k > line
+        else:
+            won = actual_k < line
+
+        pick["outcome"]    = "WIN" if won else "LOSS"
+        pick["result"]     = 1.0 if won else 0.0
+        pick["actual_k"]   = actual_k
+        pick["settled_at"] = datetime.datetime.utcnow().isoformat() + "Z"
+
+        ov = perf["overall"]
+        ov["total"] += 1
+        if won: ov["wins"] = ov.get("wins",0)+1
+        else:   ov["losses"] = ov.get("losses",0)+1
+        s = ov["wins"]+ov["losses"]
+        ov["hit_rate"] = round(ov["wins"]/s*100,2) if s>0 else 0.0
+
+        t = pick.get("confidence_tier","low")
+        bc = perf["by_confidence"].setdefault(t,{"wins":0,"total":0,"hit_rate":0.0})
+        bc["total"]+=1
+        if won: bc["wins"]+=1
+        bc["hit_rate"] = round(bc["wins"]/bc["total"]*100,2)
+
+        perf["recent"].insert(0,{**pick})
+        perf["recent"] = perf["recent"][:50]
+        settled += 1
+
+    if settled:
+        perf["last_updated"] = TODAY
+        with open(picks_path,"w") as f: json.dump(data,f,indent=2)
+        with open(perf_path,"w") as f: json.dump(perf,f,indent=2)
+        print(f"  ✓ mlb_props: settled {settled} picks (actual Ks matched)")
+    else:
+        print(f"  ~ mlb_props: {len(pending)} pending, no matches found")
+        if pitcher_ks:
+            print(f"    Available pitchers: {list(pitcher_ks.keys())[:5]}")
+
+
+def _settle_nba_props(yesterday):
+    """Settle NBA player props using ESPN box scores."""
+    picks_path = os.path.join(DATA_DIR, "nba_props_today.json")
+    if not os.path.exists(picks_path): return
+    with open(picks_path) as f: data = json.load(f)
+
+    pending = [p for p in data.get("picks", [])
+               if p.get("outcome") is None]
+    if not pending: return
+
+    # Fetch ESPN NBA scoreboard for yesterday
+    yesterday_compact = yesterday.replace("-","")
+    try:
+        scores = fetch(f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba"
+                       f"/scoreboard?dates={yesterday_compact}")
+    except Exception as e:
+        print(f"  ! nba_props settle: {e}"); return
+
+    # Get box score stats per player
+    player_stats = {}
+    for event in scores.get("events",[]):
+        eid = event.get("id","")
+        try:
+            box = fetch(f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba"
+                        f"/summary?event={eid}")
+            for box_team in box.get("boxscore",{}).get("players",[]):
+                for stat_group in box_team.get("statistics",[]):
+                    keys = stat_group.get("keys",[])
+                    for athlete in stat_group.get("athletes",[]):
+                        name = athlete.get("athlete",{}).get("displayName","")
+                        vals = athlete.get("stats",[])
+                        if not name or not vals: continue
+                        stat_map = dict(zip(keys,vals))
+                        def safe_float(v):
+                            try: return float(v)
+                            except: return 0.0
+                        player_stats[name] = {
+                            "points":   safe_float(stat_map.get("PTS",0)),
+                            "rebounds": safe_float(stat_map.get("REB",0)),
+                            "assists":  safe_float(stat_map.get("AST",0)),
+                            "threes":   safe_float(stat_map.get("3PM",0)),
+                        }
+                        # Last name shortcut
+                        player_stats[name.split()[-1]] = player_stats[name]
+        except: continue
+
+    if not player_stats:
+        print(f"  ~ nba_props: no box score data found"); return
+
+    perf, perf_path = load_perf("nba_props")
+    settled = 0
+    STAT_MAP = {"points":"points","rebounds":"rebounds","assists":"assists","threes":"threes"}
+
+    for pick in pending:
+        player = pick.get("player","")
+        stat   = pick.get("stat","")
+        line   = pick.get("line",0)
+        side   = pick.get("direction","over")
+
+        pstats = player_stats.get(player) or player_stats.get(player.split()[-1])
+        if not pstats: continue
+
+        stat_key = STAT_MAP.get(stat)
+        if not stat_key: continue
+        actual = pstats.get(stat_key,0)
+
+        won = actual > line if side=="over" else actual < line
+        pick["outcome"]    = "WIN" if won else "LOSS"
+        pick["result"]     = 1.0 if won else 0.0
+        pick["actual"]     = actual
+        pick["settled_at"] = datetime.datetime.utcnow().isoformat()+"Z"
+
+        ov = perf["overall"]
+        ov["total"]+=1
+        if won: ov["wins"]=ov.get("wins",0)+1
+        else:   ov["losses"]=ov.get("losses",0)+1
+        s=ov["wins"]+ov["losses"]
+        ov["hit_rate"]=round(ov["wins"]/s*100,2) if s>0 else 0.0
+
+        t=pick.get("confidence_tier","low")
+        bc=perf["by_confidence"].setdefault(t,{"wins":0,"total":0,"hit_rate":0.0})
+        bc["total"]+=1
+        if won: bc["wins"]+=1
+        bc["hit_rate"]=round(bc["wins"]/bc["total"]*100,2)
+        perf["recent"].insert(0,{**pick})
+        perf["recent"]=perf["recent"][:50]
+        settled+=1
+
+    if settled:
+        perf["last_updated"]=TODAY
+        with open(picks_path,"w") as f: json.dump(data,f,indent=2)
+        with open(perf_path,"w") as f: json.dump(perf,f,indent=2)
+        print(f"  ✓ nba_props: settled {settled} picks")
+    else:
+        print(f"  ~ nba_props: {len(pending)} pending, no matches found")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
