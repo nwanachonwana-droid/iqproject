@@ -175,7 +175,6 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
       <button class="filt" onclick="setF('ncaa_baseball',this)">NCAA Baseball</button>
       <button class="filt" onclick="setF('soccer',this)">Soccer</button>
       <button class="filt" onclick="setF('tennis',this)">Tennis</button>
-      <button class="filt" onclick="setF('golf',this)">Golf</button>
       <button class="filt" onclick="setF('mlb_props',this)">MLB Props</button>
       <button class="filt" onclick="setF('high',this)">High confidence only</button>
     </div>
@@ -210,11 +209,12 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   <div class="bar">
     <div class="blbl">Live record — from site launch</div>
     <div class="filts">
-      <button class="filt on" onclick="setPS('nba',this)">NBA</button>
-      <button class="filt" onclick="setPS('ncaa_basketball',this)">NCAA Basketball</button>
-      <button class="filt" onclick="setPS('mlb',this)">MLB</button>
-      <button class="filt" onclick="setPS('nhl',this)">NHL</button>
+      <button class="filt on" onclick="setPS('mlb',this)">MLB</button>
+      <button class="filt" onclick="setPS('mlb_props',this)">MLB Props</button>
       <button class="filt" onclick="setPS('ncaa_baseball',this)">NCAA Baseball</button>
+      <button class="filt" onclick="setPS('nba',this)">NBA</button>
+      <button class="filt" onclick="setPS('ncaa_basketball',this)">NCAA Basketball</button>
+      <button class="filt" onclick="setPS('nhl',this)">NHL</button>
       <button class="filt" onclick="setPS('soccer',this)">Soccer</button>
       <button class="filt" onclick="setPS('tennis',this)">Tennis</button>
       <button class="filt" onclick="setPS('props',this)">Props</button>
@@ -286,9 +286,9 @@ const META={
     sources:['PrizePicks / Underdog - prop lines, free public API','NBA Stats API - player splits, free','Baseball Savant - Statcast player splits, free'],
     limits:['NBA props market highly efficient - 5% edge required','Marcel blend needs 10+ GP for meaningful credibility weight','Injury status must be confirmed pre-game']},
 };
-const SPORTS=Object.keys(META).filter(s=>s!=='props').concat(['nba','golf']);
+const SPORTS=Object.keys(META).filter(s=>s!=='props').concat(['nba']);
 
-let PICKS=[],PROPS=[],PERF={},AF='all',PS='ncaa_basketball';
+let PICKS=[],PROPS=[],PERF={},AF='all',PS='mlb';
 
 function showTab(t){
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
@@ -490,9 +490,8 @@ async function init(){
   renderPicks();
 
   // Load perf logs — reads your actual files as-is
-  // Tries sport-specific names first, falls back to legacy names
   await Promise.allSettled([
-    ...SPORTS.map(s=>
+    ...['mlb','mlb_props','ncaa_baseball','nba','nhl','ncaa_basketball','soccer','tennis'].map(s=>
       fetch(s+'_performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
         .then(d=>{if(d)PERF[s]=d;})
     ),
@@ -501,6 +500,9 @@ async function init(){
     fetch('props_performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
       .then(d=>{if(d)PERF.props=d;}),
   ]);
+  // Render performance tab with first sport that has data
+  const firstWithData=['mlb','mlb_props','ncaa_baseball'].find(s=>PERF[s]?.overall?.total>0);
+  if(firstWithData){PS=firstWithData;renderPerf(firstWithData);}
 }
 
 init();
