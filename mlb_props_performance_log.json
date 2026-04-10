@@ -2,13 +2,13 @@
   "schema_version": "1.0",
   "sport": "mlb_props",
   "launch_date": "2026-04-09",
-  "last_updated": "2026-04-09",
+  "last_updated": "2026-04-10",
   "overall": {
-    "wins": 5,
+    "wins": 6,
     "losses": 7,
     "pushes": 0,
-    "total": 12,
-    "hit_rate": 41.67,
+    "total": 13,
+    "hit_rate": 46.15,
     "roi_flat": 0.0
   },
   "by_confidence": {
