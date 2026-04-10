@@ -468,9 +468,36 @@ function renderPerfAll(){
 
   // Recent picks — all sports merged
   const allRecent=Object.entries(PERF)
-    .flatMap(([sid,pd])=>(pd.recent||[]).map(p=>({...p,sport_id:p.sport_id||sid})))
+    .flatMap(([sid,pd])=>(pd.recent||[]).map(p=>{
+      // Normalize props schema → mkRow schema
+      const isProp = p.player !== undefined;
+      if(isProp){
+        // parse "Team A @ Team B" matchup string
+        const parts = (p.matchup||'').split('@').map(s=>s.trim());
+        const away = parts[0]||'';
+        const home = parts[1]||'';
+        return {
+          sport_id: p.sport_id || sid,
+          home, away,
+          pick: p.player ? `${p.player} ${p.direction||''} ${p.line||''}` : (p.pick||'—'),
+          pick_side: 'home',
+          model_prob_home: p.model_prob ? p.model_prob/100 : 0.5,
+          market_prob_home: p.implied_prob ? p.implied_prob/100 : 0.5,
+          edge_pp: p.prob_edge || p.raw_edge || 0,
+          confidence_tier: p.confidence_tier || (p.prob_edge>=5?'high':p.prob_edge>=3?'medium':'low'),
+          market_line_home: p.price || null,
+          game_time_utc: p.settled_at || null,
+          outcome: p.outcome || null,
+          venue: 'neutral',
+        };
+      }
+      // Already correct schema (game picks)
+      return {...p, sport_id: p.sport_id||sid,
+        home: p.home||p.home_team||'',
+        away: p.away||p.away_team||''};
+    }))
     .filter(p=>p.outcome==='WIN'||p.outcome==='LOSS')
-    .sort((a,b)=>new Date(b.settled_at||0)-new Date(a.settled_at||0))
+    .sort((a,b)=>new Date(b.game_time_utc||0)-new Date(a.game_time_utc||0))
     .slice(0,40);
   const rb=document.getElementById('rb');
   rb.innerHTML=allRecent.length
