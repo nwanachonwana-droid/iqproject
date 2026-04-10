@@ -534,9 +534,10 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-10T14:41:04.937804Z",
+      "sport_id": "ncaa_baseball"
     },
     {
       "pick_id": "ncaabb-2026-04-08-401856191",
