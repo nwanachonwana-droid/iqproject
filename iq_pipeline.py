@@ -767,6 +767,13 @@ UMP_K_ADJ = {
     "Jerry Meals":-0.7,"Sam Holbrook":-0.7,"Dan Iassogna":-0.8,
 }
 
+def poisson_over(lam, line):
+    k = int(line)
+    prob = sum((math.exp(-lam)*lam**i)/math.factorial(i) for i in range(k+1))
+    return round(1-prob, 4)
+
+
+
 def run_mlb_props():
     print("\n[MLB Props — Pitcher Strikeouts]")
     LEAGUE_K_PCT = 0.224
@@ -1197,10 +1204,3 @@ if __name__ == "__main__":
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Umpire K-rate adjustment (extra Ks per game vs league average)
-def poisson_over(lam, line):
-    k = int(line)
-    prob = sum((math.exp(-lam)*lam**i)/math.factorial(i) for i in range(k+1))
-    return round(1-prob, 4)
-
-
-

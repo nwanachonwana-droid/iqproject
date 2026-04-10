@@ -1,19 +1,53 @@
 {
   "overall": {
-    "wins": 4,
+    "wins": 5,
     "losses": 3,
-    "total": 7,
-    "hit_rate": 57.14,
+    "total": 8,
+    "hit_rate": 62.5,
     "roi_flat": 0.0
   },
   "by_confidence": {
     "low": {
-      "wins": 4,
-      "total": 7,
-      "hit_rate": 57.14
+      "wins": 5,
+      "total": 8,
+      "hit_rate": 62.5
     }
   },
   "recent": [
+    {
+      "player": "Tyrese Maxey",
+      "stat": "points",
+      "matchup": "Philadelphia 76ers @ Indiana Pacers",
+      "line": 29.2,
+      "base_proj": 23.73,
+      "ha_adj": 0.64,
+      "def_adj": 0.1,
+      "b2b_adj": 0.0,
+      "bias_adj": 0.4,
+      "projection": 24.87,
+      "std_dev": 4.13,
+      "ci_low": 20.7,
+      "ci_high": 29.0,
+      "season_avg": 28.32,
+      "rolling_avg": 22.99,
+      "games_used": 10,
+      "avg_minutes": 36.3,
+      "low_minutes": false,
+      "direction": "under",
+      "raw_edge": -4.33,
+      "edge_pct": -14.8,
+      "prob_edge": 32.4,
+      "model_prob": 85.3,
+      "implied_prob": 52.9,
+      "price": -112.3,
+      "b2b": true,
+      "over_price": -117.3,
+      "under_price": -112.3,
+      "outcome": "WIN",
+      "result": 1.0,
+      "actual": 0.0,
+      "settled_at": "2026-04-10T15:26:47.752062Z"
+    },
     {
       "player": "Tyrese Maxey",
       "stat": "points",
