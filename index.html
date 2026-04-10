@@ -53,9 +53,11 @@ body{font-family:var(--F);background:var(--bg);color:var(--ink);min-height:100vh
 .bright{margin-left:auto;font-family:var(--M);font-size:.6rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;padding-left:1.25rem;flex-shrink:0}
 
 /* TABLE */
-.tw{overflow-x:auto}
+.tw{overflow-x:auto;overflow-y:visible}
 table{width:100%;border-collapse:collapse;min-width:720px}
-thead tr{border-bottom:1px solid var(--rule);background:var(--bg2);position:sticky;top:90px;z-index:9}
+#pred thead tr{border-bottom:1px solid var(--rule);background:var(--bg2)}
+#perf .tw thead tr{border-bottom:1px solid var(--rule);background:var(--bg2)}
+#perf .ttbl thead tr{border-bottom:1px solid var(--rule);background:var(--bg2)}
 thead th{font-family:var(--M);font-size:.56rem;font-weight:500;color:var(--ink4);text-transform:uppercase;letter-spacing:.14em;padding:.6rem 1rem;text-align:left;white-space:nowrap;border-right:1px solid var(--rule)}
 thead th:last-child{border-right:none}
 th.r,td.r{text-align:right}
@@ -208,42 +210,53 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 <!-- PERFORMANCE -->
 <div id="perf">
   <div class="bar">
-    <div class="blbl">Live record — from site launch</div>
-    <div class="filts">
-      <button class="filt on" onclick="setPS('mlb',this)">MLB</button>
-      <button class="filt" onclick="setPS('mlb_props',this)">MLB Props</button>
-      <button class="filt" onclick="setPS('ncaa_baseball',this)">NCAA Baseball</button>
-      <button class="filt" onclick="setPS('nba',this)">NBA</button>
-      <button class="filt" onclick="setPS('ncaa_basketball',this)">NCAA Basketball</button>
-      <button class="filt" onclick="setPS('nhl',this)">NHL</button>
-      <button class="filt" onclick="setPS('soccer',this)">Soccer</button>
-      <button class="filt" onclick="setPS('tennis',this)">Tennis</button>
-      <button class="filt" onclick="setPS('props',this)">Props</button>
+    <div class="blbl">Live record — from site launch · walk-forward validated</div>
+  </div>
+
+  <!-- All-sports summary grid -->
+  <div class="psec">
+    <div class="ptitle">All sports — combined record</div>
+    <div class="sgrid" id="sg-all"></div>
+  </div>
+
+  <!-- Per-sport breakdown table -->
+  <div class="psec">
+    <div class="ptitle">Record by sport</div>
+    <table class="ttbl" id="sport-tbl">
+      <thead><tr style="position:static">
+        <th>Sport</th><th>Status</th><th class="r">Picks</th>
+        <th class="r">W–L</th><th class="r">Hit rate</th><th class="r">ROI</th>
+      </tr></thead>
+      <tbody id="sport-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Per-sport detail — shown when you click a sport row -->
+  <div class="psec" id="sport-detail" style="display:none">
+    <div class="ptitle" id="detail-title">Sport detail</div>
+    <div class="sgrid" id="sg-detail"></div>
+    <div style="margin-top:1.5rem">
+      <table class="ttbl"><thead><tr style="position:static">
+        <th>Tier</th><th>Threshold</th><th class="r">Picks</th>
+        <th class="r">Wins</th><th class="r">Hit rate</th>
+      </tr></thead><tbody id="tb-detail"></tbody></table>
     </div>
   </div>
-  <div class="psec"><div class="ptitle">Overall record</div><div class="sgrid" id="sg"></div></div>
+
+  <!-- Recent settled picks — all sports -->
   <div class="psec">
-    <div class="ptitle">Record by confidence tier</div>
-    <table class="ttbl"><thead><tr>
-      <th>Tier</th><th>Threshold</th><th class="r">Picks</th><th class="r">Wins</th><th class="r">Hit rate</th><th class="r">Avg edge</th>
-    </tr></thead><tbody id="tb"></tbody></table>
-  </div>
-  <div class="psec">
-    <div class="ptitle">Recent settled picks</div>
+    <div class="ptitle">Recent settled picks — all sports</div>
     <div class="tw"><table>
-      <thead><tr>
-        <th class="c-sport">Sport</th><th class="c-game">Game</th><th class="c-pick">Pick</th>
-        <th class="c-model r">Model prob</th><th class="c-mkt r">Market prob</th>
-        <th class="c-edge r">Edge</th><th class="c-tier">Confidence</th><th class="c-res r">Result</th>
+      <thead><tr style="position:static">
+        <th class="c-sport">Sport</th><th class="c-game">Game</th>
+        <th class="c-pick">Pick</th>
+        <th class="c-model r">Model</th><th class="c-mkt r">Market</th>
+        <th class="c-edge r">Edge</th><th class="c-tier">Conf</th>
+        <th class="c-res r">Result</th>
       </tr></thead><tbody id="rb"></tbody>
     </table></div>
   </div>
-  <div class="psec">
-    <div class="ptitle">vs. Kalshi — college basketball only</div>
-    <div class="sgrid" id="bl"></div>
-    <p style="font-family:var(--M);font-size:.57rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em;margin-top:.75rem">1,544 games · 2024–25 season · college basketball only</p>
-  </div>
-  <div class="psec"><div class="ptitle">Model documentation</div><div class="mwrap" id="mw"></div></div>
+
   <div class="rrow">
     <p>iQ Research Lab — students building models for NFL, Cricket, UFC, Golf, and Election Markets in collaboration with Kuhiro Class.</p>
     <a href="https://kuhiroclass.com" target="_blank">Apply to research →</a>
@@ -298,12 +311,7 @@ function showTab(t){
   const perf=document.getElementById('perf');
   if(t==='perf'){
     perf.classList.add('active');
-    const s=['mlb','mlb_props','ncaa_baseball','ncaa_basketball'].find(x=>PERF[x]?.overall?.total>0)||'mlb';
-    PS=s;
-    document.querySelectorAll('#perf .filt').forEach(b=>b.classList.remove('on'));
-    const btn=document.querySelector(`#perf .filt[onclick*="'${s}'"]`);
-    if(btn)btn.classList.add('on');
-    renderPerf(s);
+    renderPerfAll();
   } else {
     perf.classList.remove('active');
   }
@@ -393,59 +401,79 @@ function normTiers(bc){
   }).sort((a,b)=>{const o={Lock:0,High:1,Medium:2,Low:3};return(o[a.label]??9)-(o[b.label]??9);});
 }
 
-function renderPerf(sport){
-  const d=PERF[sport]||{},m=META[sport]||{};
-  const ov=d.overall||{};
-  const wins=ov.wins!=null?ov.wins:'—';
-  const total=ov.total!=null?ov.total:'—';
-  const losses=typeof wins==='number'&&typeof total==='number'?total-wins:'—';
-  document.getElementById('sg').innerHTML=`
-    <div class="scell"><div class="sv g">${ov.hit_rate!=null?ov.hit_rate.toFixed(1)+'%':'—'}</div><div class="sk2">Hit rate</div><div class="sn">Since site launch</div></div>
-    <div class="scell"><div class="sv o">${wins}–${losses}</div><div class="sk2">Win–loss</div><div class="sn">Settled picks only</div></div>
-    <div class="scell"><div class="sv d">${total}</div><div class="sk2">Total picks</div><div class="sn">Walk-forward</div></div>
-    <div class="scell"><div class="sv d">${ov.roi_flat!=null?(ov.roi_flat>0?'+':''+(ov.roi_flat*100).toFixed(1)+'%'):'—'}</div><div class="sk2">ROI flat bet</div><div class="sn">No Kelly sizing</div></div>
-    <div class="scell"><div class="sv d">${ov.clv_rate!=null?(ov.clv_rate*100).toFixed(1)+'%':'—'}</div><div class="sk2">CLV rate</div><div class="sn">vs. Pinnacle close</div></div>
-    <div class="scell"><div class="sv d">${ov.calibration_error_pp!=null?'+-'+ov.calibration_error_pp.toFixed(1)+'pp':'—'}</div><div class="sk2">Calibration</div><div class="sn">+/-2pp = PASS</div></div>`;
+const SPORT_LABELS={
+  mlb:'MLB',mlb_props:'MLB Props',ncaa_baseball:'NCAA Baseball',
+  nba:'NBA',nba_props:'NBA Props',nhl:'NHL',
+  ncaa_basketball:'NCAA Basketball',soccer:'Soccer',tennis:'Tennis',golf:'Golf'
+};
 
-  const tiers=normTiers(d.by_confidence||d.by_tier||{});
-  document.getElementById('tb').innerHTML=tiers.length
+function renderPerfAll(){
+  // Combined totals across all sports
+  let totalW=0,totalL=0,totalPicks=0;
+  Object.values(PERF).forEach(d=>{
+    const ov=d.overall||{};
+    totalW+=(ov.wins||0); totalL+=(ov.losses||0); totalPicks+=(ov.total||0);
+  });
+  const totalHR=totalW+totalL>0?((totalW/(totalW+totalL))*100).toFixed(1)+'%':'—';
+  document.getElementById('sg-all').innerHTML=`
+    <div class="scell"><div class="sv g">${totalHR}</div><div class="sk2">Hit rate</div><div class="sn">All sports combined</div></div>
+    <div class="scell"><div class="sv o">${totalW}–${totalL}</div><div class="sk2">Win–loss</div><div class="sn">Settled picks only</div></div>
+    <div class="scell"><div class="sv d">${totalPicks}</div><div class="sk2">Total picks</div><div class="sn">Walk-forward</div></div>
+    <div class="scell"><div class="sv d">${Object.keys(PERF).filter(s=>PERF[s]?.overall?.total>0).length}</div><div class="sk2">Active sports</div><div class="sn">Models running</div></div>`;
+
+  // Per-sport table
+  const ALL_SPORTS=['mlb','mlb_props','ncaa_baseball','nba','nba_props','nhl','ncaa_basketball','golf'];
+  const rows=ALL_SPORTS.map(s=>{
+    const d=PERF[s]; const ov=d?.overall||{};
+    const w=ov.wins||0; const tot=ov.total||0; const l=tot-w;
+    const hr=w+l>0?((w/(w+l))*100).toFixed(1)+'%':'—';
+    const roi=ov.roi_flat!=null?(ov.roi_flat>0?'+':'')+ov.roi_flat.toFixed(1)+'%':'—';
+    const m=META[s]||{}; const status=m.status||'active';
+    const hasDat=tot>0;
+    return `<tr style="cursor:${hasDat?'pointer':'default'};opacity:${hasDat?1:0.4}"
+      onclick="${hasDat?`showSportDetail('${s}')`:''}">
+      <td><strong style="font-family:var(--M)">${SPORT_LABELS[s]||s}</strong></td>
+      <td><span class="badge b-${status}">${status.toUpperCase()}</span></td>
+      <td class="r">${tot||'—'}</td>
+      <td class="r">${hasDat?`${w}–${l}`:'—'}</td>
+      <td class="r ${hasDat?(w/(w+l)>=0.55?'acc':''):''}"><strong>${hr}</strong></td>
+      <td class="r">${roi}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('sport-tbody').innerHTML=rows||'<tr><td colspan="6" class="empty">No data yet — run pipeline</td></tr>';
+
+  // Recent picks — all sports merged
+  const allRecent=Object.entries(PERF)
+    .flatMap(([sid,pd])=>(pd.recent||[]).map(p=>({...p,sport_id:p.sport_id||sid})))
+    .filter(p=>p.outcome==='WIN'||p.outcome==='LOSS')
+    .sort((a,b)=>new Date(b.settled_at||0)-new Date(a.settled_at||0))
+    .slice(0,40);
+  const rb=document.getElementById('rb');
+  rb.innerHTML=allRecent.length
+    ?allRecent.map((p,i)=>mkRow(p,i)).join('')
+    :'<tr><td colspan="8" class="empty">No settled picks yet</td></tr>';
+}
+
+function showSportDetail(sport){
+  const d=PERF[sport]||{}; const ov=d.overall||{};
+  const w=ov.wins||0; const tot=ov.total||0; const l=tot-w;
+  const hr=w+l>0?((w/(w+l))*100).toFixed(1)+'%':'—';
+  document.getElementById('detail-title').textContent=`${SPORT_LABELS[sport]||sport} — detail`;
+  document.getElementById('sg-detail').innerHTML=`
+    <div class="scell"><div class="sv g">${hr}</div><div class="sk2">Hit rate</div></div>
+    <div class="scell"><div class="sv o">${w}–${l}</div><div class="sk2">Win–loss</div></div>
+    <div class="scell"><div class="sv d">${tot}</div><div class="sk2">Total picks</div></div>`;
+  const tiers=normTiers(d.by_confidence||{});
+  document.getElementById('tb-detail').innerHTML=tiers.length
     ?tiers.map(t=>`<tr>
       <td><span class="tier ${t.cls}">${t.label}</span></td>
       <td style="font-family:var(--M);font-size:.7rem;color:var(--ink3)">${t.threshold}</td>
-      <td class="r">${t.total!=null?t.total:'—'}</td>
-      <td class="r">${t.wins!=null?t.wins:'—'}</td>
+      <td class="r">${t.total??'—'}</td><td class="r">${t.wins??'—'}</td>
       <td class="r acc">${t.hit_rate!=null?t.hit_rate.toFixed(1)+'%':'—'}</td>
-      <td class="r">${t.avg_edge!=null?(t.avg_edge>0?'+':'')+t.avg_edge.toFixed(1)+'pp':'—'}</td>
     </tr>`).join('')
-    :'<tr><td colspan="6" class="empty">No tier data yet</td></tr>';
-
-  const recent=d.recent||[];
-  const rb=document.getElementById('rb');
-  if(!recent.length){rb.innerHTML='<tr><td colspan="8" class="empty">No settled picks yet</td></tr>';}
-  else rb.innerHTML=recent.slice(0,20).map((p,i)=>mkRow({...p,sport_id:p.sport_id||sport},i)).join('');
-
-  const bld=d.vs_baseline||{};
-  document.getElementById('bl').innerHTML=`
-    <div class="scell"><div class="sv o">${bld.model_accuracy!=null?(bld.model_accuracy*100).toFixed(1)+'%':'70.1%'}</div><div class="sk2">iQ model</div><div class="sn">${bld.games_compared||1544} games</div></div>
-    <div class="scell"><div class="sv d">${bld.baseline_accuracy!=null?(bld.baseline_accuracy*100).toFixed(1)+'%':'68.6%'}</div><div class="sk2">Kalshi</div><div class="sn">Same games</div></div>
-    <div class="scell"><div class="sv g">${bld.edge_pp_vs_baseline!=null?'+'+bld.edge_pp_vs_baseline.toFixed(1)+'pp':'+1.5pp'}</div><div class="sk2">iQ advantage</div><div class="sn">CBB only</div></div>`;
-
-  document.getElementById('mw').innerHTML=`
-    <div class="mhdr" onclick="togM(this)">
-      <div><div class="mttl">${m.label||sport}</div><div style="margin-top:.18rem"><span class="badge b-${m.status||'active'}">${(m.status||'active').toUpperCase()}</span></div></div>
-      <span class="mtog">Show methodology</span>
-    </div>
-    <div class="mbody" id="mbody">
-      <div class="mblock"><h4>Core formula</h4><pre class="mcode">${m.formula||'—'}</pre></div>
-      <div class="mblock"><h4>Data sources</h4><ul class="mlist">${(m.sources||[]).map(s=>`<li>${s}</li>`).join('')}</ul></div>
-      <div class="mblock"><h4>Known limitations</h4><ul class="mlist">${(m.limits||[]).map(l=>`<li>${l}</li>`).join('')}</ul></div>
-      <div class="mblock"><h4>Validation standard</h4><ul class="mlist">
-        <li>Walk-forward only — no hindsight</li>
-        <li>10c slippage on every simulated entry</li>
-        <li>Triple gate: ROI &gt; 3% AND CLV >= 55% AND Calibration +/- 2% — all three simultaneously</li>
-        <li>Passing 2 of 3 is not acceptable</li>
-      </ul></div>
-    </div>`;
+    :'<tr><td colspan="5" class="empty">No tier data</td></tr>';
+  document.getElementById('sport-detail').style.display='block';
+  document.getElementById('sport-detail').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function togM(h){
@@ -502,18 +530,15 @@ async function init(){
 
   // Load perf logs — reads your actual files as-is
   await Promise.allSettled([
-    ...['mlb','mlb_props','ncaa_baseball','nba','nhl','ncaa_basketball','soccer','tennis'].map(s=>
+    ...['mlb','mlb_props','ncaa_baseball','nba','nba_props','nhl','ncaa_basketball','golf'].map(s=>
       fetch(s+'_performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
         .then(d=>{if(d)PERF[s]=d;})
     ),
     fetch('performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
       .then(d=>{if(d&&!PERF.ncaa_basketball)PERF.ncaa_basketball=d;}),
-    fetch('props_performance_log.json').then(r=>r.ok?r.json():null).catch(()=>null)
-      .then(d=>{if(d)PERF.props=d;}),
   ]);
-  // Render performance tab with first sport that has data
-  const firstWithData=['mlb','mlb_props','ncaa_baseball'].find(s=>PERF[s]?.overall?.total>0);
-  if(firstWithData){PS=firstWithData;renderPerf(firstWithData);}
+  // If perf tab is already active, re-render with data
+  if(document.getElementById('perf').classList.contains('active')) renderPerfAll();
 }
 
 init();
