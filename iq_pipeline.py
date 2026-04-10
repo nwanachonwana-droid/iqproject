@@ -748,6 +748,25 @@ def print_summary():
 # MAIN
 # ═══════════════════════════════════════════════════════════════════════════════
 
+UMP_K_ADJ = {
+    "Angel Hernandez":+1.4,"CB Bucknor":+1.2,"Lance Barksdale":+1.1,
+    "James Hoye":+1.0,"Andy Fletcher":+0.9,"Jordan Baker":+0.9,
+    "Phil Cuzzi":+0.8,"Alfonso Marquez":+0.8,"Mike Everitt":+0.8,
+    "Bill Miller":+0.7,"Rob Drake":+0.7,"Dan Bellino":+0.7,
+    "Tripp Gibson":+0.6,"Ron Kulpa":+0.6,"Chris Segal":+0.6,
+    "Pat Hoberg":+0.5,"Brian Knight":+0.5,"Nic Lentz":+0.5,
+    "Ryan Additon":+0.4,"Cory Blaser":+0.4,"Shane Livensparger":+0.4,
+    "Willie Traynor":+0.2,"Scott Barry":+0.1,"Joe West":+0.1,
+    "Mark Carlson":+0.1,"Chad Fairchild":+0.1,
+    "John Libka":0.0,"Mike Muchlinski":0.0,"Manny Gonzalez":0.0,
+    "Brennan Miller":0.0,"Nick Mahrley":0.0,"Brock Ballou":0.0,
+    "Jim Reynolds":-0.1,"Ted Barrett":-0.1,"Hunter Wendelstedt":-0.1,
+    "Tony Randazzo":-0.2,"Fieldin Culbreth":-0.2,
+    "Doug Eddings":-0.5,"Ed Hickox":-0.5,"Mark Wegner":-0.5,
+    "Tim Timmons":-0.6,"Tom Hallion":-0.6,
+    "Jerry Meals":-0.7,"Sam Holbrook":-0.7,"Dan Iassogna":-0.8,
+}
+
 def run_mlb_props():
     print("\n[MLB Props — Pitcher Strikeouts]")
     LEAGUE_K_PCT = 0.224
@@ -1178,25 +1197,6 @@ if __name__ == "__main__":
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Umpire K-rate adjustment (extra Ks per game vs league average)
-UMP_K_ADJ = {
-    "Angel Hernandez":+1.4,"CB Bucknor":+1.2,"Lance Barksdale":+1.1,
-    "James Hoye":+1.0,"Andy Fletcher":+0.9,"Jordan Baker":+0.9,
-    "Phil Cuzzi":+0.8,"Alfonso Marquez":+0.8,"Mike Everitt":+0.8,
-    "Bill Miller":+0.7,"Rob Drake":+0.7,"Dan Bellino":+0.7,
-    "Tripp Gibson":+0.6,"Ron Kulpa":+0.6,"Chris Segal":+0.6,
-    "Pat Hoberg":+0.5,"Brian Knight":+0.5,"Nic Lentz":+0.5,
-    "Ryan Additon":+0.4,"Cory Blaser":+0.4,"Shane Livensparger":+0.4,
-    "Willie Traynor":+0.2,"Scott Barry":+0.1,"Joe West":+0.1,
-    "Mark Carlson":+0.1,"Chad Fairchild":+0.1,
-    "John Libka":0.0,"Mike Muchlinski":0.0,"Manny Gonzalez":0.0,
-    "Brennan Miller":0.0,"Nick Mahrley":0.0,"Brock Ballou":0.0,
-    "Jim Reynolds":-0.1,"Ted Barrett":-0.1,"Hunter Wendelstedt":-0.1,
-    "Tony Randazzo":-0.2,"Fieldin Culbreth":-0.2,
-    "Doug Eddings":-0.5,"Ed Hickox":-0.5,"Mark Wegner":-0.5,
-    "Tim Timmons":-0.6,"Tom Hallion":-0.6,
-    "Jerry Meals":-0.7,"Sam Holbrook":-0.7,"Dan Iassogna":-0.8,
-}
-
 def poisson_over(lam, line):
     k = int(line)
     prob = sum((math.exp(-lam)*lam**i)/math.factorial(i) for i in range(k+1))
