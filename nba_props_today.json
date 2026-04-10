@@ -1623,10 +1623,10 @@
       "b2b": false,
       "over_price": -115.3,
       "under_price": -113.3,
-      "outcome": "WIN",
-      "result": 1.0,
-      "actual": 0.0,
-      "settled_at": "2026-04-10T14:41:04.745636Z",
+      "outcome": null,
+      "result": null,
+      "actual": null,
+      "settled_at": null,
       "sport_id": "nba_props"
     },
     {
@@ -1658,10 +1658,10 @@
       "b2b": false,
       "over_price": -105.0,
       "under_price": -125.0,
-      "outcome": "LOSS",
-      "result": 0.0,
-      "actual": 0.0,
-      "settled_at": "2026-04-10T14:41:04.745663Z",
+      "outcome": null,
+      "result": null,
+      "actual": null,
+      "settled_at": null,
       "sport_id": "nba_props"
     },
     {
@@ -1693,10 +1693,10 @@
       "b2b": false,
       "over_price": -118.7,
       "under_price": -110.7,
-      "outcome": "WIN",
-      "result": 1.0,
-      "actual": 0.0,
-      "settled_at": "2026-04-10T14:41:04.745677Z",
+      "outcome": null,
+      "result": null,
+      "actual": null,
+      "settled_at": null,
       "sport_id": "nba_props"
     },
     {
@@ -1728,10 +1728,10 @@
       "b2b": false,
       "over_price": -113.3,
       "under_price": -115.3,
-      "outcome": "WIN",
-      "result": 1.0,
-      "actual": 0.0,
-      "settled_at": "2026-04-10T14:41:04.745687Z",
+      "outcome": null,
+      "result": null,
+      "actual": null,
+      "settled_at": null,
       "sport_id": "nba_props"
     },
     {
@@ -1763,10 +1763,10 @@
       "b2b": false,
       "over_price": -117.7,
       "under_price": -111.0,
-      "outcome": "WIN",
-      "result": 1.0,
-      "actual": 0.0,
-      "settled_at": "2026-04-10T14:41:04.745697Z",
+      "outcome": null,
+      "result": null,
+      "actual": null,
+      "settled_at": null,
       "sport_id": "nba_props"
     },
     {
@@ -1798,10 +1798,10 @@
       "b2b": false,
       "over_price": -115.0,
       "under_price": -114.0,
-      "outcome": "LOSS",
-      "result": 0.0,
-      "actual": 0.0,
-      "settled_at": "2026-04-10T14:41:04.745708Z",
+      "outcome": null,
+      "result": null,
+      "actual": null,
+      "settled_at": null,
       "sport_id": "nba_props"
     }
   ]
