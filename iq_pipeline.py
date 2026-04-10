@@ -884,6 +884,15 @@ def run_mlb_props():
 
             if abs(best_edge) > 20 or abs(best_edge) < 3: continue
 
+            # Structural filter: no overs on low lines (<4.5K) unless SP has
+            # demonstrated ability to pitch deep (avg_ip >= 5.0, gs >= 5)
+            # Prevents early-KO losses on low over lines
+            if best_side == "Over" and line < 4.5:
+                gs  = stats["gs"]  if stats else 0
+                avg_ip = stats["avg_ip"] if stats else 0
+                if gs < 5 or avg_ip < 5.0:
+                    continue
+
             all_props.append({
                 "pick_id":   f"mlb-props-{TODAY}-{sp['id']}-k",
                 "sport":     "mlb", "market": "pitcher_strikeouts",
