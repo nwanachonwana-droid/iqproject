@@ -295,7 +295,15 @@ function showTab(t){
   document.getElementById('t-'+t).classList.add('on');
   document.getElementById('pred').style.display=t==='pred'?'':'none';
   document.getElementById('perf').style.display=t==='perf'?'':'none';
-  if(t==='perf')renderPerf(PS);
+  if(t==='perf'){
+    // Find first sport with real data
+    const s=['mlb','mlb_props','ncaa_baseball','ncaa_basketball'].find(x=>PERF[x]?.overall?.total>0)||PS;
+    PS=s;
+    document.querySelectorAll('#perf .filt').forEach(b=>b.classList.remove('on'));
+    const btn=document.querySelector(`#perf .filt[onclick*="${s}"]`);
+    if(btn)btn.classList.add('on');
+    renderPerf(s);
+  }
 }
 function setF(f,btn){AF=f;document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');AF==='mlb_props'?renderProps():renderPicks();}
 
