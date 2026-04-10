@@ -102,7 +102,8 @@ tbody td:last-child{border-right:none}
 .note strong{color:var(--ink3);font-weight:500}
 
 /* PERF TAB */
-#perf{display:none}
+#perf{display:none !important}
+#perf.active{display:block !important}
 .psec{padding:2rem;border-bottom:1px solid var(--rule)}
 .ptitle{font-family:var(--M);font-size:.6rem;color:var(--ink4);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem}
 .ptitle::after{content:'';flex:1;height:1px;background:var(--rule)}
@@ -293,16 +294,18 @@ let PICKS=[],PROPS=[],PERF={},AF='all',PS='mlb';
 function showTab(t){
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
   document.getElementById('t-'+t).classList.add('on');
-  document.getElementById('pred').style.display=t==='pred'?'':'none';
-  document.getElementById('perf').style.display=t==='perf'?'':'none';
+  document.getElementById('pred').style.display=t==='pred'?'block':'none';
+  const perf=document.getElementById('perf');
   if(t==='perf'){
-    // Find first sport with real data
-    const s=['mlb','mlb_props','ncaa_baseball','ncaa_basketball'].find(x=>PERF[x]?.overall?.total>0)||PS;
+    perf.classList.add('active');
+    const s=['mlb','mlb_props','ncaa_baseball','ncaa_basketball'].find(x=>PERF[x]?.overall?.total>0)||'mlb';
     PS=s;
     document.querySelectorAll('#perf .filt').forEach(b=>b.classList.remove('on'));
-    const btn=document.querySelector(`#perf .filt[onclick*="${s}"]`);
+    const btn=document.querySelector(`#perf .filt[onclick*="'${s}'"]`);
     if(btn)btn.classList.add('on');
     renderPerf(s);
+  } else {
+    perf.classList.remove('active');
   }
 }
 function setF(f,btn){AF=f;document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');AF==='mlb_props'?renderProps():renderPicks();}
