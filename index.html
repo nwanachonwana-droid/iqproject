@@ -179,6 +179,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
       <button class="filt" onclick="setF('soccer',this)">Soccer</button>
       <button class="filt" onclick="setF('tennis',this)">Tennis</button>
       <button class="filt" onclick="setF('mlb_props',this)">MLB Props</button>
+      <button class="filt" onclick="setF('nba_props',this)">NBA Props</button>
       <button class="filt" onclick="setF('high',this)">High confidence only</button>
     </div>
     <div class="bright" id="pct">—</div>
@@ -316,7 +317,26 @@ function showTab(t){
     perf.classList.remove('active');
   }
 }
-function setF(f,btn){AF=f;document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');AF==='mlb_props'?renderProps():renderPicks();}
+function setF(f,btn){
+  AF=f;
+  document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  if(f==='mlb_props'){
+    // Show only MLB props
+    const saved=PROPS;
+    PROPS=saved.filter(p=>!p._nba&&p.sport!=='nba');
+    renderProps();
+    PROPS=saved;
+  } else if(f==='nba_props'){
+    // Show only NBA props
+    const saved=PROPS;
+    PROPS=saved.filter(p=>p._nba||p.sport==='nba');
+    renderProps();
+    PROPS=saved;
+  } else {
+    renderPicks();
+  }
+}
 
 function renderProps(){
   const body=document.getElementById('pb');
@@ -328,16 +348,20 @@ function renderProps(){
     const star=p.confidence_tier==='high'?'★':' ';
     const tc=p.confidence_tier==='high'?'th':p.confidence_tier==='medium'?'tm':'tl';
     const estr=e>0?`+${e.toFixed(1)}pp`:`${e.toFixed(1)}pp`;
-    const ump=p.umpire&&p.umpire!=='Unknown'?p.umpire.split(' ').pop():'—';
+    const isNBA=p._nba||p.sport==='nba';
+    const sportLabel=isNBA?'NBA · Player Props':'MLB · SP Strikeouts';
+    const subLabel=isNBA?`${p.stat||''}`:(`HP Ump: ${(p.umpire&&p.umpire!=='Unknown'?p.umpire.split(' ').pop():'—')} (${p.ump_adj>=0?'+':''}${p.ump_adj||0})`);
+    const proj=isNBA?(p.proj_k!=null?p.proj_k.toFixed(1)+` ${p.stat}`:'—'):(p.proj_k!=null?`${p.proj_k} Ks`:'—');
+    const game=p.game||`${p.away_team||''} @ ${p.home_team||''}`;
     return`<tr style="animation-delay:${i*.03}s">
-      <td class="c-sport"><div><span class="badge b-active">PROPS</span></div><div class="stag">MLB · SP Strikeouts</div></td>
-      <td class="c-game"><div class="gm">${p.game}</div><div class="gt">HP Ump: ${ump} (${p.ump_adj>=0?'+':''}${p.ump_adj})</div></td>
-      <td class="c-pick" style="white-space:normal"><div class="pn">${p.pick}</div><div class="pl">Proj: ${p.proj_k} Ks</div></td>
-      <td class="c-model r"><div class="prob">${(p.model_prob*100).toFixed(1)}%</div><div class="pbar"><div class="pf m" style="width:${p.model_prob*100}%"></div></div></td>
-      <td class="c-mkt r"><div class="prob">${(p.market_prob*100).toFixed(1)}%</div><div class="pbar"><div class="pf" style="width:${p.market_prob*100}%"></div></div></td>
+      <td class="c-sport"><div><span class="badge b-active">PROPS</span></div><div class="stag">${sportLabel}</div></td>
+      <td class="c-game"><div class="gm">${game}</div><div class="gt">${subLabel}</div></td>
+      <td class="c-pick" style="white-space:normal"><div class="pn">${p.pick}</div><div class="pl">Proj: ${proj}</div></td>
+      <td class="c-model r"><div class="prob">${p.model_prob!=null?(p.model_prob*100).toFixed(1)+'%':'—'}</div><div class="pbar"><div class="pf m" style="width:${(p.model_prob||0)*100}%"></div></div></td>
+      <td class="c-mkt r"><div class="prob">${p.market_prob!=null?(p.market_prob*100).toFixed(1)+'%':'—'}</div><div class="pbar"><div class="pf" style="width:${(p.market_prob||0)*100}%"></div></div></td>
       <td class="c-edge r"><span class="edge ${ec}">${estr}</span></td>
       <td class="c-tier"><span class="tier ${tc}">${p.confidence_tier}</span></td>
-      <td class="c-res r"><span class="rn">Pending</span></td>
+      <td class="c-res r"><span class="rn">${p.outcome||'Pending'}</span></td>
     </tr>`;
   }).join('');
 }
@@ -517,7 +541,27 @@ async function init(){
   });
   // Load props
   fetch('mlb_props_today.json').then(r=>r.ok?r.json():null).catch(()=>null)
-    .then(d=>{if(d?.props?.length)PROPS=d.props;});
+    .then(d=>{if(d?.props?.length)PROPS.push(...d.props);});
+  fetch('nba_props_today.json').then(r=>r.ok?r.json():null).catch(()=>null)
+    .then(d=>{
+      if(d?.picks?.length) PROPS.push(...d.picks.map(p=>({
+        pick: `${p.player} ${p.direction==='over'?'Over':'Under'} ${p.line} ${p.stat}`,
+        pick_side: p.direction==='over'?'Over':'Under',
+        line: p.line,
+        proj_k: p.projection,
+        player: p.player,
+        game: p.matchup,
+        umpire: 'N/A', ump_adj: 0,
+        opp_k_pct: 0,
+        model_prob: (p.model_prob||0)/100,
+        market_prob: (p.implied_prob||0)/100,
+        edge_pp: p.prob_edge||p.raw_edge||0,
+        confidence_tier: p.model_prob>=65?'high':p.model_prob>=60?'medium':'low',
+        sport: 'nba', market: p.stat,
+        outcome: p.outcome||null,
+        _nba: true,
+      })));
+    });
 
   if(!any)loadDemo();
   renderPicks();
