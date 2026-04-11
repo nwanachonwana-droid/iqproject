@@ -376,8 +376,9 @@ function mkRow(p,i){
   const tc=p.confidence_tier==='high'?'th':p.confidence_tier==='medium'?'tm':'tl';
   const ln=p.market_line_home!=null?(p.pick_side==='home'?(p.market_line_home>0?'+':'')+p.market_line_home:(p.market_line_home<0?'+'+Math.abs(p.market_line_home):'-'+p.market_line_home)):'';
   const ts=p.game_time_utc?new Date(p.game_time_utc).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'}):(p.data_date||'');
-  const hd=p.pick_side==='home'?`<span class="gb">${p.home||''}</span>`:(p.home||'');
-  const ad=p.pick_side==='away'?`<span class="gb">${p.away||''}</span>`:(p.away||'');
+  const rawMatch=p.matchup||`${p.away||''} @ ${p.home||''}`;
+  const hd=p.home?( p.pick_side==='home'?`<span class="gb">${p.home}</span>`:p.home ):(rawMatch.split('@')[1]||'').trim();
+  const ad=p.away?( p.pick_side==='away'?`<span class="gb">${p.away}</span>`:p.away ):(rawMatch.split('@')[0]||'').trim();
   const neu=p.venue==='neutral'?'<span class="gn">N</span>':'';
   let rh;
   if(p.outcome==='WIN')rh='<span class="rw">WIN</span>';
