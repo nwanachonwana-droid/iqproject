@@ -185,6 +185,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
     <div class="bright" id="pct">—</div>
   </div>
   <div class="tw">
+    <div id="masters-section"></div>
     <table>
       <thead><tr>
         <th class="c-sport">Sport</th><th class="c-game">Game</th><th class="c-pick">Pick</th>
@@ -407,14 +408,8 @@ function renderMasters(d){
   if(!picks.length) return;
 
   // Find or create golf section in today's picks area
-  let el = document.getElementById('masters-section');
-  if(!el){
-    el = document.createElement('div');
-    el.id = 'masters-section';
-    el.style.cssText = 'margin:2rem 0;';
-    const pb = document.getElementById('pb');
-    if(pb) pb.parentNode.insertBefore(el, pb);
-  }
+  const el = document.getElementById('masters-section');
+  if(!el) return;
 
   const recColor = {VALUE:'var(--accent)', HOLD:'var(--ink2)', FADE:'#ef4444'};
 
