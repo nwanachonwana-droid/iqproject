@@ -296,6 +296,10 @@ const META={
     formula:'Surface ELO: current surface 70% + overall 30%\nDR = service_pts_won% / (1 - return_pts_won%)\nK  = 40 ATP   |   35 WTA',
     sources:['JeffSackmann/tennis_atp - ATP 1968+, free (GitHub)','JeffSackmann/tennis_wta - WTA 1968+, free (GitHub)','Betfair historical - CLV benchmark'],
     limits:['K-factor decay: reduce 40 to 25 after 50 career matches','Use rolling 10-match DR only - not career average','Retirement risk must be priced in for injured players']},
+  golf:{label:'Golf',status:'active',
+    formula:'Win prob = DataGolf in-play model\nAugusta fit x 0.03 delta\nMarket: devigged Pinnacle/DK outrights',
+    sources:['DataGolf API - strokes gained, win prob, free tier','Pinnacle/DK - outright odds'],
+    limits:['Tournament-based not daily','Pre-round timing critical — market lags during round']},
   props:{label:'Player Props',status:'active',
     formula:'proj = r x season_avg + (1-r) x career_avg   [Marcel]\nedge = poisson_p_over(proj, line) - 0.50\nThreshold: 5% NBA  |  3% all others',
     sources:['PrizePicks / Underdog - prop lines, free public API','NBA Stats API - player splits, free','Baseball Savant - Statcast player splits, free'],
@@ -395,6 +399,68 @@ function mkRow(p,i){
     <td class="c-tier"><span class="tier ${tc}">${p.confidence_tier||'—'}</span></td>
     <td class="c-res r">${rh}</td>
   </tr>`;
+}
+
+function renderMasters(d){
+  const picks = d.picks || [];
+  const r3 = d.r3_model_picks || [];
+  if(!picks.length) return;
+
+  // Find or create golf section in today's picks area
+  let el = document.getElementById('masters-section');
+  if(!el){
+    el = document.createElement('div');
+    el.id = 'masters-section';
+    el.style.cssText = 'margin:2rem 0;';
+    const pb = document.getElementById('pb');
+    if(pb) pb.parentNode.insertBefore(el, pb);
+  }
+
+  const recColor = {VALUE:'var(--accent)', HOLD:'var(--ink2)', FADE:'#ef4444'};
+
+  el.innerHTML = `
+    <div style="font-family:var(--M);font-size:0.65rem;color:var(--ink3);letter-spacing:.08em;margin-bottom:0.75rem">
+      ⛳ MASTERS 2026 — AFTER ROUND ${d.current_round||2} · ${d.last_updated||''}
+    </div>
+    ${r3.length ? `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0.75rem;margin-bottom:1.5rem">
+      ${r3.map(p=>`
+      <div style="border:1px solid var(--line);border-radius:6px;padding:0.85rem;background:var(--card)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">
+          <span style="font-weight:700;font-size:0.9rem;color:var(--ink)">${p.player}</span>
+          <span style="font-size:0.65rem;font-weight:700;color:${recColor[p.rec]||'var(--ink2)'};letter-spacing:.06em">${p.rec}</span>
+        </div>
+        <div style="font-size:0.72rem;color:var(--ink3);line-height:1.4">${p.rationale}</div>
+      </div>`).join('')}
+    </div>` : ''}
+    <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
+      <thead><tr style="border-bottom:1px solid var(--line)">
+        <th style="text-align:left;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Pos</th>
+        <th style="text-align:left;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Player</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">R1</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">R2</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Total</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Win ML</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Top 5</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Top 10</th>
+      </tr></thead>
+      <tbody>
+        ${picks.slice(0,12).map((p,i)=>{
+          const sc = p.score <= -8 ? 'color:var(--accent)' : p.score <= -4 ? 'color:var(--ink)' : 'color:var(--ink3)';
+          const ml = p.win_ml > 0 ? '+'+p.win_ml : p.win_ml;
+          return `<tr style="border-bottom:1px solid var(--line);${i===0?'background:var(--card)':''}">
+            <td style="padding:0.45rem 0.5rem;color:var(--ink3)">${p.pos}</td>
+            <td style="padding:0.45rem 0.5rem;font-weight:${i<3?'700':'400'};color:var(--ink)">${p.player}</td>
+            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.R1||'—'}</td>
+            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.R2||'—'}</td>
+            <td style="padding:0.45rem 0.5rem;text-align:right;font-weight:600;${sc}">${p.score>0?'+'+p.score:p.score}</td>
+            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink2)">${ml}</td>
+            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.top5_ml||'—'}</td>
+            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.top10_ml||'—'}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
 }
 
 function renderPicks(){
@@ -591,6 +657,14 @@ async function init(){
       })));
     });
 
+  // Load Masters golf picks
+  try {
+    const gr = await fetch('golf_masters_picks.json?t=' + Date.now());
+    if(gr.ok){
+      const gd = await gr.json();
+      renderMasters(gd);
+    }
+  } catch(e){}
   if(!any)loadDemo();
   renderPicks();
 
