@@ -560,7 +560,7 @@ async function init(){
   let any=false;
   pr.forEach((r,i)=>{
     if(r.status==='fulfilled'&&r.value?.picks?.length){
-      r.value.picks.forEach(p=>PICKS.push({...p,sport_id:SPORTS[i]}));
+      r.value.picks.forEach(p=>PICKS.push({...p,sport_id:SPORTS[i],home:p.home||p.home_team||'',away:p.away||p.away_team||''}));
       any=true;
       const ts=r.value.generated_at;
       if(ts)document.getElementById('gts').textContent=
