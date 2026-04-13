@@ -147,6 +147,28 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   .mbody.open{grid-template-columns:1fr}
   .sgrid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* Futures */
+.futures-header { padding: 1rem 0 0.5rem; color: var(--muted); font-size: 0.78rem; }
+.futures-market { margin-bottom: 2rem; }
+.futures-market-header { display:flex; justify-content:space-between; align-items:baseline; padding: 0.75rem 0 0.5rem; border-bottom: 1px solid var(--border); }
+.futures-label { font-family: var(--font-head); font-size: 1.1rem; color: var(--fg); }
+.futures-meta { font-size: 0.78rem; color: var(--muted); }
+.mkt-note { color: var(--accent); margin-left: 0.5rem; }
+.futures-table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+.futures-table th { text-align:left; padding:0.4rem 0.5rem; color:var(--muted); font-weight:500; border-bottom:1px solid var(--border); }
+.futures-table th.r { text-align:right; }
+.futures-table td { padding:0.45rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+.futures-table td.r { text-align:right; font-variant-numeric:tabular-nums; }
+.futures-table .value-row { background: rgba(249,115,22,0.05); }
+.futures-table .value-row:hover { background: rgba(249,115,22,0.1); }
+.star { color: var(--accent); margin-right:0.25rem; }
+.star-empty { display:inline-block; width:1rem; }
+.edge-high { color: #22c55e; font-weight:600; }
+.edge-med { color: #86efac; }
+.edge-neg { color: var(--muted); }
+.gen-line { font-size:0.75rem; color:var(--muted); padding-bottom:0.5rem; }
+
 </style>
 </head>
 <body>
@@ -159,6 +181,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   <nav class="tabs">
     <button class="tab on" id="t-pred" onclick="showTab('pred')">Predictions</button>
     <button class="tab"    id="t-perf" onclick="showTab('perf')">Performance</button>
+    <button class="tab"    id="t-futures" onclick="showTab('futures')">Futures</button>
   </nav>
   <div class="mright">
     <a class="ml" href="https://kuhiroclass.com" target="_blank">Kuhiro Research ↗</a><a class="ml" href="submit.html">Submit a model →</a>
@@ -186,6 +209,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   </div>
   <div class="tw">
     <div id="masters-section"></div>
+<div id="panel-futures" style="display:none;padding:1rem 1.5rem"><div id="futures-section"></div></div>
     <table>
       <thead><tr>
         <th class="c-sport">Sport</th><th class="c-game">Game</th><th class="c-pick">Pick</th>
@@ -329,6 +353,8 @@ function showTab(t){
   } else {
     perf.classList.remove('active');
   }
+  const fp=document.getElementById('panel-futures');
+  if(fp) fp.style.display=t==='futures'?'block':'none';
 }
 function setF(f,btn){
   AF=f;
@@ -685,6 +711,72 @@ async function init(){
 }
 
 init();
+
+// ── FUTURES ──────────────────────────────────────────────────────
+let futuresData = null;
+
+async function loadFutures() {
+  try {
+    const r = await fetch('futures.json?' + Date.now());
+    futuresData = await r.json();
+    renderFutures();
+  } catch(e) {
+    document.getElementById('futures-section').innerHTML = '<p style="color:var(--muted);padding:2rem">Futures data unavailable</p>';
+  }
+}
+
+function renderFutures() {
+  const el = document.getElementById('futures-section');
+  if (!futuresData || !el) return;
+  
+  const mkts = futuresData.markets || [];
+  const generated = futuresData.data_date || '';
+  
+  let html = `<div class="futures-header">
+    <div class="gen-line">Generated: ${generated} &nbsp;·&nbsp; Monte Carlo (50k simulations) &nbsp;·&nbsp; Edge = Model prob − Devigged market prob &nbsp;·&nbsp; Kelly = Quarter-Kelly</div>
+  </div>`;
+
+  for (const mkt of mkts) {
+    const picks = mkt.picks || [];
+    const valuePicks = picks.filter(p => p.value);
+    const note = mkt.note ? `<span class="mkt-note">${mkt.note}</span>` : '';
+    
+    html += `<div class="futures-market">
+      <div class="futures-market-header">
+        <span class="futures-label">${mkt.label}</span>
+        <span class="futures-meta">${valuePicks.length} value picks &nbsp;·&nbsp; Overround: ${mkt.overround}% ${note}</span>
+      </div>
+      <table class="futures-table">
+        <thead><tr>
+          <th>Team / Contender</th>
+          <th class="r">Model</th>
+          <th class="r">Market (NV)</th>
+          <th class="r">Edge</th>
+          <th class="r">Best Odds</th>
+          <th class="r">Kelly %</th>
+        </tr></thead>
+        <tbody>`;
+    
+    for (const p of picks) {
+      const edgeClass = p.edge_pp >= 5 ? 'edge-high' : p.edge_pp >= 3 ? 'edge-med' : p.edge_pp < 0 ? 'edge-neg' : '';
+      const star = p.value ? '<span class="star">★</span>' : '<span class="star-empty"></span>';
+      html += `<tr class="${p.value ? 'value-row' : ''}">
+        <td>${star} ${p.name}</td>
+        <td class="r">${(p.model_prob*100).toFixed(1)}%</td>
+        <td class="r">${(p.market_prob*100).toFixed(1)}%</td>
+        <td class="r ${edgeClass}">${p.edge_pp > 0 ? '+' : ''}${p.edge_pp}pp</td>
+        <td class="r">${p.best_str}</td>
+        <td class="r">${p.kelly_pct > 0 ? p.kelly_pct.toFixed(2)+'%' : '—'}</td>
+      </tr>`;
+    }
+    html += `</tbody></table></div>`;
+  }
+  
+  el.innerHTML = html;
+}
+
+loadFutures();
+
 </script>
 </body>
 </html>
