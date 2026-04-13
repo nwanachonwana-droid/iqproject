@@ -2,26 +2,26 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-13T03:41:29.054546Z",
+  "generated_at": "2026-04-13T04:16:56.387855Z",
   "data_date": "2026-04-13",
   "props": [
     {
-      "pick_id": "mlb-props-2026-04-13-669923-k",
+      "pick_id": "mlb-props-2026-04-13-669194-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
-      "game": "Houston Astros @ Seattle Mariners",
-      "player": "George Kirby",
-      "pick": "George Kirby Under 5.5 Ks",
+      "game": "Arizona Diamondbacks @ Baltimore Orioles",
+      "player": "Ryne Nelson",
+      "pick": "Ryne Nelson Under 4.5 Ks",
       "pick_side": "Under",
-      "line": 5.5,
-      "proj_k": 4.4,
+      "line": 4.5,
+      "proj_k": 4.32,
       "umpire": "Unknown",
       "ump_adj": 0.0,
-      "opp_k_pct": 0.224,
-      "model_prob": 0.7197,
-      "market_prob": 0.521,
-      "edge_pp": 19.87,
-      "confidence_tier": "high",
+      "opp_k_pct": 0.283,
+      "model_prob": 0.5669,
+      "market_prob": 0.4553,
+      "edge_pp": 11.16,
+      "confidence_tier": "low",
       "result": null,
       "outcome": null
     },
@@ -79,8 +79,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.304,
       "model_prob": 0.5409,
-      "market_prob": 0.4645,
-      "edge_pp": 7.64,
+      "market_prob": 0.4554,
+      "edge_pp": 8.55,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
@@ -108,6 +108,6 @@
   ],
   "summary": {
     "total_props": 5,
-    "high_confidence": 1
+    "high_confidence": 0
   }
 }

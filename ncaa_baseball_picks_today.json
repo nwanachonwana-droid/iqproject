@@ -1,11 +1,30 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-04-13T03:41:25.512228Z",
+  "generated_at": "2026-04-13T04:16:47.661708Z",
   "data_date": "2026-04-13",
   "model_version": "v1.0",
   "status": "PROVEN",
   "picks": [
+    {
+      "pick_id": "ncaabb-2026-04-13-401856352",
+      "game_time_utc": "2026-04-12T04:35Z",
+      "home_team": "Hawai'i Rainbow Warriors",
+      "away_team": "UC Irvine Anteaters",
+      "pick": "Hawai'i Rainbow Warriors",
+      "pick_side": "home",
+      "model_prob_home": 0.6181,
+      "model_prob_away": 0.3819,
+      "market_prob_home": null,
+      "market_prob_away": null,
+      "market_line_home": null,
+      "market_source": null,
+      "edge_pp": null,
+      "confidence_tier": "medium",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-13T04:16:57.123096Z"
+    },
     {
       "pick_id": "ncaabb-2026-04-13-401852655",
       "game_time_utc": "2026-04-12T16:00Z",
@@ -23,7 +42,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970099Z"
+      "settled_at": "2026-04-13T04:16:57.123158Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401849910",
@@ -42,7 +61,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970151Z"
+      "settled_at": "2026-04-13T04:16:57.123175Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401850274",
@@ -61,7 +80,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970169Z"
+      "settled_at": "2026-04-13T04:16:57.123188Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401848438",
@@ -80,7 +99,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970183Z"
+      "settled_at": "2026-04-13T04:16:57.123197Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401847728",
@@ -99,7 +118,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970195Z"
+      "settled_at": "2026-04-13T04:16:57.123206Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401847369",
@@ -118,7 +137,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970213Z"
+      "settled_at": "2026-04-13T04:16:57.123215Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401852292",
@@ -137,7 +156,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970225Z"
+      "settled_at": "2026-04-13T04:16:57.123224Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401854437",
@@ -156,7 +175,7 @@
       "confidence_tier": "medium",
       "result": 0.0,
       "outcome": "LOSS",
-      "settled_at": "2026-04-13T03:41:29.970237Z"
+      "settled_at": "2026-04-13T04:16:57.123233Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401853713",
@@ -175,7 +194,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970249Z"
+      "settled_at": "2026-04-13T04:16:57.123242Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401859247",
@@ -194,7 +213,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970261Z"
+      "settled_at": "2026-04-13T04:16:57.123251Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401854440",
@@ -213,7 +232,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970273Z"
+      "settled_at": "2026-04-13T04:16:57.123261Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401854439",
@@ -232,7 +251,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970284Z"
+      "settled_at": "2026-04-13T04:16:57.123270Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401853682",
@@ -251,7 +270,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970300Z"
+      "settled_at": "2026-04-13T04:16:57.123279Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401852090",
@@ -270,7 +289,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970313Z"
+      "settled_at": "2026-04-13T04:16:57.123288Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401848051",
@@ -289,7 +308,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970324Z"
+      "settled_at": "2026-04-13T04:16:57.123296Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401847780",
@@ -308,7 +327,7 @@
       "confidence_tier": "medium",
       "result": 0.0,
       "outcome": "LOSS",
-      "settled_at": "2026-04-13T03:41:29.970340Z"
+      "settled_at": "2026-04-13T04:16:57.123305Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401852015",
@@ -327,7 +346,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970352Z"
+      "settled_at": "2026-04-13T04:16:57.123314Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401858033",
@@ -346,7 +365,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970365Z"
+      "settled_at": "2026-04-13T04:16:57.123323Z"
     },
     {
       "pick_id": "ncaabb-2026-04-13-401857360",
@@ -365,26 +384,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970377Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-04-13-401856352",
-      "game_time_utc": "2026-04-12T04:35Z",
-      "home_team": "Hawai'i Rainbow Warriors",
-      "away_team": "UC Irvine Anteaters",
-      "pick": "Hawai'i Rainbow Warriors",
-      "pick_side": "home",
-      "model_prob_home": 0.6181,
-      "model_prob_away": 0.3819,
-      "market_prob_home": null,
-      "market_prob_away": null,
-      "market_line_home": null,
-      "market_source": null,
-      "edge_pp": null,
-      "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T03:41:29.970388Z"
+      "settled_at": "2026-04-13T04:16:57.123331Z"
     }
   ],
   "summary": {

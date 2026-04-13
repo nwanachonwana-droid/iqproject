@@ -364,10 +364,254 @@ def run_ncaa_baseball():
     write_picks("ncaa_baseball", picks, "PROVEN")
 
 
+# Soccer team name normalization — CSV name → Odds API name (exact, verified)
+SOCCER_NAME_MAP = {
+    # EPL (football-data → Odds API)
+    "West Ham":       "West Ham United",
+    "Wolves":         "Wolverhampton Wanderers",
+    "Tottenham":      "Tottenham Hotspur",
+    "Man United":     "Manchester United",
+    "Man City":       "Manchester City",
+    "Nott'm Forest":  "Nottingham Forest",
+    "Sheffield Weds": "Sheffield Wednesday",
+    "Leicester":      "Leicester City",
+    "Leeds":          "Leeds United",
+    "Brighton":       "Brighton and Hove Albion",
+    "Luton":          "Luton Town",
+    "Ipswich":        "Ipswich Town",
+    # La Liga
+    "Ath Bilbao":     "Athletic Bilbao",
+    "Ath Madrid":     "Atlético Madrid",
+    "Betis":          "Real Betis",
+    "Celta":          "Celta Vigo",
+    "Espanol":        "Espanyol",
+    "Sociedad":       "Real Sociedad",
+    "Vallecano":      "Rayo Vallecano",
+    "Valladolid":     "Real Valladolid",
+    "Alaves":         "Deportivo Alavés",
+    "Getafe":         "Getafe",
+    "Girona":         "Girona",
+    "Villarreal":     "Villarreal",
+    "Osasuna":        "CA Osasuna",
+    "Sevilla":        "Sevilla",
+    "Granada":        "Granada CF",
+    "Las Palmas":     "UD Las Palmas",
+    "Mallorca":       "RCD Mallorca",
+    "Leganes":        "CD Leganés",
+    "Levante":        "Levante",
+    "Elche":          "Elche CF",
+    # Bundesliga
+    "Dortmund":       "Borussia Dortmund",
+    "Ein Frankfurt":  "Eintracht Frankfurt",
+    "FC Koln":        "1. FC Köln",
+    "Leverkusen":     "Bayer Leverkusen",
+    "Mainz":          "FSV Mainz 05",
+    "M'gladbach":     "Borussia Mönchengladbach",
+    "Wolfsburg":      "VfL Wolfsburg",
+    "Hoffenheim":     "TSG Hoffenheim",
+    "Stuttgart":      "VfB Stuttgart",
+    "Hertha":         "Hertha BSC",
+    "Heidenheim":     "1. FC Heidenheim",
+    "St Pauli":       "FC St. Pauli",
+    "Hamburg":        "Hamburger SV",
+    "Schalke":        "FC Schalke 04",
+    "Freiburg":       "SC Freiburg",
+    "Greuther Furth": "SpVgg Greuther Fürth",
+    "Paderborn":      "SC Paderborn 07",
+    "Regensburg":     "Jahn Regensburg",
+    # Serie A (football-data names match Odds API well — minimal mapping needed)
+    "Inter":          "Inter Milan",
+    "Milan":          "AC Milan",
+    "Roma":           "AS Roma",
+    "Atalanta":       "Atalanta BC",
+    "Verona":         "Hellas Verona",
+    "Empoli":         "Empoli",
+    "Lecce":          "Lecce",
+    "Sassuolo":       "Sassuolo",
+    "Cremonese":      "Cremonese",
+    # Ligue 1
+    "Paris SG":       "Paris Saint Germain",
+    "Lyon":           "Olympique Lyonnais",
+    "Monaco":         "AS Monaco",
+    "Lens":           "RC Lens",
+    "Rennes":         "Stade Rennes",
+    "Reims":          "Stade de Reims",
+    "St Etienne":     "Saint-Etienne",
+    "Nantes":         "Nantes",
+    "Nice":           "Nice",
+    "Lille":          "Lille",
+    "Marseille":      "Marseille",
+    "Toulouse":       "Toulouse",
+    "Brest":          "Brest",
+    "Metz":           "Metz",
+    "Lorient":        "Lorient",
+    "Strasbourg":     "Strasbourg",
+    "Auxerre":        "Auxerre",
+    "Angers":         "Angers",
+    "Le Havre":       "Le Havre",
+    "Paris FC":       "Paris FC",
+}
+# Reverse map: Odds API → CSV name
+SOCCER_NAME_MAP_REV = {v:k for k,v in SOCCER_NAME_MAP.items()}
+
+def find_team_isr(odds_name, isr_dict):
+    """Map Odds API team name → CSV name → ISR value. No fuzzy — exact only."""
+    # Direct hit (some names match exactly e.g. Serie A)
+    if odds_name in isr_dict:
+        return isr_dict[odds_name]
+    # Reverse map: odds_name → csv_name
+    csv_name = SOCCER_NAME_MAP_REV.get(odds_name)
+    if csv_name and csv_name in isr_dict:
+        return isr_dict[csv_name]
+    # Forward map (shouldn't be needed but safety)
+    mapped = SOCCER_NAME_MAP.get(odds_name)
+    if mapped and mapped in isr_dict:
+        return isr_dict[mapped]
+    return None
+
 def run_soccer():
-    # Suppressed until August 2026 — EPL end of season, ISR unreliable on 1 game/week
-    print("\n[Soccer — suppressed until Aug 2026 new season]")
-    write_picks("soccer", [], "ACTIVE")
+    import io, csv as _csv
+    LEAGUE_CSVS = [
+        ("E0",  "soccer_epl",               "EPL"),
+        ("SP1", "soccer_spain_la_liga",      "La Liga"),
+        ("D1",  "soccer_germany_bundesliga", "Bundesliga"),
+        ("I1",  "soccer_italy_serie_a",      "Serie A"),
+        ("F1",  "soccer_france_ligue_one",   "Ligue 1"),
+    ]
+    UCL_KEYS = {"soccer_uefa_champs_league", "soccer_uefa_europa_league"}
+    ALL_ODDS = LEAGUE_CSVS + [
+        ("UCL", "soccer_uefa_champs_league",          "UEFA Champions League"),
+        ("UEL", "soccer_uefa_europa_league",           "UEFA Europa League"),
+        ("MLS", "soccer_usa_mls",                      "MLS"),
+        ("NED", "soccer_netherlands_eredivisie",        "Eredivisie"),
+        ("POR", "soccer_portugal_primeira_liga",        "Primeira Liga"),
+    ]
+    print("\n[Soccer — Dixon-Coles ISR + Pythagenpat multi-league]")
+
+    def fetch_csv(code):
+        url = f"https://www.football-data.co.uk/mmz4281/2526/{code}.csv"
+        import urllib.request
+        req = urllib.request.Request(url, headers={"User-Agent":"iqproject/1.0"})
+        r = urllib.request.urlopen(req, timeout=15)
+        return list(_csv.DictReader(io.StringIO(r.read().decode("utf-8","replace"))))
+
+    def build_isr(rows):
+        stats = {}
+        for row in rows:
+            try:
+                ht = row.get("HomeTeam","").strip()
+                at = row.get("AwayTeam","").strip()
+                hg = int(row.get("FTHG") or row.get("HG") or 0)
+                ag = int(row.get("FTAG") or row.get("AG") or 0)
+            except: continue
+            if not ht or not at: continue
+            for t in (ht,at):
+                if t not in stats: stats[t]={"gf":0,"ga":0,"gp":0}
+            stats[ht]["gf"]+=hg; stats[ht]["ga"]+=ag; stats[ht]["gp"]+=1
+            stats[at]["gf"]+=ag; stats[at]["ga"]+=hg; stats[at]["gp"]+=1
+        isr = {}
+        for t,s in stats.items():
+            if s["gp"]<3: continue
+            gf=s["gf"]/s["gp"]; ga=s["ga"]/s["gp"]
+            exp=(gf+ga)**0.285
+            pyth=gf**exp/(gf**exp+ga**exp) if (gf+ga)>0 else 0.5
+            K=10
+            isr[t]=(s["gp"]*pyth+K*0.5)/(s["gp"]+K)
+        return isr
+
+    def wp(isr_h, isr_a, neutral=False):
+        # ISR ratio method: relative strength directly gives win probability
+        # p_home = isr_h / (isr_h + isr_a) then apply home advantage
+        ha = 0.00 if neutral else 0.06
+        raw = isr_h / (isr_h + isr_a) if (isr_h + isr_a) > 0 else 0.5
+        # Apply home advantage as additive boost compressed toward extremes
+        p = raw + ha * raw * (1 - raw) * 2
+        p = max(0.05, min(0.90, p))
+        # Empirical draw rate — higher when teams are evenly matched
+        d = 0.28 - 0.10 * abs(p - 0.5)
+        p_win  = p * (1 - d)
+        p_loss = (1 - p) * (1 - d)
+        return p_win, p_loss, d
+
+    # League strength coefficients — UEFA club coefficients 2025/26, EPL=1.0 baseline
+    LEAGUE_STRENGTH = {
+        "soccer_epl":                1.000,
+        "soccer_spain_la_liga":      0.980,
+        "soccer_germany_bundesliga": 0.950,
+        "soccer_italy_serie_a":      0.940,
+        "soccer_france_ligue_one":   0.880,
+    }
+
+    # Build ISR per league, normalize to EPL baseline, build UCL pool
+    league_isr={}; ucl_pool={}
+    for code,odds_key,label in LEAGUE_CSVS:
+        try:
+            rows=fetch_csv(code)
+            isr_raw=build_isr(rows)
+            strength=LEAGUE_STRENGTH.get(odds_key,0.90)
+            # Normalize: compress ISR toward 0.5 by league strength factor
+            isr={t: 0.5+(v-0.5)*strength for t,v in isr_raw.items()}
+            league_isr[odds_key]=isr
+            for t,r in isr.items(): ucl_pool[t]=r
+            print(f"  {label}: {len(isr)} teams | {len(rows)} matches")
+        except Exception as e:
+            print(f"  {label}: FAILED — {e}")
+
+    all_picks=[]
+    for code,odds_key,label in ALL_ODDS:
+        isr=league_isr.get(odds_key, ucl_pool)
+        neutral=odds_key in UCL_KEYS
+        url=(f"https://api.the-odds-api.com/v4/sports/{odds_key}/odds"
+             f"?apiKey={ODDS_KEY}&regions=us&markets=h2h&oddsFormat=american")
+        try: games=fetch(url)
+        except: continue
+        matched=0
+        for g in games:
+            ht=g["home_team"]; at=g["away_team"]
+            isr_h=find_team_isr(ht,isr)
+            isr_a=find_team_isr(at,isr)
+            if isr_h is None or isr_a is None: continue
+            matched+=1
+            model_h,model_a,model_d=wp(isr_h,isr_a,neutral)
+            home_imps,away_imps,draw_imps=[],[],[]
+            for bk in g.get("bookmakers",[]):
+                for mk in bk.get("markets",[]):
+                    if mk["key"]!="h2h": continue
+                    oc={o["name"]:o["price"] for o in mk["outcomes"]}
+                    if ht in oc: home_imps.append(to_imp(oc[ht]))
+                    if at in oc: away_imps.append(to_imp(oc[at]))
+                    dr=[k for k in oc if k not in (ht,at)]
+                    if dr: draw_imps.append(to_imp(oc[dr[0]]))
+            if not home_imps: continue
+            raw_h=sum(home_imps)/len(home_imps)
+            raw_a=sum(away_imps)/len(away_imps)
+            raw_d=sum(draw_imps)/len(draw_imps) if draw_imps else 0.265
+            tot=raw_h+raw_a+raw_d
+            nv_h=raw_h/tot; nv_a=raw_a/tot
+            ep_h=round((model_h-nv_h)*100,2)
+            ep_a=round((model_a-nv_a)*100,2)
+            for pick_team,pick_side,model_p,nv_p,ep in [
+                (ht,"home",model_h,nv_h,ep_h),
+                (at,"away",model_a,nv_a,ep_a),
+            ]:
+                if ep<3.0 or model_p<0.38: continue
+                all_picks.append({
+                    "home_team":ht,"away_team":at,"league":label,
+                    "pick":pick_team,"pick_side":pick_side,
+                    "model_prob_home":round(model_h,4),
+                    "model_prob_away":round(model_a,4),
+                    "market_prob_home":round(nv_h,4),
+                    "market_prob_away":round(nv_a,4),
+                    "draw_prob":round(raw_d/tot,4),
+                    "edge_pp":ep,
+                    "confidence_tier":tier(model_p),
+                    "game_time_utc":g.get("commence_time"),
+                    "outcome":None,"result":None,
+                })
+        if matched>0 or label in ("EPL","La Liga","Bundesliga","Serie A","Ligue 1"):
+            print(f"  {label}: {len(games)} games | {matched} matched")
+    print(f"  -> {len(all_picks)} picks with ≥3.0pp edge")
+    write_picks("soccer", all_picks, "ACTIVE")
 
 
 def run_nfl():
