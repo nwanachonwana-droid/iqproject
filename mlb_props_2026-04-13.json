@@ -2,9 +2,29 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-13T03:39:19.808251Z",
+  "generated_at": "2026-04-13T03:41:29.054546Z",
   "data_date": "2026-04-13",
   "props": [
+    {
+      "pick_id": "mlb-props-2026-04-13-669923-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Houston Astros @ Seattle Mariners",
+      "player": "George Kirby",
+      "pick": "George Kirby Under 5.5 Ks",
+      "pick_side": "Under",
+      "line": 5.5,
+      "proj_k": 4.4,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.224,
+      "model_prob": 0.7197,
+      "market_prob": 0.521,
+      "edge_pp": 19.87,
+      "confidence_tier": "high",
+      "result": null,
+      "outcome": null
+    },
     {
       "pick_id": "mlb-props-2026-04-13-701542-k",
       "sport": "mlb",
@@ -87,7 +107,7 @@
     }
   ],
   "summary": {
-    "total_props": 4,
-    "high_confidence": 0
+    "total_props": 5,
+    "high_confidence": 1
   }
 }
