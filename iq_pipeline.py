@@ -1367,7 +1367,7 @@ def run_nba():
         d = fetch(url)
     except Exception as e:
         print(f"  ! Standings fetch failed: {e}")
-        write_picks("nba", [], "ACTIVE")
+        write_picks("nba", [], "EXPERIMENTAL")
         return
 
     # Build ISR from point differential
@@ -1417,7 +1417,7 @@ def run_nba():
         games = fetch(url)
     except Exception as e:
         print(f"  ! Odds fetch failed: {e}")
-        write_picks("nba", [], "ACTIVE")
+        write_picks("nba", [], "EXPERIMENTAL")
         return
 
     NBA_NAME_MAP = {
@@ -1491,7 +1491,7 @@ def run_nba():
             })
 
     print(f"  -> {len(all_picks)} picks | {len(games)} games")
-    write_picks("nba", all_picks, "ACTIVE")
+    write_picks("nba", all_picks, "EXPERIMENTAL")
 
 def run_nba_props():
     """NBA props — rolling average projection vs Odds API lines."""
@@ -1927,7 +1927,7 @@ def run_mma():
 
     # Step 2: Get MMA odds
     if not ODDS_KEY:
-        write_picks("mma", [], "ACTIVE")
+        write_picks("mma", [], "EXPERIMENTAL")
         return
 
     url = (f"https://api.the-odds-api.com/v4/sports/mma_mixed_martial_arts/odds"
@@ -1936,7 +1936,7 @@ def run_mma():
         games = fetch(url)
     except Exception as e:
         print(f"  ! Odds fetch failed: {e}")
-        write_picks("mma", [], "ACTIVE")
+        write_picks("mma", [], "EXPERIMENTAL")
         return
 
     # Filter to next event only (next 8 days)
@@ -2007,7 +2007,7 @@ def run_mma():
             })
 
     print(f"  Matched: {matched}/{len(games)} fights | Picks: {len(all_picks)}")
-    write_picks("mma", all_picks, "ACTIVE")
+    write_picks("mma", all_picks, "EXPERIMENTAL")
 
 SPORT_RUNNERS = {
     "mlb":          run_mlb,

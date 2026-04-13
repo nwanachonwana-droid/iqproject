@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
   "sport": "mma",
-  "generated_at": "2026-04-13T15:39:51.042329Z",
+  "generated_at": "2026-04-13T15:46:09.055425Z",
   "data_date": "2026-04-13",
   "model_version": "v1.0",
-  "status": "ACTIVE",
+  "status": "EXPERIMENTAL",
   "picks": [
     {
       "home_team": "Julien Leblanc",

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-13T15:39:57.214621Z",
+  "generated_at": "2026-04-13T15:46:16.320026Z",
   "data_date": "2026-04-13",
   "props": [
     {
@@ -19,8 +19,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.274,
       "model_prob": 0.6425,
-      "market_prob": 0.4518,
-      "edge_pp": 19.07,
+      "market_prob": 0.4779,
+      "edge_pp": 16.46,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null
@@ -39,8 +39,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.283,
       "model_prob": 0.5669,
-      "market_prob": 0.4242,
-      "edge_pp": 14.27,
+      "market_prob": 0.4223,
+      "edge_pp": 14.46,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
@@ -79,8 +79,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.239,
       "model_prob": 0.5633,
-      "market_prob": 0.4595,
-      "edge_pp": 10.38,
+      "market_prob": 0.4613,
+      "edge_pp": 10.2,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
@@ -99,8 +99,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.306,
       "model_prob": 0.6452,
-      "market_prob": 0.5449,
-      "edge_pp": 10.03,
+      "market_prob": 0.5439,
+      "edge_pp": 10.13,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null
@@ -119,8 +119,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.304,
       "model_prob": 0.5409,
-      "market_prob": 0.4543,
-      "edge_pp": 8.66,
+      "market_prob": 0.4549,
+      "edge_pp": 8.6,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
@@ -159,8 +159,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.228,
       "model_prob": 0.5555,
-      "market_prob": 0.4976,
-      "edge_pp": 5.79,
+      "market_prob": 0.4924,
+      "edge_pp": 6.31,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
