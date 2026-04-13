@@ -1868,10 +1868,152 @@ def run_nba_props_old():
     import shutil
     shutil.copy2(path, site_path)
 
+
+def run_mma():
+    """MMA/UFC — win-rate ISR model vs market odds."""
+    import re, time
+    print("\n[MMA — Win-rate ISR + market edge model]")
+
+    # Step 1: Build fighter win rates from UFCStats
+    fighter_stats = {}
+    for char in 'abcdefghijklmnopqrstuvwxyz':
+        try:
+            url = f'http://ufcstats.com/statistics/fighters?char={char}&page=all'
+            req = __import__('urllib.request', fromlist=['Request','urlopen']).Request(
+                url, headers={"User-Agent":"iqproject/1.0"})
+            html = __import__('urllib.request', fromlist=['urlopen']).urlopen(req, timeout=10).read().decode('utf-8','replace')
+            rows = re.findall(r'<tr class="b-statistics__table-row">(.*?)</tr>', html, re.DOTALL)
+            for row in rows:
+                cols = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+                if len(cols) < 10: continue
+                first = re.sub(r'<[^>]+>','',cols[0]).strip()
+                last  = re.sub(r'<[^>]+>','',cols[1]).strip()
+                w     = re.sub(r'<[^>]+>','',cols[7]).strip()
+                l     = re.sub(r'<[^>]+>','',cols[8]).strip()
+                d     = re.sub(r'<[^>]+>','',cols[9]).strip()
+                if not first or not last: continue
+                try:
+                    wins,losses,draws = int(w),int(l),int(d)
+                    total = wins+losses+draws
+                    if total >= 3:
+                        fighter_stats[f"{first} {last}"] = {
+                            'wins':wins,'losses':losses,'total':total,
+                            'win_rate': wins/total
+                        }
+                except: continue
+            time.sleep(0.03)
+        except: continue
+
+    print(f"  Fighters rated: {len(fighter_stats)}")
+
+    def find_fighter(name):
+        """Fuzzy match fighter name to UFCStats record."""
+        if name in fighter_stats: return fighter_stats[name]
+        name_parts = name.lower().split()
+        best, best_score = None, 0
+        for k, v in fighter_stats.items():
+            k_parts = k.lower().split()
+            score = sum(1 for p in name_parts if any(p in kp for kp in k_parts))
+            if score > best_score and score >= 1:
+                best_score = score
+                best = v
+        return best
+
+    def win_prob(wr_a, wr_b):
+        """Log5 win probability from win rates."""
+        if wr_a + wr_b == 0: return 0.5
+        p = (wr_a * (1 - wr_b)) / (wr_a * (1 - wr_b) + wr_b * (1 - wr_a))
+        return max(0.05, min(0.95, p))
+
+    # Step 2: Get MMA odds
+    if not ODDS_KEY:
+        write_picks("mma", [], "ACTIVE")
+        return
+
+    url = (f"https://api.the-odds-api.com/v4/sports/mma_mixed_martial_arts/odds"
+           f"?apiKey={ODDS_KEY}&regions=us&markets=h2h&oddsFormat=american")
+    try:
+        games = fetch(url)
+    except Exception as e:
+        print(f"  ! Odds fetch failed: {e}")
+        write_picks("mma", [], "ACTIVE")
+        return
+
+    # Filter to next event only (next 8 days)
+    import datetime as _dt
+    cutoff = (_dt.date.today() + _dt.timedelta(days=8)).isoformat()
+    games = [g for g in games if g.get("commence_time","") <= cutoff + "T99:99:99Z"]
+    print(f"  Fights in next 8 days: {len(games)}")
+
+    all_picks = []
+    matched = 0
+    for g in games:
+        f1 = g["home_team"]  # UFC uses home/away for fighter A/B
+        f2 = g["away_team"]
+
+        s1 = find_fighter(f1)
+        s2 = find_fighter(f2)
+        if not s1 or not s2: continue
+        matched += 1
+
+        wr1 = s1["win_rate"]
+        wr2 = s2["win_rate"]
+
+        # Regress to mean (K=10 fights)
+        K = 10
+        wr1_r = (s1["total"] * wr1 + K * 0.5) / (s1["total"] + K)
+        wr2_r = (s2["total"] * wr2 + K * 0.5) / (s2["total"] + K)
+
+        model_f1 = win_prob(wr1_r, wr2_r)
+        model_f2 = 1 - model_f1
+
+        # Market odds
+        home_imps, away_imps = [], []
+        for bk in g.get("bookmakers", []):
+            for mk in bk.get("markets", []):
+                if mk["key"] != "h2h": continue
+                oc = {o["name"]: o["price"] for o in mk["outcomes"]}
+                if f1 in oc: home_imps.append(to_imp(oc[f1]))
+                if f2 in oc: away_imps.append(to_imp(oc[f2]))
+
+        if not home_imps: continue
+        raw_h = sum(home_imps)/len(home_imps)
+        raw_a = sum(away_imps)/len(away_imps)
+        nv_f1, nv_f2 = devig(raw_h, raw_a)
+
+        ep_f1 = round((model_f1 - nv_f1) * 100, 2)
+        ep_f2 = round((model_f2 - nv_f2) * 100, 2)
+
+        for fighter, model_p, nv_p, ep, pick_side in [
+            (f1, model_f1, nv_f1, ep_f1, "home"),
+            (f2, model_f2, nv_f2, ep_f2, "away"),
+        ]:
+            if ep < 4.0 or ep > 15.0 or model_p < 0.45: continue
+            all_picks.append({
+                "home_team":        f1,
+                "away_team":        f2,
+                "pick":             fighter,
+                "pick_side":        pick_side,
+                "model_prob_home":  round(model_f1, 4),
+                "model_prob_away":  round(model_f2, 4),
+                "market_prob_home": round(nv_f1, 4),
+                "market_prob_away": round(nv_f2, 4),
+                "edge_pp":          ep,
+                "confidence_tier":  tier(model_p),
+                "record":           f"{s1['wins']}-{s1['losses']}" if pick_side=="home" else f"{s2['wins']}-{s2['losses']}",
+                "game_time_utc":    g.get("commence_time"),
+                "outcome":          None,
+                "result":           None,
+            })
+
+    print(f"  Matched: {matched}/{len(games)} fights | Picks: {len(all_picks)}")
+    write_picks("mma", all_picks, "ACTIVE")
+
 SPORT_RUNNERS = {
     "mlb":          run_mlb,
     "nhl":          run_nhl,
     "ncaa_baseball": run_ncaa_baseball,
+    "mma":          run_mma,
     "nba":          run_nba,
     "soccer":       run_soccer,
     "nfl":          run_nfl,
