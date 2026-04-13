@@ -21,9 +21,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 0.0,
-      "outcome": "LOSS",
-      "settled_at": "2026-04-13T05:30:04.426167Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401852655",
@@ -40,9 +40,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426220Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401849910",
@@ -59,9 +59,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426242Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401850274",
@@ -78,9 +78,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426256Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401848438",
@@ -97,9 +97,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426270Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401847728",
@@ -116,9 +116,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426283Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401847369",
@@ -135,9 +135,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426294Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401852292",
@@ -154,9 +154,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426307Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401854437",
@@ -173,9 +173,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 0.0,
-      "outcome": "LOSS",
-      "settled_at": "2026-04-13T05:30:04.426319Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401853713",
@@ -192,9 +192,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426331Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401859247",
@@ -211,9 +211,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426343Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401854440",
@@ -230,9 +230,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426354Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401854439",
@@ -249,9 +249,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426367Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401853682",
@@ -268,9 +268,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426381Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401852090",
@@ -287,9 +287,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426396Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401848051",
@@ -306,9 +306,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426411Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401847780",
@@ -325,9 +325,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 0.0,
-      "outcome": "LOSS",
-      "settled_at": "2026-04-13T05:30:04.426444Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401852015",
@@ -344,9 +344,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426454Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401858033",
@@ -363,9 +363,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426463Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     },
     {
       "pick_id": "ncaabb-2026-04-13-401857360",
@@ -382,9 +382,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-13T05:30:04.426472Z"
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     }
   ],
   "summary": {

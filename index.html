@@ -375,7 +375,7 @@ function setPS(s,btn){PS=s;document.querySelectorAll('#perf .filt').forEach(b=>b
 function mkRow(p,i){
   const m=META[p.sport_id]||{};
   const pp=p.pick_side==='home'?p.model_prob_home:(1-p.model_prob_home);
-  const mp=p.pick_side==='home'?p.market_prob_home:(1-p.market_prob_home);
+  const mp=p.market_prob_home!=null?(p.pick_side==='home'?p.market_prob_home:(1-p.market_prob_home)):null;
   const ep=p.edge_pp||0;
   const ec=ep>1.5?'ep':ep<-1.5?'en':'ez';
   const tc=p.confidence_tier==='high'?'th':p.confidence_tier==='medium'?'tm':'tl';

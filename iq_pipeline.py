@@ -644,8 +644,7 @@ def settle_all():
 
         pending = [p for p in picks_data.get("picks", [])
                    if p.get("outcome") is None and
-                   (p.get("data_date") == yesterday or
-                    (p.get("game_time_utc") or "").startswith(yesterday))]
+                   (p.get("game_time_utc") or "").startswith(yesterday)]
         if not pending: continue
 
         try:
