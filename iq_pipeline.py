@@ -17,7 +17,7 @@ from pathlib import Path
 from collections import defaultdict
 
 TODAY    = datetime.date.today().isoformat()
-SITE_DIR = os.path.expanduser("~/Desktop/IQ_SITE")   # ← change to your site repo
+SITE_DIR = os.path.expanduser("/workspaces/iqproject")   # ← change to your site repo
 DATA_DIR = os.path.expanduser("~/Desktop/iq_data")
 ODDS_KEY = os.environ.get("ODDS_API_KEY", "")
 
