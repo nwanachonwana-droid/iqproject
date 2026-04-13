@@ -2009,6 +2009,226 @@ def run_mma():
     print(f"  Matched: {matched}/{len(games)} fights | Picks: {len(all_picks)}")
     write_picks("mma", all_picks, "EXPERIMENTAL")
 
+
+def _series_prob(isr_a, isr_b, a_home, home_adv=0.035):
+    def wp(is_a_home):
+        if is_a_home:
+            raw = isr_a/(isr_a+isr_b)
+            p = raw + home_adv*raw*(1-raw)*2
+            return max(0.05, min(0.95, p))
+        else:
+            raw = isr_b/(isr_a+isr_b)
+            p = raw + home_adv*raw*(1-raw)*2
+            return 1 - max(0.05, min(0.95, p))
+    locs = [True,True,False,False,True,False,True] if a_home else [False,False,True,True,False,True,False]
+    probs = [wp(loc) for loc in locs]
+    dp = [[0.0]*5 for _ in range(5)]
+    dp[0][0] = 1.0
+    for wa in range(4):
+        for wb in range(4):
+            if dp[wa][wb] < 1e-12: continue
+            g = wa+wb
+            if g >= 7: continue
+            p = probs[g]
+            dp[wa+1][wb] += dp[wa][wb]*p
+            dp[wa][wb+1] += dp[wa][wb]*(1-p)
+    return sum(dp[4][wb] for wb in range(4))
+
+def _sim_series(a, b, home_adv):
+    a_home = a["seed"] < b["seed"]
+    p = _series_prob(a["isr"], b["isr"], a_home, home_adv)
+    return a if __import__('random').random() < p else b
+
+def _sim_bracket(teams, home_adv):
+    import random as _r
+    bracket = sorted(teams[:], key=lambda x: x["seed"])
+    while len(bracket) > 1:
+        next_r = []
+        n = len(bracket)
+        for i in range(n//2):
+            next_r.append(_sim_series(bracket[i], bracket[n-1-i], home_adv))
+        bracket = sorted(next_r, key=lambda x: x["seed"])
+    return bracket[0]
+
+def _futures_market(odds_key):
+    if not ODDS_KEY: return {}, {}, 0
+    url = (f"https://api.the-odds-api.com/v4/sports/{odds_key}/odds"
+           f"?apiKey={ODDS_KEY}&regions=us&markets=outrights&oddsFormat=american")
+    try:
+        data = fetch(url)
+    except:
+        return {}, {}, 0
+    player_odds = {}
+    for bk in data[0].get("bookmakers",[]):
+        for mk in bk.get("markets",[]):
+            for o in mk.get("outcomes",[]):
+                nm = o["name"]
+                if nm not in player_odds: player_odds[nm]=[]
+                player_odds[nm].append(o["price"])
+    raw = {n: sum(to_imp(p) for p in prices)/len(prices) for n,prices in player_odds.items()}
+    tot = sum(raw.values())
+    nv = {n: raw[n]/tot for n in raw}
+    return player_odds, nv, round((tot-1)*100,1)
+
+def _build_futures_results(teams, model_probs, player_odds, nv_prob):
+    results = []
+    for t in teams:
+        name = t["name"]
+        mkt_p = nv_prob.get(name)
+        model_p = model_probs.get(name, 0)
+        if not mkt_p or model_p == 0: continue
+        edge_pp = round((model_p - mkt_p)*100, 1)
+        best_ml = max(player_odds.get(name, [0]))
+        best_str = f"+{best_ml}" if best_ml > 0 else str(best_ml)
+        b = best_ml/100 if best_ml > 0 else 100/abs(best_ml)
+        kelly = max(0, (model_p*b-(1-model_p))/b * 0.25)
+        results.append({
+            "name": name, "seed": t.get("seed",0),
+            "isr": round(t["isr"],4),
+            "model_prob": round(model_p,4),
+            "market_prob": round(mkt_p,4),
+            "edge_pp": edge_pp,
+            "best_ml": best_ml, "best_str": best_str,
+            "kelly_pct": round(kelly*100,2),
+            "value": edge_pp >= 3.0,
+        })
+    return sorted(results, key=lambda x: -x["edge_pp"])
+
+def run_futures():
+    import random, shutil
+    print("\n[Futures — Monte Carlo bracket simulations]")
+    random.seed(42)
+
+    def build_isr(ppg, papg, gp, K=10):
+        if ppg+papg == 0: return 0.5
+        exp = (ppg+papg)**0.285
+        pyth = ppg**exp/(ppg**exp+papg**exp)
+        return (gp*pyth + K*0.5)/(gp+K)
+    METHOD = "Pythagenpat ISR → best-of-7 series DP → 50k Monte Carlo bracket simulation. Edge = model_prob − devigged market prob. Kelly = quarter-Kelly (25%)."
+
+    # ── NBA ──────────────────────────────────────────────────────
+    EAST = [
+        {"name":"Detroit Pistons","seed":1,"ppg":117.8,"papg":109.6,"gp":82},
+        {"name":"Boston Celtics","seed":2,"ppg":114.9,"papg":107.2,"gp":82},
+        {"name":"New York Knicks","seed":3,"ppg":116.5,"papg":110.1,"gp":82},
+        {"name":"Cleveland Cavaliers","seed":4,"ppg":119.5,"papg":115.4,"gp":82},
+        {"name":"Toronto Raptors","seed":5,"ppg":114.6,"papg":111.8,"gp":82},
+        {"name":"Atlanta Hawks","seed":6,"ppg":118.5,"papg":116.0,"gp":82},
+        {"name":"Philadelphia 76ers","seed":7,"ppg":115.9,"papg":116.1,"gp":82},
+        {"name":"Orlando Magic","seed":8,"ppg":115.7,"papg":115.1,"gp":82},
+    ]
+    WEST = [
+        {"name":"Oklahoma City Thunder","seed":1,"ppg":119.0,"papg":107.9,"gp":82},
+        {"name":"San Antonio Spurs","seed":2,"ppg":119.8,"papg":111.5,"gp":82},
+        {"name":"Denver Nuggets","seed":3,"ppg":122.1,"papg":116.9,"gp":82},
+        {"name":"Los Angeles Lakers","seed":4,"ppg":116.3,"papg":114.6,"gp":82},
+        {"name":"Houston Rockets","seed":5,"ppg":115.2,"papg":110.0,"gp":82},
+        {"name":"Minnesota Timberwolves","seed":6,"ppg":118.0,"papg":114.6,"gp":82},
+        {"name":"Phoenix Suns","seed":7,"ppg":112.6,"papg":111.1,"gp":82},
+        {"name":"Portland Trail Blazers","seed":8,"ppg":115.5,"papg":115.8,"gp":82},
+    ]
+    for t in EAST+WEST:
+        t["isr"] = build_isr(t["ppg"],t["papg"],t["gp"])
+        t["conf"] = "E" if t in EAST else "W"
+
+    def nba_sim(teams):
+        east = sorted([t for t in teams if t["conf"]=="E"], key=lambda x:x["seed"])
+        west = sorted([t for t in teams if t["conf"]=="W"], key=lambda x:x["seed"])
+        ec = _sim_bracket(east, 0.035)
+        wc = _sim_bracket(west, 0.035)
+        p = _series_prob(ec["isr"], wc["isr"], True, 0.035)
+        return ec if random.random() < p else wc
+
+    wins = {t["name"]:0 for t in EAST+WEST}
+    for _ in range(50000):
+        wins[nba_sim(EAST+WEST)["name"]] += 1
+    nba_model = {n:c/50000 for n,c in wins.items()}
+    nba_odds, nba_nv, nba_over = _futures_market("basketball_nba_championship_winner")
+    nba_results = _build_futures_results(EAST+WEST, nba_model, nba_odds, nba_nv)
+    nba_value = [r for r in nba_results if r["value"]]
+    print(f"  NBA: {len(nba_value)} value picks | overround:{nba_over}%")
+
+    # ── NHL ──────────────────────────────────────────────────────
+    try:
+        nhl_stand = fetch("https://site.api.espn.com/apis/v2/sports/hockey/nhl/standings?season=2026&type=0")
+        nhl_teams = []
+        for conf in nhl_stand.get("children",[]):
+            entries = conf.get("standings",{}).get("entries",[])
+            entries_s = sorted(entries, key=lambda e: next(
+                (int(float(s.get("value",99))) for s in e.get("stats",[]) if s["name"]=="playoffSeed"),99))
+            for e in entries_s[:8]:
+                name = e["team"]["displayName"]
+                stats = {s["name"]:float(s.get("value",0) or 0) for s in e.get("stats",[])}
+                gp = stats.get("gamesPlayed",82)
+                gf = stats.get("pointsFor",0)
+                ga = stats.get("pointsAgainst",0)
+                ps = int(stats.get("playoffSeed",1))
+                if gp == 0: continue
+                nhl_teams.append({"name":name,"seed":ps,"isr":build_isr(gf/gp,ga/gp,gp),
+                                   "gp":int(gp),"wins":int(stats.get("wins",0))})
+        wins = {t["name"]:0 for t in nhl_teams}
+        for _ in range(50000):
+            wins[_sim_bracket(nhl_teams, 0.025)["name"]] += 1
+        nhl_model = {n:c/50000 for n,c in wins.items()}
+        nhl_odds, nhl_nv, nhl_over = _futures_market("icehockey_nhl_championship_winner")
+        nhl_results = _build_futures_results(nhl_teams, nhl_model, nhl_odds, nhl_nv)
+        nhl_value = [r for r in nhl_results if r["value"]]
+        print(f"  NHL: {len(nhl_value)} value picks | overround:{nhl_over}%")
+    except Exception as e:
+        print(f"  NHL futures failed: {e}")
+        nhl_results, nhl_over = [], 0
+
+    # ── MLB ──────────────────────────────────────────────────────
+    try:
+        mlb_stand = fetch("https://site.api.espn.com/apis/v2/sports/baseball/mlb/standings?season=2026&type=0")
+        mlb_teams = []
+        for conf in mlb_stand.get("children",[]):
+            entries = conf.get("standings",{}).get("entries",[])
+            entries_s = sorted(entries, key=lambda e: next(
+                (int(float(s.get("value",99))) for s in e.get("stats",[]) if s["name"]=="playoffSeed"),99))
+            for e in entries_s[:5]:
+                name = e["team"]["displayName"]
+                stats = {s["name"]:float(s.get("value",0) or 0) for s in e.get("stats",[])}
+                gp = stats.get("gamesPlayed",0)
+                rf = stats.get("pointsFor",0)
+                ra = stats.get("pointsAgainst",0)
+                ps = int(stats.get("playoffSeed",1))
+                if gp == 0: continue
+                mlb_teams.append({"name":name,"seed":ps,"isr":build_isr(rf/gp,ra/gp,gp,K=20),
+                                   "gp":int(gp),"wins":int(stats.get("wins",0))})
+        wins = {t["name"]:0 for t in mlb_teams}
+        for _ in range(50000):
+            wins[_sim_bracket(mlb_teams, 0.03)["name"]] += 1
+        mlb_model = {n:c/50000 for n,c in wins.items()}
+        mlb_odds, mlb_nv, mlb_over = _futures_market("baseball_mlb_world_series_winner")
+        mlb_results = _build_futures_results(mlb_teams, mlb_model, mlb_odds, mlb_nv)
+        mlb_value = [r for r in mlb_results if r["value"]]
+        print(f"  MLB: {len(mlb_value)} value picks | overround:{mlb_over}% (early season — high variance)")
+    except Exception as e:
+        print(f"  MLB futures failed: {e}")
+        mlb_results, mlb_over = [], 0
+
+    # ── SAVE ─────────────────────────────────────────────────────
+    now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    futures_out = {
+        "generated_at": now,
+        "data_date": TODAY,
+        "markets": [
+            {"key":"nba","label":"NBA Championship 2026","simulations":50000,
+             "overround":nba_over,"methodology":METHOD,"picks":nba_results},
+            {"key":"nhl","label":"NHL Stanley Cup 2026","simulations":50000,
+             "overround":nhl_over,"methodology":METHOD,"picks":nhl_results},
+            {"key":"mlb","label":"MLB World Series 2026","simulations":50000,
+             "overround":mlb_over,"methodology":METHOD,
+             "note":"Early season — high variance, picks regressed to mean (K=20).",
+             "picks":mlb_results},
+        ]
+    }
+    path = os.path.join(DATA_DIR, "futures.json")
+    with open(path,"w") as f: json.dump(futures_out,f,indent=2)
+    shutil.copy2(path, os.path.join(SITE_DIR,"futures.json"))
+    print(f"  Saved futures.json")
+
 SPORT_RUNNERS = {
     "mlb":          run_mlb,
     "nhl":          run_nhl,
@@ -2020,7 +2240,64 @@ SPORT_RUNNERS = {
     "mlb_props":   run_mlb_props,
     "nba_props":   run_nba_props,
     "golf_masters": run_golf_masters,
+    "futures":       run_futures,
 }
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="iQ Project Master Pipeline")
+    parser.add_argument("--picks-only",  action="store_true")
+    parser.add_argument("--settle-only", action="store_true")
+    parser.add_argument("--no-sync",     action="store_true")
+    parser.add_argument("--sport",       default="all")
+    args = parser.parse_args()
+
+    start = time.time()
+    print(f"iQ Project Pipeline — {TODAY}")
+    print("=" * 68)
+
+    if not args.settle_only:
+        print("\n── GENERATING PICKS ──")
+        if args.sport == "all":
+            for name, fn in SPORT_RUNNERS.items():
+                try:    fn()
+                except Exception as e:
+                    import traceback
+                    print(f"  ✗ {name}: {e}")
+                    traceback.print_exc()
+        else:
+            fn = SPORT_RUNNERS.get(args.sport)
+            if fn:
+                try:    fn()
+                except Exception as e:
+                    import traceback; print(f"  ✗ {args.sport}: {e}"); traceback.print_exc()
+            else:
+                print(f"Unknown sport: {args.sport}")
+                print(f"Available: {', '.join(SPORT_RUNNERS.keys())}")
+
+        print_summary()
+
+    if not args.picks_only:
+        settle_all()
+
+    if not args.no_sync:
+        sync_to_site()
+
+    elapsed = round(time.time() - start, 1)
+    print(f"\n✓ Done in {elapsed}s")
+
+if __name__ == "__main__":
+    main()
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MLB PROPS — Pitcher Strikeouts
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Umpire K-rate adjustment (extra Ks per game vs league average)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FUTURES ENGINE — Monte Carlo bracket simulation + devigged market comparison
+# ═══════════════════════════════════════════════════════════════════════════════
 
 def main():
     import argparse
@@ -2074,3 +2351,7 @@ if __name__ == "__main__":
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Umpire K-rate adjustment (extra Ks per game vs league average)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FUTURES ENGINE — Monte Carlo bracket simulation + devigged market comparison
+# ═══════════════════════════════════════════════════════════════════════════════

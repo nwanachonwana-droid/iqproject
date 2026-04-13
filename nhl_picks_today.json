@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nhl",
-  "generated_at": "2026-04-13T15:45:46.580085Z",
+  "generated_at": "2026-04-13T17:41:39.926016Z",
   "data_date": "2026-04-13",
   "model_version": "v1.0",
   "status": "ACTIVE",
@@ -15,11 +15,11 @@
       "pick_side": "away",
       "model_prob_home": 0.4485,
       "model_prob_away": 0.5515,
-      "market_prob_home": 0.5427,
-      "market_prob_away": 0.4573,
-      "market_line_home": -130,
+      "market_prob_home": 0.583,
+      "market_prob_away": 0.417,
+      "market_line_home": -155,
       "market_source": "pinnacle",
-      "edge_pp": 9.42,
+      "edge_pp": 13.45,
       "confidence_tier": "low",
       "result": null,
       "outcome": null,
@@ -86,6 +86,6 @@
   "summary": {
     "total_picks": 4,
     "high_confidence": 0,
-    "avg_edge_pp": 3.42
+    "avg_edge_pp": 4.42
   }
 }

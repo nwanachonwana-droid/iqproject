@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "sport": "mlb",
+  "market": "MLB World Series 2026",
+  "simulations": 50000,
+  "overround": 23.3,
+  "generated_at": "2026-04-13T17:18:35.996832+00:00",
+  "data_date": "2026-04-13",
+  "methodology": "Pythagenpat ISR \u2192 best-of-7 series DP \u2192 50k Monte Carlo. Edge = model_prob \u2212 devigged market prob. Kelly = quarter-Kelly.",
+  "picks": [
+    {
+      "name": "Minnesota Twins",
+      "seed": 1,
+      "isr": 0.531,
+      "model_prob": 0.1328,
+      "market_prob": 0.0076,
+      "edge_pp": 12.5,
+      "best_ml": 15000,
+      "best_str": "+15000",
+      "kelly_pct": 3.17,
+      "value": true
+    },
+    {
+      "name": "Atlanta Braves",
+      "seed": 2,
+      "isr": 0.6771,
+      "model_prob": 0.1641,
+      "market_prob": 0.0429,
+      "edge_pp": 12.1,
+      "best_ml": 2000,
+      "best_str": "+2000",
+      "kelly_pct": 3.06,
+      "value": true
+    },
+    {
+      "name": "San Diego Padres",
+      "seed": 4,
+      "isr": 0.5584,
+      "model_prob": 0.103,
+      "market_prob": 0.0222,
+      "edge_pp": 8.1,
+      "best_ml": 4000,
+      "best_str": "+4000",
+      "kelly_pct": 2.01,
+      "value": true
+    },
+    {
+      "name": "Athletics",
+      "seed": 5,
+      "isr": 0.4914,
+      "model_prob": 0.073,
+      "market_prob": 0.0086,
+      "edge_pp": 6.4,
+      "best_ml": 10000,
+      "best_str": "+10000",
+      "kelly_pct": 1.59,
+      "value": true
+    },
+    {
+      "name": "Pittsburgh Pirates",
+      "seed": 3,
+      "isr": 0.5352,
+      "model_prob": 0.0792,
+      "market_prob": 0.0212,
+      "edge_pp": 5.8,
+      "best_ml": 4500,
+      "best_str": "+4500",
+      "kelly_pct": 1.47,
+      "value": true
+    },
+    {
+      "name": "Arizona Diamondbacks",
+      "seed": 5,
+      "isr": 0.4748,
+      "model_prob": 0.0665,
+      "market_prob": 0.0129,
+      "edge_pp": 5.4,
+      "best_ml": 6600,
+      "best_str": "+6600",
+      "kelly_pct": 1.31,
+      "value": true
+    },
+    {
+      "name": "Tampa Bay Rays",
+      "seed": 2,
+      "isr": 0.4616,
+      "model_prob": 0.0468,
+      "market_prob": 0.0107,
+      "edge_pp": 3.6,
+      "best_ml": 10000,
+      "best_str": "+10000",
+      "kelly_pct": 0.93,
+      "value": true
+    },
+    {
+      "name": "Texas Rangers",
+      "seed": 3,
+      "isr": 0.5187,
+      "model_prob": 0.0701,
+      "market_prob": 0.0351,
+      "edge_pp": 3.5,
+      "best_ml": 2500,
+      "best_str": "+2500",
+      "kelly_pct": 0.82,
+      "value": true
+    },
+    {
+      "name": "Cleveland Guardians",
+      "seed": 4,
+      "isr": 0.4604,
+      "model_prob": 0.0424,
+      "market_prob": 0.0168,
+      "edge_pp": 2.6,
+      "best_ml": 5500,
+      "best_str": "+5500",
+      "kelly_pct": 0.62,
+      "value": false
+    },
+    {
+      "name": "Los Angeles Dodgers",
+      "seed": 1,
+      "isr": 0.6303,
+      "model_prob": 0.222,
+      "market_prob": 0.2714,
+      "edge_pp": -4.9,
+      "best_ml": 210,
+      "best_str": "+210",
+      "kelly_pct": 0,
+      "value": false
+    }
+  ]
+}
