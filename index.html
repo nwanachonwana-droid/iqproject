@@ -717,8 +717,9 @@ let futuresData = null;
 
 async function loadFutures() {
   try {
-    const r = await fetch('futures.json?' + Date.now());
+    const r = await fetch('./futures.json?v=' + Date.now());
     futuresData = await r.json();
+    console.log('Futures loaded:', JSON.stringify(futuresData.markets[0].picks[0]));
     renderFutures();
   } catch(e) {
     document.getElementById('futures-section').innerHTML = '<p style="color:var(--muted);padding:2rem">Futures data unavailable</p>';
