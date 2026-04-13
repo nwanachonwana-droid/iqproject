@@ -4,8 +4,8 @@
   "tournament": "Masters Tournament 2026",
   "generated_at": "2026-04-11T01:09:05.244649Z",
   "data_date": "2026-04-10",
-  "current_round": 2,
-  "last_updated": "2026-04-11 01:09",
+  "current_round": 4,
+  "last_updated": "2026-04-12 23:32",
   "status": "ACTIVE",
   "picks": [
     {
@@ -21,8 +21,8 @@
       "market_prob": 0.6923,
       "top5_ml": "-1776",
       "top10_ml": "-5614",
-      "outcome": null,
-      "result": null
+      "outcome": "WIN",
+      "result": "WIN"
     },
     {
       "player": "Burns, Sam",
@@ -37,8 +37,8 @@
       "market_prob": 0.0436,
       "top5_ml": "+134",
       "top10_ml": "-198",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Reed, Patrick",
@@ -53,8 +53,8 @@
       "market_prob": 0.0342,
       "top5_ml": "+145",
       "top10_ml": "-193",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Fleetwood, Tommy",
@@ -69,8 +69,8 @@
       "market_prob": 0.0443,
       "top5_ml": "+123",
       "top10_ml": "-226",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Rose, Justin",
@@ -85,8 +85,8 @@
       "market_prob": 0.0312,
       "top5_ml": "+172",
       "top10_ml": "-154",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Lowry, Shane",
@@ -101,8 +101,8 @@
       "market_prob": 0.0165,
       "top5_ml": "+262",
       "top10_ml": "-111",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Young, Cameron",
@@ -117,8 +117,8 @@
       "market_prob": 0.034,
       "top5_ml": "+162",
       "top10_ml": "-164",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Day, Jason",
@@ -133,8 +133,8 @@
       "market_prob": 0.0098,
       "top5_ml": "+409",
       "top10_ml": "+142",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Hatton, Tyrrell",
@@ -149,8 +149,8 @@
       "market_prob": 0.0089,
       "top5_ml": "+435",
       "top10_ml": "+148",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Clark, Wyndham",
@@ -165,8 +165,8 @@
       "market_prob": 0.0073,
       "top5_ml": "+523",
       "top10_ml": "+179",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Reitan, Kristoffer",
@@ -181,8 +181,8 @@
       "market_prob": 0.0056,
       "top5_ml": "+646",
       "top10_ml": "+218",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Li, Haotong",
@@ -197,8 +197,8 @@
       "market_prob": 0.0031,
       "top5_ml": "+967",
       "top10_ml": "+306",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Gotterup, Chris",
@@ -213,8 +213,8 @@
       "market_prob": 0.0072,
       "top5_ml": "+538",
       "top10_ml": "+183",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Koepka, Brooks",
@@ -229,8 +229,8 @@
       "market_prob": 0.0064,
       "top5_ml": "+618",
       "top10_ml": "+206",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Griffin, Ben",
@@ -245,8 +245,8 @@
       "market_prob": 0.0035,
       "top5_ml": "+822",
       "top10_ml": "+256",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Schauffele, Xander",
@@ -261,8 +261,8 @@
       "market_prob": 0.0147,
       "top5_ml": "+310",
       "top10_ml": "+110",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Matsuyama, Hideki",
@@ -277,8 +277,8 @@
       "market_prob": 0.0068,
       "top5_ml": "+554",
       "top10_ml": "+180",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Knapp, Jake",
@@ -293,8 +293,8 @@
       "market_prob": 0.0059,
       "top5_ml": "+675",
       "top10_ml": "+223",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Homa, Max",
@@ -309,8 +309,8 @@
       "market_prob": 0.0008,
       "top5_ml": "+2230",
       "top10_ml": "+609",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     },
     {
       "player": "Fitzpatrick, Matt",
@@ -325,30 +325,35 @@
       "market_prob": 0.0042,
       "top5_ml": "+681",
       "top10_ml": "+217",
-      "outcome": null,
-      "result": null
+      "outcome": "LOSS",
+      "result": "LOSS"
     }
   ],
   "r3_model_picks": [
     {
       "player": "Tommy Fleetwood",
       "rec": "VALUE",
-      "rationale": "T4 -5, +2155 win. Ball-striker profile fits Augusta. Best value in top 5."
+      "rationale": "T4 -5, +2155 win. Ball-striker profile fits Augusta. Best value in top 5.",
+      "outcome": "VALUE \u2014 LOSS"
     },
     {
       "player": "Cameron Young",
       "rec": "VALUE",
-      "rationale": "T7 -4, +2837 win. Shot -5 today. Ball-striking upside for back nine."
+      "rationale": "T7 -4, +2837 win. Shot -5 today. Ball-striking upside for back nine.",
+      "outcome": "VALUE \u2014 LOSS"
     },
     {
       "player": "Rory McIlroy",
       "rec": "HOLD",
-      "rationale": "6-shot lead, -225. Hold existing. Do not chase outrights \u2014 use R3 leader props."
+      "rationale": "6-shot lead, -225. Hold existing. Do not chase outrights \u2014 use R3 leader props.",
+      "outcome": "HOLD \u2014 WON"
     },
     {
       "player": "Sam Burns",
       "rec": "FADE",
-      "rationale": "T2 -6, Augusta fit 0.0. Regression candidate in R3/R4."
+      "rationale": "T2 -6, Augusta fit 0.0. Regression candidate in R3/R4.",
+      "outcome": "FADE \u2014 CORRECT"
     }
-  ]
+  ],
+  "tournament_complete": true
 }
