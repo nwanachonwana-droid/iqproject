@@ -1568,6 +1568,21 @@ def run_nba_props():
 
     print(f"  Player logs: {len(player_logs)} players tracked")
 
+    # Fetch team defensive ratings (PA/G) from ESPN standings
+    def_ratings = {}
+    try:
+        standings = fetch("https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season=2026&type=0")
+        for conf in standings.get("children", []):
+            for e in conf.get("standings", {}).get("entries", []):
+                name = e["team"]["displayName"]
+                for s in e.get("stats", []):
+                    if s["name"] == "avgPointsAgainst":
+                        try: def_ratings[name] = float(s.get("value", 113.0) or 113.0)
+                        except: pass
+        print(f"  Defensive ratings: {len(def_ratings)} teams")
+    except:
+        print("  ! Defensive ratings unavailable")
+
     # Step 3: Get prop lines from Odds API
     PROP_MARKETS = [
         ("player_points",   "pts", "PTS"),
@@ -1625,10 +1640,35 @@ def run_nba_props():
                 if len(logs) < 5:
                     continue  # not enough data
 
-                # Rolling average projection
-                vals = [g[stat_key] for g in logs[-10:]]
-                weights = list(range(1, len(vals)+1))
-                lam = sum(v*w for v,w in zip(vals,weights)) / sum(weights)
+                import math as _math
+                n = min(10, len(logs))
+                recent = logs[-n:]
+                # Exponential recency weights
+                ew = [_math.exp(i/n) for i in range(1, n+1)]
+                tot_w = sum(ew)
+                vals = [g[stat_key] for g in recent]
+                rolling_avg = sum(v*w for v,w in zip(vals,ew)) / tot_w
+                # Recency gate — role change detection
+                if len(logs) >= 5:
+                    last5 = [g[stat_key] for g in logs[-5:]]
+                    last5_avg = sum(last5) / 5
+                    if rolling_avg > 0 and abs(last5_avg - rolling_avg) / rolling_avg > 0.30:
+                        rolling_avg = 0.80 * last5_avg + 0.20 * rolling_avg
+                # Season average anchor (65/35 blend)
+                season_avg = sum(g[stat_key] for g in logs) / len(logs)
+                lam = 0.65 * rolling_avg + 0.35 * season_avg
+                # Opponent defensive rating adjustment
+                # Use average of both teams' defense (player team unknown)
+                def_h = def_ratings.get(ht, 113.0)
+                def_a = def_ratings.get(at, 113.0)
+                opp_def = (def_h + def_a) / 2
+                league_avg_def = 113.0
+                def_scale = 0.15 if stat_key == "pts" else 0.05
+                lam = lam * (1 + (opp_def - league_avg_def) / league_avg_def * def_scale)
+                lam = max(0.1, lam)
+                # Skip if no signal or role-change artifact
+                if abs(lam - line) < 0.5 or abs(lam - line) > 6.0:
+                    continue
 
                 # Devig
                 avg_over  = sum(to_imp(p) for p in data["over"])  / len(data["over"])

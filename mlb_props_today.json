@@ -2,9 +2,29 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-13T05:10:00.414011Z",
+  "generated_at": "2026-04-13T05:26:28.971043Z",
   "data_date": "2026-04-13",
   "props": [
+    {
+      "pick_id": "mlb-props-2026-04-13-669923-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Houston Astros @ Seattle Mariners",
+      "player": "George Kirby",
+      "pick": "George Kirby Under 5.5 Ks",
+      "pick_side": "Under",
+      "line": 5.5,
+      "proj_k": 4.4,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.224,
+      "model_prob": 0.7197,
+      "market_prob": 0.5201,
+      "edge_pp": 19.96,
+      "confidence_tier": "high",
+      "result": null,
+      "outcome": null
+    },
     {
       "pick_id": "mlb-props-2026-04-13-622663-k",
       "sport": "mlb",
@@ -19,8 +39,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.285,
       "model_prob": 0.7235,
-      "market_prob": 0.5518,
-      "edge_pp": 17.17,
+      "market_prob": 0.5491,
+      "edge_pp": 17.44,
       "confidence_tier": "high",
       "result": null,
       "outcome": null
@@ -79,8 +99,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.301,
       "model_prob": 0.5512,
-      "market_prob": 0.4478,
-      "edge_pp": 10.34,
+      "market_prob": 0.4461,
+      "edge_pp": 10.51,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
@@ -99,8 +119,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.306,
       "model_prob": 0.6452,
-      "market_prob": 0.5611,
-      "edge_pp": 8.41,
+      "market_prob": 0.5588,
+      "edge_pp": 8.64,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null
@@ -167,7 +187,7 @@
     }
   ],
   "summary": {
-    "total_props": 8,
-    "high_confidence": 1
+    "total_props": 9,
+    "high_confidence": 2
   }
 }
