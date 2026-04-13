@@ -1358,37 +1358,482 @@ def run_golf_masters():
     for r in picks[:5]:
         p = f"+{r['best_price']}" if r.get('best_price') and r['best_price']>0 else "?"
         print(f"     ★ {r['player']:<26} model={r['model_prob']*100:.1f}% mkt={r['market_prob']*100:.1f}% edge=+{r['edge_pp']:.1f}pp @ {p}")
+def run_nba():
+    """NBA game picks — Pythagenpat ISR from ESPN standings + B2B adjustment."""
+    print("\n[NBA — Pythagenpat ISR + B2B adjustment]")
+
+    # Fetch standings
+    url = "https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season=2026&type=0"
+    try:
+        d = fetch(url)
+    except Exception as e:
+        print(f"  ! Standings fetch failed: {e}")
+        write_picks("nba", [], "ACTIVE")
+        return
+
+    # Build ISR from point differential
+    isr = {}
+    for conf in d.get("children", []):
+        for e in conf.get("standings", {}).get("entries", []):
+            name = e["team"]["displayName"]
+            stats = {}
+            for s in e.get("stats", []):
+                try: stats[s["name"]] = float(s.get("value") or 0)
+                except: stats[s["name"]] = 0
+            ppg  = stats.get("avgPointsFor", 0)
+            papg = stats.get("avgPointsAgainst", 0)
+            if ppg + papg == 0:
+                continue
+            exp  = (ppg + papg) ** 0.285
+            pyth = ppg**exp / (ppg**exp + papg**exp)
+            K    = 10
+            gp   = stats.get("wins", 0) + stats.get("losses", 0)
+            isr[name] = (gp * pyth + K * 0.5) / (gp + K)
+
+    print(f"  Ratings: {len(isr)} teams")
+
+    # Check B2B schedule from ESPN scoreboard
+    def get_b2b():
+        yesterday = (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y%m%d")
+        url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={yesterday}"
+        try:
+            d = fetch(url)
+            played = set()
+            for ev in d.get("events", []):
+                for comp in ev.get("competitions", []):
+                    for team in comp.get("competitors", []):
+                        played.add(team["team"]["displayName"])
+            return played
+        except:
+            return set()
+
+    b2b_teams = get_b2b()
+    if b2b_teams:
+        print(f"  B2B teams (played yesterday): {', '.join(sorted(b2b_teams))}")
+
+    # Get odds
+    url = (f"https://api.the-odds-api.com/v4/sports/basketball_nba/odds"
+           f"?apiKey={ODDS_KEY}&regions=us&markets=h2h&oddsFormat=american")
+    try:
+        games = fetch(url)
+    except Exception as e:
+        print(f"  ! Odds fetch failed: {e}")
+        write_picks("nba", [], "ACTIVE")
+        return
+
+    NBA_NAME_MAP = {
+        "LA Clippers": "Los Angeles Clippers",
+        "GS Warriors": "Golden State Warriors",
+        "OKC Thunder": "Oklahoma City Thunder",
+        "NY Knicks":   "New York Knicks",
+        "NJ Nets":     "Brooklyn Nets",
+    }
+
+    all_picks = []
+    for g in games:
+        ht = NBA_NAME_MAP.get(g["home_team"], g["home_team"])
+        at = NBA_NAME_MAP.get(g["away_team"], g["away_team"])
+        isr_h = isr.get(ht)
+        isr_a = isr.get(at)
+        if isr_h is None or isr_a is None:
+            continue
+
+        # B2B penalty: -0.03 ISR for team on back-to-back
+        isr_h_adj = isr_h * (0.93 if ht in b2b_teams else 1.0)
+        isr_a_adj = isr_a * (0.93 if at in b2b_teams else 1.0)
+
+        # Win probability via ISR ratio + home court
+        home_adv = 0.035
+        raw = isr_h_adj / (isr_h_adj + isr_a_adj)
+        p_home = min(0.92, raw + home_adv * raw * (1 - raw) * 2)
+        p_away = 1 - p_home
+
+        # Market odds
+        home_imps, away_imps = [], []
+        for bk in g.get("bookmakers", []):
+            for mk in bk.get("markets", []):
+                if mk["key"] != "h2h": continue
+                oc = {o["name"]: o["price"] for o in mk["outcomes"]}
+                if g["home_team"] in oc: home_imps.append(to_imp(oc[g["home_team"]]))
+                if g["away_team"] in oc: away_imps.append(to_imp(oc[g["away_team"]]))
+        if not home_imps: continue
+        raw_h = sum(home_imps)/len(home_imps)
+        raw_a = sum(away_imps)/len(away_imps)
+        nv_h, nv_a = devig(raw_h, raw_a)
+
+        ep_h = round((p_home - nv_h) * 100, 2)
+        ep_a = round((p_away - nv_a) * 100, 2)
+
+        flags = []
+        if ht in b2b_teams: flags.append("H-B2B")
+        if at in b2b_teams: flags.append("A-B2B")
+        flag_str = " ".join(flags) if flags else "—"
+
+        for pick_team, pick_side, model_p, nv_p, ep in [
+            (ht, "home", p_home, nv_h, ep_h),
+            (at, "away", p_away, nv_a, ep_a),
+        ]:
+            if ep < 3.0 or model_p < 0.50: continue
+            all_picks.append({
+                "home_team":        ht,
+                "away_team":        at,
+                "pick":             pick_team,
+                "pick_side":        pick_side,
+                "model_prob_home":  round(p_home, 4),
+                "model_prob_away":  round(p_away, 4),
+                "market_prob_home": round(nv_h, 4),
+                "market_prob_away": round(nv_a, 4),
+                "edge_pp":          ep,
+                "confidence_tier":  tier(model_p),
+                "flags":            flag_str,
+                "game_time_utc":    g.get("commence_time"),
+                "outcome":          None,
+                "result":           None,
+            })
+
+    print(f"  -> {len(all_picks)} picks | {len(games)} games")
+    write_picks("nba", all_picks, "ACTIVE")
+
 def run_nba_props():
-    """Call the existing validated nba_props_model.py and copy output to DATA_DIR."""
-    print("\n[NBA Props — backtested model]")
-    import subprocess, shutil
-    model_path = os.path.expanduser("~/Desktop/basketball_iq/nba_props_model.py")
-    if not os.path.exists(model_path):
-        print("  ! nba_props_model.py not found at ~/Desktop/basketball_iq/")
+    """NBA props — rolling average projection vs Odds API lines."""
+    print("\n[NBA Props — rolling projection model]")
+    import math, time, shutil
+
+    def poisson_over(lam, line):
+        k = int(math.floor(line))
+        cum = sum((lam**i * math.exp(-lam)) / math.factorial(i) for i in range(k+1))
+        return 1 - cum
+
+    # Step 1: Get today's NBA game IDs from ESPN scoreboard
+    today_str = datetime.date.today().strftime("%Y%m%d")
+    try:
+        sboard = fetch(f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={today_str}")
+        events = sboard.get("events", [])
+    except Exception as e:
+        print(f"  ! Scoreboard fetch failed: {e}")
         return
-    result = subprocess.run(
-        ["python3", model_path],
-        capture_output=True, text=True,
-        cwd=os.path.expanduser("~/Desktop/basketball_iq"),
-        env={**os.environ, "ODDS_API_KEY": ODDS_KEY}
-    )
-    if result.returncode != 0:
-        print(f"  ! Model error: {result.stderr[-300:]}")
+
+    # Use Odds API events directly — ESPN scoreboard only shows live/completed games
+    key = ODDS_KEY
+    try:
+        odds_events = fetch(f"https://api.the-odds-api.com/v4/sports/basketball_nba/events?apiKey={key}&dateFormat=iso")
+    except Exception as e:
+        print(f"  ! Odds events fetch failed: {e}")
         return
-    src = os.path.expanduser("~/Desktop/basketball_iq/output/nba_props_today.json")
-    if os.path.exists(src):
-        dst = os.path.join(DATA_DIR, "nba_props_today.json")
-        shutil.copy2(src, dst)
-        with open(dst) as f: d = json.load(f)
-        picks = d.get("picks", [])
-        print(f"  -> {len(picks)} props written (from {len(d.get('projections',[]))} projections)")
-    else:
-        print("  ! No output file generated")
+
+    if not odds_events:
+        print("  -> No NBA games in odds today")
+        write_picks("nba_props", [], "ACTIVE")
+        return
+
+    print(f"  Games today: {len(odds_events)}")
+    # Override events with odds events for prop fetching
+    events = odds_events
+
+    # Step 2: For each game, pull last 10 box scores for each player
+    # Use ESPN game summary API
+    player_logs = {}  # player_name -> list of {pts, reb, ast, fg3}
+
+    # Get recent games (last 14 days) from ESPN scoreboard
+    for days_back in range(1, 15):
+        date = (datetime.date.today() - datetime.timedelta(days=days_back)).strftime("%Y%m%d")
+        try:
+            sb = fetch(f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={date}")
+            for ev in sb.get("events", []):
+                gid = ev["id"]
+                try:
+                    box = fetch(f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event={gid}")
+                    for team in box.get("boxscore", {}).get("players", []):
+                        for sg in team.get("statistics", []):
+                            keys = sg.get("keys", [])
+                            for p in sg.get("athletes", []):
+                                if p.get("didNotPlay"): continue
+                                name = p.get("athlete", {}).get("displayName", "")
+                                stats = p.get("stats", [])
+                                if not name or not stats: continue
+                                d = dict(zip(keys, stats))
+                                if name not in player_logs:
+                                    player_logs[name] = []
+                                if len(player_logs[name]) < 10:
+                                    try:
+                                        player_logs[name].append({
+                                            "pts": float(d.get("points", 0) or 0),
+                                            "reb": float(d.get("rebounds", 0) or 0),
+                                            "ast": float(d.get("assists", 0) or 0),
+                                            "fg3": float(d.get("threePointFieldGoalsMade", 0) or 0),
+                                        })
+                                    except: pass
+                except: pass
+        except: pass
+
+    print(f"  Player logs: {len(player_logs)} players tracked")
+
+    # Step 3: Get prop lines from Odds API
+    PROP_MARKETS = [
+        ("player_points",   "pts", "PTS"),
+        ("player_rebounds", "reb", "REB"),
+        ("player_assists",  "ast", "AST"),
+        ("player_threes",   "fg3", "3PM"),
+    ]
+
+    all_props = []
+    for g in events[:6]:
+        odds_game_id = g["id"]
+        ht = g.get("home_team", "")
+        at = g.get("away_team", "")
+        gt = g.get("commence_time", "")
+
+        for market_key, stat_key, stat_label in PROP_MARKETS:
+            url = (f"https://api.the-odds-api.com/v4/sports/basketball_nba/events"
+                   f"/{odds_game_id}/odds?apiKey={ODDS_KEY}&regions=us"
+                   f"&markets={market_key}&oddsFormat=american")
+            try:
+                d = fetch(url)
+            except: continue
+
+            player_lines = {}
+            for bk in d.get("bookmakers", []):
+                for mk in bk.get("markets", []):
+                    if mk["key"] != market_key: continue
+                    for outcome in mk.get("outcomes", []):
+                        player = outcome.get("description") or outcome.get("name","")
+                        name_lower = outcome.get("name","").lower()
+                        point = outcome.get("point")
+                        price = outcome.get("price")
+                        if not player or point is None: continue
+                        if player not in player_lines:
+                            player_lines[player] = {"over":[],"under":[],"line":point}
+                        if "over" in name_lower:
+                            player_lines[player]["over"].append(price)
+                        elif "under" in name_lower:
+                            player_lines[player]["under"].append(price)
+
+            for player, data in player_lines.items():
+                if not data["over"] or not data["under"]: continue
+                line = data["line"]
+
+                # Find player in logs
+                logs = player_logs.get(player, [])
+                # Try partial name match
+                if not logs:
+                    for logged_name, logged_data in player_logs.items():
+                        last = player.split()[-1].lower()
+                        if last in logged_name.lower() and len(last) > 3:
+                            logs = logged_data
+                            break
+
+                if len(logs) < 5:
+                    continue  # not enough data
+
+                # Rolling average projection
+                vals = [g[stat_key] for g in logs[-10:]]
+                weights = list(range(1, len(vals)+1))
+                lam = sum(v*w for v,w in zip(vals,weights)) / sum(weights)
+
+                # Devig
+                avg_over  = sum(to_imp(p) for p in data["over"])  / len(data["over"])
+                avg_under = sum(to_imp(p) for p in data["under"]) / len(data["under"])
+                tot = avg_over + avg_under
+                nv_over  = avg_over  / tot
+                nv_under = avg_under / tot
+
+                model_over  = poisson_over(lam, line)
+                model_under = 1 - model_over
+                ep_over  = round((model_over  - nv_over)  * 100, 2)
+                ep_under = round((model_under - nv_under) * 100, 2)
+
+                for direction, model_p, nv_p, ep in [
+                    ("over",  model_over,  nv_over,  ep_over),
+                    ("under", model_under, nv_under, ep_under),
+                ]:
+                    if ep < 4.0: continue
+                    all_props.append({
+                        "player":          player,
+                        "stat":            stat_label,
+                        "line":            line,
+                        "projection":      round(lam, 1),
+                        "direction":       direction,
+                        "model_prob":      round(model_p, 4),
+                        "market_prob":     round(nv_p, 4),
+                        "edge_pp":         ep,
+                        "games_used":      len(vals),
+                        "confidence_tier": tier(model_p),
+                        "matchup":         f"{at} @ {ht}",
+                        "game_time_utc":   gt,
+                        "outcome":         None,
+                        "result":          None,
+                    })
+
+    # Deduplicate
+    seen = set()
+    deduped = []
+    for p in sorted(all_props, key=lambda x: -x["edge_pp"]):
+        key = (p["player"], p["stat"])
+        if key not in seen:
+            seen.add(key)
+            deduped.append(p)
+
+    print(f"  -> {len(deduped)} props with ≥4.0pp edge")
+
+    out = {
+        "schema_version": "1.0",
+        "sport":          "nba_props",
+        "generated_at":   datetime.datetime.utcnow().isoformat() + "Z",
+        "data_date":      TODAY,
+        "status":         "ACTIVE",
+        "picks":          deduped,
+    }
+    path = os.path.join(DATA_DIR, "nba_props_today.json")
+    with open(path, "w") as f:
+        json.dump(out, f, indent=2)
+    site_path = os.path.join(SITE_DIR, "nba_props_today.json")
+    shutil.copy2(path, site_path)
+
+def run_nba_props_old():
+    """NBA props — Poisson edge model using Odds API player props."""
+    print("\n[NBA Props — Poisson edge model]")
+    import math
+
+    def poisson_over(lam, line):
+        """P(X > line) using Poisson CDF."""
+        k = int(math.floor(line))
+        cum = 0.0
+        for i in range(k + 1):
+            cum += (lam ** i * math.exp(-lam)) / math.factorial(i)
+        # Handle half-lines: P(X > k.5) = 1 - P(X <= k)
+        if line != int(line):
+            return 1 - cum
+        # Whole line: P(X > k) = 1 - P(X <= k)
+        return 1 - cum
+
+    # Get today's NBA games
+    odds_url = (f"https://api.the-odds-api.com/v4/sports/basketball_nba/odds"
+                f"?apiKey={ODDS_KEY}&regions=us&markets=h2h&oddsFormat=american")
+    try:
+        games = fetch(odds_url)
+    except Exception as e:
+        print(f"  ! Games fetch failed: {e}")
+        return
+
+    if not games:
+        print("  -> No NBA games today")
+        write_picks("nba_props", [], "ACTIVE")
+        return
+
+    # Fetch player props for each market
+    PROP_MARKETS = [
+        ("player_points",        "PTS"),
+        ("player_rebounds",      "REB"),
+        ("player_assists",       "AST"),
+        ("player_threes",        "3PM"),
+    ]
+
+    all_props = []
+    for g in games[:6]:  # limit to save API calls
+        game_id = g["id"]
+        ht = g["home_team"]; at = g["away_team"]
+        gt = g.get("commence_time", "")
+
+        for market_key, stat_label in PROP_MARKETS:
+            url = (f"https://api.the-odds-api.com/v4/sports/basketball_nba/events"
+                   f"/{game_id}/odds?apiKey={ODDS_KEY}&regions=us"
+                   f"&markets={market_key}&oddsFormat=american")
+            try:
+                d = fetch(url)
+            except:
+                continue
+
+            # Collect lines per player
+            player_lines = {}
+            for bk in d.get("bookmakers", []):
+                for mk in bk.get("markets", []):
+                    if mk["key"] != market_key: continue
+                    for outcome in mk.get("outcomes", []):
+                        player = outcome.get("description") or outcome.get("name")
+                        name   = outcome.get("name","").lower()
+                        point  = outcome.get("point")
+                        price  = outcome.get("price")
+                        if not player or point is None: continue
+                        if player not in player_lines:
+                            player_lines[player] = {"over":[],"under":[],"line":point}
+                        if "over" in name:
+                            player_lines[player]["over"].append(price)
+                        elif "under" in name:
+                            player_lines[player]["under"].append(price)
+
+            for player, data in player_lines.items():
+                if not data["over"] or not data["under"]: continue
+                line = data["line"]
+
+                # Devig over/under
+                avg_over  = sum(to_imp(p) for p in data["over"])  / len(data["over"])
+                avg_under = sum(to_imp(p) for p in data["under"]) / len(data["under"])
+                tot = avg_over + avg_under
+                nv_over  = avg_over  / tot
+                nv_under = avg_under / tot
+
+                # Model: use Poisson with lambda = line + 0.5 as projection baseline
+                # This is conservative — treats market line as a fair estimate
+                # then looks for mispricing via Poisson distribution shape
+                lam = line + 0.3  # slight over-projection (historical NBA scoring trends)
+                model_over  = poisson_over(lam, line)
+                model_under = 1 - model_over
+
+                ep_over  = round((model_over  - nv_over)  * 100, 2)
+                ep_under = round((model_under - nv_under) * 100, 2)
+
+                # Only take edges >= 4pp (props market is efficient)
+                for direction, model_p, nv_p, ep in [
+                    ("over",  model_over,  nv_over,  ep_over),
+                    ("under", model_under, nv_under, ep_under),
+                ]:
+                    if ep < 4.0: continue
+                    all_props.append({
+                        "player":           player,
+                        "stat":             stat_label,
+                        "line":             line,
+                        "direction":        direction,
+                        "model_prob":       round(model_p, 4),
+                        "market_prob":      round(nv_p, 4),
+                        "edge_pp":          ep,
+                        "confidence_tier":  tier(model_p),
+                        "matchup":          f"{at} @ {ht}",
+                        "game_time_utc":    gt,
+                        "outcome":          None,
+                        "result":           None,
+                    })
+
+    # Sort by edge, deduplicate players
+    seen = set()
+    deduped = []
+    for p in sorted(all_props, key=lambda x: -x["edge_pp"]):
+        key = (p["player"], p["stat"])
+        if key not in seen:
+            seen.add(key)
+            deduped.append(p)
+
+    print(f"  -> {len(deduped)} props with ≥4.0pp edge")
+
+    out = {
+        "schema_version": "1.0",
+        "sport":          "nba_props",
+        "generated_at":   datetime.datetime.utcnow().isoformat() + "Z",
+        "data_date":      TODAY,
+        "status":         "ACTIVE",
+        "picks":          deduped,
+    }
+    path = os.path.join(DATA_DIR, "nba_props_today.json")
+    with open(path, "w") as f:
+        json.dump(out, f, indent=2)
+    site_path = os.path.join(SITE_DIR, "nba_props_today.json")
+    import shutil
+    shutil.copy2(path, site_path)
 
 SPORT_RUNNERS = {
     "mlb":          run_mlb,
     "nhl":          run_nhl,
     "ncaa_baseball": run_ncaa_baseball,
+    "nba":          run_nba,
     "soccer":       run_soccer,
     "nfl":          run_nfl,
     "mlb_props":   run_mlb_props,

@@ -1,66 +1,31 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-04-08T22:43:22.368465Z",
-  "data_date": "2026-04-08",
+  "generated_at": "2026-04-13T05:09:51.518148Z",
+  "data_date": "2026-04-13",
+  "model_version": "v1.0",
   "status": "ACTIVE",
   "picks": [
     {
-      "pick_id": "nba-2026-04-08-401811016",
-      "game_time_utc": "2026-04-09T01:30Z",
-      "home_team": "San Antonio Spurs",
-      "away_team": "Portland Trail Blazers",
-      "pick": "San Antonio Spurs",
+      "home_team": "Los Angeles Lakers",
+      "away_team": "Houston Rockets",
+      "pick": "Los Angeles Lakers",
       "pick_side": "home",
-      "model_prob_home": 0.7444,
-      "model_prob_away": 0.2556,
-      "market_prob_home": 0.5934,
-      "market_prob_away": 0.4066,
-      "market_line_home": -162,
-      "market_source": "pinnacle",
-      "edge_pp": 15.1,
-      "confidence_tier": "high",
-      "market_gap_flag": true,
-      "market_note": "Market gap >12pp \u2014 possible lineup/rest info not in model",
-      "home_injuries": [],
-      "away_injuries": [],
-      "model_inputs": {
-        "home_isr": 6.68,
-        "away_isr": -0.44
-      },
-      "result": null,
-      "outcome": null
-    },
-    {
-      "pick_id": "nba-2026-04-08-401811018",
-      "game_time_utc": "2026-04-09T02:00Z",
-      "home_team": "LA Clippers",
-      "away_team": "Oklahoma City Thunder",
-      "pick": "Oklahoma City Thunder",
-      "pick_side": "away",
-      "model_prob_home": 0.3439,
-      "model_prob_away": 0.6561,
-      "market_prob_home": 0.404,
-      "market_prob_away": 0.596,
-      "market_line_home": null,
-      "market_source": "pinnacle",
-      "edge_pp": 6.01,
-      "confidence_tier": "high",
-      "market_gap_flag": false,
-      "market_note": "",
-      "home_injuries": [],
-      "away_injuries": [],
-      "model_inputs": {
-        "home_isr": 1.26,
-        "away_isr": 9.58
-      },
-      "result": null,
-      "outcome": null
+      "model_prob_home": 0.5024,
+      "model_prob_away": 0.4976,
+      "market_prob_home": 0.3571,
+      "market_prob_away": 0.6429,
+      "edge_pp": 14.53,
+      "confidence_tier": "low",
+      "flags": "H-B2B A-B2B",
+      "game_time_utc": "2026-04-19T00:40:00Z",
+      "outcome": null,
+      "result": null
     }
   ],
   "summary": {
-    "total_picks": 2,
-    "high_confidence": 2,
-    "avg_edge_pp": 10.55
+    "total_picks": 1,
+    "high_confidence": 0,
+    "avg_edge_pp": 14.53
   }
 }
