@@ -209,7 +209,6 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   </div>
   <div class="tw">
     <div id="masters-section"></div>
-<div id="panel-futures" style="display:none;padding:1rem 1.5rem"><div id="futures-section"></div></div>
     <table>
       <thead><tr>
         <th class="c-sport">Sport</th><th class="c-game">Game</th><th class="c-pick">Pick</th>
@@ -245,6 +244,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
     <div class="sgrid" id="sg-all"></div>
   </div>
 
+<div id="panel-futures" style="display:none;padding:1rem 1.5rem"><div id="futures-section"></div></div>
   <!-- Per-sport breakdown table -->
   <div class="psec">
     <div class="ptitle">Record by sport</div>
@@ -353,7 +353,6 @@ function showTab(t){
   } else {
     perf.classList.remove('active');
   }
-  const fp=document.getElementById('panel-futures');
   if(fp) fp.style.display=t==='futures'?'block':'none';
 }
 function setF(f,btn){
