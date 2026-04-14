@@ -647,9 +647,15 @@ def settle_all():
     }
 
     for sport_id, espn_path in espn_paths.items():
+        archive_path = os.path.join(DATA_DIR, f"{sport_id}_picks_{yesterday}.json")
         picks_path = os.path.join(DATA_DIR, f"{sport_id}_picks_today.json")
-        if not os.path.exists(picks_path): continue
-        with open(picks_path) as f:
+        if os.path.exists(archive_path):
+            use_path = archive_path
+        elif os.path.exists(picks_path):
+            use_path = picks_path
+        else:
+            continue
+        with open(use_path) as f:
             picks_data = json.load(f)
 
         pending = [p for p in picks_data.get("picks", [])
