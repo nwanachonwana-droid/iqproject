@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "mma",
-  "generated_at": "2026-04-14T00:57:28.429438Z",
+  "generated_at": "2026-04-14T00:58:22.285158Z",
   "data_date": "2026-04-14",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
@@ -13,9 +13,9 @@
       "pick_side": "home",
       "model_prob_home": 0.5459,
       "model_prob_away": 0.4541,
-      "market_prob_home": 0.4235,
-      "market_prob_away": 0.5765,
-      "edge_pp": 12.24,
+      "market_prob_home": 0.4261,
+      "market_prob_away": 0.5739,
+      "edge_pp": 11.98,
       "confidence_tier": "low",
       "record": "12-4",
       "game_time_utc": "2026-04-18T22:00:00Z",
@@ -29,9 +29,9 @@
       "pick_side": "home",
       "model_prob_home": 0.5957,
       "model_prob_away": 0.4043,
-      "market_prob_home": 0.4551,
-      "market_prob_away": 0.5449,
-      "edge_pp": 14.06,
+      "market_prob_home": 0.4555,
+      "market_prob_away": 0.5445,
+      "edge_pp": 14.02,
       "confidence_tier": "low",
       "record": "10-2",
       "game_time_utc": "2026-04-18T23:30:00Z",
@@ -42,6 +42,6 @@
   "summary": {
     "total_picks": 2,
     "high_confidence": 0,
-    "avg_edge_pp": 13.15
+    "avg_edge_pp": 13.0
   }
 }
