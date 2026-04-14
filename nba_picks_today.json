@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-04-14T00:51:15.934465Z",
+  "generated_at": "2026-04-14T00:57:28.638254Z",
   "data_date": "2026-04-14",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
@@ -13,9 +13,9 @@
       "pick_side": "home",
       "model_prob_home": 0.5024,
       "model_prob_away": 0.4976,
-      "market_prob_home": 0.3348,
-      "market_prob_away": 0.6652,
-      "edge_pp": 16.76,
+      "market_prob_home": 0.3346,
+      "market_prob_away": 0.6654,
+      "edge_pp": 16.78,
       "confidence_tier": "low",
       "flags": "\u2014",
       "game_time_utc": "2026-04-19T00:40:00Z",
@@ -26,6 +26,6 @@
   "summary": {
     "total_picks": 1,
     "high_confidence": 0,
-    "avg_edge_pp": 16.76
+    "avg_edge_pp": 16.78
   }
 }
