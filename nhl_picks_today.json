@@ -1,30 +1,11 @@
 {
   "schema_version": "1.0",
   "sport": "nhl",
-  "generated_at": "2026-04-14T13:46:37.569341Z",
+  "generated_at": "2026-04-14T19:52:04.650806Z",
   "data_date": "2026-04-14",
   "model_version": "v1.0",
   "status": "ACTIVE",
   "picks": [
-    {
-      "pick_id": "nhl-2026-04-14-2025021292",
-      "game_time_utc": "2026-04-14T23:00:00Z",
-      "home_team": "Boston Bruins",
-      "away_team": "New Jersey Devils",
-      "pick": "Boston Bruins",
-      "pick_side": "home",
-      "model_prob_home": 0.5941,
-      "model_prob_away": 0.4059,
-      "market_prob_home": 0.5514,
-      "market_prob_away": 0.4486,
-      "market_line_home": -135,
-      "market_source": "pinnacle",
-      "edge_pp": 4.27,
-      "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
-    },
     {
       "pick_id": "nhl-2026-04-14-2025021293",
       "game_time_utc": "2026-04-14T23:00:00Z",
@@ -34,11 +15,11 @@
       "pick_side": "away",
       "model_prob_home": 0.4317,
       "model_prob_away": 0.5683,
-      "market_prob_home": 0.5325,
-      "market_prob_away": 0.4675,
-      "market_line_home": -125,
+      "market_prob_home": 0.5934,
+      "market_prob_away": 0.4066,
+      "market_line_home": -162,
       "market_source": "pinnacle",
-      "edge_pp": 10.08,
+      "edge_pp": 16.17,
       "confidence_tier": "low",
       "result": null,
       "outcome": null,
@@ -72,11 +53,11 @@
       "pick_side": "away",
       "model_prob_home": 0.3026,
       "model_prob_away": 0.6974,
-      "market_prob_home": 0.417,
-      "market_prob_away": 0.583,
-      "market_line_home": 130,
+      "market_prob_home": 0.4365,
+      "market_prob_away": 0.5635,
+      "market_line_home": 120,
       "market_source": "pinnacle",
-      "edge_pp": 11.44,
+      "edge_pp": 13.39,
       "confidence_tier": "high",
       "result": null,
       "outcome": null,
@@ -103,8 +84,8 @@
     }
   ],
   "summary": {
-    "total_picks": 5,
+    "total_picks": 4,
     "high_confidence": 1,
-    "avg_edge_pp": 8.09
+    "avg_edge_pp": 11.06
   }
 }
