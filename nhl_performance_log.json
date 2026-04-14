@@ -1,0 +1,65 @@
+{
+  "sport": "nhl",
+  "last_updated": "2026-04-14",
+  "overall": {
+    "total": 4,
+    "wins": 2,
+    "losses": 2,
+    "hit_rate": 50.0,
+    "roi_flat": -4.55
+  },
+  "by_confidence": {
+    "low": {
+      "wins": 1,
+      "total": 3,
+      "hit_rate": 33.33
+    },
+    "medium": {
+      "wins": 1,
+      "total": 1,
+      "hit_rate": 100.0
+    }
+  },
+  "recent": [
+    {
+      "pick": "Vegas Golden Knights",
+      "outcome": "WIN",
+      "result": 1.0,
+      "confidence_tier": "low",
+      "edge_pp": -5.5,
+      "game_time_utc": "2026-04-14T02:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-14T14:20:48.823016+00:00"
+    },
+    {
+      "pick": "Colorado Avalanche",
+      "outcome": "WIN",
+      "result": 1.0,
+      "confidence_tier": "medium",
+      "edge_pp": 8.9,
+      "game_time_utc": "2026-04-14T01:30:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-14T14:20:48.823016+00:00"
+    },
+    {
+      "pick": "Minnesota Wild",
+      "outcome": "LOSS",
+      "result": 0.0,
+      "confidence_tier": "low",
+      "edge_pp": 14.7,
+      "game_time_utc": "2026-04-14T00:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-14T14:20:48.823016+00:00"
+    },
+    {
+      "pick": "Carolina Hurricanes",
+      "outcome": "LOSS",
+      "result": 0.0,
+      "confidence_tier": "low",
+      "edge_pp": 9.4,
+      "game_time_utc": "2026-04-13T23:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-14T14:20:48.823006+00:00"
+    }
+  ]
+}

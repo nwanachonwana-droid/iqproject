@@ -124,6 +124,16 @@ def write_picks(sport_id, picks, status="PROVEN", model_version="v1.0"):
         }
     }
     path = os.path.join(DATA_DIR, f"{sport_id}_picks_today.json")
+    # Archive previous day before overwriting
+    if os.path.exists(path):
+        try:
+            with open(path) as _f: _old = json.load(_f)
+            _old_date = _old.get("data_date","")
+            if _old_date and _old_date != TODAY:
+                _archive = os.path.join(DATA_DIR, f"{sport_id}_picks_{_old_date}.json")
+                if not os.path.exists(_archive):
+                    with open(_archive,"w") as _f: json.dump(_old,_f,indent=2)
+        except: pass
     with open(path, "w") as f:
         json.dump(out, f, indent=2)
     print(f"  -> {len(picks)} picks  [{status}]  {sport_id}_picks_today.json")
@@ -695,7 +705,7 @@ def settle_all():
 
         if settled:
             perf["last_updated"] = TODAY
-            with open(picks_path, "w") as f: json.dump(picks_data, f, indent=2)
+            with open(use_path, "w") as f: json.dump(picks_data, f, indent=2)
             with open(perf_path, "w") as f: json.dump(perf, f, indent=2)
             print(f"  ✓ {sport_id}: settled {settled} picks")
 
