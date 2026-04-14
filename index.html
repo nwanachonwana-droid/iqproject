@@ -353,6 +353,7 @@ function showTab(t){
   } else {
     perf.classList.remove('active');
   }
+  const fp=document.getElementById('panel-futures');
   if(fp) fp.style.display=t==='futures'?'block':'none';
 }
 function setF(f,btn){
