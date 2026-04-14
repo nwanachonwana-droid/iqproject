@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Splash Solver — iQ Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f12;--bg2:#13161a;--bg3:#1a1e24;--border:rgba(255,255,255,0.07);--fg:#e8eaed;--ink:#c9cdd4;--muted:#6b7280;--accent:#f97316;--accent2:#fb923c;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--font-head:'Syne',sans-serif;--font-body:'DM Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:13px;min-height:100vh}
+.mast{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:48px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100}
+.logo{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--fg);text-decoration:none;letter-spacing:-0.02em}.logo b{color:var(--accent)}
+.back{font-size:.72rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase}.back:hover{color:var(--accent)}
+.page{max-width:940px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.hero{margin-bottom:2rem}.hero h1{font-family:var(--font-head);font-size:1.8rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:.4rem}.hero h1 span{color:var(--accent)}.hero p{color:var(--muted);font-size:.78rem;line-height:1.6;max-width:560px}
+.gtabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.gtab{padding:.45rem 1rem;border:1px solid var(--border);background:var(--bg2);color:var(--muted);font-family:var(--font-body);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .15s}.gtab:hover{color:var(--fg)}.gtab.on{background:var(--accent);color:#000;border-color:var(--accent);font-weight:600}
+.panel{display:none;animation:fi .2s ease}.panel.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.sec{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.stitle{font-family:var(--font-head);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}.stitle::after{content:'';flex:1;height:1px;background:var(--border)}.stitle .bdg{background:var(--accent);color:#000;padding:.1rem .4rem;border-radius:2px;font-size:.6rem;font-weight:700}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}
+.f{display:flex;flex-direction:column;gap:.3rem}.f label{font-size:.67rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.f input,.f select{background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--font-body);font-size:.82rem;padding:.45rem .6rem;border-radius:2px;outline:none;width:100%;transition:border-color .15s}.f input:focus,.f select:focus{border-color:var(--accent)}.f select option{background:var(--bg3)}
+.banner{background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.25);border-radius:4px;padding:.75rem 1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.btext{font-size:.75rem;color:var(--ink);line-height:1.5}.btext strong{color:var(--accent)}.bdate{font-size:.65rem;color:var(--muted);margin-top:.2rem}
+.lbtn{background:var(--accent);color:#000;border:none;font-family:var(--font-body);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .9rem;border-radius:2px;cursor:pointer;white-space:nowrap;transition:background .15s}.lbtn:hover{background:var(--accent2)}.lbtn:disabled{background:var(--bg3);color:var(--muted);cursor:default}
+.tbl{width:100%;border-collapse:collapse;margin-top:.5rem}
+.tbl thead th{font-size:.65rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:.4rem .5rem;border-bottom:1px solid var(--border);text-align:left;font-weight:500}.tbl thead th.r{text-align:right}
+.tbl tbody tr{border-bottom:1px solid rgba(255,255,255,.03)}.tbl tbody tr:hover{background:rgba(255,255,255,.02)}
+.tbl td{padding:.4rem .5rem;vertical-align:middle}.tbl td.r{text-align:right}
+.tbl input{background:transparent;border:none;color:var(--fg);font-family:var(--font-body);font-size:.8rem;outline:none;width:100%}
+.tbl input[type=number]{color:var(--accent);text-align:right;width:58px}
+.sbdg{font-size:.62rem;padding:.1rem .35rem;border-radius:2px;font-weight:600;letter-spacing:.04em}
+.sm{background:rgba(249,115,22,.12);color:var(--accent)}.sx{background:rgba(107,114,128,.15);color:var(--muted)}
+.dbtn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;padding:0 .25rem}.dbtn:hover{color:var(--red)}
+.abtn{background:var(--bg3);border:1px dashed var(--border);color:var(--muted);font-family:var(--font-body);font-size:.72rem;padding:.45rem;cursor:pointer;border-radius:2px;width:100%;text-align:center;letter-spacing:.06em;transition:all .15s;margin-top:.5rem}.abtn:hover{color:var(--accent);border-color:var(--accent)}
+.sbtn{width:100%;padding:.85rem;background:var(--accent);color:#000;font-family:var(--font-head);font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;margin-top:.75rem;transition:background .15s,transform .1s}.sbtn:hover{background:var(--accent2)}.sbtn:active{transform:scale(.99)}
+.results{margin-top:1.5rem;display:none}.results.on{display:block;animation:fi .3s ease}
+.rh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem}
+.rh h2{font-family:var(--font-head);font-size:1.1rem;font-weight:700;letter-spacing:-0.02em}.rh .rm{font-size:.7rem;color:var(--muted)}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:.9rem 1.25rem;margin-bottom:.4rem;display:flex;align-items:center;gap:1rem;transition:border-color .15s}.card:hover{border-color:rgba(255,255,255,.12)}
+.card.tp{border-color:var(--accent)}.card.vp{border-color:var(--green)}.card.ap{border-color:var(--red)}
+.cr{font-family:var(--font-head);font-size:1.3rem;font-weight:800;color:var(--muted);min-width:2.5rem;text-align:center}.card.tp .cr{color:var(--accent)}.card.vp .cr{color:var(--green)}
+.ci{flex:1;min-width:0}.cn{font-family:var(--font-head);font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.2rem}.cs{font-size:.68rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap}
+.eb{height:2px;background:var(--bg3);border-radius:2px;margin-top:.4rem;overflow:hidden;width:100%;max-width:200px}.ef{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .8s cubic-bezier(.23,1,.32,1)}
+.cm{display:flex;gap:1.25rem;align-items:center;flex-shrink:0}.mt{text-align:right}.mv{font-family:var(--font-head);font-size:1rem;font-weight:700}.mv.g{color:var(--green)}.mv.o{color:var(--accent)}.mv.r{color:var(--red)}.ml{font-size:.6rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.vt{padding:.25rem .55rem;border-radius:2px;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.vs{background:rgba(249,115,22,.15);color:var(--accent)}.vv{background:rgba(34,197,94,.12);color:var(--green)}.vn{background:rgba(107,114,128,.12);color:var(--muted)}.va{background:rgba(239,68,68,.12);color:var(--red)}
+.sbox{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:2px;padding:1rem 1.25rem;margin-top:1.25rem}
+.sbox h3{font-family:var(--font-head);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.sbox p{color:var(--ink);font-size:.78rem;line-height:1.7;margin-bottom:.5rem}.sbox p:last-child{margin-bottom:0}.sbox strong{color:var(--fg)}
+.ll{text-align:center;padding:1.5rem;color:var(--muted);font-size:.75rem;display:none}.ll.on{display:block}
+.dto{display:inline-block;padding:.15rem .4rem;border-radius:2px;font-size:.62rem;font-weight:600}.dov{background:rgba(34,197,94,.15);color:var(--green)}.dun{background:rgba(59,130,246,.15);color:var(--blue)}
+footer{border-top:1px solid var(--border);padding:1.25rem;text-align:center;color:var(--muted);font-size:.67rem;margin-top:2rem}footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="mast">
+  <a href="/" class="logo">the <b>iQ</b> project</a>
+  <a href="/" class="back">← Predictions</a>
+</header>
+<div class="page">
+<div class="hero"><h1>Splash <span>Solver</span></h1><p>Pool equity optimizer for SplashSports. Auto-loads today’s iQ picks — add pool structure and hit solve.</p></div>
+<div class="gtabs">
+  <button class="gtab on" onclick="sg('survivor',this)">Survivor</button>
+  <button class="gtab" onclick="sg('pickem',this)">Pick’em</button>
+  <button class="gtab" onclick="sg('one_done',this)">One &amp; Done</button>
+  <button class="gtab" onclick="sg('confidence',this)">Confidence</button>
+</div>
+
+<div class="panel on" id="p-survivor">
+  <div class="banner"><div class="btext"><strong>iQ Auto-Load</strong> — model win probs + market-implied ownership proxy.<div class="bdate" id="sd"></div></div><button class="lbtn" id="slb" onclick="loadS()">Load Today’s Picks</button></div>
+  <div class="sec"><div class="stitle">Pool Structure</div><div class="fg">
+    <div class="f"><label>Total Entries</label><input type="number" id="se" value="100" min="2"></div>
+    <div class="f"><label>Still Alive</label><input type="number" id="sa" value="100" min="1"></div>
+    <div class="f"><label>Sport</label><select id="ss" onchange="loadS()"><option value="mlb">MLB</option><option value="nhl">NHL</option><option value="nba">NBA</option><option value="soccer">Soccer</option></select></div>
+    <div class="f"><label>Week / Round</label><input type="number" id="sw" value="1" min="1"></div>
+    <div class="f"><label>Prize</label><select id="sp"><option value="wta">Winner Take All</option><option value="top3">Top 3</option><option value="top10">Top 10%</option></select></div>
+    <div class="f"><label>Strikes</label><select id="sk"><option value="0">None</option><option value="1">1 Strike</option><option value="2">2 Strikes</option></select></div>
+  </div></div>
+  <div class="sec"><div class="stitle">Available Teams <span class="bdg" id="sb">MANUAL</span></div>
+    <table class="tbl"><thead><tr><th>Team</th><th class="r">Win%</th><th class="r">Own%</th><th class="r">Edge</th><th>Source</th><th></th></tr></thead><tbody id="stb"></tbody></table>
+    <button class="abtn" onclick="asr()">+ Add Team</button>
+  </div>
+  <div class="sec"><div class="stitle">Already Used This Season</div><div class="f"><input type="text" id="su" placeholder="Atlanta Braves, Houston Astros — comma separated"></div></div>
+  <button class="sbtn" onclick="solveS()">▶ Generate Survivor Strategy</button>
+</div>
+
+<div class="panel" id="p-pickem">
+  <div class="banner"><div class="btext"><strong>iQ Auto-Load</strong> — NBA/MLB props with model vs. market edge pre-calculated.<div class="bdate" id="pd"></div></div><button class="lbtn" id="plb" onclick="loadP()">Load Today’s Props</button></div>
+  <div class="sec"><div class="stitle">Contest Settings</div><div class="fg">
+    <div class="f"><label>Picks Required</label><select id="pn"><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option></select></div>
+    <div class="f"><label>Format</label><select id="pf"><option value="all">All correct</option><option value="insurance">Insurance (miss 1)</option><option value="partial">Partial payouts</option></select></div>
+    <div class="f"><label>Contest Type</label><select id="pt"><option value="public">Public (large)</option><option value="friends">Friends group</option></select></div>
+    <div class="f"><label>Sport</label><select id="psp" onchange="loadP()"><option value="nba_props">NBA Props</option><option value="mlb_props">MLB Props</option></select></div>
+  </div></div>
+  <div class="sec"><div class="stitle">Props <span class="bdg" id="pb">MANUAL</span></div>
+    <table class="tbl"><thead><tr><th style="width:35%">Player — Stat</th><th>Line</th><th>Dir</th><th class="r">Model%</th><th class="r">Mkt%</th><th class="r">Edge</th><th></th></tr></thead><tbody id="ptb"></tbody></table>
+    <button class="abtn" onclick="apr()">+ Add Prop</button>
+  </div>
+  <button class="sbtn" onclick="solveP()">▶ Build Optimal Lineup</button>
+</div>
+
+<div class="panel" id="p-one_done">
+  <div class="banner"><div class="btext"><strong>iQ Auto-Load</strong> — picks with future value warnings.</div><button class="lbtn" id="olb" onclick="loadO()">Load Picks</button></div>
+  <div class="sec"><div class="stitle">Settings</div><div class="fg">
+    <div class="f"><label>Sport</label><select id="os" onchange="loadO()"><option value="mlb">MLB</option><option value="nhl">NHL</option><option value="nba">NBA</option></select></div>
+    <div class="f"><label>Total Rounds</label><input type="number" id="or" value="162" min="1"></div>
+    <div class="f"><label>Current Round</label><input type="number" id="oc" value="1" min="1"></div>
+  </div></div>
+  <div class="sec"><div class="stitle">Options <span class="bdg" id="ob">MANUAL</span></div>
+    <table class="tbl"><thead><tr><th>Team / Player</th><th class="r">Win%</th><th class="r">Own%</th><th class="r">Edge</th><th>Source</th><th></th></tr></thead><tbody id="otb"></tbody></table>
+    <button class="abtn" onclick="aor()">+ Add</button>
+  </div>
+  <div class="sec"><div class="stitle">Already Used</div><div class="f"><input type="text" id="ou" placeholder="Comma-separated"></div></div>
+  <button class="sbtn" onclick="solveO()">▶ One &amp; Done Strategy</button>
+</div>
+
+<div class="panel" id="p-confidence">
+  <div class="banner"><div class="btext"><strong>iQ Auto-Load</strong> — game picks for confidence ranking.</div><button class="lbtn" id="clb" onclick="loadC()">Load Games</button></div>
+  <div class="sec"><div class="stitle">Settings</div><div class="fg">
+    <div class="f"><label>Sport</label><select id="cs" onchange="loadC()"><option value="mlb">MLB</option><option value="nhl">NHL</option><option value="nba">NBA</option><option value="soccer">Soccer</option></select></div>
+    <div class="f"><label>Pool Size</label><select id="cz"><option value="small">Small (&lt;20)</option><option value="medium">Medium (20–100)</option><option value="large">Large (100+)</option></select></div>
+  </div></div>
+  <div class="sec"><div class="stitle">Games <span class="bdg" id="cb">MANUAL</span></div>
+    <table class="tbl"><thead><tr><th>Matchup / Pick</th><th class="r">Win%</th><th class="r">Own%</th><th class="r">Edge</th><th>Source</th><th></th></tr></thead><tbody id="ctb"></tbody></table>
+    <button class="abtn" onclick="acr()">+ Add Game</button>
+  </div>
+  <button class="sbtn" onclick="solveC()">▶ Rank by Confidence</button>
+</div>
+
+<div class="ll" id="ll">Running solver…</div>
+<div class="results" id="res"></div>
+</div>
+<footer>iQ Project · Splash Solver · Equity = Win% ÷ Own% · <a href="/">Back to Predictions</a></footer>
+<script>
+function sg(t,b){document.querySelectorAll('.gtab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById('p-'+t).classList.add('on');document.getElementById('res').classList.remove('on')}
+function mto(m){if(m>=.70)return Math.min(.80,m*1.05);if(m>=.60)return m*.85;if(m>=.50)return m*.70;return Math.max(.05,m*.50)}
+function eq(w,o){return(!o||!w)?0:w/o}
+async function fp(s){try{const r=await fetch(s+'_picks_today.json?t='+Date.now());if(!r.ok)throw 0;return await r.json()}catch{return null}}
+async function fpr(s){try{const f=s==='nba_props'?'nba_props_today.json':'mlb_props_today.json';const r=await fetch(f+'?t='+Date.now());if(!r.ok)throw 0;return await r.json()}catch{return null}}
+function sl(){document.getElementById('ll').classList.add('on');document.getElementById('res').classList.remove('on')}
+function hl(){document.getElementById('ll').classList.remove('on')}
+function rt(id){const rows=document.querySelectorAll('#'+id+' tr');const t=[];rows.forEach(r=>{const i=r.querySelectorAll('input');if(i.length<3)return;const n=i[0].value.trim(),w=parseFloat(i[1].value)/100,o=parseFloat(i[2].value)/100;if(n&&!isNaN(w)&&!isNaN(o))t.push({name:n,win:w,own:o})});return t}
+
+async function loadS(){const s=document.getElementById('ss').value;const b=document.getElementById('slb');b.textContent='Loading…';b.disabled=true;const d=await fp(s);document.getElementById('stb').innerHTML='';if(!d||!d.picks?.length){b.textContent='No picks';b.disabled=false;asr();asr();asr();return}document.getElementById('sd').textContent='Data: '+d.data_date+' · '+d.picks.length+' picks';document.getElementById('sb').textContent='iQ AUTO';d.picks.forEach(p=>{const w=p.pick_side==='home'?p.model_prob_home:p.model_prob_away;const m=p.pick_side==='home'?p.market_prob_home:p.market_prob_away;asr(p.pick,w,mto(m||.5),p.edge_pp||0,'iQ')});b.textContent='✓ '+d.picks.length+' loaded';b.disabled=false}
+function asr(n='',w='',o='',e='',src='Manual'){const tb=document.getElementById('stb');const tr=document.createElement('tr');const sc=src==='Manual'?'sx':'sm';const wp=w?(w*100).toFixed(1):'',op=o?(o*100).toFixed(1):'',ep=e?parseFloat(e).toFixed(1):'';tr.innerHTML=`<td><input type="text" value="${n}" placeholder="Team name"></td><td class="r"><input type="number" value="${wp}" placeholder="65" style="width:55px;text-align:right"></td><td class="r"><input type="number" value="${op}" placeholder="40" style="width:55px;text-align:right"></td><td class="r" style="color:${e>0?'var(--green)':'var(--muted)'};font-size:.75rem">${ep?'+'+ep+'pp':'—'}</td><td><span class="sbdg ${sc}">${src}</span></td><td><button class="dbtn" onclick="this.closest('tr').remove()">×</button></td>`;tb.appendChild(tr)}
+
+async function loadP(){const s=document.getElementById('psp').value;const b=document.getElementById('plb');b.textContent='Loading…';b.disabled=true;const d=await fpr(s);document.getElementById('ptb').innerHTML='';if(!d||!d.picks?.length){b.textContent='No props';b.disabled=false;apr();apr();apr();apr();return}const picks=[...d.picks].sort((a,z)=>Math.abs(z.edge_pp||0)-Math.abs(a.edge_pp||0)).slice(0,20);document.getElementById('pd').textContent='Data: '+d.data_date+' · top '+picks.length+' by edge';document.getElementById('pb').textContent='iQ AUTO';picks.forEach(p=>apr((p.player||'')+' — '+(p.stat||''),p.line,p.direction==='over'?'over':'under',p.model_prob,p.market_prob,p.edge_pp));b.textContent='✓ '+picks.length+' loaded';b.disabled=false}
+function apr(n='',l='',d='over',mp='',mkp='',ep=''){const tb=document.getElementById('ptb');const tr=document.createElement('tr');const m=mp?(mp*100).toFixed(1):'',mk=mkp?(mkp*100).toFixed(1):'',e=ep?parseFloat(ep).toFixed(1):'';tr.innerHTML=`<td><input type="text" value="${n}" placeholder="Player — Stat" style="width:100%"></td><td><input type="number" value="${l}" placeholder="27.5" style="width:65px;color:var(--fg)"></td><td><select style="background:transparent;border:none;color:var(--accent);font-family:var(--font-body);font-size:.79rem;outline:none"><option value="over" ${d==='over'?'selected':''}>OVER</option><option value="under" ${d==='under'?'selected':''}>UNDER</option></select></td><td class="r"><input type="number" value="${m}" placeholder="65" style="width:50px;text-align:right;color:var(--accent)"></td><td class="r"><input type="number" value="${mk}" placeholder="50" style="width:50px;text-align:right"></td><td class="r" style="color:${e>0?'var(--green)':'var(--muted)'};font-size:.75rem">${e?'+'+e+'pp':'—'}</td><td><button class="dbtn" onclick="this.closest('tr').remove()">×</button></td>`;tb.appendChild(tr)}
+
+async function loadO(){const s=document.getElementById('os').value;const b=document.getElementById('olb');b.textContent='Loading…';b.disabled=true;const d=await fp(s);document.getElementById('otb').innerHTML='';if(!d||!d.picks?.length){b.textContent='No picks';b.disabled=false;aor();aor();aor();return}document.getElementById('ob').textContent='iQ AUTO';d.picks.forEach(p=>{const w=p.pick_side==='home'?p.model_prob_home:p.model_prob_away;const m=p.pick_side==='home'?p.market_prob_home:p.market_prob_away;aor(p.pick,w,mto(m||.5),p.edge_pp||0,'iQ')});b.textContent='✓ '+d.picks.length+' loaded';b.disabled=false}
+function aor(n='',w='',o='',e='',src='Manual'){const tb=document.getElementById('otb');const tr=document.createElement('tr');const sc=src==='Manual'?'sx':'sm';tr.innerHTML=`<td><input type="text" value="${n}" placeholder="Team / Player"></td><td class="r"><input type="number" value="${w?(w*100).toFixed(1):''}" placeholder="65" style="width:55px;text-align:right"></td><td class="r"><input type="number" value="${o?(o*100).toFixed(1):''}" placeholder="40" style="width:55px;text-align:right"></td><td class="r" style="color:${e>0?'var(--green)':'var(--muted)'};font-size:.75rem">${e?'+'+parseFloat(e).toFixed(1)+'pp':'—'}</td><td><span class="sbdg ${sc}">${src}</span></td><td><button class="dbtn" onclick="this.closest('tr').remove()">×</button></td>`;tb.appendChild(tr)}
+
+async function loadC(){const s=document.getElementById('cs').value;const b=document.getElementById('clb');b.textContent='Loading…';b.disabled=true;const d=await fp(s);document.getElementById('ctb').innerHTML='';if(!d||!d.picks?.length){b.textContent='No picks';b.disabled=false;acr();acr();acr();return}document.getElementById('cb').textContent='iQ AUTO';d.picks.forEach(p=>{const w=p.pick_side==='home'?p.model_prob_home:p.model_prob_away;const m=p.pick_side==='home'?p.market_prob_home:p.market_prob_away;acr(p.away_team+' @ '+p.home_team+' → '+p.pick,w,mto(m||.5),p.edge_pp||0,'iQ')});b.textContent='✓ '+d.picks.length+' loaded';b.disabled=false}
+function acr(n='',w='',o='',e='',src='Manual'){const tb=document.getElementById('ctb');const tr=document.createElement('tr');const sc=src==='Manual'?'sx':'sm';tr.innerHTML=`<td><input type="text" value="${n}" placeholder="Team A @ Team B → Pick" style="width:100%"></td><td class="r"><input type="number" value="${w?(w*100).toFixed(1):''}" placeholder="65" style="width:55px;text-align:right"></td><td class="r"><input type="number" value="${o?(o*100).toFixed(1):''}" placeholder="40" style="width:55px;text-align:right"></td><td class="r" style="color:${e>0?'var(--green)':'var(--muted)'};font-size:.75rem">${e?'+'+parseFloat(e).toFixed(1)+'pp':'—'}</td><td><span class="sbdg ${sc}">${src}</span></td><td><button class="dbtn" onclick="this.closest('tr').remove()">×</button></td>`;tb.appendChild(tr)}
+
+function solveS(){const entries=parseInt(document.getElementById('se').value)||100;const alive=parseInt(document.getElementById('sa').value)||100;const week=parseInt(document.getElementById('sw').value)||1;const strikes=parseInt(document.getElementById('sk').value)||0;const used=document.getElementById('su').value.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);let teams=rt('stb').filter(t=>!used.includes(t.name.toLowerCase()));if(!teams.length){alert('Add at least one team.');return}sl();setTimeout(()=>{const big=entries>200;teams=teams.map(t=>{const e=eq(t.win,t.own);const fv=(t.win>.75&&week<=5)?.82:1;const score=e*fv;let v,vc,cc;if(e>2&&t.win>.55){v='TOP PLAY';vc='vs';cc='tp'}else if(e>1.4&&t.own<.25){v='VALUE';vc='vv';cc='vp'}else if(e<.6||(t.own>.6&&t.win<.65)){v='AVOID';vc='va';cc='ap'}else{v='NEUTRAL';vc='vn';cc=''}return{...t,equity:e,score,verdict:v,vc,cc}}).sort((a,b)=>b.score-a.score);const top=teams[0];const con=teams.filter(t=>t.own<.2&&t.win>.55);let s='<p>Pool: <strong>'+alive+' alive</strong> of '+entries+'. ';if(big){s+='Large field — contrarian picks are your edge.</p>';if(con.length)s+='<p>Best contrarian: <strong>'+con[0].name+'</strong> — '+(con[0].win*100).toFixed(0)+'% win, only '+(con[0].own*100).toFixed(0)+'% est. ownership.</p>'}else{s+='Focus on survival — take highest equity pick.</p>'}if(top.win>.75&&week<=5)s+='<p>⚠ <strong>Future value alert:</strong> '+top.name+' is elite — consider saving for a harder week.</p>';if(strikes)s+='<p>With <strong>'+strikes+' strike(s)</strong>, you can afford more aggression on contrarian plays.</p>';rtr(teams,s,'Survivor Strategy',alive+'/'+entries+' alive · Week '+week);hl()},500)}
+
+function solveP(){const n=parseInt(document.getElementById('pn').value);const fmt=document.getElementById('pf').value;const big=document.getElementById('pt').value==='public';const rows=document.querySelectorAll('#ptb tr');const props=[];rows.forEach(row=>{const t=row.querySelector('input[type=text]');const ins=row.querySelectorAll('input[type=number]');const sel=row.querySelector('select');if(!t||ins.length<2)return;const name=t.value.trim();const line=parseFloat(ins[0].value);const dir=sel?sel.value:'over';const mp=parseFloat(ins[1].value)/100;const mkp=parseFloat(ins[2]?.value)/100;if(!name||isNaN(mp))return;const edge=isNaN(mkp)?0:Math.abs(mp-mkp);const hit=mp>=.5?mp:1-mp;props.push({name,line,dir,mp,mkp,edge,hit})});if(props.length<n){alert('Need '+n+' props.');return}sl();setTimeout(()=>{props.sort((a,b)=>b.edge-a.edge);const sel=props.slice(0,n);const combo=sel.reduce((a,p)=>a*p.hit,1);const avg=sel.reduce((a,p)=>a+p.edge,0)/sel.length;let s='<p>Selected <strong>'+n+' props</strong>, avg edge <strong>+'+(avg*100).toFixed(1)+'pp</strong>. Hit probability: <strong>'+(combo*100).toFixed(1)+'%</strong>.</p>';if(fmt==='insurance')s+='<p>Insurance covers your weakest leg — effective win rate is meaningfully higher.</p>';if(big)s+='<p>Large public field: avoid correlated props from the same game.</p>';rpr(sel,combo,avg,s,n);hl()},400)}
+
+function solveO(){const curr=parseInt(document.getElementById('oc').value)||1;const total=parseInt(document.getElementById('or').value)||18;const used=document.getElementById('ou').value.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);let opts=rt('otb').filter(t=>!used.includes(t.name.toLowerCase()));if(!opts.length){alert('Add options.');return}sl();setTimeout(()=>{const left=total-curr;opts=opts.map(o=>{const fv=o.win>.70?(left/total)*.25:0;const e=eq(o.win,o.own);const score=e-fv;let v,vc,cc;if(score>1.8){v='USE NOW';vc='vs';cc='tp'}else if(o.win>.70&&left>10){v='SAVE';vc='vn';cc=''}else if(e>1.3){v='GOOD VALUE';vc='vv';cc='vp'}else{v='SKIP';vc='va';cc='ap'}return{...o,equity:e,score,fvCost:fv,verdict:v,vc,cc}}).sort((a,b)=>b.score-a.score);let s='<p><strong>'+left+' rounds left</strong>. ';if(left>10)s+='Future value is significant — save elite options for choke-point rounds.</p>';else s+='Late stage — use highest win probability now.</p>';rtr(opts,s,'One & Done Strategy','Round '+curr+' of '+total);hl()},400)}
+
+function solveC(){const big=document.getElementById('cz').value==='large';let games=rt('ctb');if(!games.length){alert('Add games.');return}sl();setTimeout(()=>{games.sort((a,b)=>b.win-a.win);const n=games.length;games=games.map((g,i)=>{const pts=n-i;const e=eq(g.win,g.own);let v,vc,cc;if(i===0){v='MAX PTS';vc='vs';cc='tp'}else if(e>1.5&&g.win>.55){v='RANK HIGH';vc='vv';cc='vp'}else if(g.win<.45){v='RANK LOW';vc='va';cc='ap'}else{v='MIDDLE';vc='vn';cc=''}return{...g,pts,equity:e,score:pts*g.win,verdict:v,vc,cc}});let s='<p>Assign <strong>'+n+' pts</strong> to most certain → <strong>1 pt</strong> to least certain.</p>';if(big){const c=games.find((g,i)=>i>0&&g.win>.55&&g.own<.3);if(c)s+='<p>Contrarian: <strong>'+c.name+'</strong> at '+(c.win*100).toFixed(0)+'% win, low '+(c.own*100).toFixed(0)+'% ownership — ranking higher creates separation.</p>'}rtr(games,s,'Confidence Rankings',n+' games ranked');hl()},400)}
+
+function rtr(teams,strategy,title,meta){const c=document.getElementById('res');let h='<div class="rh"><h2>'+title+'</h2><span class="rm">'+meta+' · '+new Date().toLocaleTimeString()+'</span></div>';teams.forEach((t,i)=>{const ev=t.equity?t.equity.toFixed(2):'—';const w=(t.win*100).toFixed(1),o=(t.own*100).toFixed(1);const ew=Math.min(100,(parseFloat(ev)/3)*100);const lbl=t.pts?t.pts+'pts':'#'+(i+1);const ec=parseFloat(ev)>1.5?'g':parseFloat(ev)<.7?'r':'o';h+='<div class="card '+t.cc+'"><div class="cr">'+lbl+'</div><div class="ci"><div class="cn">'+t.name+'</div><div class="cs"><span>Win: '+w+'%</span><span>Own: '+o+'%</span>'+(t.fvCost?'<span>FV cost: -'+(t.fvCost*100).toFixed(0)+'pp</span>':'')+'</div><div class="eb"><div class="ef" style="width:'+ew+'%"></div></div></div><div class="cm"><div class="mt"><div class="mv '+ec+'">'+ev+'×</div><div class="ml">Equity</div></div><div class="mt"><div class="mv '+(t.win>.65?'g':t.win<.45?'r':'o')+'">'+w+'%</div><div class="ml">Win</div></div><span class="vt '+t.vc+'">'+t.verdict+'</span></div></div>'});if(strategy)h+='<div class="sbox"><h3>iQ Strategy Notes</h3>'+strategy+'</div>';c.innerHTML=h;c.classList.add('on');c.scrollIntoView({behavior:'smooth',block:'start'})}
+
+function rpr(picks,combo,avg,strat,n){const c=document.getElementById('res');let h='<div class="rh"><h2>Optimal '+n+'-Pick Lineup</h2><span class="rm">Combined: '+(combo*100).toFixed(1)+'% · Avg edge: +'+(avg*100).toFixed(1)+'pp</span></div>';picks.forEach((p,i)=>{const ov=p.dir==='over';h+='<div class="card '+(i===0?'tp':'')+'"><div class="cr">#'+(i+1)+'</div><div class="ci"><div class="cn">'+p.name+'</div><div class="cs"><span>Line: '+(p.line||'—')+'</span><span>Model: '+(p.hit*100).toFixed(1)+'%</span>'+(p.mkp?'<span>Mkt: '+(p.mkp*100).toFixed(1)+'%</span>':'')+'</div></div><div class="cm"><div class="mt"><div class="mv '+(p.edge>.08?'g':'o')+'">+'+(p.edge*100).toFixed(1)+'pp</div><div class="ml">Edge</div></div><span class="dto '+(ov?'dov':'dun')+'">'+p.dir.toUpperCase()+'</span></div></div>'});h+='<div class="sbox"><h3>iQ Strategy Notes</h3>'+strat+'</div>';c.innerHTML=h;c.classList.add('on');c.scrollIntoView({behavior:'smooth',block:'start'})}
+
+asr();asr();asr();aor();aor();aor();acr();acr();acr();apr();apr();apr();apr();
+</script>
+</body>
+</html>
