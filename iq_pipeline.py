@@ -1665,8 +1665,13 @@ def run_nba_props():
                 def_scale = 0.15 if stat_key == "pts" else 0.05
                 lam = lam * (1 + (opp_def - league_avg_def) / league_avg_def * def_scale)
                 lam = max(0.1, lam)
-                # Skip if no signal or role-change artifact
+                # Skip if no signal, role-change artifact, or degenerate prob
                 if abs(lam - line) < 0.5 or abs(lam - line) > 6.0:
+                    continue
+                # Skip near-certain outcomes — not actionable
+                model_over = poisson_over(lam, line)
+                model_under = 1 - model_over
+                if max(model_over, model_under) > 0.85:
                     continue
 
                 # Devig
