@@ -2,19 +2,19 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "launch_date": "2026-04-09",
-  "last_updated": "2026-04-09",
+  "last_updated": "2026-04-14",
   "overall": {
-    "wins": 7,
-    "losses": 6,
+    "wins": 9,
+    "losses": 10,
     "pushes": 0,
-    "total": 13,
-    "hit_rate": 53.85,
-    "roi_flat": 2.79
+    "total": 19,
+    "hit_rate": 47.37,
+    "roi_flat": -9.57
   },
   "by_confidence": {
     "high": {
       "wins": 0,
-      "total": 2,
+      "total": 3,
       "hit_rate": 0.0
     },
     "medium": {
@@ -23,12 +23,72 @@
       "hit_rate": 0.0
     },
     "low": {
-      "wins": 7,
-      "total": 9,
-      "hit_rate": 77.78
+      "wins": 9,
+      "total": 14,
+      "hit_rate": 64.29
     }
   },
   "recent": [
+    {
+      "pick": "Athletics",
+      "outcome": "LOSS",
+      "result": 0.0,
+      "confidence_tier": "low",
+      "edge_pp": 7.9,
+      "game_time_utc": "2026-04-14T01:40:00Z",
+      "sport": "mlb",
+      "settled_at": "2026-04-14T14:16:10.068283+00:00"
+    },
+    {
+      "pick": "St. Louis Cardinals",
+      "outcome": "LOSS",
+      "result": 0.0,
+      "confidence_tier": "low",
+      "edge_pp": 4.5,
+      "game_time_utc": "2026-04-13T23:45:00Z",
+      "sport": "mlb",
+      "settled_at": "2026-04-14T14:16:10.068283+00:00"
+    },
+    {
+      "pick": "Minnesota Twins",
+      "outcome": "WIN",
+      "result": 1.0,
+      "confidence_tier": "low",
+      "edge_pp": 17.5,
+      "game_time_utc": "2026-04-13T23:40:00Z",
+      "sport": "mlb",
+      "settled_at": "2026-04-14T14:16:10.068283+00:00"
+    },
+    {
+      "pick": "Atlanta Braves",
+      "outcome": "LOSS",
+      "result": 0.0,
+      "confidence_tier": "high",
+      "edge_pp": 11.0,
+      "game_time_utc": "2026-04-13T23:15:00Z",
+      "sport": "mlb",
+      "settled_at": "2026-04-14T14:16:10.068283+00:00"
+    },
+    {
+      "pick": "Chicago Cubs",
+      "outcome": "LOSS",
+      "result": 0.0,
+      "confidence_tier": "low",
+      "edge_pp": 16.4,
+      "game_time_utc": "2026-04-13T22:40:00Z",
+      "sport": "mlb",
+      "settled_at": "2026-04-14T14:16:10.068283+00:00"
+    },
+    {
+      "pick": "Pittsburgh Pirates",
+      "outcome": "WIN",
+      "result": 1.0,
+      "confidence_tier": "low",
+      "edge_pp": 15.2,
+      "game_time_utc": "2026-04-13T22:40:00Z",
+      "sport": "mlb",
+      "settled_at": "2026-04-14T14:16:10.068283+00:00"
+    },
     {
       "pick_id": "mlb-2026-04-08-823726",
       "game_time_utc": "2026-04-08T23:40:00Z",
