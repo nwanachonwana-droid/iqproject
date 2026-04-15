@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "sport": "nba",
+  "generated_at": "2026-04-15T17:38:33.461155Z",
+  "data_date": "2026-04-15",
+  "model_version": "v1.0",
+  "status": "EXPERIMENTAL",
+  "picks": [
+    {
+      "home_team": "Los Angeles Lakers",
+      "away_team": "Houston Rockets",
+      "pick": "Los Angeles Lakers",
+      "pick_side": "home",
+      "model_prob_home": 0.5024,
+      "model_prob_away": 0.4976,
+      "market_prob_home": 0.3388,
+      "market_prob_away": 0.6612,
+      "edge_pp": 16.36,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-04-19T00:40:00Z",
+      "outcome": null,
+      "result": null
+    }
+  ],
+  "summary": {
+    "total_picks": 1,
+    "high_confidence": 0,
+    "avg_edge_pp": 16.36
+  }
+}

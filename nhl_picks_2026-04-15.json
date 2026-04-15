@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "sport": "nhl",
+  "generated_at": "2026-04-15T17:38:17.547503Z",
+  "data_date": "2026-04-15",
+  "model_version": "v1.0",
+  "status": "ACTIVE",
+  "picks": [
+    {
+      "pick_id": "nhl-2026-04-15-2025021302",
+      "game_time_utc": "2026-04-15T23:00:00Z",
+      "home_team": "Tampa Bay Lightning",
+      "away_team": "New York Rangers",
+      "pick": "Tampa Bay Lightning",
+      "pick_side": "home",
+      "model_prob_home": 0.6519,
+      "model_prob_away": 0.3481,
+      "market_prob_home": 0.5934,
+      "market_prob_away": 0.4066,
+      "market_line_home": -162,
+      "market_source": "pinnacle",
+      "edge_pp": 5.85,
+      "confidence_tier": "high",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "pick_id": "nhl-2026-04-15-2025021306",
+      "game_time_utc": "2026-04-16T02:00:00Z",
+      "home_team": "Vegas Golden Knights",
+      "away_team": "Seattle Kraken",
+      "pick": "Vegas Golden Knights",
+      "pick_side": "home",
+      "model_prob_home": 0.6052,
+      "model_prob_away": 0.3948,
+      "market_prob_home": 0.718,
+      "market_prob_away": 0.282,
+      "market_line_home": -298,
+      "market_source": "pinnacle",
+      "edge_pp": -11.28,
+      "confidence_tier": "medium",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ],
+  "summary": {
+    "total_picks": 2,
+    "high_confidence": 1,
+    "avg_edge_pp": -2.71
+  }
+}
