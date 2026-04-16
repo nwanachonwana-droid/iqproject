@@ -1,28 +1,26 @@
 {
-  "schema_version": "1.0",
   "sport": "nhl",
-  "launch_date": "2026-04-15",
   "last_updated": "2026-04-16",
+  "_verified": true,
   "overall": {
-    "wins": 1,
-    "losses": 1,
-    "pushes": 0,
-    "total": 2,
-    "hit_rate": 50.0,
-    "roi_flat": -4.55
+    "total": 9,
+    "wins": 6,
+    "losses": 3,
+    "hit_rate": 66.67,
+    "roi_flat": 27.27
   },
   "by_confidence": {
-    "high": {
-      "wins": 0,
-      "total": 1,
-      "hit_rate": 0.0
+    "low": {
+      "wins": 3,
+      "total": 5,
+      "hit_rate": 60.0
     },
     "medium": {
-      "wins": 0,
-      "total": 0,
-      "hit_rate": 0.0
+      "wins": 2,
+      "total": 3,
+      "hit_rate": 66.67
     },
-    "low": {
+    "high": {
       "wins": 1,
       "total": 1,
       "hit_rate": 100.0
@@ -30,42 +28,85 @@
   },
   "recent": [
     {
-      "pick_id": "nhl-2026-04-15-2025021302",
-      "game_time_utc": "2026-04-15T23:00:00Z",
-      "home_team": "Tampa Bay Lightning",
-      "away_team": "New York Rangers",
-      "pick": "Tampa Bay Lightning",
-      "pick_side": "home",
-      "model_prob_home": 0.6519,
-      "model_prob_away": 0.3481,
-      "market_prob_home": 0.5934,
-      "market_prob_away": 0.4066,
-      "market_line_home": -162,
-      "market_source": "pinnacle",
-      "edge_pp": 5.85,
-      "confidence_tier": "high",
-      "result": 0.0,
+      "pick": "Pittsburgh Penguins",
       "outcome": "LOSS",
-      "settled_at": "2026-04-16T11:01:40.131234Z"
+      "confidence_tier": "low",
+      "edge_pp": 0.0,
+      "game_time_utc": "2026-04-15T00:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
     },
     {
-      "pick_id": "nhl-2026-04-14-2025021293",
-      "game_time_utc": "2026-04-14T23:00:00Z",
-      "home_team": "New York Islanders",
-      "away_team": "Carolina Hurricanes",
-      "pick": "Carolina Hurricanes",
-      "pick_side": "away",
-      "model_prob_home": 0.4317,
-      "model_prob_away": 0.5683,
-      "market_prob_home": 0.5934,
-      "market_prob_away": 0.4066,
-      "market_line_home": -162,
-      "market_source": "pinnacle",
-      "edge_pp": 16.17,
-      "confidence_tier": "low",
-      "result": 1.0,
+      "pick": "Boston Bruins",
       "outcome": "WIN",
-      "settled_at": "2026-04-15T17:38:13.521211Z"
+      "confidence_tier": "low",
+      "edge_pp": 4.3,
+      "game_time_utc": "2026-04-15T00:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
+    },
+    {
+      "pick": "Carolina Hurricanes",
+      "outcome": "WIN",
+      "confidence_tier": "low",
+      "edge_pp": 10.1,
+      "game_time_utc": "2026-04-15T00:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
+    },
+    {
+      "pick": "Minnesota Wild",
+      "outcome": "WIN",
+      "confidence_tier": "medium",
+      "edge_pp": 14.7,
+      "game_time_utc": "2026-04-15T00:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
+    },
+    {
+      "pick": "Colorado Avalanche",
+      "outcome": "WIN",
+      "confidence_tier": "high",
+      "edge_pp": 11.4,
+      "game_time_utc": "2026-04-15T01:30:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
+    },
+    {
+      "pick": "Vegas Golden Knights",
+      "outcome": "WIN",
+      "confidence_tier": "low",
+      "edge_pp": -5.5,
+      "game_time_utc": "2026-04-14T02:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
+    },
+    {
+      "pick": "Colorado Avalanche",
+      "outcome": "WIN",
+      "confidence_tier": "medium",
+      "edge_pp": 8.9,
+      "game_time_utc": "2026-04-14T01:30:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
+    },
+    {
+      "pick": "Minnesota Wild",
+      "outcome": "LOSS",
+      "confidence_tier": "medium",
+      "edge_pp": 14.7,
+      "game_time_utc": "2026-04-14T00:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
+    },
+    {
+      "pick": "Carolina Hurricanes",
+      "outcome": "LOSS",
+      "confidence_tier": "low",
+      "edge_pp": 9.4,
+      "game_time_utc": "2026-04-13T23:00:00Z",
+      "sport": "nhl",
+      "settled_at": "2026-04-16T16:02:23.752369+00:00"
     }
   ]
 }

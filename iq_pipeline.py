@@ -143,7 +143,8 @@ def load_perf(sport_id):
     path = os.path.join(DATA_DIR, f"{sport_id}_performance_log.json")
     if os.path.exists(path):
         with open(path) as f:
-            return json.load(f), path
+            data = json.load(f)
+        return data, path
     return {
         "schema_version": "1.0", "sport": sport_id,
         "launch_date": TODAY, "last_updated": TODAY,
