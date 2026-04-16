@@ -182,6 +182,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
     <button class="tab on" id="t-pred" onclick="showTab('pred')">Predictions</button>
     <button class="tab"    id="t-perf" onclick="showTab('perf')">Performance</button>
     <button class="tab"    id="t-futures" onclick="showTab('futures')">Futures</button>
+    <button class="tab"    id="t-splash" onclick="showTab('splash')">Splash Solver</button>
   </nav>
   <div class="mright">
     <a class="ml" href="/splash.html">Splash Solver →</a><a class="ml" href="https://kuhiroclass.com" target="_blank">Kuhiro Research ↗</a><a class="ml" href="submit.html">Submit a model →</a>
@@ -290,6 +291,102 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 </div>
 
 <div id="panel-futures" style="display:none;padding:2rem 1.5rem;max-width:1200px;margin:0 auto"><div id="futures-section"></div></div>
+
+<div id="panel-splash" style="display:none;padding:2rem 1.5rem;max-width:1100px;margin:0 auto">
+
+<div style="margin-bottom:1.5rem">
+  <div style="font-family:var(--H);font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.3rem">
+    Splash <span style="color:var(--orange)">Solver</span>
+  </div>
+  <div style="color:var(--ink3);font-size:0.75rem">Equity optimizer for SplashSports contests — auto-loads today's iQ picks</div>
+</div>
+
+<!-- CONTEST TYPE TABS -->
+<div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap" id="splash-tabs">
+  <button class="filt on" onclick="setSplashMode('survivor',this)">Hit Streak Survivor</button>
+  <button class="filt" onclick="setSplashMode('tiers',this)">NBA Tiers</button>
+  <button class="filt" onclick="setSplashMode('pickem',this)">Pick'em</button>
+  <button class="filt" onclick="setSplashMode('confidence',this)">Confidence</button>
+</div>
+
+<!-- POOL STRUCTURE -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.25rem 1.5rem;margin-bottom:1rem">
+  <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">Pool Structure</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem" id="splash-pool-fields">
+    <div>
+      <div style="font-size:0.67rem;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem">Sport</div>
+      <select id="sp-sport" onchange="splashLoadPicks()" style="background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.82rem;padding:0.45rem 0.6rem;border-radius:2px;outline:none;width:100%">
+        <option value="mlb">MLB</option>
+        <option value="nhl">NHL</option>
+        <option value="nba">NBA</option>
+        <option value="soccer">Soccer</option>
+      </select>
+    </div>
+    <div>
+      <div style="font-size:0.67rem;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem">Total Entries</div>
+      <input type="number" id="sp-entries" value="50" min="2" style="background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.82rem;padding:0.45rem 0.6rem;border-radius:2px;outline:none;width:100%">
+    </div>
+    <div>
+      <div style="font-size:0.67rem;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem">Alive</div>
+      <input type="number" id="sp-alive" value="50" min="1" style="background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.82rem;padding:0.45rem 0.6rem;border-radius:2px;outline:none;width:100%">
+    </div>
+    <div>
+      <div style="font-size:0.67rem;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem">Prize Pool</div>
+      <input type="text" id="sp-prize" placeholder="$437.50" style="background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.82rem;padding:0.45rem 0.6rem;border-radius:2px;outline:none;width:100%">
+    </div>
+    <div>
+      <div style="font-size:0.67rem;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem">Entry Fee</div>
+      <input type="text" id="sp-fee" placeholder="$10" style="background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.82rem;padding:0.45rem 0.6rem;border-radius:2px;outline:none;width:100%">
+    </div>
+    <div>
+      <div style="font-size:0.67rem;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem">Strikes</div>
+      <select id="sp-strikes" style="background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.82rem;padding:0.45rem 0.6rem;border-radius:2px;outline:none;width:100%">
+        <option value="0">None</option>
+        <option value="1">1 Strike</option>
+        <option value="2">2 Strikes</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- AUTO-LOAD BANNER -->
+<div style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:4px;padding:0.65rem 1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem">
+  <div style="font-size:0.73rem;color:var(--ink)"><span style="color:var(--orange);font-weight:600">iQ Auto-Load</span> — pulls today's picks with model win probs + market-implied ownership estimates<span id="sp-data-info" style="color:var(--ink3);font-size:0.65rem;margin-left:0.75rem"></span></div>
+  <button onclick="splashLoadPicks()" id="sp-load-btn" style="background:var(--orange);color:#000;border:none;font-family:var(--M);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.35rem 0.85rem;border-radius:2px;cursor:pointer;white-space:nowrap">Load Picks</button>
+</div>
+
+<!-- PICKS TABLE -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;margin-bottom:1rem;overflow-x:auto">
+  <table style="width:100%;border-collapse:collapse">
+    <thead>
+      <tr style="font-size:0.65rem;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase">
+        <th style="text-align:left;padding:0.4rem 0.5rem;border-bottom:1px solid var(--border);font-weight:500">Team / Player</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;border-bottom:1px solid var(--border);font-weight:500">Win%</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;border-bottom:1px solid var(--border);font-weight:500">Est. Own%</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;border-bottom:1px solid var(--border);font-weight:500">Edge</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;border-bottom:1px solid var(--border);font-weight:500">Tier</th>
+        <th style="text-align:left;padding:0.4rem 0.5rem;border-bottom:1px solid var(--border);font-weight:500">Source</th>
+      </tr>
+    </thead>
+    <tbody id="sp-picks-body"></tbody>
+  </table>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem">
+  <div>
+    <div style="font-size:0.67rem;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem">Teams Already Used</div>
+    <input type="text" id="sp-used" placeholder="e.g. Colorado Avalanche, Detroit Tigers" style="background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.82rem;padding:0.45rem 0.6rem;border-radius:2px;outline:none;width:100%">
+  </div>
+  <div style="display:flex;align-items:flex-end">
+    <button onclick="splashSolve()" style="width:100%;padding:0.75rem;background:var(--orange);color:#000;font-family:var(--H);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer">▶ Solve</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="sp-results" style="display:none"></div>
+
+</div>
+
 <footer>
   <div class="fw">the <b>iQ</b> project</div>
   <div class="fm">Walk-forward validated · No retroactive edits · All predictions time-stamped</div>
@@ -356,6 +453,9 @@ function showTab(t){
   }
   const fp=document.getElementById('panel-futures');
   if(fp) fp.style.display=t==='futures'?'block':'none';
+  const sp=document.getElementById('panel-splash');
+  if(sp) sp.style.display=t==='splash'?'block':'none';
+  if(t==='splash') initSplash();
 }
 function setF(f,btn){
   AF=f;
@@ -781,6 +881,266 @@ function renderFutures() {
 }
 
 loadFutures();
+
+
+// ═══════════════════════════════════════
+// SPLASH SOLVER
+// ═══════════════════════════════════════
+let splashMode = 'survivor';
+let splashPicks = [];
+let splashInited = false;
+
+function initSplash() {
+  if (!splashInited) { splashLoadPicks(); splashInited = true; }
+}
+
+function setSplashMode(mode, btn) {
+  splashMode = mode;
+  document.querySelectorAll('#splash-tabs .filt').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  // Show/hide tiers-specific UI
+  const isTiers = mode === 'tiers';
+  document.getElementById('sp-alive').parentElement.style.display = isTiers ? 'none' : '';
+  document.getElementById('sp-strikes').parentElement.style.display = isTiers ? 'none' : '';
+  if (splashPicks.length) splashRenderPicks();
+}
+
+function mto(m) {
+  if (!m) return 0.35;
+  if (m >= 0.70) return Math.min(0.80, m * 1.05);
+  if (m >= 0.60) return m * 0.85;
+  if (m >= 0.50) return m * 0.70;
+  return Math.max(0.05, m * 0.50);
+}
+
+async function splashLoadPicks() {
+  const sport = document.getElementById('sp-sport').value;
+  const btn = document.getElementById('sp-load-btn');
+  btn.textContent = 'Loading…'; btn.disabled = true;
+
+  let data = null;
+  try {
+    // For pickem mode load props
+    if (splashMode === 'pickem') {
+      const fname = sport === 'nba' ? 'nba_props_today.json' : 'mlb_props_today.json';
+      const r = await fetch(fname + '?t=' + Date.now());
+      if (r.ok) data = await r.json();
+    } else {
+      const r = await fetch(sport + '_picks_today.json?t=' + Date.now());
+      if (r.ok) data = await r.json();
+    }
+  } catch(e) {}
+
+  splashPicks = [];
+  if (data && data.picks && data.picks.length) {
+    document.getElementById('sp-data-info').textContent = '· ' + data.data_date + ' · ' + data.picks.length + ' picks loaded';
+    if (splashMode === 'pickem') {
+      splashPicks = [...data.picks]
+        .sort((a,b) => Math.abs(b.edge_pp||0) - Math.abs(a.edge_pp||0))
+        .slice(0,20)
+        .map(p => ({
+          name: (p.player||'') + ' — ' + (p.stat||''),
+          win: p.model_prob >= 0.5 ? p.model_prob : 1 - p.model_prob,
+          own: mto(p.market_prob || 0.5),
+          edge: p.edge_pp || 0,
+          dir: p.direction,
+          line: p.line,
+          source: 'iQ'
+        }));
+    } else {
+      splashPicks = data.picks.map(p => {
+        const win = p.pick_side === 'home' ? p.model_prob_home : p.model_prob_away;
+        const mkt = p.pick_side === 'home' ? p.market_prob_home : p.market_prob_away;
+        return {
+          name: p.pick,
+          win: win || 0.5,
+          own: mto(mkt || 0.5),
+          edge: p.edge_pp || 0,
+          tier: p.confidence_tier,
+          matchup: (p.away_team || '') + ' @ ' + (p.home_team || ''),
+          source: 'iQ'
+        };
+      });
+    }
+    splashRenderPicks();
+  } else {
+    document.getElementById('sp-data-info').textContent = '· No picks today for ' + sport.toUpperCase();
+    document.getElementById('sp-picks-body').innerHTML = '<tr><td colspan="6" style="padding:1rem;color:var(--ink3);text-align:center">No picks available — add manually below</td></tr>';
+  }
+  btn.textContent = splashPicks.length ? '✓ ' + splashPicks.length + ' loaded' : 'No picks';
+  btn.disabled = false;
+}
+
+function splashRenderPicks() {
+  const tbody = document.getElementById('sp-picks-body');
+  tbody.innerHTML = '';
+  const used = (document.getElementById('sp-used').value || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  splashPicks.forEach((p, i) => {
+    const isUsed = used.includes(p.name.toLowerCase());
+    const tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid rgba(255,255,255,0.04)';
+    if (isUsed) tr.style.opacity = '0.35';
+    const winPct = ((p.win||0)*100).toFixed(1);
+    const ownPct = ((p.own||0)*100).toFixed(1);
+    const edgeStr = p.edge ? (p.edge > 0 ? '+' : '') + parseFloat(p.edge).toFixed(1) + 'pp' : '—';
+    const edgeColor = p.edge > 5 ? 'var(--green)' : p.edge > 0 ? 'var(--ink)' : 'var(--ink3)';
+    const tierColor = p.tier === 'high' ? 'var(--orange)' : p.tier === 'medium' ? 'var(--ink)' : 'var(--ink3)';
+    tr.innerHTML = \`
+      <td style="padding:0.45rem 0.5rem;font-size:0.82rem">\${p.name}\${p.matchup ? '<div style="font-size:0.65rem;color:var(--ink3)">' + p.matchup + '</div>' : ''}\${p.line ? '<div style="font-size:0.65rem;color:var(--ink3)">Line: ' + p.line + ' ' + (p.dir||'').toUpperCase() + '</div>' : ''}</td>
+      <td style="padding:0.45rem 0.5rem;text-align:right;font-size:0.82rem;color:\${p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--ink)'}">\${winPct}%</td>
+      <td style="padding:0.45rem 0.5rem;text-align:right;font-size:0.82rem;color:var(--ink3)">\${ownPct}%</td>
+      <td style="padding:0.45rem 0.5rem;text-align:right;font-size:0.82rem;color:\${edgeColor}">\${edgeStr}</td>
+      <td style="padding:0.45rem 0.5rem;text-align:right;font-size:0.72rem;color:\${tierColor};text-transform:uppercase;letter-spacing:0.06em">\${p.tier||'—'}</td>
+      <td style="padding:0.45rem 0.5rem;font-size:0.68rem"><span style="background:rgba(249,115,22,0.12);color:var(--orange);padding:0.1rem 0.35rem;border-radius:2px;font-weight:600">\${p.source||'Manual'}</span></td>
+    \`;
+    tbody.appendChild(tr);
+  });
+}
+
+function splashSolve() {
+  const entries = parseInt(document.getElementById('sp-entries').value) || 50;
+  const alive = parseInt(document.getElementById('sp-alive').value) || 50;
+  const strikes = parseInt(document.getElementById('sp-strikes').value) || 0;
+  const used = (document.getElementById('sp-used').value || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  const prize = document.getElementById('sp-prize').value || '—';
+  const fee = document.getElementById('sp-fee').value || '—';
+
+  let picks = splashPicks.filter(p => !used.includes(p.name.toLowerCase()));
+  if (!picks.length) { alert('No picks available. Load picks first or remove used teams.'); return; }
+
+  const big = entries > 100;
+
+  if (splashMode === 'survivor') {
+    picks = picks.map(p => {
+      const equity = p.own > 0 ? p.win / p.own : p.win;
+      const fvPen = (p.win > 0.75) ? 0.85 : 1.0;
+      const score = equity * fvPen;
+      let verdict, vc;
+      if (equity > 2.0 && p.win > 0.55) { verdict = 'TOP PLAY'; vc = 'color:var(--orange)'; }
+      else if (equity > 1.4 && p.own < 0.25) { verdict = 'VALUE'; vc = 'color:var(--green)'; }
+      else if (equity < 0.6 || (p.own > 0.6 && p.win < 0.65)) { verdict = 'AVOID'; vc = 'color:var(--red)'; }
+      else { verdict = 'NEUTRAL'; vc = 'color:var(--ink3)'; }
+      return { ...p, equity, score, verdict, vc };
+    }).sort((a,b) => b.score - a.score);
+
+    const top = picks[0];
+    const contrarians = picks.filter(p => p.own < 0.20 && p.win > 0.55);
+    let html = \`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;margin-bottom:1rem">
+      <div style="font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem">Survivor Strategy · \${alive}/\${entries} alive · Prize: \${prize}</div>\`;
+
+    picks.forEach((p, i) => {
+      const isTop = i === 0;
+      const eq = p.equity.toFixed(2);
+      const borderColor = isTop ? 'var(--orange)' : p.verdict === 'VALUE' ? 'var(--green)' : 'var(--border)';
+      html += \`<div style="display:flex;align-items:center;gap:1rem;padding:0.75rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.04);border-left:3px solid \${borderColor};padding-left:0.75rem;margin-bottom:0.25rem">
+        <div style="font-family:var(--H);font-size:1.2rem;font-weight:800;color:\${isTop?'var(--orange)':'var(--ink3)'};min-width:2rem;text-align:center">#\${i+1}</div>
+        <div style="flex:1">
+          <div style="font-family:var(--H);font-size:0.9rem;font-weight:700">\${p.name}</div>
+          <div style="font-size:0.68rem;color:var(--ink3)">\${p.matchup||''}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:var(--H);font-weight:700;color:\${p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--orange)'}">\${(p.win*100).toFixed(1)}%</div>
+          <div style="font-size:0.6rem;color:var(--ink3)">WIN PROB</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:var(--H);font-weight:700;color:\${parseFloat(eq)>1.5?'var(--green)':parseFloat(eq)<0.7?'var(--red)':'var(--orange)'}">\${eq}×</div>
+          <div style="font-size:0.6rem;color:var(--ink3)">EQUITY</div>
+        </div>
+        <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;\${p.vc};min-width:5rem;text-align:right">\${p.verdict}</div>
+      </div>\`;
+    });
+
+    let strat = \`<div style="background:var(--bg3);border-left:3px solid var(--orange);padding:0.75rem 1rem;margin-top:0.75rem;font-size:0.78rem;color:var(--ink);line-height:1.7">\`;
+    strat += \`<div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem">iQ Strategy</div>\`;
+    strat += \`<p style="margin-bottom:0.4rem">Pool: <strong>\${alive} alive</strong> of \${entries}. \`;
+    if (big) {
+      strat += \`Large field — contrarian picks maximize equity.</p>\`;
+      if (contrarians.length) strat += \`<p style="margin-bottom:0.4rem">Best contrarian: <strong>\${contrarians[0].name}</strong> — \${(contrarians[0].win*100).toFixed(0)}% win prob, only \${(contrarians[0].own*100).toFixed(0)}% est. ownership.</p>\`;
+    } else {
+      strat += \`Small pool — take highest equity pick.</p>\`;
+    }
+    if (top.win > 0.75) strat += \`<p style="margin-bottom:0">⚠ <strong>Future value:</strong> \${top.name} is elite — consider saving for a harder slate.</p>\`;
+    if (strikes > 0) strat += \`<p style="margin:0"><strong>\${strikes} strike(s)</strong> available — justifies slightly more aggression on contrarian plays.</p>\`;
+    strat += \`</div>\`;
+
+    html += strat + '</div>';
+    const res = document.getElementById('sp-results');
+    res.innerHTML = html;
+    res.style.display = 'block';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  } else if (splashMode === 'pickem') {
+    picks = picks.sort((a,b) => Math.abs(b.edge) - Math.abs(a.edge));
+    const n = Math.min(4, picks.length);
+    const selected = picks.slice(0, n);
+    const combo = selected.reduce((acc,p) => acc * p.win, 1);
+    let html = \`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem">
+      <div style="font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem">Optimal \${n}-Pick Lineup · Combined: \${(combo*100).toFixed(1)}%</div>\`;
+    selected.forEach((p, i) => {
+      const isOver = (p.dir||'over') === 'over';
+      html += \`<div style="display:flex;align-items:center;gap:1rem;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+        <div style="font-family:var(--H);font-size:1.1rem;font-weight:800;color:\${i===0?'var(--orange)':'var(--ink3)'};min-width:2rem;text-align:center">#\${i+1}</div>
+        <div style="flex:1">
+          <div style="font-size:0.85rem;font-weight:600">\${p.name}\${p.line?' · '+p.line:''}</div>
+        </div>
+        <div style="text-align:right;margin-right:0.5rem">
+          <div style="font-weight:700;color:\${p.edge>8?'var(--green)':'var(--orange)'}">+\${Math.abs(parseFloat(p.edge)||0).toFixed(1)}pp</div>
+          <div style="font-size:0.6rem;color:var(--ink3)">EDGE</div>
+        </div>
+        <span style="padding:0.2rem 0.5rem;border-radius:2px;font-size:0.68rem;font-weight:600;background:\${isOver?'rgba(34,197,94,0.15)':'rgba(59,130,246,0.15)'};color:\${isOver?'var(--green)':'var(--blue)'}">\${(p.dir||'OVER').toUpperCase()}</span>
+      </div>\`;
+    });
+    html += '</div>';
+    const res = document.getElementById('sp-results');
+    res.innerHTML = html;
+    res.style.display = 'block';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  } else if (splashMode === 'confidence') {
+    picks = picks.sort((a,b) => b.win - a.win);
+    const n = picks.length;
+    let html = \`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem">
+      <div style="font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem">Confidence Rankings — assign \${n} pts → 1 pt</div>\`;
+    picks.forEach((p, i) => {
+      const pts = n - i;
+      html += \`<div style="display:flex;align-items:center;gap:1rem;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+        <div style="font-family:var(--H);font-size:1.1rem;font-weight:800;color:\${i===0?'var(--orange)':'var(--ink3)'};min-width:3rem;text-align:center">\${pts}pts</div>
+        <div style="flex:1"><div style="font-size:0.85rem;font-weight:600">\${p.name}</div><div style="font-size:0.65rem;color:var(--ink3)">\${p.matchup||''}</div></div>
+        <div style="font-weight:700;color:\${p.win>0.65?'var(--green)':'var(--ink)'}">\${(p.win*100).toFixed(1)}%</div>
+      </div>\`;
+    });
+    html += '</div>';
+    const res = document.getElementById('sp-results');
+    res.innerHTML = html;
+    res.style.display = 'block';
+  } else if (splashMode === 'tiers') {
+    picks = picks.sort((a,b) => b.win - a.win);
+    let html = \`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem">
+      <div style="font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem">Tiers Strategy — ranked by model strength</div>\`;
+    const tiers = [
+      {label:'Tier 1 — Elite', min:0.70, color:'var(--orange)'},
+      {label:'Tier 2 — Strong', min:0.60, color:'var(--green)'},
+      {label:'Tier 3 — Value', min:0.50, color:'var(--ink)'},
+      {label:'Tier 4 — Dart Throw', min:0, color:'var(--ink3)'},
+    ];
+    tiers.forEach(tier => {
+      const tp = picks.filter(p => p.win >= tier.min && (tier.min === 0 || p.win < (tier.min === 0.50 ? 0.60 : tier.min === 0.60 ? 0.70 : 999)));
+      if (!tp.length) return;
+      html += \`<div style="font-size:0.68rem;font-weight:600;color:\${tier.color};letter-spacing:0.08em;text-transform:uppercase;padding:0.5rem 0 0.25rem;border-top:1px solid var(--border)">\${tier.label}</div>\`;
+      tp.forEach(p => {
+        html += \`<div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0">
+          <div style="flex:1;font-size:0.85rem">\${p.name}</div>
+          <div style="font-weight:700;color:\${tier.color}">\${(p.win*100).toFixed(1)}%</div>
+          <div style="font-size:0.7rem;color:var(--ink3)">own \${(p.own*100).toFixed(0)}%</div>
+        </div>\`;
+      });
+    });
+    html += '</div>';
+    const res = document.getElementById('sp-results');
+    res.innerHTML = html;
+    res.style.display = 'block';
+  }
+}
 
 </script>
 </body>
