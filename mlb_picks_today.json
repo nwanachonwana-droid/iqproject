@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "mlb",
-  "generated_at": "2026-04-16T11:58:13.912416Z",
+  "generated_at": "2026-04-16T12:59:54.577045Z",
   "data_date": "2026-04-16",
   "model_version": "v1.0",
   "status": "PROVEN",
@@ -53,11 +53,11 @@
       "pick_side": "home",
       "model_prob_home": 0.619,
       "model_prob_away": 0.381,
-      "market_prob_home": 0.4911,
-      "market_prob_away": 0.5089,
-      "market_line_home": -104,
+      "market_prob_home": 0.4758,
+      "market_prob_away": 0.5242,
+      "market_line_home": 102,
       "market_source": "pinnacle",
-      "edge_pp": 12.79,
+      "edge_pp": 14.32,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null,
@@ -110,11 +110,11 @@
       "pick_side": "home",
       "model_prob_home": 0.5455,
       "model_prob_away": 0.4545,
-      "market_prob_home": 0.6386,
-      "market_prob_away": 0.3614,
-      "market_line_home": -198,
+      "market_prob_home": 0.6301,
+      "market_prob_away": 0.3699,
+      "market_line_home": -190,
       "market_source": "pinnacle",
-      "edge_pp": -9.31,
+      "edge_pp": -8.46,
       "confidence_tier": "low",
       "result": null,
       "outcome": null,
@@ -143,6 +143,6 @@
   "summary": {
     "total_picks": 7,
     "high_confidence": 0,
-    "avg_edge_pp": 2.85
+    "avg_edge_pp": 3.19
   }
 }
