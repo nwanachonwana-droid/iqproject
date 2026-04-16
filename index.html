@@ -789,6 +789,138 @@ loadFutures();
 
 
 
+
+function mto(m){if(!m||isNaN(m))return 0.35;if(m>=0.75)return Math.min(0.85,m*1.08);if(m>=0.65)return m*0.92;if(m>=0.55)return m*0.78;if(m>=0.45)return m*0.62;return Math.max(0.05,m*0.42)}
+function splashLoad(){splashFetch(document.getElementById('sp-sport')?document.getElementById('sp-sport').value:'mlb')}
+async function splashFetch(sport){
+  window._splashPicks=[];
+  try{
+    const r=await fetch(sport+'_picks_today.json?t='+Date.now());
+    if(r.ok){const d=await r.json();window._splashDate=d.data_date||'';
+      window._splashPicks=(d.picks||[]).map(p=>({
+        name:p.pick,
+        win:(p.pick_side==='home'?p.model_prob_home:p.model_prob_away)||0.5,
+        own:mto(p.pick_side==='home'?p.market_prob_home:p.market_prob_away),
+        edge:p.edge_pp||0,tier:p.confidence_tier||'low',
+        matchup:(p.away_team||'')+' @ '+(p.home_team||'')
+      }));
+    }
+  }catch(e){console.error(e);}
+  splashRender();
+}
+function splashRender(){
+  const el=document.getElementById('panel-splash');
+  if(!el)return;
+  const picks=window._splashPicks||[];
+  const date=window._splashDate||'';
+  const sport=document.getElementById('sp-sport')?document.getElementById('sp-sport').value:'mlb';
+  const mode=document.getElementById('sp-mode')?document.getElementById('sp-mode').value:'survivor';
+  const entries=document.getElementById('sp-entries')?document.getElementById('sp-entries').value:'50';
+  const alive=document.getElementById('sp-alive')?document.getElementById('sp-alive').value:'50';
+  const prize=document.getElementById('sp-prize')?document.getElementById('sp-prize').value:'';
+  const used=document.getElementById('sp-used')?document.getElementById('sp-used').value:'';
+  const fi=(id,lbl,type,val,ph)=>`<div><div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">${lbl}</div><input id="${id}" type="${type}" value="${val}" placeholder="${ph||''}" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none"></div>`;
+  const fs=(id,lbl,opts,onch)=>`<div><div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">${lbl}</div><select id="${id}" onchange="${onch||''}" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">${opts}</select></div>`;
+  el.innerHTML=`
+    <div style="margin-bottom:1.25rem"><div style="font-family:var(--H);font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:.2rem">Splash <span style="color:var(--orange)">Solver</span></div><div style="color:var(--ink3);font-size:.73rem">Game theory optimizer for all SplashSports formats · ${date?'Data: '+date:'Load picks to begin'}</div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:.65rem;margin-bottom:1rem">
+      ${fs('sp-sport','Sport',`<option value="mlb" ${sport==='mlb'?'selected':''}>MLB</option><option value="nhl" ${sport==='nhl'?'selected':''}>NHL</option><option value="nba" ${sport==='nba'?'selected':''}>NBA</option><option value="soccer" ${sport==='soccer'?'selected':''}>Soccer</option>`,'splashFetch(this.value)')}
+      ${fs('sp-mode','Contest Mode',`<option value="survivor" ${mode==='survivor'?'selected':''}>Hit Streak Survivor</option><option value="one_done" ${mode==='one_done'?'selected':''}>One & Done</option><option value="tiers" ${mode==='tiers'?'selected':''}>Tiers</option><option value="quickpicks" ${mode==='quickpicks'?'selected':''}>QuickPicks</option><option value="confidence" ${mode==='confidence'?'selected':''}>Confidence</option><option value="bracket" ${mode==='bracket'?'selected':''}>Bracket</option>`,'splashRender()')}
+      ${fi('sp-entries','Total Entries','number',entries)}
+      ${fi('sp-alive','Still Alive','number',alive)}
+      ${fi('sp-prize','Prize Pool','text',prize,'$437.50')}
+      ${fi('sp-used','Used/Excluded','text',used,'Team A, Team B')}
+    </div>
+    <div style="background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.2);border-radius:3px;padding:.5rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;font-size:.73rem;color:var(--ink)">
+      <span><span style="color:var(--orange);font-weight:600">iQ Auto-Load</span> · ${picks.length} picks loaded · ownership from market implied prob</span>
+      <button onclick="splashFetch(document.getElementById('sp-sport').value)" style="background:var(--orange);color:#000;border:none;font-family:var(--M);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .75rem;border-radius:2px;cursor:pointer">↺ Reload</button>
+    </div>
+    <button onclick="splashSolve()" style="width:100%;padding:.75rem;background:var(--orange);color:#000;font-family:var(--H);font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;margin-bottom:1.25rem">▶ Generate Strategy</button>
+    <div id="sp-results"></div>`;
+}
+function splashSolve(){
+  const mode=document.getElementById('sp-mode').value;
+  const entries=parseInt(document.getElementById('sp-entries').value)||50;
+  const alive=parseInt(document.getElementById('sp-alive').value)||50;
+  const prize=document.getElementById('sp-prize').value||'—';
+  const used=(document.getElementById('sp-used').value||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+  let picks=(window._splashPicks||[]).filter(p=>!used.includes(p.name.toLowerCase()));
+  const res=document.getElementById('sp-results');
+  if(!picks.length){res.innerHTML='<div style="padding:1rem;color:var(--ink3)">No picks loaded. Select a sport and click Reload.</div>';return;}
+  const big=entries>100;
+  const eq=(w,o)=>o>0?w/o:w*2;
+  const mc=(val,lbl,col)=>`<div style="text-align:right;margin-left:.25rem"><div style="font-family:var(--H);font-weight:700;color:${col||'var(--ink)'};font-size:.88rem">${val}</div><div style="font-size:.58rem;color:var(--ink3);letter-spacing:.05em;text-transform:uppercase">${lbl}</div></div>`;
+  const stbox=txt=>`<div style="padding:.7rem 1rem;background:var(--bg3);border-top:1px solid var(--border);font-size:.76rem;color:var(--ink);line-height:1.7"><span style="color:var(--orange);font-weight:700;font-size:.63rem;letter-spacing:.1em;text-transform:uppercase">iQ Strategy · </span>${txt}</div>`;
+  const row=(rank,name,sub,metrics,verdict,vc,bl)=>`<div style="display:flex;align-items:center;gap:.75rem;padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);border-left:3px solid ${bl||'transparent'}">${rank}<div style="flex:1;min-width:0"><div style="font-size:.86rem;font-weight:600">${name}</div><div style="font-size:.63rem;color:var(--ink3)">${sub||''}</div></div>${metrics}<div style="font-size:.63rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:${vc};min-width:4rem;text-align:right">${verdict}</div></div>`;
+  const rk=(i,c)=>`<div style="font-family:var(--H);font-size:1rem;font-weight:800;color:${c||'var(--ink3)'};min-width:1.8rem;text-align:center">#${i+1}</div>`;
+
+  if(mode==='survivor'){
+    picks=picks.map(p=>{const e=eq(p.win,p.own);const sc=e*(p.win>0.75?0.84:1);let v,vc,bl;if(e>2.2&&p.win>0.55){v='TOP PLAY';vc='var(--orange)';bl='var(--orange)';}else if(e>1.5&&p.own<0.22){v='HIGH VALUE';vc='var(--green)';bl='var(--green)';}else if(e>1.1){v='SOLID';vc='var(--ink)';bl='var(--border)';}else if(e<0.65||p.own>0.65){v='AVOID';vc='var(--red)';bl='transparent';}else{v='NEUTRAL';vc='var(--ink3)';bl='transparent';}return{...p,e,sc,v,vc,bl};}).sort((a,b)=>b.sc-a.sc);
+    const top=picks[0];const cons=picks.filter(p=>p.own<0.18&&p.win>0.55);
+    let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden"><div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between"><span>Hit Streak Survivor · ${alive}/${entries} alive</span><span>Prize: ${prize}</span></div>`;
+    picks.forEach((p,i)=>h+=row(rk(i,i===0?'var(--orange)':'var(--ink3)'),p.name,p.matchup,mc((p.win*100).toFixed(1)+'%','Win',p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--orange)')+mc(p.e.toFixed(2)+'×','Equity',p.e>1.5?'var(--green)':p.e<0.7?'var(--red)':'var(--orange)')+mc((p.own*100).toFixed(0)+'%','Own','var(--ink3)'),p.v,p.vc,p.bl));
+    let st=big?`Large field (${entries}) — equity maximization is the goal. `:`Small pool (${entries}) — survival first. `;
+    if(cons.length)st+=`Best contrarian: <strong>${cons[0].name}</strong> at ${(cons[0].win*100).toFixed(0)}% win, ${(cons[0].own*100).toFixed(0)}% est. ownership. `;
+    if(top.win>0.75)st+=`⚠ <strong>${top.name}</strong> is elite — consider saving for a harder slate. `;
+    st+=`Equity = win% ÷ ownership%. Contrarian plays gain massive equity when high-ownership chalk loses.`;
+    h+=stbox(st)+'</div>';res.innerHTML=h;
+
+  }else if(mode==='one_done'){
+    picks=picks.map(p=>{const e=eq(p.win,p.own);const fv=p.win>0.70?0.28:0;const sc=e-fv*2;let v,vc,bl;if(sc>1.8&&p.win>0.58){v='USE NOW';vc='var(--orange)';bl='var(--orange)';}else if(p.win>0.68){v='SAVE';vc='var(--blue)';bl='rgba(59,130,246,0.5)';}else if(e>1.3){v='GOOD VALUE';vc='var(--green)';bl='var(--green)';}else if(p.win<0.46){v='SKIP';vc='var(--red)';bl='transparent';}else{v='NEUTRAL';vc='var(--ink3)';bl='transparent';}return{...p,e,fv,sc,v,vc,bl};}).sort((a,b)=>b.sc-a.sc);
+    let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden"><div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase">One &amp; Done · Each team usable once all season</div>`;
+    picks.forEach((p,i)=>h+=row(rk(i,i===0?'var(--orange)':'var(--ink3)'),p.name,p.matchup,mc((p.win*100).toFixed(1)+'%','Win',p.win>0.65?'var(--green)':'var(--orange)')+mc(p.e.toFixed(2)+'×','Equity','var(--orange)')+mc('-'+(p.fv*100).toFixed(0)+'pp','FV Cost','var(--ink3)'),p.v,p.vc,p.bl));
+    const saves=picks.filter(p=>p.v==='SAVE');
+    let st=`Future value is the defining variable. `;
+    if(saves.length)st+=`<strong>${saves.map(p=>p.name).join(', ')}</strong> flagged SAVE — use a 58-65% option this round instead, preserve elites for choke-point weeks. `;
+    st+=`Choke-point weeks (holiday slates, condensed schedules) are when elite teams are scarcest and most valuable.`;
+    h+=stbox(st)+'</div>';res.innerHTML=h;
+
+  }else if(mode==='tiers'){
+    const td=[{l:'Tier 1 — Elite (70%+)',min:0.70,c:'var(--orange)'},{l:'Tier 2 — Strong (60–70%)',min:0.60,c:'var(--green)'},{l:'Tier 3 — Solid (50–60%)',min:0.50,c:'var(--ink)'},{l:'Tier 4 — Speculative (<50%)',min:0,c:'var(--ink3)'}];
+    let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden"><div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between"><span>Tiers Strategy</span><span>Prize: ${prize} · ${entries} entries</span></div>`;
+    td.forEach((tier,ti)=>{
+      const tp=picks.filter(p=>ti===0?p.win>=0.70:ti===1?p.win>=0.60&&p.win<0.70:ti===2?p.win>=0.50&&p.win<0.60:p.win<0.50).sort((a,b)=>eq(b.win,b.own)-eq(a.win,a.own));
+      if(!tp.length)return;
+      h+=`<div style="padding:.4rem 1rem;background:rgba(255,255,255,.02);border-bottom:1px solid var(--border);font-size:.65rem;font-weight:700;color:${tier.c};letter-spacing:.09em;text-transform:uppercase">${tier.l}</div>`;
+      tp.forEach((p,i)=>{const e=eq(p.win,p.own);h+=row(i===0?`<div style="font-family:var(--H);font-size:.9rem;font-weight:800;color:${tier.c};min-width:1.8rem">★</div>`:`<div style="font-size:.8rem;color:var(--ink3);min-width:1.8rem;text-align:center">${i+1}</div>`,p.name,p.matchup,mc((p.win*100).toFixed(1)+'%','Win',tier.c)+mc(e.toFixed(2)+'×','Equity',e>1.4?'var(--green)':'var(--ink3)')+mc((p.own*100).toFixed(0)+'%','Own','var(--ink3)'),i===0?'← PICK':'',i===0?tier.c:'var(--ink3)',i===0?tier.c:'transparent');});
+    });
+    h+=stbox(`Pick ★ within each tier — ranked by equity (win% ÷ ownership%), not raw win probability. In a large public field, the low-ownership option within each tier is your differentiator.`);
+    h+='</div>';res.innerHTML=h;
+
+  }else if(mode==='quickpicks'){
+    const n=Math.min(6,picks.length);const sel=picks.sort((a,b)=>Math.abs(b.edge)-Math.abs(a.edge)).slice(0,n);
+    const combo=sel.reduce((a,p)=>a*p.win,1);const avg=sel.reduce((a,p)=>a+Math.abs(p.edge),0)/sel.length;
+    let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden"><div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between"><span>QuickPicks · ${sel.length} picks</span><span>Combined: ${(combo*100).toFixed(1)}% · Avg edge: +${avg.toFixed(1)}pp</span></div>`;
+    sel.forEach((p,i)=>h+=row(rk(i,i===0?'var(--orange)':'var(--ink3)'),p.name,p.matchup,mc((p.win*100).toFixed(1)+'%','Hit%',p.win>0.65?'var(--green)':'var(--orange)')+mc('+'+(Math.abs(p.edge)||0).toFixed(1)+'pp','Edge',(Math.abs(p.edge)||0)>8?'var(--green)':'var(--orange)'),p.tier==='high'?'HIGH CONF':p.tier==='medium'?'MEDIUM':'LOW',p.tier==='high'?'var(--orange)':p.tier==='medium'?'var(--ink)':'var(--ink3)',p.tier==='high'?'var(--orange)':'transparent'));
+    let st=`Top ${sel.length} picks by model edge. Combined hit probability: <strong>${(combo*100).toFixed(1)}%</strong>. `;
+    if(big)st+=`Large public field: avoid correlated picks from the same game. `;
+    if(combo<0.20)st+=`⚠ Combined prob below 20% — consider dropping to ${sel.length-1} picks.`;
+    h+=stbox(st)+'</div>';res.innerHTML=h;
+
+  }else if(mode==='confidence'){
+    picks=picks.sort((a,b)=>b.win-a.win);const n=picks.length;
+    picks=picks.map((p,i)=>{const pts=n-i;const e=eq(p.win,p.own);const cont=e>1.4&&pts>n*0.6;let v,vc;if(i===0){v='MAX PTS';vc='var(--orange)';}else if(cont){v='CONTRARIAN';vc='var(--green)';}else if(p.win<0.44){v='MIN PTS';vc='var(--red)';}else{v='MIDDLE';vc='var(--ink3)';}return{...p,pts,e,cont,v,vc};});
+    let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden"><div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between"><span>Confidence Rankings · ${n} games</span><span>Assign ${n} pts → 1 pt</span></div>`;
+    picks.forEach(p=>h+=row(`<div style="font-family:var(--H);font-size:.95rem;font-weight:800;color:${p.pts===n?'var(--orange)':'var(--ink3)'};min-width:2.8rem;text-align:center">${p.pts}pts</div>`,p.name,p.matchup,mc((p.win*100).toFixed(1)+'%','Win',p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--ink)')+mc((p.pts*p.win).toFixed(1),'Exp Pts','var(--orange)')+mc(p.e.toFixed(2)+'×','Equity',p.e>1.4?'var(--green)':'var(--ink3)'),p.v,p.vc,p.pts===n?'var(--orange)':p.cont?'var(--green)':'transparent'));
+    const cons=picks.filter(p=>p.cont);let st=`Expected pts = assigned pts × win probability. `;
+    if(big&&cons.length)st+=`Contrarian opportunity: <strong>${cons[0].name}</strong> — high equity suggests low public ownership. Consider assigning more points than the field expects. `;
+    st+=big?`Large pool: middle rankings create the most separation when public consensus picks lose.`:`Small pool: follow expected points ranking. Deviate only on strong conviction.`;
+    h+=stbox(st)+'</div>';res.innerHTML=h;
+
+  }else if(mode==='bracket'){
+    fetch('futures.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+      const mkt=(d.markets||[]).find(m=>m.sport==='nba');
+      if(!mkt||!mkt.picks){res.innerHTML='<div style="padding:1rem;color:var(--ink3)">Load NBA futures data — check Futures tab first.</div>';return;}
+      let fp=mkt.picks.map(p=>({name:p.team,win:p.model_prob||0.1,own:mto(p.market_prob||0.1),edge:p.edge_pp||0,matchup:'NBA Champion'}));
+      fp=fp.map(p=>{const ds=p.win*(1-Math.abs(p.own-0.18));let v,vc,bl;if(ds>0.10&&p.win>0.12){v='CHAMPION PICK';vc='var(--orange)';bl='var(--orange)';}else if(p.win>0.15&&p.own<0.12){v='DARK HORSE';vc='var(--green)';bl='var(--green)';}else if(p.own>0.38){v='TOO PUBLIC';vc='var(--red)';bl='transparent';}else{v='AVOID';vc='var(--ink3)';bl='transparent';}return{...p,ds,v,vc,bl};}).sort((a,b)=>b.ds-a.ds);
+      let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden"><div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase">Bracket Strategy · Champion pick = 32× first-round value</div>`;
+      fp.forEach((p,i)=>h+=row(rk(i,i===0?'var(--orange)':'var(--ink3)'),p.name,'NBA Championship',mc((p.win*100).toFixed(1)+'%','Win%',p.win>0.20?'var(--green)':'var(--ink)')+mc((p.own*100).toFixed(0)+'%','Est Own%',p.own<0.20?'var(--green)':p.own>0.38?'var(--red)':'var(--ink)')+mc(p.ds.toFixed(3),'Diff Score','var(--orange)'),p.v,p.vc,p.bl));
+      h+=stbox(`Champion pick dominates bracket EV. Optimal: ~15-30% win prob, ~10-25% ownership. A 50% favorite at 60% ownership barely moves your equity when they win. A 20% team at 10% ownership triples it if correct.`);
+      h+='</div>';res.innerHTML=h;
+    }).catch(()=>res.innerHTML='<div style="padding:1rem;color:var(--ink3)">Futures data not available.</div>');
+  }
+}
+
 </script>
 </body>
 </html>
