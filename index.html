@@ -908,16 +908,49 @@ function splashSolve(){
     h+=stbox(st)+'</div>';res.innerHTML=h;
 
   }else if(mode==='bracket'){
+    // Bracket: pull from futures.json + allow manual team entry
+    // Key insight: champion pick = 32x value in standard scoring
+    const bracketSolve = (fp) => {
+      fp=fp.map(p=>{
+        const ds=p.win*(1.2-Math.abs(p.own-0.18)*2);
+        let v,vc,bl;
+        if(p.win>0.25&&p.own<0.20){v='CHAMPION PICK';vc='var(--orange)';bl='var(--orange)';}
+        else if(p.win>0.15&&p.own<0.12){v='DARK HORSE';vc='var(--green)';bl='var(--green)';}
+        else if(p.win>0.30&&p.own>0.35){v='TOO PUBLIC';vc='var(--red)';bl='transparent';}
+        else if(p.win<0.08){v='LONGSHOT';vc='var(--ink3)';bl='transparent';}
+        else{v='CONSIDER';vc='var(--ink)';bl='var(--border)';}
+        return{...p,ds,v,vc,bl};
+      }).sort((a,b)=>b.ds-a.ds);
+      let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+        <div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between">
+          <span>Bracket Champion Strategy · ${entries} entries · Prize: ${prize}</span>
+          <span>Champion = 32× first-round value</span>
+        </div>`;
+      fp.forEach((p,i)=>h+=row(rk(i,i===0?'var(--orange)':'var(--ink3)'),p.name,p.matchup||'Championship',
+        mc((p.win*100).toFixed(1)+'%','Win%',p.win>0.20?'var(--green)':'var(--ink)')+
+        mc((p.own*100).toFixed(0)+'%','Est Own%',p.own<0.20?'var(--green)':p.own>0.35?'var(--red)':'var(--ink)')+
+        mc(p.ds.toFixed(2),'Diff Score','var(--orange)'),
+        p.v,p.vc,p.bl));
+      const top=fp[0];const pub=fp.filter(p=>p.v==='TOO PUBLIC');
+      let st=`<strong>Champion pick dominates bracket pool EV</strong> — worth 32× a first-round game in standard scoring. `;
+      st+=`Optimal champion: 15-30% win probability, under 20% public ownership. `;
+      if(top)st+=`Top recommendation: <strong>${top.name}</strong> at ${(top.win*100).toFixed(0)}% win, ~${(top.own*100).toFixed(0)}% est. ownership. `;
+      if(pub.length)st+=`Avoid: ${pub.map(p=>'<strong>'+p.name+'</strong>').join(', ')} — too heavily owned, winning barely improves your equity. `;
+      st+=`A 25% team at 12% ownership triples your equity vs. a 60% favorite at 55% ownership who barely moves the needle.`;
+      h+=stbox(st)+'</div>';
+      res.innerHTML=h;
+    };
+    // Try futures.json first, fall back to game picks
     fetch('futures.json?t='+Date.now()).then(r=>r.json()).then(d=>{
-      const mkt=(d.markets||[]).find(m=>m.sport==='nba');
-      if(!mkt||!mkt.picks){res.innerHTML='<div style="padding:1rem;color:var(--ink3)">Load NBA futures data — check Futures tab first.</div>';return;}
-      let fp=mkt.picks.map(p=>({name:p.team,win:p.model_prob||0.1,own:mto(p.market_prob||0.1),edge:p.edge_pp||0,matchup:'NBA Champion'}));
-      fp=fp.map(p=>{const ds=p.win*(1-Math.abs(p.own-0.18));let v,vc,bl;if(ds>0.10&&p.win>0.12){v='CHAMPION PICK';vc='var(--orange)';bl='var(--orange)';}else if(p.win>0.15&&p.own<0.12){v='DARK HORSE';vc='var(--green)';bl='var(--green)';}else if(p.own>0.38){v='TOO PUBLIC';vc='var(--red)';bl='transparent';}else{v='AVOID';vc='var(--ink3)';bl='transparent';}return{...p,ds,v,vc,bl};}).sort((a,b)=>b.ds-a.ds);
-      let h=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden"><div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase">Bracket Strategy · Champion pick = 32× first-round value</div>`;
-      fp.forEach((p,i)=>h+=row(rk(i,i===0?'var(--orange)':'var(--ink3)'),p.name,'NBA Championship',mc((p.win*100).toFixed(1)+'%','Win%',p.win>0.20?'var(--green)':'var(--ink)')+mc((p.own*100).toFixed(0)+'%','Est Own%',p.own<0.20?'var(--green)':p.own>0.38?'var(--red)':'var(--ink)')+mc(p.ds.toFixed(3),'Diff Score','var(--orange)'),p.v,p.vc,p.bl));
-      h+=stbox(`Champion pick dominates bracket EV. Optimal: ~15-30% win prob, ~10-25% ownership. A 50% favorite at 60% ownership barely moves your equity when they win. A 20% team at 10% ownership triples it if correct.`);
-      h+='</div>';res.innerHTML=h;
-    }).catch(()=>res.innerHTML='<div style="padding:1rem;color:var(--ink3)">Futures data not available.</div>');
+      const sport_sel=document.getElementById('sp-sport').value;
+      const mkt=(d.markets||[]).find(m=>m.sport===sport_sel)||(d.markets||[])[0];
+      if(mkt&&mkt.picks&&mkt.picks.length){
+        bracketSolve(mkt.picks.map(p=>({name:p.team,win:p.model_prob||0.1,own:mto(p.market_prob||0.1),edge:p.edge_pp||0,matchup:p.sport?.toUpperCase()+' Champion'})));
+      } else {
+        // Fall back to game picks as proxy
+        bracketSolve(picks.map(p=>({...p,matchup:p.matchup+' (game pick)'})));
+      }
+    }).catch(()=>bracketSolve(picks.map(p=>({...p,matchup:p.matchup+' (game pick)'}))));
   }
 }
 
