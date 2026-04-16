@@ -182,6 +182,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
     <button class="tab on" id="t-pred" onclick="showTab('pred')">Predictions</button>
     <button class="tab"    id="t-perf" onclick="showTab('perf')">Performance</button>
     <button class="tab"    id="t-futures" onclick="showTab('futures')">Futures</button>
+    <button class="tab"    id="t-splash" onclick="showTab('splash')">Splash Solver</button>
   </nav>
   <div class="mright">
     <a class="ml" href="/splash.html">Splash Solver →</a><a class="ml" href="https://kuhiroclass.com" target="_blank">Kuhiro Research ↗</a><a class="ml" href="submit.html">Submit a model →</a>
@@ -290,6 +291,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 </div>
 
 <div id="panel-futures" style="display:none;padding:2rem 1.5rem;max-width:1200px;margin:0 auto"><div id="futures-section"></div></div>
+<div id="panel-splash" style="display:none;padding:2rem 1.5rem;max-width:1100px;margin:0 auto"></div>
 <footer>
   <div class="fw">the <b>iQ</b> project</div>
   <div class="fm">Walk-forward validated · No retroactive edits · All predictions time-stamped</div>
@@ -356,6 +358,9 @@ function showTab(t){
   }
   const fp=document.getElementById('panel-futures');
   if(fp) fp.style.display=t==='futures'?'block':'none';
+  const sp=document.getElementById('panel-splash');
+  if(sp) sp.style.display=t==='splash'?'block':'none';
+  if(t==='splash' && !window._splashInited){window._splashInited=true;splashLoad();}
 }
 function setF(f,btn){
   AF=f;
@@ -781,6 +786,173 @@ function renderFutures() {
 }
 
 loadFutures();
+
+
+// ═══ SPLASH SOLVER ═══
+function splashLoad() {
+  const sport = document.getElementById('sp-sport') ? document.getElementById('sp-sport').value : 'mlb';
+  splashFetch(sport);
+}
+
+function mto(m) {
+  if (!m) return 0.35;
+  if (m >= 0.70) return Math.min(0.80, m * 1.05);
+  if (m >= 0.60) return m * 0.85;
+  if (m >= 0.50) return m * 0.70;
+  return Math.max(0.05, m * 0.50);
+}
+
+async function splashFetch(sport) {
+  try {
+    const r = await fetch(sport + '_picks_today.json?t=' + Date.now());
+    if (!r.ok) return;
+    const d = await r.json();
+    window._splashPicks = (d.picks || []).map(p => ({
+      name: p.pick,
+      win: p.pick_side === 'home' ? p.model_prob_home : p.model_prob_away,
+      own: mto(p.pick_side === 'home' ? p.market_prob_home : p.market_prob_away),
+      edge: p.edge_pp || 0,
+      tier: p.confidence_tier,
+      matchup: (p.away_team||'') + ' @ ' + (p.home_team||'')
+    }));
+    splashRender(d.data_date);
+  } catch(e) { console.error('splash fetch:', e); }
+}
+
+function splashRender(date) {
+  const el = document.getElementById('panel-splash');
+  const picks = window._splashPicks || [];
+  const used = (document.getElementById('sp-used') ? document.getElementById('sp-used').value : '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+
+  el.innerHTML = `
+    <div style="margin-bottom:1.5rem">
+      <div style="font-family:var(--H);font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.25rem">Splash <span style="color:var(--orange)">Solver</span></div>
+      <div style="color:var(--ink3);font-size:0.75rem">Equity optimizer · auto-loaded from iQ ${date||''} picks</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem;margin-bottom:1rem">
+      <div>
+        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Sport</div>
+        <select id="sp-sport" onchange="splashFetch(this.value)" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
+          <option value="mlb">MLB</option>
+          <option value="nhl">NHL</option>
+          <option value="nba">NBA</option>
+          <option value="soccer">Soccer</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Entries</div>
+        <input id="sp-entries" type="number" value="50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
+      </div>
+      <div>
+        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Alive</div>
+        <input id="sp-alive" type="number" value="50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
+      </div>
+      <div>
+        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Prize Pool</div>
+        <input id="sp-prize" type="text" placeholder="$437.50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
+      </div>
+      <div>
+        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Mode</div>
+        <select id="sp-mode" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
+          <option value="survivor">Hit Streak Survivor</option>
+          <option value="tiers">Tiers</option>
+          <option value="confidence">Confidence</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Used Teams</div>
+        <input id="sp-used" type="text" placeholder="Team A, Team B" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
+      </div>
+    </div>
+    <button onclick="splashSolve()" style="width:100%;padding:0.75rem;background:var(--orange);color:#000;font-family:var(--H);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;margin-bottom:1.5rem">▶ Generate Strategy</button>
+    <div id="sp-results"></div>
+  `;
+}
+
+function splashSolve() {
+  const mode = document.getElementById('sp-mode').value;
+  const entries = parseInt(document.getElementById('sp-entries').value) || 50;
+  const alive = parseInt(document.getElementById('sp-alive').value) || 50;
+  const used = (document.getElementById('sp-used').value||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+  let picks = (window._splashPicks||[]).filter(p=>!used.includes(p.name.toLowerCase()));
+  if (!picks.length) { alert('No picks loaded.'); return; }
+
+  const res = document.getElementById('sp-results');
+
+  if (mode === 'survivor') {
+    picks = picks.map(p => {
+      const eq = p.own > 0 ? p.win / p.own : p.win;
+      const score = eq * (p.win > 0.75 ? 0.85 : 1.0);
+      let v, vc;
+      if (eq > 2.0 && p.win > 0.55) { v='TOP PLAY'; vc='var(--orange)'; }
+      else if (eq > 1.4 && p.own < 0.25) { v='VALUE'; vc='var(--green)'; }
+      else if (eq < 0.6) { v='AVOID'; vc='var(--red)'; }
+      else { v='NEUTRAL'; vc='var(--ink3)'; }
+      return {...p, eq, score, v, vc};
+    }).sort((a,b)=>b.score-a.score);
+
+    const top = picks[0];
+    const con = picks.filter(p=>p.own<0.2&&p.win>0.55);
+    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
+    html += '<div style="padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase">Survivor Strategy · ' + alive + '/' + entries + ' alive</div>';
+    picks.forEach((p,i) => {
+      const bc = i===0?'3px solid var(--orange)':p.v==='VALUE'?'3px solid var(--green)':'3px solid transparent';
+      html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.7rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);border-left:'+bc+'">';
+      html += '<div style="font-family:var(--H);font-size:1.1rem;font-weight:800;color:'+(i===0?'var(--orange)':'var(--ink3)')+';min-width:1.8rem">#'+(i+1)+'</div>';
+      html += '<div style="flex:1"><div style="font-size:0.88rem;font-weight:600">'+p.name+'</div><div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
+      html += '<div style="text-align:right;margin-right:0.5rem"><div style="font-weight:700;color:'+(p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--orange)')+'">'+( p.win*100).toFixed(1)+'%</div><div style="font-size:0.6rem;color:var(--ink3)">WIN</div></div>';
+      html += '<div style="text-align:right;margin-right:0.5rem"><div style="font-weight:700;color:'+(p.eq>1.5?'var(--green)':p.eq<0.7?'var(--red)':'var(--orange)')+'">'+p.eq.toFixed(2)+'×</div><div style="font-size:0.6rem;color:var(--ink3)">EQUITY</div></div>';
+      html += '<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:'+p.vc+';min-width:4.5rem;text-align:right">'+p.v+'</div>';
+      html += '</div>';
+    });
+    html += '<div style="padding:0.75rem 1rem;background:var(--bg3);border-top:1px solid var(--border);font-size:0.78rem;color:var(--ink);line-height:1.7">';
+    html += '<span style="color:var(--orange);font-weight:600;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase">iQ Strategy · </span>';
+    if (entries > 100) {
+      html += 'Large field — contrarian picks maximize equity.';
+      if (con.length) html += ' Best contrarian: <strong>'+con[0].name+'</strong> at '+(con[0].win*100).toFixed(0)+'% win, '+(con[0].own*100).toFixed(0)+'% est. ownership.';
+    } else {
+      html += 'Small pool — take highest equity pick. ';
+    }
+    if (top.win > 0.75) html += ' ⚠ <strong>'+top.name+'</strong> is elite — consider saving for a harder slate.';
+    html += '</div></div>';
+    res.innerHTML = html;
+
+  } else if (mode === 'tiers') {
+    const tiers = [{l:'Tier 1 — Elite',min:0.70,c:'var(--orange)'},{l:'Tier 2 — Strong',min:0.60,c:'var(--green)'},{l:'Tier 3 — Solid',min:0.50,c:'var(--ink)'},{l:'Tier 4 — Speculative',min:0,c:'var(--ink3)'}];
+    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
+    tiers.forEach(tier => {
+      const tp = picks.filter(p=>p.win>=tier.min).filter(p=>tier.min===0||p.win<(tier.min===0.50?0.60:tier.min===0.60?0.70:99));
+      if (!tp.length) return;
+      html += '<div style="padding:0.5rem 1rem;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);font-size:0.67rem;font-weight:700;color:'+tier.c+';letter-spacing:0.1em;text-transform:uppercase">'+tier.l+'</div>';
+      tp.sort((a,b)=>b.win-a.win).forEach(p=>{
+        html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.6rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)">';
+        html += '<div style="flex:1;font-size:0.85rem">'+p.name+'<div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
+        html += '<div style="font-weight:700;color:'+tier.c+'">'+(p.win*100).toFixed(1)+'%</div>';
+        html += '<div style="font-size:0.7rem;color:var(--ink3)">own '+(p.own*100).toFixed(0)+'%</div>';
+        html += '<div style="font-size:0.7rem;color:'+(p.edge>5?'var(--green)':'var(--ink3)')+'">+'+(p.edge||0).toFixed(1)+'pp</div>';
+        html += '</div>';
+      });
+    });
+    html += '</div>';
+    res.innerHTML = html;
+
+  } else if (mode === 'confidence') {
+    picks = picks.sort((a,b)=>b.win-a.win);
+    const n = picks.length;
+    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
+    html += '<div style="padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase">Confidence Rankings — assign '+n+' pts down to 1 pt</div>';
+    picks.forEach((p,i)=>{
+      const pts = n - i;
+      html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)">';
+      html += '<div style="font-family:var(--H);font-size:1rem;font-weight:800;color:'+(i===0?'var(--orange)':'var(--ink3)')+';min-width:3rem">'+pts+'pts</div>';
+      html += '<div style="flex:1;font-size:0.85rem">'+p.name+'<div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
+      html += '<div style="font-weight:700;color:'+(p.win>0.65?'var(--green)':'var(--ink)')+'">'+( p.win*100).toFixed(1)+'%</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    res.innerHTML = html;
+  }
+}
 
 </script>
 </body>
