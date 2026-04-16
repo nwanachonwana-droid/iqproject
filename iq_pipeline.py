@@ -634,6 +634,67 @@ def run_nfl():
 # SETTLEMENT — fetch yesterday's results, update performance logs
 # ═══════════════════════════════════════════════════════════════════════════════
 
+
+def _settle_soccer(yesterday):
+    """Settle soccer picks using ESPN soccer scoreboards."""
+    picks_path = os.path.join(DATA_DIR, "soccer_picks_today.json")
+    archive_path = os.path.join(DATA_DIR, f"soccer_picks_{yesterday}.json")
+    use_path = archive_path if os.path.exists(archive_path) else picks_path
+    if not os.path.exists(use_path): return
+    with open(use_path) as f: data = json.load(f)
+    pending = [p for p in data.get("picks",[])
+               if p.get("outcome") is None and
+               (p.get("game_time_utc","") or "").startswith(yesterday)]
+    if not pending:
+        print(f"  ~ soccer: no pending picks for {yesterday}")
+        return
+    leagues = ["eng.1","esp.1","ger.1","ita.1","fra.ligue_1",
+               "uefa.champions","uefa.europa","usa.1","eng.championship"]
+    winners = {}
+    yesterday_compact = yesterday.replace("-","")
+    for league in leagues:
+        try:
+            url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard?dates={yesterday_compact}"
+            scores = fetch(url)
+            for event in scores.get("events",[]):
+                for comp in event.get("competitions",[{}]):
+                    for c in comp.get("competitors",[]):
+                        name = c["team"]["displayName"]
+                        winners[name] = c.get("winner", False)
+        except: pass
+    settled = 0
+    perf_path = os.path.join(DATA_DIR, "soccer_performance_log.json")
+    perf = json.load(open(perf_path)) if os.path.exists(perf_path) else {"sport":"soccer","last_updated":yesterday,"overall":{"total":0,"wins":0,"losses":0,"hit_rate":0.0,"roi_flat":0.0},"by_confidence":{},"recent":[]}
+    for pick in pending:
+        team = pick["pick"]
+        if team in winners:
+            won = winners[team]
+            pick["outcome"] = "WIN" if won else "LOSS"
+            pick["result"] = 1.0 if won else 0.0
+            pick["settled_at"] = datetime.datetime.utcnow().isoformat() + "Z"
+            ov = perf["overall"]
+            ov["total"] += 1
+            ov["wins"] = ov.get("wins",0) + (1 if won else 0)
+            ov["losses"] = ov.get("losses",0) + (0 if won else 1)
+            s = ov["wins"] + ov["losses"]
+            ov["hit_rate"] = round(ov["wins"]/s*100,2) if s else 0
+            ov["roi_flat"] = round(((ov["wins"]*0.909)-ov["losses"])/ov["total"]*100,2)
+            t = pick.get("confidence_tier","low")
+            bc = perf["by_confidence"].setdefault(t,{"wins":0,"total":0,"hit_rate":0.0})
+            bc["total"] += 1
+            if won: bc["wins"] += 1
+            bc["hit_rate"] = round(bc["wins"]/bc["total"]*100,2)
+            perf["recent"].insert(0, dict(pick))
+            settled += 1
+    if settled:
+        perf["recent"] = perf["recent"][:50]
+        perf["last_updated"] = yesterday
+        with open(perf_path,"w") as f: json.dump(perf,f,indent=2)
+        with open(use_path,"w") as f: json.dump(data,f,indent=2)
+        print(f"  ✓ soccer: settled {settled} picks")
+    else:
+        print(f"  ~ soccer: {len(pending)} pending, no matches found in {len(winners)} results")
+
 def settle_all():
     print("\n[Settling yesterday's picks]")
     yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
