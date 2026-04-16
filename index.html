@@ -788,335 +788,475 @@ function renderFutures() {
 loadFutures();
 
 
-// ═══ SPLASH SOLVER ═══
+
+// ═══════════════════════════════════════════════════════
+// SPLASH SOLVER — Full Game Theory Engine
+// Modes: Hit Streak Survivor | One & Done | Tiers |
+//        QuickPicks/Pick'em | Confidence | Bracket
+// ═══════════════════════════════════════════════════════
+
 function splashLoad() {
   const sport = document.getElementById('sp-sport') ? document.getElementById('sp-sport').value : 'mlb';
   splashFetch(sport);
 }
 
 function mto(m) {
-  if (!m) return 0.35;
-  if (m >= 0.70) return Math.min(0.80, m * 1.05);
-  if (m >= 0.60) return m * 0.85;
-  if (m >= 0.50) return m * 0.70;
-  return Math.max(0.05, m * 0.50);
+  // Market implied prob → public ownership proxy
+  // Public systematically overweights favorites
+  if (!m || isNaN(m)) return 0.35;
+  if (m >= 0.75) return Math.min(0.85, m * 1.08);
+  if (m >= 0.65) return m * 0.95;
+  if (m >= 0.55) return m * 0.80;
+  if (m >= 0.45) return m * 0.65;
+  return Math.max(0.05, m * 0.45);
 }
 
 async function splashFetch(sport) {
+  window._splashPicks = [];
+  window._splashProps = [];
   try {
     const r = await fetch(sport + '_picks_today.json?t=' + Date.now());
-    if (!r.ok) return;
-    const d = await r.json();
-    window._splashPicks = (d.picks || []).map(p => ({
-      name: p.pick,
-      win: p.pick_side === 'home' ? p.model_prob_home : p.model_prob_away,
-      own: mto(p.pick_side === 'home' ? p.market_prob_home : p.market_prob_away),
-      edge: p.edge_pp || 0,
-      tier: p.confidence_tier,
-      matchup: (p.away_team||'') + ' @ ' + (p.home_team||'')
-    }));
-    splashRender(d.data_date);
+    if (r.ok) {
+      const d = await r.json();
+      window._splashDate = d.data_date || '';
+      window._splashPicks = (d.picks || []).map(p => ({
+        name: p.pick,
+        win: (p.pick_side === 'home' ? p.model_prob_home : p.model_prob_away) || 0.5,
+        own: mto(p.pick_side === 'home' ? p.market_prob_home : p.market_prob_away),
+        edge: p.edge_pp || 0,
+        tier: p.confidence_tier || 'low',
+        matchup: (p.away_team||'') + ' @ ' + (p.home_team||''),
+        game_time: p.game_time_utc || ''
+      }));
+    }
+    // Also fetch props for QuickPicks mode
+    const pr = await fetch((sport === 'nba' ? 'nba' : 'mlb') + '_props_today.json?t=' + Date.now());
+    if (pr.ok) {
+      const pd = await pr.json();
+      window._splashProps = (pd.picks || [])
+        .filter(p => p.edge_pp && Math.abs(p.edge_pp) >= 4)
+        .sort((a,b) => Math.abs(b.edge_pp||0) - Math.abs(a.edge_pp||0))
+        .slice(0, 25)
+        .map(p => ({
+          name: (p.player||'?') + ' — ' + (p.stat||'?'),
+          line: p.line,
+          dir: p.direction || 'over',
+          win: p.model_prob >= 0.5 ? p.model_prob : 1 - p.model_prob,
+          edge: Math.abs(p.edge_pp || 0),
+          market: p.market_prob || 0.5,
+          own: mto(p.market_prob || 0.5),
+          tier: p.confidence_tier || 'low'
+        }));
+    }
   } catch(e) { console.error('splash fetch:', e); }
+  splashRender();
 }
 
-function splashRender(date) {
+function splashRender() {
   const el = document.getElementById('panel-splash');
+  if (!el) return;
   const picks = window._splashPicks || [];
-  const used = (document.getElementById('sp-used') ? document.getElementById('sp-used').value : '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+  const props = window._splashProps || [];
+  const date = window._splashDate || '';
+  const mode = document.getElementById('sp-mode') ? document.getElementById('sp-mode').value : 'survivor';
+  const usedVal = document.getElementById('sp-used') ? document.getElementById('sp-used').value : '';
+  const entriesVal = document.getElementById('sp-entries') ? document.getElementById('sp-entries').value : '50';
+  const aliveVal = document.getElementById('sp-alive') ? document.getElementById('sp-alive').value : '50';
+  const prizeVal = document.getElementById('sp-prize') ? document.getElementById('sp-prize').value : '';
+  const sportVal = document.getElementById('sp-sport') ? document.getElementById('sp-sport').value : 'mlb';
+
+  const inp = (id, label, type, val, ph) => `<div>
+    <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">${label}</div>
+    <input id="${id}" type="${type}" value="${val}" placeholder="${ph||''}" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
+  </div>`;
+  const sel = (id, label, opts, onch) => `<div>
+    <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">${label}</div>
+    <select id="${id}" ${onch?'onchange="'+onch+'"':''} style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
+      ${opts.map(o=>`<option value="${o.v}" ${o.v===sportVal||o.v===mode?'selected':''>${o.l}</option>`).join('')}
+    </select>
+  </div>`;
 
   el.innerHTML = `
-    <div style="margin-bottom:1.5rem">
-      <div style="font-family:var(--H);font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.25rem">Splash <span style="color:var(--orange)">Solver</span></div>
-      <div style="color:var(--ink3);font-size:0.75rem">Equity optimizer · auto-loaded from iQ ${date||''} picks</div>
+    <div style="margin-bottom:1.25rem">
+      <div style="font-family:var(--H);font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:.2rem">Splash <span style="color:var(--orange)">Solver</span></div>
+      <div style="color:var(--ink3);font-size:.73rem">Game theory optimizer for all SplashSports contest formats · ${date ? 'Data: '+date : 'Load picks to begin'}</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem;margin-bottom:1rem">
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:.65rem;margin-bottom:1rem">
       <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Sport</div>
-        <select id="sp-sport" onchange="splashFetch(this.value)" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-          <option value="mlb">MLB</option>
-          <option value="nhl">NHL</option>
-          <option value="nba">NBA</option>
-          <option value="soccer">Soccer</option>
+        <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">Sport</div>
+        <select id="sp-sport" onchange="splashFetch(this.value)" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
+          <option value="mlb" ${sportVal==='mlb'?'selected':''}>MLB</option>
+          <option value="nhl" ${sportVal==='nhl'?'selected':''}>NHL</option>
+          <option value="nba" ${sportVal==='nba'?'selected':''}>NBA</option>
+          <option value="soccer" ${sportVal==='soccer'?'selected':''}>Soccer</option>
         </select>
       </div>
       <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Entries</div>
-        <input id="sp-entries" type="number" value="50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Alive</div>
-        <input id="sp-alive" type="number" value="50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Prize Pool</div>
-        <input id="sp-prize" type="text" placeholder="$437.50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Mode</div>
-        <select id="sp-mode" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-          <option value="survivor">Hit Streak Survivor</option>
-          <option value="tiers">Tiers</option>
-          <option value="confidence">Confidence</option>
+        <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">Contest Mode</div>
+        <select id="sp-mode" onchange="splashRender()" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
+          <option value="survivor" ${mode==='survivor'?'selected':''}>Hit Streak Survivor</option>
+          <option value="one_done" ${mode==='one_done'?'selected':''}>One &amp; Done</option>
+          <option value="tiers" ${mode==='tiers'?'selected':''}>Tiers (NBA/PGA)</option>
+          <option value="quickpicks" ${mode==='quickpicks'?'selected':''}>QuickPicks / Pick'em</option>
+          <option value="confidence" ${mode==='confidence'?'selected':''}>Confidence Pool</option>
+          <option value="bracket" ${mode==='bracket'?'selected':''}>Bracket Challenge</option>
         </select>
       </div>
       <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Used Teams</div>
-        <input id="sp-used" type="text" placeholder="Team A, Team B" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
+        <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">Total Entries</div>
+        <input id="sp-entries" type="number" value="${entriesVal}" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
+      </div>
+      <div>
+        <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">Still Alive</div>
+        <input id="sp-alive" type="number" value="${aliveVal}" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
+      </div>
+      <div>
+        <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">Prize Pool</div>
+        <input id="sp-prize" type="text" value="${prizeVal}" placeholder="e.g. $437.50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
+      </div>
+      <div>
+        <div style="font-size:.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">Used / Excluded</div>
+        <input id="sp-used" type="text" value="${usedVal}" placeholder="Team A, Team B…" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:.8rem;padding:.4rem .5rem;border-radius:2px;outline:none">
       </div>
     </div>
-    <button onclick="splashSolve()" style="width:100%;padding:0.75rem;background:var(--orange);color:#000;font-family:var(--H);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;margin-bottom:1.5rem">▶ Generate Strategy</button>
+
+    <div style="background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.2);border-radius:3px;padding:.55rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;font-size:.73rem;color:var(--ink)">
+      <span><span style="color:var(--orange);font-weight:600">iQ Auto-Load</span> · ${picks.length} game picks + ${props.length} props loaded · ownership estimated from market implied probability</span>
+      <button onclick="splashFetch(document.getElementById('sp-sport').value)" style="background:var(--orange);color:#000;border:none;font-family:var(--M);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .75rem;border-radius:2px;cursor:pointer;white-space:nowrap">↺ Reload</button>
+    </div>
+
+    <button onclick="splashSolve()" style="width:100%;padding:.75rem;background:var(--orange);color:#000;font-family:var(--H);font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;margin-bottom:1.25rem;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">▶ Generate Strategy</button>
+
     <div id="sp-results"></div>
   `;
 }
 
-function splashSolve() {
-  const mode = document.getElementById('sp-mode').value;
-  const entries = parseInt(document.getElementById('sp-entries').value) || 50;
-  const alive = parseInt(document.getElementById('sp-alive').value) || 50;
-  const used = (document.getElementById('sp-used').value||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
-  let picks = (window._splashPicks||[]).filter(p=>!used.includes(p.name.toLowerCase()));
-  if (!picks.length) { alert('No picks loaded.'); return; }
-
-  const res = document.getElementById('sp-results');
-
-  if (mode === 'survivor') {
-    picks = picks.map(p => {
-      const eq = p.own > 0 ? p.win / p.own : p.win;
-      const score = eq * (p.win > 0.75 ? 0.85 : 1.0);
-      let v, vc;
-      if (eq > 2.0 && p.win > 0.55) { v='TOP PLAY'; vc='var(--orange)'; }
-      else if (eq > 1.4 && p.own < 0.25) { v='VALUE'; vc='var(--green)'; }
-      else if (eq < 0.6) { v='AVOID'; vc='var(--red)'; }
-      else { v='NEUTRAL'; vc='var(--ink3)'; }
-      return {...p, eq, score, v, vc};
-    }).sort((a,b)=>b.score-a.score);
-
-    const top = picks[0];
-    const con = picks.filter(p=>p.own<0.2&&p.win>0.55);
-    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
-    html += '<div style="padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase">Survivor Strategy · ' + alive + '/' + entries + ' alive</div>';
-    picks.forEach((p,i) => {
-      const bc = i===0?'3px solid var(--orange)':p.v==='VALUE'?'3px solid var(--green)':'3px solid transparent';
-      html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.7rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);border-left:'+bc+'">';
-      html += '<div style="font-family:var(--H);font-size:1.1rem;font-weight:800;color:'+(i===0?'var(--orange)':'var(--ink3)')+';min-width:1.8rem">#'+(i+1)+'</div>';
-      html += '<div style="flex:1"><div style="font-size:0.88rem;font-weight:600">'+p.name+'</div><div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
-      html += '<div style="text-align:right;margin-right:0.5rem"><div style="font-weight:700;color:'+(p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--orange)')+'">'+( p.win*100).toFixed(1)+'%</div><div style="font-size:0.6rem;color:var(--ink3)">WIN</div></div>';
-      html += '<div style="text-align:right;margin-right:0.5rem"><div style="font-weight:700;color:'+(p.eq>1.5?'var(--green)':p.eq<0.7?'var(--red)':'var(--orange)')+'">'+p.eq.toFixed(2)+'×</div><div style="font-size:0.6rem;color:var(--ink3)">EQUITY</div></div>';
-      html += '<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:'+p.vc+';min-width:4.5rem;text-align:right">'+p.v+'</div>';
-      html += '</div>';
-    });
-    html += '<div style="padding:0.75rem 1rem;background:var(--bg3);border-top:1px solid var(--border);font-size:0.78rem;color:var(--ink);line-height:1.7">';
-    html += '<span style="color:var(--orange);font-weight:600;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase">iQ Strategy · </span>';
-    if (entries > 100) {
-      html += 'Large field — contrarian picks maximize equity.';
-      if (con.length) html += ' Best contrarian: <strong>'+con[0].name+'</strong> at '+(con[0].win*100).toFixed(0)+'% win, '+(con[0].own*100).toFixed(0)+'% est. ownership.';
-    } else {
-      html += 'Small pool — take highest equity pick. ';
-    }
-    if (top.win > 0.75) html += ' ⚠ <strong>'+top.name+'</strong> is elite — consider saving for a harder slate.';
-    html += '</div></div>';
-    res.innerHTML = html;
-
-  } else if (mode === 'tiers') {
-    const tiers = [{l:'Tier 1 — Elite',min:0.70,c:'var(--orange)'},{l:'Tier 2 — Strong',min:0.60,c:'var(--green)'},{l:'Tier 3 — Solid',min:0.50,c:'var(--ink)'},{l:'Tier 4 — Speculative',min:0,c:'var(--ink3)'}];
-    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
-    tiers.forEach(tier => {
-      const tp = picks.filter(p=>p.win>=tier.min).filter(p=>tier.min===0||p.win<(tier.min===0.50?0.60:tier.min===0.60?0.70:99));
-      if (!tp.length) return;
-      html += '<div style="padding:0.5rem 1rem;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);font-size:0.67rem;font-weight:700;color:'+tier.c+';letter-spacing:0.1em;text-transform:uppercase">'+tier.l+'</div>';
-      tp.sort((a,b)=>b.win-a.win).forEach(p=>{
-        html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.6rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)">';
-        html += '<div style="flex:1;font-size:0.85rem">'+p.name+'<div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
-        html += '<div style="font-weight:700;color:'+tier.c+'">'+(p.win*100).toFixed(1)+'%</div>';
-        html += '<div style="font-size:0.7rem;color:var(--ink3)">own '+(p.own*100).toFixed(0)+'%</div>';
-        html += '<div style="font-size:0.7rem;color:'+(p.edge>5?'var(--green)':'var(--ink3)')+'">+'+(p.edge||0).toFixed(1)+'pp</div>';
-        html += '</div>';
-      });
-    });
-    html += '</div>';
-    res.innerHTML = html;
-
-  } else if (mode === 'confidence') {
-    picks = picks.sort((a,b)=>b.win-a.win);
-    const n = picks.length;
-    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
-    html += '<div style="padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase">Confidence Rankings — assign '+n+' pts down to 1 pt</div>';
-    picks.forEach((p,i)=>{
-      const pts = n - i;
-      html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)">';
-      html += '<div style="font-family:var(--H);font-size:1rem;font-weight:800;color:'+(i===0?'var(--orange)':'var(--ink3)')+';min-width:3rem">'+pts+'pts</div>';
-      html += '<div style="flex:1;font-size:0.85rem">'+p.name+'<div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
-      html += '<div style="font-weight:700;color:'+(p.win>0.65?'var(--green)':'var(--ink)')+'">'+( p.win*100).toFixed(1)+'%</div>';
-      html += '</div>';
-    });
-    html += '</div>';
-    res.innerHTML = html;
-  }
-}
-
-
-// ═══ SPLASH SOLVER ═══
-function splashLoad() {
-  const sport = document.getElementById('sp-sport') ? document.getElementById('sp-sport').value : 'mlb';
-  splashFetch(sport);
-}
-
-function mto(m) {
-  if (!m) return 0.35;
-  if (m >= 0.70) return Math.min(0.80, m * 1.05);
-  if (m >= 0.60) return m * 0.85;
-  if (m >= 0.50) return m * 0.70;
-  return Math.max(0.05, m * 0.50);
-}
-
-async function splashFetch(sport) {
-  try {
-    const r = await fetch(sport + '_picks_today.json?t=' + Date.now());
-    if (!r.ok) return;
-    const d = await r.json();
-    window._splashPicks = (d.picks || []).map(p => ({
-      name: p.pick,
-      win: p.pick_side === 'home' ? p.model_prob_home : p.model_prob_away,
-      own: mto(p.pick_side === 'home' ? p.market_prob_home : p.market_prob_away),
-      edge: p.edge_pp || 0,
-      tier: p.confidence_tier,
-      matchup: (p.away_team||'') + ' @ ' + (p.home_team||'')
-    }));
-    splashRender(d.data_date);
-  } catch(e) { console.error('splash fetch:', e); }
-}
-
-function splashRender(date) {
-  const el = document.getElementById('panel-splash');
-  const picks = window._splashPicks || [];
-  const used = (document.getElementById('sp-used') ? document.getElementById('sp-used').value : '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
-
-  el.innerHTML = `
-    <div style="margin-bottom:1.5rem">
-      <div style="font-family:var(--H);font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.25rem">Splash <span style="color:var(--orange)">Solver</span></div>
-      <div style="color:var(--ink3);font-size:0.75rem">Equity optimizer · auto-loaded from iQ ${date||''} picks</div>
+function card(rank, name, sub, metrics, verdict, verdictColor, borderColor) {
+  return `<div style="display:flex;align-items:center;gap:1rem;padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);border-left:3px solid ${borderColor||'transparent'}">
+    <div style="font-family:var(--H);font-size:1.05rem;font-weight:800;color:${borderColor==='var(--orange)'?'var(--orange)':'var(--ink3)'};min-width:2rem;text-align:center">${rank}</div>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:.88rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${name}</div>
+      <div style="font-size:.65rem;color:var(--ink3)">${sub||''}</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem;margin-bottom:1rem">
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Sport</div>
-        <select id="sp-sport" onchange="splashFetch(this.value)" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-          <option value="mlb">MLB</option>
-          <option value="nhl">NHL</option>
-          <option value="nba">NBA</option>
-          <option value="soccer">Soccer</option>
-        </select>
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Entries</div>
-        <input id="sp-entries" type="number" value="50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Alive</div>
-        <input id="sp-alive" type="number" value="50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Prize Pool</div>
-        <input id="sp-prize" type="text" placeholder="$437.50" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Mode</div>
-        <select id="sp-mode" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-          <option value="survivor">Hit Streak Survivor</option>
-          <option value="tiers">Tiers</option>
-          <option value="confidence">Confidence</option>
-        </select>
-      </div>
-      <div>
-        <div style="font-size:0.65rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Used Teams</div>
-        <input id="sp-used" type="text" placeholder="Team A, Team B" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-family:var(--M);font-size:0.8rem;padding:0.4rem 0.5rem;border-radius:2px;outline:none">
-      </div>
-    </div>
-    <button onclick="splashSolve()" style="width:100%;padding:0.75rem;background:var(--orange);color:#000;font-family:var(--H);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;margin-bottom:1.5rem">▶ Generate Strategy</button>
-    <div id="sp-results"></div>
-  `;
+    ${metrics}
+    <div style="font-size:.63rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:${verdictColor};min-width:4.5rem;text-align:right">${verdict}</div>
+  </div>`;
+}
+
+function metric(val, label, color) {
+  return `<div style="text-align:right;margin-left:.25rem">
+    <div style="font-family:var(--H);font-weight:700;color:${color||'var(--ink)'};font-size:.88rem">${val}</div>
+    <div style="font-size:.58rem;color:var(--ink3);letter-spacing:.05em;text-transform:uppercase">${label}</div>
+  </div>`;
+}
+
+function stratBox(text) {
+  return `<div style="padding:.75rem 1rem;background:var(--bg3);border-top:1px solid var(--border);font-size:.77rem;color:var(--ink);line-height:1.7">
+    <span style="color:var(--orange);font-weight:700;font-size:.63rem;letter-spacing:.1em;text-transform:uppercase">iQ Strategy · </span>${text}
+  </div>`;
 }
 
 function splashSolve() {
   const mode = document.getElementById('sp-mode').value;
-  const entries = parseInt(document.getElementById('sp-entries').value) || 50;
-  const alive = parseInt(document.getElementById('sp-alive').value) || 50;
+  const entries = parseInt(document.getElementById('sp-entries').value)||50;
+  const alive = parseInt(document.getElementById('sp-alive').value)||50;
+  const prize = document.getElementById('sp-prize').value||'—';
   const used = (document.getElementById('sp-used').value||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
-  let picks = (window._splashPicks||[]).filter(p=>!used.includes(p.name.toLowerCase()));
-  if (!picks.length) { alert('No picks loaded.'); return; }
-
   const res = document.getElementById('sp-results');
+  if (!res) return;
+
+  let picks = (window._splashPicks||[]).filter(p=>!used.includes(p.name.toLowerCase()));
+  let props = (window._splashProps||[]);
+  const big = entries > 100;
+
+  // ── EQUITY CORE ──
+  // E[equity] = win_prob / ownership_pct
+  // Future value penalty: elite teams early in season cost more later
+  function equity(win, own) { return own > 0 ? win / own : win * 2; }
 
   if (mode === 'survivor') {
+    // HIT STREAK SURVIVOR
+    // Goal: survive while opponents are eliminated
+    // Key: equity = win_prob / ownership (contrarian value)
+    // Future value: don't burn >75% teams early
+    if (!picks.length) { res.innerHTML = '<div style="padding:1rem;color:var(--ink3)">No picks loaded. Select a sport and reload.</div>'; return; }
     picks = picks.map(p => {
-      const eq = p.own > 0 ? p.win / p.own : p.win;
-      const score = eq * (p.win > 0.75 ? 0.85 : 1.0);
-      let v, vc;
-      if (eq > 2.0 && p.win > 0.55) { v='TOP PLAY'; vc='var(--orange)'; }
-      else if (eq > 1.4 && p.own < 0.25) { v='VALUE'; vc='var(--green)'; }
-      else if (eq < 0.6) { v='AVOID'; vc='var(--red)'; }
-      else { v='NEUTRAL'; vc='var(--ink3)'; }
-      return {...p, eq, score, v, vc};
+      const eq = equity(p.win, p.own);
+      const fv = p.win > 0.75 ? 0.84 : 1.0; // future value penalty
+      const score = eq * fv;
+      let v, vc, bc;
+      if (eq > 2.2 && p.win > 0.55) { v='TOP PLAY'; vc='var(--orange)'; bc='var(--orange)'; }
+      else if (eq > 1.5 && p.own < 0.22) { v='HIGH VALUE'; vc='var(--green)'; bc='var(--green)'; }
+      else if (eq > 1.2) { v='SOLID'; vc='var(--ink)'; bc='var(--border)'; }
+      else if (eq < 0.65 || p.own > 0.65) { v='AVOID'; vc='var(--red)'; bc='var(--red)'; }
+      else { v='NEUTRAL'; vc='var(--ink3)'; bc='transparent'; }
+      return {...p, eq, score, v, vc, bc};
     }).sort((a,b)=>b.score-a.score);
 
     const top = picks[0];
-    const con = picks.filter(p=>p.own<0.2&&p.win>0.55);
-    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
-    html += '<div style="padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase">Survivor Strategy · ' + alive + '/' + entries + ' alive</div>';
+    const cons = picks.filter(p=>p.own<0.18&&p.win>0.55);
+
+    let html = `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between">
+        <span>Hit Streak Survivor · ${alive}/${entries} alive</span><span>Prize: ${prize}</span>
+      </div>`;
     picks.forEach((p,i) => {
-      const bc = i===0?'3px solid var(--orange)':p.v==='VALUE'?'3px solid var(--green)':'3px solid transparent';
-      html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.7rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);border-left:'+bc+'">';
-      html += '<div style="font-family:var(--H);font-size:1.1rem;font-weight:800;color:'+(i===0?'var(--orange)':'var(--ink3)')+';min-width:1.8rem">#'+(i+1)+'</div>';
-      html += '<div style="flex:1"><div style="font-size:0.88rem;font-weight:600">'+p.name+'</div><div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
-      html += '<div style="text-align:right;margin-right:0.5rem"><div style="font-weight:700;color:'+(p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--orange)')+'">'+( p.win*100).toFixed(1)+'%</div><div style="font-size:0.6rem;color:var(--ink3)">WIN</div></div>';
-      html += '<div style="text-align:right;margin-right:0.5rem"><div style="font-weight:700;color:'+(p.eq>1.5?'var(--green)':p.eq<0.7?'var(--red)':'var(--orange)')+'">'+p.eq.toFixed(2)+'×</div><div style="font-size:0.6rem;color:var(--ink3)">EQUITY</div></div>';
-      html += '<div style="font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:'+p.vc+';min-width:4.5rem;text-align:right">'+p.v+'</div>';
-      html += '</div>';
+      html += card(
+        '#'+(i+1), p.name, p.matchup,
+        metric((p.win*100).toFixed(1)+'%','Win',p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--orange)') +
+        metric(p.eq.toFixed(2)+'×','Equity',p.eq>1.5?'var(--green)':p.eq<0.7?'var(--red)':'var(--orange)') +
+        metric((p.own*100).toFixed(0)+'%','Own%','var(--ink3)'),
+        p.v, p.vc, p.bc
+      );
     });
-    html += '<div style="padding:0.75rem 1rem;background:var(--bg3);border-top:1px solid var(--border);font-size:0.78rem;color:var(--ink);line-height:1.7">';
-    html += '<span style="color:var(--orange);font-weight:600;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase">iQ Strategy · </span>';
-    if (entries > 100) {
-      html += 'Large field — contrarian picks maximize equity.';
-      if (con.length) html += ' Best contrarian: <strong>'+con[0].name+'</strong> at '+(con[0].win*100).toFixed(0)+'% win, '+(con[0].own*100).toFixed(0)+'% est. ownership.';
-    } else {
-      html += 'Small pool — take highest equity pick. ';
-    }
-    if (top.win > 0.75) html += ' ⚠ <strong>'+top.name+'</strong> is elite — consider saving for a harder slate.';
-    html += '</div></div>';
+
+    let strat = big
+      ? `Large field (${entries}) — equity > survival. `
+      : `Small pool (${entries}) — survival first, equity second. `;
+    if (cons.length) strat += `Best contrarian: <strong>${cons[0].name}</strong> at ${(cons[0].win*100).toFixed(0)}% win, only ${(cons[0].own*100).toFixed(0)}% est. ownership — if chalk loses, you eliminate a wave. `;
+    if (top.win > 0.75) strat += `⚠ <strong>${top.name}</strong> is elite — consider saving for a harder slate when choke-point weeks arrive. `;
+    strat += `Equity = win% ÷ ownership%. A 65% team at 15% ownership scores 4.3× equity vs. a 75% team at 70% ownership scoring 1.07×.`;
+    html += stratBox(strat) + '</div>';
+    res.innerHTML = html;
+
+  } else if (mode === 'one_done') {
+    // ONE & DONE
+    // Each team/player usable once all season
+    // Key: future value — save elite options for choke-point rounds
+    if (!picks.length) { res.innerHTML = '<div style="padding:1rem;color:var(--ink3)">No picks loaded.</div>'; return; }
+    const roundsLeft = 162 - parseInt(document.getElementById('sp-alive').value||82); // estimate
+    picks = picks.map(p => {
+      const eq = equity(p.win, p.own);
+      // Future value cost increases if elite and many rounds remain
+      const fvCost = p.win > 0.70 ? Math.min(0.30, (roundsLeft/162) * 0.35) : 0;
+      const score = eq - fvCost * 2;
+      let v, vc, bc;
+      if (score > 1.8 && p.win > 0.60) { v='USE NOW'; vc='var(--orange)'; bc='var(--orange)'; }
+      else if (p.win > 0.70 && roundsLeft > 80) { v='SAVE'; vc='var(--blue)'; bc='var(--blue)'; }
+      else if (eq > 1.3) { v='GOOD VALUE'; vc='var(--green)'; bc='var(--green)'; }
+      else if (p.win < 0.48) { v='SKIP'; vc='var(--red)'; bc='transparent'; }
+      else { v='NEUTRAL'; vc='var(--ink3)'; bc='transparent'; }
+      return {...p, eq, fvCost, score, v, vc, bc};
+    }).sort((a,b)=>b.score-a.score);
+
+    let html = `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase">One &amp; Done · Each team usable once all season</div>`;
+    picks.forEach((p,i) => {
+      html += card(
+        '#'+(i+1), p.name, p.matchup,
+        metric((p.win*100).toFixed(1)+'%','Win',p.win>0.65?'var(--green)':'var(--orange)') +
+        metric(p.eq.toFixed(2)+'×','Equity','var(--orange)') +
+        metric('-'+(p.fvCost*100).toFixed(0)+'pp','FV Cost','var(--ink3)'),
+        p.v, p.vc, p.bc
+      );
+    });
+    const saveTeams = picks.filter(p=>p.v==='SAVE');
+    let strat = `Future value is the defining variable in One & Done. `;
+    if (saveTeams.length) strat += `<strong>${saveTeams.map(p=>p.name).join(', ')}</strong> — flagged SAVE: their win probability is high enough that you'll need them in harder weeks. Use a 58-65% option this round instead. `;
+    strat += `Choke-point weeks (holiday slates, condensed schedules) are when elite teams are scarcest — that's when to deploy them.`;
+    html += stratBox(strat) + '</div>';
     res.innerHTML = html;
 
   } else if (mode === 'tiers') {
-    const tiers = [{l:'Tier 1 — Elite',min:0.70,c:'var(--orange)'},{l:'Tier 2 — Strong',min:0.60,c:'var(--green)'},{l:'Tier 3 — Solid',min:0.50,c:'var(--ink)'},{l:'Tier 4 — Speculative',min:0,c:'var(--ink3)'}];
-    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
-    tiers.forEach(tier => {
-      const tp = picks.filter(p=>p.win>=tier.min).filter(p=>tier.min===0||p.win<(tier.min===0.50?0.60:tier.min===0.60?0.70:99));
-      if (!tp.length) return;
-      html += '<div style="padding:0.5rem 1rem;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);font-size:0.67rem;font-weight:700;color:'+tier.c+';letter-spacing:0.1em;text-transform:uppercase">'+tier.l+'</div>';
-      tp.sort((a,b)=>b.win-a.win).forEach(p=>{
-        html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.6rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)">';
-        html += '<div style="flex:1;font-size:0.85rem">'+p.name+'<div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
-        html += '<div style="font-weight:700;color:'+tier.c+'">'+(p.win*100).toFixed(1)+'%</div>';
-        html += '<div style="font-size:0.7rem;color:var(--ink3)">own '+(p.own*100).toFixed(0)+'%</div>';
-        html += '<div style="font-size:0.7rem;color:'+(p.edge>5?'var(--green)':'var(--ink3)')+'">+'+(p.edge||0).toFixed(1)+'pp</div>';
-        html += '</div>';
+    // TIERS (NBA Playoffs / PGA)
+    // Pick one player/team per tier, score based on performance
+    // Key: find undervalued options within each tier (low ownership, decent floor)
+    if (!picks.length) { res.innerHTML = '<div style="padding:1rem;color:var(--ink3)">No picks loaded.</div>'; return; }
+    const tierDefs = [
+      {l:'Tier 1 — Elite (>70%)', min:0.70, c:'var(--orange)'},
+      {l:'Tier 2 — Strong (60–70%)', min:0.60, c:'var(--green)'},
+      {l:'Tier 3 — Solid (50–60%)', min:0.50, c:'var(--ink)'},
+      {l:'Tier 4 — Speculative (<50%)', min:0.00, c:'var(--ink3)'}
+    ];
+    let html = `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between">
+        <span>Tiers Strategy</span><span>Prize: ${prize} · ${entries} entries</span>
+      </div>`;
+
+    let bestPerTier = [];
+    tierDefs.forEach((tier, ti) => {
+      const next = tierDefs[ti+1];
+      const tp = picks.filter(p => p.win >= tier.min && (!next || p.win < tierDefs[ti-1]?.min || ti===0 || p.win < tier.min+0.10+ti*0.05)).filter(p =>
+        p.win >= tier.min && (ti === tierDefs.length-1 || p.win < tierDefs[ti].min + 0.10 + 0.05)
+      );
+      // Actually just split cleanly
+      const cleanTp = picks.filter(p => {
+        if (ti===0) return p.win >= 0.70;
+        if (ti===1) return p.win >= 0.60 && p.win < 0.70;
+        if (ti===2) return p.win >= 0.50 && p.win < 0.60;
+        return p.win < 0.50;
+      }).sort((a,b) => {
+        // Within tier: prioritize equity (low ownership + good win)
+        return equity(b.win,b.own) - equity(a.win,a.own);
+      });
+      if (!cleanTp.length) return;
+      const best = cleanTp[0];
+      bestPerTier.push({...best, tierLabel: tier.l, tierColor: tier.c});
+      html += `<div style="padding:.45rem 1rem;background:rgba(255,255,255,.02);border-bottom:1px solid var(--border);font-size:.65rem;font-weight:700;color:${tier.c};letter-spacing:.09em;text-transform:uppercase">${tier.l}</div>`;
+      cleanTp.forEach((p,i) => {
+        const eq = equity(p.win, p.own);
+        const isBest = i === 0;
+        html += card(
+          isBest ? '★' : (i+1), p.name, p.matchup,
+          metric((p.win*100).toFixed(1)+'%','Win',p.win>0.65?'var(--green)':'var(--ink)') +
+          metric(eq.toFixed(2)+'×','Equity',eq>1.4?'var(--green)':'var(--ink3)') +
+          metric((p.own*100).toFixed(0)+'%','Own%','var(--ink3)'),
+          isBest ? '← PICK' : '',
+          isBest ? tier.c : 'var(--ink3)',
+          isBest ? tier.c : 'transparent'
+        );
       });
     });
-    html += '</div>';
+
+    let strat = `Tiers strategy: pick the highest-equity option within each tier, not necessarily the highest win probability. `;
+    if (big) strat += `In a large public field, fading chalk within each tier (lower ownership, similar floor) is the differentiator. `;
+    strat += `★ marks the recommended pick per tier based on win% ÷ ownership.`;
+    html += stratBox(strat) + '</div>';
+    res.innerHTML = html;
+
+  } else if (mode === 'quickpicks') {
+    // QUICKPICKS / PICK'EM
+    // Over/under player props — pick 2-6, all must hit (or insurance allows 1 miss)
+    // Key: edge (model - market), independence (avoid correlated picks), combined prob
+    const source = props.length >= 2 ? props : picks.map(p=>({...p, dir:'win', edge: Math.abs(p.edge)||2, line: null}));
+    if (!source.length) { res.innerHTML = '<div style="padding:1rem;color:var(--ink3)">No props loaded. Select NBA or MLB sport.</div>'; return; }
+    const n = Math.min(6, Math.max(2, source.length));
+    const selected = source.slice(0, n);
+    const combo = selected.reduce((a,p)=>a*p.win,1);
+    const avgEdge = selected.reduce((a,p)=>a+p.edge,0)/selected.length;
+
+    let html = `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between">
+        <span>QuickPicks Lineup · ${selected.length} picks</span>
+        <span>Combined hit: ${(combo*100).toFixed(1)}% · Avg edge: +${avgEdge.toFixed(1)}pp</span>
+      </div>`;
+    selected.forEach((p,i) => {
+      const isOver = (p.dir||'over') === 'over';
+      const dirColor = isOver ? 'var(--green)' : 'var(--blue)';
+      html += card(
+        '#'+(i+1),
+        p.name,
+        p.line ? 'Line: '+p.line+' · '+(p.dir||'OVER').toUpperCase() : (p.matchup||''),
+        metric((p.win*100).toFixed(1)+'%','Hit%',p.win>0.65?'var(--green)':'var(--orange)') +
+        metric('+'+p.edge.toFixed(1)+'pp','Edge',p.edge>8?'var(--green)':'var(--orange)') +
+        `<div style="padding:.15rem .4rem;border-radius:2px;font-size:.62rem;font-weight:700;background:${isOver?'rgba(34,197,94,.15)':'rgba(59,130,246,.15)'};color:${dirColor};margin-left:.25rem">${(p.dir||'OVER').toUpperCase()}</div>`,
+        p.tier==='high'?'HIGH CONF':p.tier==='medium'?'MEDIUM':'LOW',
+        p.tier==='high'?'var(--orange)':p.tier==='medium'?'var(--ink)':'var(--ink3)',
+        p.tier==='high'?'var(--orange)':'transparent'
+      );
+    });
+
+    let strat = `Selected top ${selected.length} props by edge. Combined hit probability: <strong>${(combo*100).toFixed(1)}%</strong>. `;
+    if (big) strat += `In a large public contest, avoid correlated picks from the same game — if one leg goes wrong, correlated picks often follow. `;
+    strat += `Edge = model probability minus market implied probability. Picks above +8pp have meaningful edge over the book's pricing. `;
+    if (combo < 0.25) strat += `⚠ Combined probability below 25% — consider dropping to ${selected.length-1} picks for better hit rate.`;
+    html += stratBox(strat) + '</div>';
     res.innerHTML = html;
 
   } else if (mode === 'confidence') {
+    // CONFIDENCE POOL
+    // Assign points N→1 based on certainty — highest points to most certain pick
+    // Key: expected points = pts × win_prob; contrarian angle in large pools
+    if (!picks.length) { res.innerHTML = '<div style="padding:1rem;color:var(--ink3)">No picks loaded.</div>'; return; }
     picks = picks.sort((a,b)=>b.win-a.win);
     const n = picks.length;
-    let html = '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">';
-    html += '<div style="padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.68rem;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase">Confidence Rankings — assign '+n+' pts down to 1 pt</div>';
-    picks.forEach((p,i)=>{
+    picks = picks.map((p,i) => {
       const pts = n - i;
-      html += '<div style="display:flex;align-items:center;gap:1rem;padding:0.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)">';
-      html += '<div style="font-family:var(--H);font-size:1rem;font-weight:800;color:'+(i===0?'var(--orange)':'var(--ink3)')+';min-width:3rem">'+pts+'pts</div>';
-      html += '<div style="flex:1;font-size:0.85rem">'+p.name+'<div style="font-size:0.65rem;color:var(--ink3)">'+p.matchup+'</div></div>';
-      html += '<div style="font-weight:700;color:'+(p.win>0.65?'var(--green)':'var(--ink)')+'">'+( p.win*100).toFixed(1)+'%</div>';
-      html += '</div>';
+      const expPts = pts * p.win;
+      const eq = equity(p.win, p.own);
+      // Contrarian value: high equity + high pts = differentiation opportunity
+      const contVal = eq > 1.4 && pts > n * 0.6;
+      let v, vc;
+      if (i===0) { v='MAX PTS'; vc='var(--orange)'; }
+      else if (contVal) { v='CONTRARIAN'; vc='var(--green)'; }
+      else if (p.win < 0.45) { v='MIN PTS'; vc='var(--red)'; }
+      else { v='MIDDLE'; vc='var(--ink3)'; }
+      return {...p, pts, expPts, eq, contVal, v, vc};
     });
-    html += '</div>';
+
+    let html = `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between">
+        <span>Confidence Rankings · ${n} games</span><span>Assign ${n} pts → 1 pt</span>
+      </div>`;
+    picks.forEach((p,i) => {
+      html += card(
+        p.pts+'pts', p.name, p.matchup,
+        metric((p.win*100).toFixed(1)+'%','Win',p.win>0.65?'var(--green)':p.win<0.45?'var(--red)':'var(--ink)') +
+        metric(p.expPts.toFixed(1),'Exp Pts','var(--orange)') +
+        metric(p.eq.toFixed(2)+'×','Equity',p.eq>1.4?'var(--green)':'var(--ink3)'),
+        p.v, p.vc,
+        i===0?'var(--orange)':p.contVal?'var(--green)':'transparent'
+      );
+    });
+
+    const contPicks = picks.filter(p=>p.contVal);
+    let strat = `Assign highest points to most certain pick, lowest to least certain. Expected pts = assigned pts × win probability. `;
+    if (big) {
+      strat += `Large pool: the real edge is in your <strong>middle rankings</strong>. If the field is on a popular pick at high points and that team loses, you gain massive relative equity. `;
+      if (contPicks.length) strat += `Contrarian opportunity: <strong>${contPicks[0].name}</strong> — high equity (${contPicks[0].eq.toFixed(2)}×) suggesting low public ownership. Consider assigning more points than the field expects.`;
+    } else {
+      strat += `Small pool: follow expected points ranking closely. Only deviate if you have strong read on a specific game the rest of your pool is mispricing.`;
+    }
+    html += stratBox(strat) + '</div>';
+    res.innerHTML = html;
+
+  } else if (mode === 'bracket') {
+    // BRACKET CHALLENGE
+    // Key insight: champion pick dominates expected value (worth 32× first round in standard scoring)
+    // Differentiation: pick a champion that ~15-25% of pool picks (not 0%, not 50%)
+    // Strategy: maximize P(your bracket wins) = P(champion correct) × P(path correct)
+    if (!picks.length) { res.innerHTML = '<div style="padding:1rem;color:var(--ink3)">No picks loaded — loading futures data...</div>';
+      fetch('futures.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+        const mkt = d.markets || [];
+        const nba = mkt.find(m=>m.sport==='nba');
+        if (nba && nba.picks) {
+          window._splashPicks = nba.picks.map(p=>({
+            name: p.team,
+            win: p.model_prob || 0.1,
+            own: mto(p.market_prob || 0.1),
+            edge: p.edge_pp || 0,
+            tier: p.edge_pp > 5 ? 'high' : 'low',
+            matchup: 'NBA Champion'
+          }));
+          splashSolve();
+        }
+      }).catch(()=>{});
+      return;
+    }
+
+    picks = picks.map(p => {
+      const eq = equity(p.win, p.own);
+      // Champion pick score: balance win prob with differentiation
+      // Ideal: 15-35% ownership, 15-35% win prob
+      const diffScore = p.win * (1 - Math.abs(p.own - 0.20));
+      let v, vc, bc;
+      if (diffScore > 0.12 && p.win > 0.15) { v='CHAMPION PICK'; vc='var(--orange)'; bc='var(--orange)'; }
+      else if (p.win > 0.25 && p.own < 0.15) { v='DARK HORSE'; vc='var(--green)'; bc='var(--green)'; }
+      else if (p.own > 0.40) { v='TOO PUBLIC'; vc='var(--red)'; bc='transparent'; }
+      else { v='AVOID'; vc='var(--ink3)'; bc='transparent'; }
+      return {...p, eq, diffScore, v, vc, bc};
+    }).sort((a,b)=>b.diffScore-a.diffScore);
+
+    let html = `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--border);font-size:.67rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase">
+        Bracket Strategy · Champion selection is worth 32× first-round points
+      </div>`;
+    picks.forEach((p,i) => {
+      html += card(
+        '#'+(i+1), p.name, p.matchup||'Championship',
+        metric((p.win*100).toFixed(1)+'%','Win%',p.win>0.25?'var(--green)':'var(--ink)') +
+        metric((p.own*100).toFixed(0)+'%','Est Own%',p.own<0.20?'var(--green)':p.own>0.40?'var(--red)':'var(--ink)') +
+        metric(p.diffScore.toFixed(3),'Diff Score','var(--orange)'),
+        p.v, p.vc, p.bc
+      );
+    });
+
+    let strat = `<strong>Champion pick dominates bracket pool EV.</strong> In a 1-2-4-8-16-32 scoring format, your champion is worth 32× a first-round pick. `;
+    strat += `Optimal champion: ~15-30% win probability, ~10-25% public ownership — high enough to win, differentiated enough to matter. `;
+    strat += `A 50% favorite picked by 60% of the pool barely moves your equity when they win. A 25% team at 12% ownership triples your equity if correct. `;
+    if (big) strat += `Large pool: you need a contrarian champion to have realistic first-place equity. Shared champions = shared prize.`;
+    html += stratBox(strat) + '</div>';
     res.innerHTML = html;
   }
 }
