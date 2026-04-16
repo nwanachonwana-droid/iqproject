@@ -2,19 +2,19 @@
   "schema_version": "1.0",
   "sport": "nhl",
   "launch_date": "2026-04-15",
-  "last_updated": "2026-04-15",
+  "last_updated": "2026-04-16",
   "overall": {
     "wins": 1,
-    "losses": 0,
+    "losses": 1,
     "pushes": 0,
-    "total": 1,
-    "hit_rate": 100.0,
-    "roi_flat": 90.9
+    "total": 2,
+    "hit_rate": 50.0,
+    "roi_flat": -4.55
   },
   "by_confidence": {
     "high": {
       "wins": 0,
-      "total": 0,
+      "total": 1,
       "hit_rate": 0.0
     },
     "medium": {
@@ -29,6 +29,25 @@
     }
   },
   "recent": [
+    {
+      "pick_id": "nhl-2026-04-15-2025021302",
+      "game_time_utc": "2026-04-15T23:00:00Z",
+      "home_team": "Tampa Bay Lightning",
+      "away_team": "New York Rangers",
+      "pick": "Tampa Bay Lightning",
+      "pick_side": "home",
+      "model_prob_home": 0.6519,
+      "model_prob_away": 0.3481,
+      "market_prob_home": 0.5934,
+      "market_prob_away": 0.4066,
+      "market_line_home": -162,
+      "market_source": "pinnacle",
+      "edge_pp": 5.85,
+      "confidence_tier": "high",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-16T11:01:40.131234Z"
+    },
     {
       "pick_id": "nhl-2026-04-14-2025021293",
       "game_time_utc": "2026-04-14T23:00:00Z",

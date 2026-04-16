@@ -21,9 +21,9 @@
       "market_source": "pinnacle",
       "edge_pp": 5.85,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-16T11:01:40.131234Z"
     },
     {
       "pick_id": "nhl-2026-04-15-2025021306",

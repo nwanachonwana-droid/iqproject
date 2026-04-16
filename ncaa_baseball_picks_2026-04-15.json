@@ -21,9 +21,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-16T11:01:40.251654Z"
     },
     {
       "pick_id": "ncaabb-2026-04-15-401851065",
@@ -40,9 +40,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-16T11:01:40.251683Z"
     },
     {
       "pick_id": "ncaabb-2026-04-15-401849995",
@@ -59,9 +59,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "high",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-16T11:01:40.251693Z"
     },
     {
       "pick_id": "ncaabb-2026-04-15-401867374",
@@ -78,9 +78,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-16T11:01:40.251701Z"
     },
     {
       "pick_id": "ncaabb-2026-04-15-401851101",
@@ -97,9 +97,9 @@
       "market_source": "pinnacle",
       "edge_pp": 25.58,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-16T11:01:40.251708Z"
     },
     {
       "pick_id": "ncaabb-2026-04-15-401847457",
@@ -116,9 +116,9 @@
       "market_source": "pinnacle",
       "edge_pp": -3.89,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-16T11:01:40.251715Z"
     },
     {
       "pick_id": "ncaabb-2026-04-15-401850133",
@@ -135,9 +135,9 @@
       "market_source": null,
       "edge_pp": null,
       "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-16T11:01:40.251722Z"
     }
   ],
   "summary": {

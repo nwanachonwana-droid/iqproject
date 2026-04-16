@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "sport": "mma",
-  "generated_at": "2026-04-15T17:38:33.253571Z",
-  "data_date": "2026-04-15",
+  "generated_at": "2026-04-16T11:00:52.671325Z",
+  "data_date": "2026-04-16",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
   "picks": [
@@ -13,28 +13,12 @@
       "pick_side": "home",
       "model_prob_home": 0.5625,
       "model_prob_away": 0.4375,
-      "market_prob_home": 0.4891,
-      "market_prob_away": 0.5109,
-      "edge_pp": 7.34,
+      "market_prob_home": 0.4895,
+      "market_prob_away": 0.5105,
+      "edge_pp": 7.3,
       "confidence_tier": "low",
       "record": "4-2",
-      "game_time_utc": "2026-04-16T23:00:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "home_team": "Sean Gauci",
-      "away_team": "Liam Gittins",
-      "pick": "Sean Gauci",
-      "pick_side": "home",
-      "model_prob_home": 0.6452,
-      "model_prob_away": 0.3548,
-      "market_prob_home": 0.5191,
-      "market_prob_away": 0.4809,
-      "edge_pp": 12.6,
-      "confidence_tier": "medium",
-      "record": "10-1",
-      "game_time_utc": "2026-04-16T23:00:00Z",
+      "game_time_utc": "2026-04-17T00:10:00Z",
       "outcome": null,
       "result": null
     },
@@ -77,9 +61,9 @@
       "pick_side": "home",
       "model_prob_home": 0.5459,
       "model_prob_away": 0.4541,
-      "market_prob_home": 0.4213,
-      "market_prob_away": 0.5787,
-      "edge_pp": 12.46,
+      "market_prob_home": 0.4265,
+      "market_prob_away": 0.5735,
+      "edge_pp": 11.93,
       "confidence_tier": "low",
       "record": "12-4",
       "game_time_utc": "2026-04-18T22:00:00Z",
@@ -88,8 +72,8 @@
     }
   ],
   "summary": {
-    "total_picks": 5,
+    "total_picks": 4,
     "high_confidence": 1,
-    "avg_edge_pp": 8.63
+    "avg_edge_pp": 7.5
   }
 }
