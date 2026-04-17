@@ -1,11 +1,27 @@
 {
   "schema_version": "1.0",
   "sport": "mma",
-  "generated_at": "2026-04-17T11:44:26.063428Z",
-  "data_date": "2026-04-17",
+  "generated_at": "2026-04-16T13:01:28.889739Z",
+  "data_date": "2026-04-16",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
   "picks": [
+    {
+      "home_team": "Darragh Kelly",
+      "away_team": "Jay Jay Wilson",
+      "pick": "Darragh Kelly",
+      "pick_side": "home",
+      "model_prob_home": 0.5625,
+      "model_prob_away": 0.4375,
+      "market_prob_home": 0.484,
+      "market_prob_away": 0.516,
+      "edge_pp": 7.85,
+      "confidence_tier": "low",
+      "record": "4-2",
+      "game_time_utc": "2026-04-17T00:10:00Z",
+      "outcome": null,
+      "result": null
+    },
     {
       "home_team": "Albert Odzimkowski",
       "away_team": "Andi Vrtacic",
@@ -45,51 +61,19 @@
       "pick_side": "home",
       "model_prob_home": 0.5459,
       "model_prob_away": 0.4541,
-      "market_prob_home": 0.4388,
-      "market_prob_away": 0.5612,
-      "edge_pp": 10.7,
+      "market_prob_home": 0.4243,
+      "market_prob_away": 0.5757,
+      "edge_pp": 12.16,
       "confidence_tier": "low",
       "record": "12-4",
       "game_time_utc": "2026-04-18T22:00:00Z",
       "outcome": null,
       "result": null
-    },
-    {
-      "home_team": "Thiago Moises",
-      "away_team": "Gauge Young",
-      "pick": "Thiago Moises",
-      "pick_side": "home",
-      "model_prob_home": 0.4776,
-      "model_prob_away": 0.5224,
-      "market_prob_home": 0.4245,
-      "market_prob_away": 0.5755,
-      "edge_pp": 5.31,
-      "confidence_tier": "low",
-      "record": "19-9",
-      "game_time_utc": "2026-04-18T22:00:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "home_team": "Rodolfo Vieira",
-      "away_team": "Eric McConico",
-      "pick": "Eric McConico",
-      "pick_side": "away",
-      "model_prob_home": 0.5424,
-      "model_prob_away": 0.4576,
-      "market_prob_home": 0.6829,
-      "market_prob_away": 0.3171,
-      "edge_pp": 14.05,
-      "confidence_tier": "low",
-      "record": "10-4",
-      "game_time_utc": "2026-04-25T21:00:00Z",
-      "outcome": null,
-      "result": null
     }
   ],
   "summary": {
-    "total_picks": 5,
+    "total_picks": 4,
     "high_confidence": 1,
-    "avg_edge_pp": 8.16
+    "avg_edge_pp": 7.69
   }
 }
