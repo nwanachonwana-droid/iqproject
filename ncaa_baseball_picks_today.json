@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-04-19T06:31:26.453809Z",
+  "generated_at": "2026-04-19T06:32:35.841126Z",
   "data_date": "2026-04-19",
   "model_version": "v1.0",
   "status": "PROVEN",
@@ -23,7 +23,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302208Z"
+      "settled_at": "2026-04-19T06:33:34.627254Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401847081",
@@ -42,7 +42,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302254Z"
+      "settled_at": "2026-04-19T06:33:34.627289Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401849912",
@@ -61,7 +61,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302272Z"
+      "settled_at": "2026-04-19T06:33:34.627303Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401853035",
@@ -80,7 +80,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302284Z"
+      "settled_at": "2026-04-19T06:33:34.627314Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401847372",
@@ -99,7 +99,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302295Z"
+      "settled_at": "2026-04-19T06:33:34.627323Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401847459",
@@ -118,7 +118,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302307Z"
+      "settled_at": "2026-04-19T06:33:34.627333Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401848693",
@@ -137,7 +137,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302318Z"
+      "settled_at": "2026-04-19T06:33:34.627343Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401847415",
@@ -156,7 +156,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302328Z"
+      "settled_at": "2026-04-19T06:33:34.627352Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401847731",
@@ -175,7 +175,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302338Z"
+      "settled_at": "2026-04-19T06:33:34.627361Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401847732",
@@ -194,7 +194,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302347Z"
+      "settled_at": "2026-04-19T06:33:34.627371Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401847326",
@@ -213,7 +213,7 @@
       "confidence_tier": "medium",
       "result": 0.0,
       "outcome": "LOSS",
-      "settled_at": "2026-04-19T06:32:31.302357Z"
+      "settled_at": "2026-04-19T06:33:34.627381Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401853753",
@@ -232,7 +232,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302368Z"
+      "settled_at": "2026-04-19T06:33:34.627391Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401853685",
@@ -251,7 +251,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302379Z"
+      "settled_at": "2026-04-19T06:33:34.627400Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401851067",
@@ -270,7 +270,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302389Z"
+      "settled_at": "2026-04-19T06:33:34.627411Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401858154",
@@ -289,7 +289,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302399Z"
+      "settled_at": "2026-04-19T06:33:34.627420Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401854448",
@@ -308,7 +308,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302408Z"
+      "settled_at": "2026-04-19T06:33:34.627430Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401853522",
@@ -327,7 +327,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302418Z"
+      "settled_at": "2026-04-19T06:33:34.627440Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401853258",
@@ -346,7 +346,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302429Z"
+      "settled_at": "2026-04-19T06:33:34.627450Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401853081",
@@ -365,7 +365,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302440Z"
+      "settled_at": "2026-04-19T06:33:34.627461Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401850277",
@@ -384,7 +384,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302452Z"
+      "settled_at": "2026-04-19T06:33:34.627471Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401857997",
@@ -403,7 +403,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302462Z"
+      "settled_at": "2026-04-19T06:33:34.627481Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401853478",
@@ -422,7 +422,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302473Z"
+      "settled_at": "2026-04-19T06:33:34.627492Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401854257",
@@ -441,7 +441,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302483Z"
+      "settled_at": "2026-04-19T06:33:34.627503Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401848054",
@@ -460,7 +460,7 @@
       "confidence_tier": "medium",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302493Z"
+      "settled_at": "2026-04-19T06:33:34.627511Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401854449",
@@ -479,7 +479,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302504Z"
+      "settled_at": "2026-04-19T06:33:34.627517Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401854450",
@@ -498,7 +498,7 @@
       "confidence_tier": "high",
       "result": 1.0,
       "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302514Z"
+      "settled_at": "2026-04-19T06:33:34.627524Z"
     },
     {
       "pick_id": "ncaabb-2026-04-19-401851920",
@@ -517,7 +517,7 @@
       "confidence_tier": "high",
       "result": 0.0,
       "outcome": "LOSS",
-      "settled_at": "2026-04-19T06:32:31.302524Z"
+      "settled_at": "2026-04-19T06:33:34.627530Z"
     }
   ],
   "summary": {

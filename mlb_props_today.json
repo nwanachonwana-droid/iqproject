@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-19T06:31:44.266184Z",
+  "generated_at": "2026-04-19T06:32:56.528127Z",
   "data_date": "2026-04-19",
   "props": [
     {
@@ -19,8 +19,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.21,
       "model_prob": 0.7378,
-      "market_prob": 0.5464,
-      "edge_pp": 19.14,
+      "market_prob": 0.5445,
+      "edge_pp": 19.33,
       "confidence_tier": "high",
       "result": null,
       "outcome": null
@@ -139,8 +139,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.264,
       "model_prob": 0.6841,
-      "market_prob": 0.5709,
-      "edge_pp": 11.32,
+      "market_prob": 0.5723,
+      "edge_pp": 11.18,
       "confidence_tier": "high",
       "result": null,
       "outcome": null
