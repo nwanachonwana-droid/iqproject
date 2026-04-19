@@ -786,11 +786,14 @@ def settle_all():
 
 def _settle_mlb_props(yesterday):
     """Settle pitcher strikeout props using MLB Stats API box scores."""
+    archive_path = os.path.join(DATA_DIR, f"mlb_props_{yesterday}.json")
     picks_path = os.path.join(DATA_DIR, "mlb_props_today.json")
-    if not os.path.exists(picks_path): return
-    with open(picks_path) as f: data = json.load(f)
-
+    use_path = archive_path if os.path.exists(archive_path) else picks_path
+    if not os.path.exists(use_path): return
+    with open(use_path) as f: data = json.load(f)
     pending = [p for p in data.get("props", [])
+               if p.get("outcome") is None and
+               (p.get("game_time_utc","") or "").startswith(yesterday)]
                if p.get("outcome") is None and data.get("data_date") == yesterday]
     if not pending:
         return
@@ -881,13 +884,17 @@ def _settle_mlb_props(yesterday):
 
 def _settle_nba_props(yesterday):
     """Settle NBA player props using ESPN box scores."""
+    archive_path = os.path.join(DATA_DIR, f"nba_props_{yesterday}.json")
     picks_path = os.path.join(DATA_DIR, "nba_props_today.json")
-    if not os.path.exists(picks_path): return
-    with open(picks_path) as f: data = json.load(f)
-
+    use_path = archive_path if os.path.exists(archive_path) else picks_path
+    if not os.path.exists(use_path): return
+    with open(use_path) as f: data = json.load(f)
     pending = [p for p in data.get("picks", [])
-               if p.get("outcome") is None]
-    if not pending: return
+               if p.get("outcome") is None and
+               (p.get("game_time_utc","") or "").startswith(yesterday)]
+    if not pending:
+        print(f"  ~ nba_props: no pending picks for {yesterday}")
+        return
 
     # Fetch ESPN NBA scoreboard for yesterday
     yesterday_compact = yesterday.replace("-","")
