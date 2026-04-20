@@ -317,74 +317,142 @@ def run_nhl():
 def run_ncaa_baseball():
     print("\n[NCAA Baseball — Pythagenpat ISR K=25]")
     today_compact = TODAY.replace("-","")
+    ODDS_KEY = os.environ.get("ODDS_API_KEY","")
+
+    # Step 1: Get all games with odds from Odds API
+    odds = get_odds("baseball_ncaa")
+    games = {}  # key: "away@home" -> game dict
+
+    # Pull Odds API odds directly — this has team names + lines
     try:
-        # Try today-specific first, fall back to default scoreboard
-        sched = fetch(f"https://site.api.espn.com/apis/site/v2/sports/"
-                      f"baseball/college-baseball/scoreboard?dates={today_compact}")
-        if len(sched.get("events",[])) < 5:
-            # Not enough games yet — fall back to default and filter
-            sched2 = fetch("https://site.api.espn.com/apis/site/v2/sports/"
-                           "baseball/college-baseball/scoreboard")
-            # Merge: prefer today's games from either source
-            all_events = {e["id"]: e for e in sched.get("events",[])}
-            all_events.update({e["id"]: e for e in sched2.get("events",[])
-                               if (e.get("date","") or "")[:10] == TODAY})
-            sched = {"events": list(all_events.values())}
-            print(f"  ~ ESPN fallback: {len(sched['events'])} games for {TODAY}")
+        odds_raw = fetch(
+            f"https://api.the-odds-api.com/v4/sports/baseball_ncaa/odds"
+            f"?apiKey={ODDS_KEY}&regions=us&markets=h2h"
+        )
+        for ev in odds_raw:
+            dt = (ev.get("commence_time","") or "")[:10]
+            hn = ev.get("home_team",""); an = ev.get("away_team","")
+            k = f"{an}@{hn}"
+            # Extract devigged probs
+            nv_home = nv_away = None
+            for bk in ev.get("bookmakers",[]):
+                for mkt in bk.get("markets",[]):
+                    if mkt["key"] == "h2h":
+                        outs = {o["name"]: o["price"] for o in mkt.get("outcomes",[])}
+                        ph = outs.get(hn); pa = outs.get(an)
+                        if ph and pa:
+                            ih = 1/ph; ia = 1/pa; tot = ih+ia
+                            nv_home = round(ih/tot,4); nv_away = round(ia/tot,4)
+                            break
+                if nv_home: break
+            games[k] = {
+                "home_team":hn,"away_team":an,
+                "game_time_utc":ev.get("commence_time"),
+                "game_id":ev.get("id",""),
+                "nv_home":nv_home,"nv_away":nv_away,
+                "hw":15,"hl":15,"aw":15,"al":15
+            }
+        print(f"  Odds API: {len(games)} games with lines")
     except Exception as e:
-        print(f"  ! ESPN unavailable: {e}")
+        print(f"  ! Odds API: {e}")
+
+    # Step 2: ESPN for W-L records (better ISR) + any extra games
+    try:
+        sched = fetch(
+            f"https://site.api.espn.com/apis/site/v2/sports/"
+            f"baseball/college-baseball/scoreboard?dates={today_compact}"
+        )
+        def parse_rec(c):
+            for r in c.get("records",[]):
+                if r.get("type")=="total" or r.get("name")=="overall":
+                    p = r.get("summary","0-0").split("-")
+                    try: return int(p[0]),int(p[1])
+                    except: pass
+            return 15,15
+
+        for ev in sched.get("events",[]):
+            ev_date = (ev.get("date","") or "")[:10]
+            cs = ev.get("competitions",[{}])[0].get("competitors",[])
+            if len(cs) < 2: continue
+            home = next((c for c in cs if c["homeAway"]=="home"),cs[0])
+            away = next((c for c in cs if c["homeAway"]=="away"),cs[1])
+            hn = home["team"]["displayName"]
+            an = away["team"]["displayName"]
+            hw,hl = parse_rec(home); aw,al = parse_rec(away)
+
+            # Fuzzy match to existing games dict
+            matched = None
+            for gk in games:
+                ga,gh = gk.split("@",1)
+                hn_norm = hn.lower().replace("state","st").replace("  "," ").strip()
+                gh_norm = gh.lower().replace("state","st").replace("  "," ").strip()
+                an_norm = an.lower().replace("state","st").replace("  "," ").strip()
+                ga_norm = ga.lower().replace("state","st").replace("  "," ").strip()
+                if (hn_norm in gh_norm or gh_norm in hn_norm) and (an_norm in ga_norm or ga_norm in an_norm):
+                    matched = gk; break
+
+            if matched:
+                games[matched].update({"hw":hw,"hl":hl,"aw":aw,"al":al})
+            elif ev_date == TODAY:
+                # Add games not in odds API
+                k = f"{an}@{hn}"
+                if k not in games:
+                    games[k] = {"home_team":hn,"away_team":an,
+                        "game_time_utc":ev.get("date"),"game_id":ev.get("id",""),
+                        "nv_home":None,"nv_away":None,
+                        "hw":hw,"hl":hl,"aw":aw,"al":al}
+        print(f"  ESPN: merged records, total games: {len(games)}")
+    except Exception as e:
+        print(f"  ! ESPN: {e}")
+
+    if not games:
+        print(f"  ! No games found for {TODAY}")
         return write_picks("ncaa_baseball", [], "PROVEN")
 
-    odds = get_odds("baseball_ncaa")
     picks = []
+    for k, g in games.items():
+        # Skip games not today
+        dt = (g.get("game_time_utc","") or "")[:10]
+        if dt and dt != TODAY: continue
 
-    for ev in sched.get("events", []):
-        cs = ev.get("competitions", [{}])[0].get("competitors", [])
-        if len(cs) < 2: continue
-        home = next((c for c in cs if c["homeAway"] == "home"), cs[0])
-        away = next((c for c in cs if c["homeAway"] == "away"), cs[1])
-        hn = home["team"]["displayName"]
-        an = away["team"]["displayName"]
+        hn=g["home_team"]; an=g["away_team"]
+        hw=g["hw"]; hl=g["hl"]; aw=g["aw"]; al=g["al"]
+        gp_h=hw+hl or 1; gp_a=aw+al or 1
+        isr_h=gp_h/(gp_h+25)*(hw/gp_h)+(1-gp_h/(gp_h+25))*0.500
+        isr_a=gp_a/(gp_a+25)*(aw/gp_a)+(1-gp_a/(gp_a+25))*0.500
+        p_home=round(max(0.01,min(0.99,log5(isr_h,isr_a)+0.04)),4)
+        p_away=round(1-p_home,4)
+        ps="home" if p_home>=p_away else "away"
+        pp=p_home if ps=="home" else p_away
 
-        def parse_record(c):
-            for rec in c.get("records", []):
-                if rec.get("type") == "total" or rec.get("name") == "overall":
-                    parts = rec.get("summary", "0-0").split("-")
-                    try: return int(parts[0]), int(parts[1])
-                    except: return 0, 1
-            return 0, 1
-
-        hw, hl = parse_record(home); aw, al = parse_record(away)
-        gp_h = hw + hl or 1; gp_a = aw + al or 1
-        isr_h = gp_h / (gp_h + 25) * (hw / gp_h) + (1 - gp_h / (gp_h + 25)) * 0.500
-        isr_a = gp_a / (gp_a + 25) * (aw / gp_a) + (1 - gp_a / (gp_a + 25)) * 0.500
-        p_home = round(max(0.01, min(0.99, log5(isr_h, isr_a) + 0.04)), 4)
-        p_away = round(1 - p_home, 4)
-        ps = "home" if p_home >= p_away else "away"
-        pp = p_home if ps == "home" else p_away
-        if pp < 0.60: continue
-
-        gid = ev.get("id", "")
-        mkt = lookup_odds(odds, hn, an, gid)
-        mp = mkt.get("nv_home") if ps == "home" else mkt.get("nv_away")
-        e = edge_pp(pp, mp)
-        if mp and e is not None and abs(e) < 3: continue
+        # Show all games — no win% floor filter
+        # College baseball is naturally clustered 50-60%, that's fine
+        nv_home=g.get("nv_home"); nv_away=g.get("nv_away")
+        mp=nv_home if ps=="home" else nv_away
+        e=edge_pp(pp,mp)
+        gid=g["game_id"]
 
         picks.append({
-            "pick_id": f"ncaabb-{TODAY}-{gid}",
-            "game_time_utc": ev.get("date"),
-            "home_team": hn, "away_team": an,
-            "pick": hn if ps == "home" else an,
-            "pick_side": ps,
-            "model_prob_home": p_home, "model_prob_away": p_away,
-            "market_prob_home": mkt.get("nv_home"),
-            "market_prob_away": mkt.get("nv_away"),
-            "market_line_home": mkt.get("home_line"),
-            "market_source": "pinnacle" if mkt else None,
-            "edge_pp": e, "confidence_tier": tier(pp),
-            "result": None, "outcome": None, "settled_at": None,
+            "pick_id":f"ncaabb-{TODAY}-{gid}",
+            "game_time_utc":g["game_time_utc"],
+            "home_team":hn,"away_team":an,
+            "pick":hn if ps=="home" else an,
+            "pick_side":ps,
+            "model_prob_home":p_home,"model_prob_away":p_away,
+            "market_prob_home":nv_home,
+            "market_prob_away":nv_away,
+            "market_line_home":None,
+            "market_source":"pinnacle" if mp else None,
+            "edge_pp":e,"confidence_tier":tier(pp),
+            "result":None,"outcome":None,"settled_at":None,
         })
+
+    picks.sort(key=lambda x:x["model_prob_home"] if x["pick_side"]=="home" else x["model_prob_away"],reverse=True)
+    mkt_count=sum(1 for p in picks if p["market_prob_home"] is not None)
+    print(f"  -> {len(picks)} picks | {mkt_count} with market odds")
     write_picks("ncaa_baseball", picks, "PROVEN")
+
+
 
 
 # Soccer team name normalization — CSV name → Odds API name (exact, verified)
