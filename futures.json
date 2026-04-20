@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T15:51:24.232131+00:00",
+  "generated_at": "2026-04-20T16:02:11.696242+00:00",
   "data_date": "2026-04-20",
   "markets": [
     {
@@ -38,10 +38,10 @@
           "seed": 5,
           "isr": 0.5258,
           "model_prob": 0.0532,
-          "market_prob": 0.002,
+          "market_prob": 0.0021,
           "edge_pp": 5.1,
-          "best_ml": 75000,
-          "best_str": "+75000",
+          "best_ml": 70000,
+          "best_str": "+70000",
           "kelly_pct": 1.3,
           "value": true
         },
@@ -62,7 +62,7 @@
           "seed": 6,
           "isr": 0.5225,
           "model_prob": 0.0501,
-          "market_prob": 0.0046,
+          "market_prob": 0.0045,
           "edge_pp": 4.6,
           "best_ml": 25000,
           "best_str": "+25000",

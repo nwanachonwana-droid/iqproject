@@ -1,14 +1,72 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-04-20T15:50:25.773545Z",
+  "generated_at": "2026-04-20T16:01:07.697158Z",
   "data_date": "2026-04-20",
   "model_version": "v1.0",
   "status": "PROVEN",
-  "picks": [],
+  "picks": [
+    {
+      "pick_id": "ncaabb-2026-04-20-5623ec384c5741e97e41dbc55d6fd89f",
+      "game_time_utc": "2026-04-20T22:05:00Z",
+      "home_team": "Fresno St Bulldogs",
+      "away_team": "UC Davis Aggies",
+      "pick": "Fresno St Bulldogs",
+      "pick_side": "home",
+      "model_prob_home": 0.5642,
+      "model_prob_away": 0.4358,
+      "market_prob_home": 0.52,
+      "market_prob_away": 0.48,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": 4.42,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "pick_id": "ncaabb-2026-04-20-6a51289964004dbb513426ddb09e2908",
+      "game_time_utc": "2026-04-20T23:05:00Z",
+      "home_team": "BYU Cougars",
+      "away_team": "Utah Tech Trailblazers",
+      "pick": "BYU Cougars",
+      "pick_side": "home",
+      "model_prob_home": 0.5559,
+      "model_prob_away": 0.4441,
+      "market_prob_home": 0.7048,
+      "market_prob_away": 0.2952,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -14.89,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "pick_id": "ncaabb-2026-04-20-9eba3346c12b312323f43049d7bbb113",
+      "game_time_utc": "2026-04-20T18:00:00Z",
+      "home_team": "San Diego St Aztecs",
+      "away_team": "Seattle Redhawks",
+      "pick": "San Diego St Aztecs",
+      "pick_side": "home",
+      "model_prob_home": 0.54,
+      "model_prob_away": 0.46,
+      "market_prob_home": 0.7445,
+      "market_prob_away": 0.2555,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -20.45,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ],
   "summary": {
-    "total_picks": 0,
+    "total_picks": 3,
     "high_confidence": 0,
-    "avg_edge_pp": 0
+    "avg_edge_pp": -10.31
   }
 }

@@ -2,9 +2,29 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-20T15:50:47.654412Z",
+  "generated_at": "2026-04-20T16:01:35.654356Z",
   "data_date": "2026-04-20",
   "props": [
+    {
+      "pick_id": "mlb-props-2026-04-20-693821-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Atlanta Braves @ Washington Nationals",
+      "player": "Bryce Elder",
+      "pick": "Bryce Elder Over 4.5 Ks",
+      "pick_side": "Over",
+      "line": 4.5,
+      "proj_k": 5.75,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.228,
+      "model_prob": 0.6797,
+      "market_prob": 0.5019,
+      "edge_pp": 17.78,
+      "confidence_tier": "high",
+      "result": null,
+      "outcome": null
+    },
     {
       "pick_id": "mlb-props-2026-04-20-656302-k",
       "sport": "mlb",
@@ -19,8 +39,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.294,
       "model_prob": 0.6536,
-      "market_prob": 0.4854,
-      "edge_pp": 16.82,
+      "market_prob": 0.4891,
+      "edge_pp": 16.45,
       "confidence_tier": "high",
       "result": null,
       "outcome": null
@@ -79,8 +99,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.203,
       "model_prob": 0.6085,
-      "market_prob": 0.5098,
-      "edge_pp": 9.87,
+      "market_prob": 0.5179,
+      "edge_pp": 9.06,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null
@@ -146,6 +166,26 @@
       "outcome": null
     },
     {
+      "pick_id": "mlb-props-2026-04-20-681293-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Houston Astros @ Cleveland Guardians",
+      "player": "Spencer Arrighetti",
+      "pick": "Spencer Arrighetti Under 4.5 Ks",
+      "pick_side": "Under",
+      "line": 4.5,
+      "proj_k": 4.55,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.242,
+      "model_prob": 0.522,
+      "market_prob": 0.4883,
+      "edge_pp": 3.37,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null
+    },
+    {
       "pick_id": "mlb-props-2026-04-20-607067-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -167,7 +207,7 @@
     }
   ],
   "summary": {
-    "total_props": 8,
-    "high_confidence": 1
+    "total_props": 10,
+    "high_confidence": 2
   }
 }
