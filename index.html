@@ -37,6 +37,9 @@ body{font-family:var(--F);background:var(--bg);color:var(--ink);min-height:100vh
 .tab{font-family:var(--M);font-size:.68rem;font-weight:500;color:var(--ink3);background:none;border:none;border-bottom:2px solid transparent;padding:0 1.25rem;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;height:100%;margin-bottom:-2px;transition:color .12s,border-color .12s}
 .tab:hover{color:var(--ink)}
 .tab.on{color:var(--orange);border-bottom-color:var(--orange)}
+.filt-hc{font-family:var(--M);font-size:.68rem;font-weight:600;color:var(--ink3);background:none;border:1px solid var(--border);border-radius:2px;padding:.2rem .75rem;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .12s;margin-left:.5rem}
+.filt-hc:hover{color:var(--orange);border-color:var(--orange)}
+.filt-hc.on{color:#000;background:var(--orange);border-color:var(--orange)}
 .mright{margin-left:auto;display:flex;align-items:center}
 .ml{font-family:var(--M);font-size:.6rem;color:var(--ink4);text-decoration:none;text-transform:uppercase;letter-spacing:.1em;transition:color .12s;padding-left:1.5rem}
 .ml:hover{color:var(--orange)}
@@ -205,7 +208,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
       <button class="filt" onclick="setF('mlb_props',this)">MLB Props</button>
       <button class="filt" onclick="setF('nba_props',this)">NBA Props</button>
       <button class="filt" onclick="setF('mma',this)">MMA</button>
-      <button class="filt" onclick="setF('high',this)">High confidence only</button>
+      <button class="filt-hc" id="btn-hc" onclick="toggleHC(this)">High Confidence Only</button>
     </div>
     <div class="bright" id="pct">—</div>
   </div>
@@ -362,17 +365,15 @@ function showTab(t){
   if(sp) sp.style.display=t==='splash'?'block':'none';
   if(t==='splash' && !window._splashInited){window._splashInited=true;splashLoad();}
 }
+function toggleHC(btn){
+  HC=!HC;
+  btn.classList.toggle('on',HC);
+  renderPicks();
+}
 function setF(f,btn){
+  AF=f;
   document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  if(f==='high'){
-    HC=!HC;
-    btn.classList.toggle('on',HC);
-    renderPicks();
-    return;
-  }
-  HC=false;
-  AF=f;
   if(f==='mlb_props'){
     // Show only MLB props
     const saved=PROPS;
