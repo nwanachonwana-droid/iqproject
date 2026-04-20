@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "nhl",
   "launch_date": "2026-04-15",
-  "last_updated": "2026-04-17",
+  "last_updated": "2026-04-20",
   "overall": {
     "wins": 1,
-    "losses": 2,
+    "losses": 3,
     "pushes": 0,
-    "total": 3,
-    "hit_rate": 33.33,
-    "roi_flat": -36.37
+    "total": 4,
+    "hit_rate": 25.0,
+    "roi_flat": -52.28
   },
   "by_confidence": {
     "high": {
@@ -24,11 +24,30 @@
     },
     "low": {
       "wins": 1,
-      "total": 1,
-      "hit_rate": 100.0
+      "total": 2,
+      "hit_rate": 50.0
     }
   },
   "recent": [
+    {
+      "pick_id": "nhl-2026-04-19-2025030121",
+      "game_time_utc": "2026-04-19T21:45:00Z",
+      "home_team": "Tampa Bay Lightning",
+      "away_team": "Montr\u00e9al Canadiens",
+      "pick": "Tampa Bay Lightning",
+      "pick_side": "home",
+      "model_prob_home": 0.5831,
+      "model_prob_away": 0.4169,
+      "market_prob_home": 0.6247,
+      "market_prob_away": 0.3753,
+      "market_line_home": -188,
+      "market_source": "pinnacle",
+      "edge_pp": -4.16,
+      "confidence_tier": "low",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-20T12:29:17.196316Z"
+    },
     {
       "pick_id": "nhl-2026-04-16-2025021309",
       "game_time_utc": "2026-04-16T23:30:00Z",

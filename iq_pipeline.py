@@ -794,7 +794,6 @@ def _settle_mlb_props(yesterday):
     pending = [p for p in data.get("props", [])
                if p.get("outcome") is None and
                (p.get("game_time_utc","") or "").startswith(yesterday)]
-               if p.get("outcome") is None and data.get("data_date") == yesterday]
     if not pending:
         return
 
