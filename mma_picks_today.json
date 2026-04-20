@@ -1,63 +1,14 @@
 {
   "schema_version": "1.0",
   "sport": "mma",
-  "generated_at": "2026-04-20T12:29:37.703636Z",
+  "generated_at": "2026-04-20T12:48:20.794947Z",
   "data_date": "2026-04-20",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
-  "picks": [
-    {
-      "home_team": "Rodolfo Vieira",
-      "away_team": "Eric McConico",
-      "pick": "Eric McConico",
-      "pick_side": "away",
-      "model_prob_home": 0.5424,
-      "model_prob_away": 0.4576,
-      "market_prob_home": 0.6809,
-      "market_prob_away": 0.3191,
-      "edge_pp": 13.85,
-      "confidence_tier": "low",
-      "record": "10-4",
-      "game_time_utc": "2026-04-25T21:00:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "home_team": "Talita Alencar",
-      "away_team": "Julia Polastri",
-      "pick": "Talita Alencar",
-      "pick_side": "home",
-      "model_prob_home": 0.4743,
-      "model_prob_away": 0.5257,
-      "market_prob_home": 0.3308,
-      "market_prob_away": 0.6692,
-      "edge_pp": 14.35,
-      "confidence_tier": "low",
-      "record": "7-1",
-      "game_time_utc": "2026-04-25T21:00:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "home_team": "Montel Jackson",
-      "away_team": "Raoni Barcelos",
-      "pick": "Raoni Barcelos",
-      "pick_side": "away",
-      "model_prob_home": 0.4902,
-      "model_prob_away": 0.5098,
-      "market_prob_home": 0.6063,
-      "market_prob_away": 0.3937,
-      "edge_pp": 11.61,
-      "confidence_tier": "low",
-      "record": "21-5",
-      "game_time_utc": "2026-04-26T00:00:00Z",
-      "outcome": null,
-      "result": null
-    }
-  ],
+  "picks": [],
   "summary": {
-    "total_picks": 3,
+    "total_picks": 0,
     "high_confidence": 0,
-    "avg_edge_pp": 13.27
+    "avg_edge_pp": 0
   }
 }
