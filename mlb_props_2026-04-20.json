@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-20T16:01:35.654356Z",
+  "generated_at": "2026-04-20T16:02:43.089546Z",
   "data_date": "2026-04-20",
   "props": [
     {
@@ -86,26 +86,6 @@
       "outcome": null
     },
     {
-      "pick_id": "mlb-props-2026-04-20-672282-k",
-      "sport": "mlb",
-      "market": "pitcher_strikeouts",
-      "game": "Toronto Blue Jays @ Los Angeles Angels",
-      "player": "Reid Detmers",
-      "pick": "Reid Detmers Over 5.5 Ks",
-      "pick_side": "Over",
-      "line": 5.5,
-      "proj_k": 6.35,
-      "umpire": "Unknown",
-      "ump_adj": 0.0,
-      "opp_k_pct": 0.203,
-      "model_prob": 0.6085,
-      "market_prob": 0.5179,
-      "edge_pp": 9.06,
-      "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
-    },
-    {
       "pick_id": "mlb-props-2026-04-20-669372-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -121,6 +101,26 @@
       "model_prob": 0.6262,
       "market_prob": 0.5386,
       "edge_pp": 8.76,
+      "confidence_tier": "medium",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "pick_id": "mlb-props-2026-04-20-672282-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Toronto Blue Jays @ Los Angeles Angels",
+      "player": "Reid Detmers",
+      "pick": "Reid Detmers Over 5.5 Ks",
+      "pick_side": "Over",
+      "line": 5.5,
+      "proj_k": 6.35,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.203,
+      "model_prob": 0.6085,
+      "market_prob": 0.5213,
+      "edge_pp": 8.72,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null
