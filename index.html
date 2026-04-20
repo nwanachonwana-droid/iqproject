@@ -519,7 +519,7 @@ function renderPicks(){
       _is_prop:true,
       sport_id:p.sport||p.sport_id||'props',
       home:p.player||'',away:'',
-      pick:p.player+' '+p.stat+' '+(p.direction||'')+(p.line?' '+p.line:''),
+      pick:p.pick||(p.player+' '+(p.stat||p.market||'')+' '+(p.direction||p.pick_side||'')+(p.line?' '+p.line:'')),
       pick_side:'home',
       model_prob_home:p.model_prob||0.5,
       market_prob_home:p.market_prob||null,
