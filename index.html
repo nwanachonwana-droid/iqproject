@@ -343,7 +343,7 @@ const META={
 };
 const SPORTS=Object.keys(META).filter(s=>s!=='props').concat(['nba']);
 
-let PICKS=[],PROPS=[],PERF={},AF='all',PS='mlb';
+let PICKS=[],PROPS=[],PERF={},AF='all',PS='mlb',HC=false;
 
 function showTab(t){
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
@@ -363,9 +363,16 @@ function showTab(t){
   if(t==='splash' && !window._splashInited){window._splashInited=true;splashLoad();}
 }
 function setF(f,btn){
-  AF=f;
   document.querySelectorAll('#pred .filt').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
+  if(f==='high'){
+    HC=!HC;
+    btn.classList.toggle('on',HC);
+    renderPicks();
+    return;
+  }
+  HC=false;
+  AF=f;
   if(f==='mlb_props'){
     // Show only MLB props
     const saved=PROPS;
@@ -500,8 +507,10 @@ function renderMasters(d){
 
 function renderPicks(){
   let list=PICKS;
-  if(AF==='high')list=list.filter(p=>p.confidence_tier==='high');
-  else if(AF!=='all')list=list.filter(p=>p.sport_id===AF);
+  // Sport filter
+  if(AF!=='all'&&AF!=='high')list=list.filter(p=>p.sport_id===AF);
+  // Confidence filter (independent, can combine with sport)
+  if(HC)list=list.filter(p=>p.confidence_tier==='high');
   document.getElementById('pct').textContent=list.length+' pick'+(list.length!==1?'s':'');
   const b=document.getElementById('pb');
   if(!list.length){b.innerHTML='<tr><td colspan="8" class="empty">No picks for this filter today</td></tr>';return;}
