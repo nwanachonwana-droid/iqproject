@@ -509,7 +509,7 @@ function renderMasters(d){
 function renderPicks(){
   let list=PICKS;
   // Sport filter
-  if(AF!=='all'&&AF!=='high')list=list.filter(p=>p.sport_id===AF);
+  if(AF!=='all')list=list.filter(p=>p.sport_id===AF);
   // Confidence filter (independent, can combine with sport)
   if(HC)list=list.filter(p=>p.confidence_tier==='high');
   document.getElementById('pct').textContent=list.length+' pick'+(list.length!==1?'s':'');
