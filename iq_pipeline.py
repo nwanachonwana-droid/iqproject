@@ -316,9 +316,21 @@ def run_nhl():
 
 def run_ncaa_baseball():
     print("\n[NCAA Baseball — Pythagenpat ISR K=25]")
+    today_compact = TODAY.replace("-","")
     try:
-        sched = fetch("https://site.api.espn.com/apis/site/v2/sports/"
-                      "baseball/college-baseball/scoreboard")
+        # Try today-specific first, fall back to default scoreboard
+        sched = fetch(f"https://site.api.espn.com/apis/site/v2/sports/"
+                      f"baseball/college-baseball/scoreboard?dates={today_compact}")
+        if len(sched.get("events",[])) < 5:
+            # Not enough games yet — fall back to default and filter
+            sched2 = fetch("https://site.api.espn.com/apis/site/v2/sports/"
+                           "baseball/college-baseball/scoreboard")
+            # Merge: prefer today's games from either source
+            all_events = {e["id"]: e for e in sched.get("events",[])}
+            all_events.update({e["id"]: e for e in sched2.get("events",[])
+                               if (e.get("date","") or "")[:10] == TODAY})
+            sched = {"events": list(all_events.values())}
+            print(f"  ~ ESPN fallback: {len(sched['events'])} games for {TODAY}")
     except Exception as e:
         print(f"  ! ESPN unavailable: {e}")
         return write_picks("ncaa_baseball", [], "PROVEN")
