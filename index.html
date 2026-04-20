@@ -510,8 +510,26 @@ function renderPicks(){
   let list=PICKS;
   // Sport filter
   if(AF!=='all')list=list.filter(p=>p.sport_id===AF);
-  // Confidence filter (independent, can combine with sport)
-  if(HC)list=list.filter(p=>p.confidence_tier==='high');
+  // Confidence filter: include high-conf props too
+  if(HC){
+    list=list.filter(p=>p.confidence_tier==='high');
+    // Also pull in high-confidence props
+    const highProps=PROPS.filter(p=>p.confidence_tier==='high').map(p=>({
+      ...p,
+      _is_prop:true,
+      sport_id:p.sport||p.sport_id||'props',
+      home:p.player||'',away:'',
+      pick:p.player+' '+p.stat+' '+(p.direction||'')+(p.line?' '+p.line:''),
+      pick_side:'home',
+      model_prob_home:p.model_prob||0.5,
+      market_prob_home:p.market_prob||null,
+      edge_pp:p.edge_pp||0,
+      game_time_utc:p.game_time_utc||null,
+      outcome:p.outcome||null
+    }));
+    list=[...list,...highProps].sort((a,b)=>
+      (b.model_prob_home||0)-(a.model_prob_home||0));
+  }
   document.getElementById('pct').textContent=list.length+' pick'+(list.length!==1?'s':'');
   const b=document.getElementById('pb');
   if(!list.length){b.innerHTML='<tr><td colspan="8" class="empty">No picks for this filter today</td></tr>';return;}
