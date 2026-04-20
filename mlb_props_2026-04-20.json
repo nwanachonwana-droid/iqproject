@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-20T12:29:43.043309Z",
+  "generated_at": "2026-04-20T12:50:54.696975Z",
   "data_date": "2026-04-20",
   "props": [
     {
@@ -39,8 +39,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.294,
       "model_prob": 0.6536,
-      "market_prob": 0.4922,
-      "edge_pp": 16.14,
+      "market_prob": 0.489,
+      "edge_pp": 16.46,
       "confidence_tier": "high",
       "result": null,
       "outcome": null
@@ -59,8 +59,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.242,
       "model_prob": 0.6938,
-      "market_prob": 0.5361,
-      "edge_pp": 15.77,
+      "market_prob": 0.5424,
+      "edge_pp": 15.14,
       "confidence_tier": "high",
       "result": null,
       "outcome": null
@@ -86,26 +86,6 @@
       "outcome": null
     },
     {
-      "pick_id": "mlb-props-2026-04-20-676974-k",
-      "sport": "mlb",
-      "market": "pitcher_strikeouts",
-      "game": "St. Louis Cardinals @ Miami Marlins",
-      "player": "Max Meyer",
-      "pick": "Max Meyer Over 4.5 Ks",
-      "pick_side": "Over",
-      "line": 4.5,
-      "proj_k": 5.14,
-      "umpire": "Unknown",
-      "ump_adj": 0.0,
-      "opp_k_pct": 0.248,
-      "model_prob": 0.5843,
-      "market_prob": 0.4506,
-      "edge_pp": 13.37,
-      "confidence_tier": "low",
-      "result": null,
-      "outcome": null
-    },
-    {
       "pick_id": "mlb-props-2026-04-20-672282-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -126,6 +106,26 @@
       "outcome": null
     },
     {
+      "pick_id": "mlb-props-2026-04-20-676974-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "St. Louis Cardinals @ Miami Marlins",
+      "player": "Max Meyer",
+      "pick": "Max Meyer Over 4.5 Ks",
+      "pick_side": "Over",
+      "line": 4.5,
+      "proj_k": 5.14,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.248,
+      "model_prob": 0.5843,
+      "market_prob": 0.494,
+      "edge_pp": 9.03,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null
+    },
+    {
       "pick_id": "mlb-props-2026-04-20-669372-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -139,8 +139,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.286,
       "model_prob": 0.6262,
-      "market_prob": 0.5423,
-      "edge_pp": 8.39,
+      "market_prob": 0.5451,
+      "edge_pp": 8.11,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null
@@ -159,8 +159,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.274,
       "model_prob": 0.5116,
-      "market_prob": 0.4291,
-      "edge_pp": 8.25,
+      "market_prob": 0.4316,
+      "edge_pp": 8.0,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
