@@ -2,9 +2,29 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-21T20:18:48.866441Z",
+  "generated_at": "2026-04-21T20:19:48.971896Z",
   "data_date": "2026-04-21",
   "props": [
+    {
+      "pick_id": "mlb-props-2026-04-21-690997-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Minnesota Twins @ New York Mets",
+      "player": "Nolan McLean",
+      "pick": "Nolan McLean Over 6.5 Ks",
+      "pick_side": "Over",
+      "line": 6.5,
+      "proj_k": 7.79,
+      "umpire": "Ryan Additon",
+      "ump_adj": 0.4,
+      "opp_k_pct": 0.268,
+      "model_prob": 0.6603,
+      "market_prob": 0.4608,
+      "edge_pp": 19.95,
+      "confidence_tier": "high",
+      "result": null,
+      "outcome": null
+    },
     {
       "pick_id": "mlb-props-2026-04-21-666200-k",
       "sport": "mlb",
@@ -47,7 +67,7 @@
     }
   ],
   "summary": {
-    "total_props": 2,
-    "high_confidence": 2
+    "total_props": 3,
+    "high_confidence": 3
   }
 }
