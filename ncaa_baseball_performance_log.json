@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
   "launch_date": "2026-04-13",
-  "last_updated": "2026-04-19",
+  "last_updated": "2026-04-21",
   "overall": {
     "wins": 180,
-    "losses": 29,
+    "losses": 30,
     "pushes": 0,
-    "total": 209,
-    "hit_rate": 86.12,
-    "roi_flat": 64.41
+    "total": 210,
+    "hit_rate": 85.71,
+    "roi_flat": 63.63
   },
   "by_confidence": {
     "high": {
@@ -24,11 +24,30 @@
     },
     "low": {
       "wins": 0,
-      "total": 0,
+      "total": 1,
       "hit_rate": 0.0
     }
   },
   "recent": [
+    {
+      "pick_id": "ncaabb-2026-04-20-6a51289964004dbb513426ddb09e2908",
+      "game_time_utc": "2026-04-20T23:05:00Z",
+      "home_team": "BYU Cougars",
+      "away_team": "Utah Tech Trailblazers",
+      "pick": "BYU Cougars",
+      "pick_side": "home",
+      "model_prob_home": 0.5559,
+      "model_prob_away": 0.4441,
+      "market_prob_home": 0.7048,
+      "market_prob_away": 0.2952,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -14.89,
+      "confidence_tier": "low",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-21T20:19:23.275306Z"
+    },
     {
       "pick_id": "ncaabb-2026-04-19-401851920",
       "game_time_utc": "2026-04-18T17:00Z",
@@ -959,25 +978,6 @@
       "result": 1.0,
       "outcome": "WIN",
       "settled_at": "2026-04-19T06:32:31.302307Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-04-19-401847372",
-      "game_time_utc": "2026-04-18T21:30Z",
-      "home_team": "LSU Tigers",
-      "away_team": "Texas A&M Aggies",
-      "pick": "Texas A&M Aggies",
-      "pick_side": "away",
-      "model_prob_home": 0.3957,
-      "model_prob_away": 0.6043,
-      "market_prob_home": 0.4285,
-      "market_prob_away": 0.5715,
-      "market_line_home": 120,
-      "market_source": "pinnacle",
-      "edge_pp": 3.28,
-      "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-19T06:32:31.302295Z"
     }
   ]
 }
