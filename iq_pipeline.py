@@ -1642,7 +1642,7 @@ def run_nba():
             (ht, "home", p_home, nv_h, ep_h),
             (at, "away", p_away, nv_a, ep_a),
         ]:
-            if ep < 1.0 or model_p < 0.50: continue
+            if ep < 1.0: continue  # removed model_p filter - away dogs can have p<0.50
             all_picks.append({
                 "home_team":        ht,
                 "away_team":        at,
