@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-04-22T19:17:15.269859Z",
+  "generated_at": "2026-04-22T19:18:12.689228Z",
   "data_date": "2026-04-22",
   "status": "ACTIVE",
   "picks": [
@@ -86,22 +86,6 @@
       "result": null
     },
     {
-      "player": "Anthony Black",
-      "stat": "REB",
-      "line": 2.5,
-      "projection": 4.2,
-      "direction": "over",
-      "model_prob": 0.7861,
-      "market_prob": 0.4731,
-      "edge_pp": 31.3,
-      "games_used": 6,
-      "confidence_tier": "high",
-      "matchup": "Orlando Magic @ Detroit Pistons",
-      "game_time_utc": "2026-04-22T23:10:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
       "player": "Justin Edwards",
       "stat": "PTS",
       "line": 4.5,
@@ -114,6 +98,22 @@
       "confidence_tier": "high",
       "matchup": "Boston Celtics @ Philadelphia 76ers",
       "game_time_utc": "2026-04-24T23:10:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "player": "Anthony Black",
+      "stat": "REB",
+      "line": 2.5,
+      "projection": 4.2,
+      "direction": "over",
+      "model_prob": 0.7861,
+      "market_prob": 0.4793,
+      "edge_pp": 30.68,
+      "games_used": 6,
+      "confidence_tier": "high",
+      "matchup": "Orlando Magic @ Detroit Pistons",
+      "game_time_utc": "2026-04-22T23:10:00Z",
       "outcome": null,
       "result": null
     },
@@ -294,22 +294,6 @@
       "result": null
     },
     {
-      "player": "Tristan da Silva",
-      "stat": "REB",
-      "line": 2.5,
-      "projection": 3.3,
-      "direction": "over",
-      "model_prob": 0.6345,
-      "market_prob": 0.4612,
-      "edge_pp": 17.33,
-      "games_used": 6,
-      "confidence_tier": "medium",
-      "matchup": "Orlando Magic @ Detroit Pistons",
-      "game_time_utc": "2026-04-22T23:10:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
       "player": "VJ Edgecombe",
       "stat": "PTS",
       "line": 15.5,
@@ -322,6 +306,22 @@
       "confidence_tier": "high",
       "matchup": "Boston Celtics @ Philadelphia 76ers",
       "game_time_utc": "2026-04-24T23:10:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "player": "Tristan da Silva",
+      "stat": "REB",
+      "line": 2.5,
+      "projection": 3.3,
+      "direction": "over",
+      "model_prob": 0.6345,
+      "market_prob": 0.4667,
+      "edge_pp": 16.78,
+      "games_used": 6,
+      "confidence_tier": "medium",
+      "matchup": "Orlando Magic @ Detroit Pistons",
+      "game_time_utc": "2026-04-22T23:10:00Z",
       "outcome": null,
       "result": null
     },
@@ -444,8 +444,8 @@
       "projection": 12.9,
       "direction": "under",
       "model_prob": 0.5803,
-      "market_prob": 0.5005,
-      "edge_pp": 7.98,
+      "market_prob": 0.5003,
+      "edge_pp": 8.0,
       "games_used": 6,
       "confidence_tier": "low",
       "matchup": "Orlando Magic @ Detroit Pistons",
