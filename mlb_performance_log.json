@@ -2,33 +2,109 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "launch_date": "2026-04-15",
-  "last_updated": "2026-04-21",
+  "last_updated": "2026-04-22",
   "overall": {
-    "wins": 21,
-    "losses": 10,
+    "wins": 23,
+    "losses": 12,
     "pushes": 0,
-    "total": 31,
-    "hit_rate": 67.74,
-    "roi_flat": 29.32
+    "total": 35,
+    "hit_rate": 65.71,
+    "roi_flat": 25.45
   },
   "by_confidence": {
     "high": {
-      "wins": 4,
-      "total": 5,
-      "hit_rate": 80.0
+      "wins": 5,
+      "total": 6,
+      "hit_rate": 83.33
     },
     "medium": {
       "wins": 7,
-      "total": 11,
-      "hit_rate": 63.64
+      "total": 12,
+      "hit_rate": 58.33
     },
     "low": {
-      "wins": 10,
-      "total": 15,
-      "hit_rate": 66.67
+      "wins": 11,
+      "total": 17,
+      "hit_rate": 64.71
     }
   },
   "recent": [
+    {
+      "pick_id": "mlb-2026-04-21-824690",
+      "game_time_utc": "2026-04-21T23:40:00Z",
+      "home_team": "Chicago Cubs",
+      "away_team": "Philadelphia Phillies",
+      "pick": "Chicago Cubs",
+      "pick_side": "home",
+      "model_prob_home": 0.7172,
+      "model_prob_away": 0.2828,
+      "market_prob_home": 0.537,
+      "market_prob_away": 0.463,
+      "market_line_home": -126,
+      "market_source": "pinnacle",
+      "edge_pp": 18.02,
+      "confidence_tier": "high",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-22T11:01:26.174790Z"
+    },
+    {
+      "pick_id": "mlb-2026-04-21-824127",
+      "game_time_utc": "2026-04-21T23:40:00Z",
+      "home_team": "Kansas City Royals",
+      "away_team": "Baltimore Orioles",
+      "pick": "Baltimore Orioles",
+      "pick_side": "away",
+      "model_prob_home": 0.4655,
+      "model_prob_away": 0.5345,
+      "market_prob_home": 0.5328,
+      "market_prob_away": 0.4672,
+      "market_line_home": -124,
+      "market_source": "pinnacle",
+      "edge_pp": 6.73,
+      "confidence_tier": "low",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-22T11:01:26.174754Z"
+    },
+    {
+      "pick_id": "mlb-2026-04-21-823640",
+      "game_time_utc": "2026-04-21T23:10:00Z",
+      "home_team": "New York Mets",
+      "away_team": "Minnesota Twins",
+      "pick": "Minnesota Twins",
+      "pick_side": "away",
+      "model_prob_home": 0.4444,
+      "model_prob_away": 0.5556,
+      "market_prob_home": 0.5934,
+      "market_prob_away": 0.4066,
+      "market_line_home": -162,
+      "market_source": "pinnacle",
+      "edge_pp": 14.9,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-22T11:01:26.174734Z"
+    },
+    {
+      "pick_id": "mlb-2026-04-21-822747",
+      "game_time_utc": "2026-04-21T22:45:00Z",
+      "home_team": "Washington Nationals",
+      "away_team": "Atlanta Braves",
+      "pick": "Atlanta Braves",
+      "pick_side": "away",
+      "model_prob_home": 0.3652,
+      "model_prob_away": 0.6348,
+      "market_prob_home": 0.4417,
+      "market_prob_away": 0.5583,
+      "market_line_home": 118,
+      "market_source": "pinnacle",
+      "edge_pp": 7.65,
+      "confidence_tier": "medium",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-22T11:01:26.174699Z"
+    },
     {
       "pick_id": "mlb-2026-04-20-824692",
       "game_time_utc": "2026-04-20T23:40:00Z",
