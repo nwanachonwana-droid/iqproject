@@ -183,7 +183,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   </div>
   <nav class="tabs">
     <button class="tab on" id="t-pred" onclick="showTab('pred')">Predictions</button>
-    <button class="tab"    id="t-perf" onclick="showTab('perf')">Performance</button>
+
     <button class="tab"    id="t-futures" onclick="showTab('futures')">Futures</button>
     <button class="tab"    id="t-splash" onclick="showTab('splash')">Splash Solver</button>
   </nav>
@@ -208,7 +208,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
       <button class="filt" onclick="setF('mlb_props',this)">MLB Props</button>
       <button class="filt" onclick="setF('nba_props',this)">NBA Props</button>
       <button class="filt" onclick="setF('mma',this)">MMA</button>
-      <button class="filt-hc" id="btn-hc" onclick="toggleHC(this)">High Confidence Only</button>
+
     </div>
     <div class="bright" id="pct">—</div>
   </div>
@@ -238,7 +238,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 </div>
 
 <!-- PERFORMANCE -->
-<div id="perf">
+<div id="perf" style="display:none">
   <div class="bar">
     <div class="blbl">Live record — from site launch · walk-forward validated</div>
   </div>
