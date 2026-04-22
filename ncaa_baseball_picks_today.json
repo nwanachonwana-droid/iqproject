@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-04-22T14:43:45.513557Z",
+  "generated_at": "2026-04-22T18:19:22.120529Z",
   "data_date": "2026-04-22",
   "model_version": "v1.0",
   "status": "PROVEN",
@@ -254,25 +254,6 @@
       "settled_at": null
     },
     {
-      "pick_id": "ncaabb-2026-04-22-34b258260c266121804f48350effa6a5",
-      "game_time_utc": "2026-04-22T18:00:00Z",
-      "home_team": "Arkansas-Little Rock Trojans",
-      "away_team": "UT Rio Grande Valley Vaqueros",
-      "pick": "Arkansas-Little Rock Trojans",
-      "pick_side": "home",
-      "model_prob_home": 0.54,
-      "model_prob_away": 0.46,
-      "market_prob_home": 0.48,
-      "market_prob_away": 0.52,
-      "market_line_home": null,
-      "market_source": "pinnacle",
-      "edge_pp": 6.0,
-      "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
-    },
-    {
       "pick_id": "ncaabb-2026-04-22-396b3578cd83424b5d3168d8b5c768b1",
       "game_time_utc": "2026-04-22T22:00:00Z",
       "home_team": "Georgetown Hoyas",
@@ -331,7 +312,7 @@
     },
     {
       "pick_id": "ncaabb-2026-04-22-401853260",
-      "game_time_utc": "2026-04-22T15:00Z",
+      "game_time_utc": "2026-04-22T18:30Z",
       "home_team": "Marshall Thundering Herd",
       "away_team": "Morehead State Eagles",
       "pick": "Marshall Thundering Herd",
@@ -407,8 +388,8 @@
     }
   ],
   "summary": {
-    "total_picks": 21,
+    "total_picks": 20,
     "high_confidence": 2,
-    "avg_edge_pp": -1.0
+    "avg_edge_pp": -1.35
   }
 }

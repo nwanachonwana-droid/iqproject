@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "soccer",
-  "generated_at": "2026-04-22T14:44:09.753097Z",
+  "generated_at": "2026-04-22T18:19:33.995597Z",
   "data_date": "2026-04-22",
   "model_version": "v1.0",
   "status": "ACTIVE",
@@ -14,12 +14,12 @@
       "pick_side": "away",
       "model_prob_home": 0.3301,
       "model_prob_away": 0.3943,
-      "market_prob_home": 0.4017,
-      "market_prob_away": 0.3361,
-      "draw_prob": 0.2622,
-      "edge_pp": 5.82,
+      "market_prob_home": 0.4935,
+      "market_prob_away": 0.1447,
+      "draw_prob": 0.3618,
+      "edge_pp": 24.96,
       "confidence_tier": "low",
-      "game_time_utc": "2026-04-22T17:00:00Z",
+      "game_time_utc": "2026-04-22T17:06:00Z",
       "outcome": null,
       "result": null
     }
@@ -27,6 +27,6 @@
   "summary": {
     "total_picks": 1,
     "high_confidence": 0,
-    "avg_edge_pp": 5.82
+    "avg_edge_pp": 24.96
   }
 }
