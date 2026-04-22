@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "mlb",
-  "generated_at": "2026-04-22T11:01:30.103393Z",
+  "generated_at": "2026-04-22T14:42:35.543832Z",
   "data_date": "2026-04-22",
   "model_version": "v1.0",
   "status": "PROVEN",
@@ -15,11 +15,11 @@
       "pick_side": "away",
       "model_prob_home": 0.4951,
       "model_prob_away": 0.5049,
-      "market_prob_home": 0.553,
-      "market_prob_away": 0.447,
-      "market_line_home": -134,
+      "market_prob_home": 0.5583,
+      "market_prob_away": 0.4417,
+      "market_line_home": -138,
       "market_source": "pinnacle",
-      "edge_pp": 5.79,
+      "edge_pp": 6.32,
       "confidence_tier": "low",
       "result": null,
       "outcome": null,
@@ -83,25 +83,6 @@
       "settled_at": null
     },
     {
-      "pick_id": "mlb-2026-04-22-822748",
-      "game_time_utc": "2026-04-22T22:45:00Z",
-      "home_team": "Washington Nationals",
-      "away_team": "Atlanta Braves",
-      "pick": "Atlanta Braves",
-      "pick_side": "away",
-      "model_prob_home": 0.3965,
-      "model_prob_away": 0.6035,
-      "market_prob_home": 0.4365,
-      "market_prob_away": 0.5635,
-      "market_line_home": 120,
-      "market_source": "pinnacle",
-      "edge_pp": 4.0,
-      "confidence_tier": "medium",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
-    },
-    {
       "pick_id": "mlb-2026-04-22-823641",
       "game_time_utc": "2026-04-22T23:10:00Z",
       "home_team": "New York Mets",
@@ -148,11 +129,11 @@
       "pick_side": "away",
       "model_prob_home": 0.4436,
       "model_prob_away": 0.5564,
-      "market_prob_home": 0.4004,
-      "market_prob_away": 0.5996,
-      "market_line_home": 140,
+      "market_prob_home": 0.4066,
+      "market_prob_away": 0.5934,
+      "market_line_home": 136,
       "market_source": "pinnacle",
-      "edge_pp": -4.32,
+      "edge_pp": -3.7,
       "confidence_tier": "low",
       "result": null,
       "outcome": null,
@@ -160,8 +141,8 @@
     }
   ],
   "summary": {
-    "total_picks": 8,
+    "total_picks": 7,
     "high_confidence": 1,
-    "avg_edge_pp": 4.81
+    "avg_edge_pp": 5.09
   }
 }
