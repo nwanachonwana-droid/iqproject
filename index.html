@@ -344,7 +344,7 @@ const META={
     sources:['PrizePicks / Underdog - prop lines, free public API','NBA Stats API - player splits, free','Baseball Savant - Statcast player splits, free'],
     limits:['NBA props market highly efficient - 5% edge required','Marcel blend needs 10+ GP for meaningful credibility weight','Injury status must be confirmed pre-game']},
 };
-const SPORTS=Object.keys(META).filter(s=>s!=='props').concat(['nba']);
+const SPORTS=Object.keys(META).filter(s=>s!=='props');
 
 let PICKS=[],PROPS=[],PERF={},AF='all',PS='mlb',HC=false;
 
