@@ -1596,9 +1596,11 @@ def run_nba():
 
     all_picks = []
     for g in games:
-        # Only process today's games
+        # Process today's and tomorrow's games (NBA playoffs span time zones)
+        import datetime as _dt
         game_date = (g.get("commence_time") or "")[:10]
-        if game_date != TODAY:
+        tomorrow = (_dt.date.today() + _dt.timedelta(days=1)).isoformat()
+        if game_date not in (TODAY, tomorrow):
             continue
         ht = NBA_NAME_MAP.get(g["home_team"], g["home_team"])
         at = NBA_NAME_MAP.get(g["away_team"], g["away_team"])
