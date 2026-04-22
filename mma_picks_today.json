@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "mma",
-  "generated_at": "2026-04-22T18:49:36.987453Z",
+  "generated_at": "2026-04-22T19:05:30.645547Z",
   "data_date": "2026-04-22",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
@@ -61,9 +61,9 @@
       "pick_side": "home",
       "model_prob_home": 0.5909,
       "model_prob_away": 0.4091,
-      "market_prob_home": 0.4584,
-      "market_prob_away": 0.5416,
-      "edge_pp": 13.25,
+      "market_prob_home": 0.457,
+      "market_prob_away": 0.543,
+      "edge_pp": 13.39,
       "confidence_tier": "low",
       "record": "18-4",
       "game_time_utc": "2026-04-26T00:00:00Z",
@@ -77,9 +77,9 @@
       "pick_side": "home",
       "model_prob_home": 0.5893,
       "model_prob_away": 0.4107,
-      "market_prob_home": 0.4576,
-      "market_prob_away": 0.5424,
-      "edge_pp": 13.17,
+      "market_prob_home": 0.4569,
+      "market_prob_away": 0.5431,
+      "edge_pp": 13.23,
       "confidence_tier": "low",
       "record": "25-5",
       "game_time_utc": "2026-04-26T00:00:00Z",
@@ -93,9 +93,9 @@
       "pick_side": "away",
       "model_prob_home": 0.4902,
       "model_prob_away": 0.5098,
-      "market_prob_home": 0.6124,
-      "market_prob_away": 0.3876,
-      "edge_pp": 12.22,
+      "market_prob_home": 0.6135,
+      "market_prob_away": 0.3865,
+      "edge_pp": 12.33,
       "confidence_tier": "low",
       "record": "21-5",
       "game_time_utc": "2026-04-26T00:00:00Z",
@@ -106,6 +106,6 @@
   "summary": {
     "total_picks": 6,
     "high_confidence": 0,
-    "avg_edge_pp": 9.98
+    "avg_edge_pp": 10.03
   }
 }
