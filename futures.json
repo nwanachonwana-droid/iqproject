@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-22T18:21:11.543017+00:00",
+  "generated_at": "2026-04-22T18:39:15.837804+00:00",
   "data_date": "2026-04-22",
   "markets": [
     {
@@ -207,7 +207,7 @@
       "key": "nhl",
       "label": "NHL Stanley Cup 2026",
       "simulations": 50000,
-      "overround": 17.0,
+      "overround": 17.1,
       "methodology": "Pythagenpat ISR \u2192 best-of-7 series DP \u2192 50k Monte Carlo bracket simulation. Edge = model_prob \u2212 devigged market prob. Kelly = quarter-Kelly (25%).",
       "picks": [
         {
@@ -239,7 +239,7 @@
           "seed": 5,
           "isr": 0.5318,
           "model_prob": 0.0536,
-          "market_prob": 0.022,
+          "market_prob": 0.0219,
           "edge_pp": 3.2,
           "best_ml": 4500,
           "best_str": "+4500",
@@ -323,11 +323,11 @@
           "seed": 8,
           "isr": 0.5105,
           "model_prob": 0.0344,
-          "market_prob": 0.0292,
+          "market_prob": 0.0298,
           "edge_pp": 0.5,
-          "best_ml": 3300,
-          "best_str": "+3300",
-          "kelly_pct": 0.13,
+          "best_ml": 3000,
+          "best_str": "+3000",
+          "kelly_pct": 0.06,
           "value": false
         },
         {
@@ -335,7 +335,7 @@
           "seed": 4,
           "isr": 0.5219,
           "model_prob": 0.0489,
-          "market_prob": 0.0687,
+          "market_prob": 0.0686,
           "edge_pp": -2.0,
           "best_ml": 1400,
           "best_str": "+1400",
@@ -347,7 +347,7 @@
           "seed": 5,
           "isr": 0.5181,
           "model_prob": 0.0471,
-          "market_prob": 0.0764,
+          "market_prob": 0.0763,
           "edge_pp": -2.9,
           "best_ml": 1100,
           "best_str": "+1100",
@@ -371,7 +371,7 @@
           "seed": 1,
           "isr": 0.579,
           "model_prob": 0.0973,
-          "market_prob": 0.1686,
+          "market_prob": 0.1685,
           "edge_pp": -7.1,
           "best_ml": 440,
           "best_str": "+440",
@@ -383,7 +383,7 @@
           "seed": 1,
           "isr": 0.6433,
           "model_prob": 0.1383,
-          "market_prob": 0.2451,
+          "market_prob": 0.245,
           "edge_pp": -10.7,
           "best_ml": 275,
           "best_str": "+275",
