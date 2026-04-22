@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-22T11:00:48.238093Z",
+  "generated_at": "2026-04-22T11:01:52.066028Z",
   "data_date": "2026-04-22",
   "props": [
     {
@@ -119,8 +119,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.285,
       "model_prob": 0.6637,
-      "market_prob": 0.5319,
-      "edge_pp": 13.18,
+      "market_prob": 0.5312,
+      "edge_pp": 13.25,
       "confidence_tier": "high",
       "result": null,
       "outcome": null
