@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "mlb",
-  "generated_at": "2026-04-22T19:06:13.393162Z",
+  "generated_at": "2026-04-22T19:14:54.839366Z",
   "data_date": "2026-04-22",
   "model_version": "v1.0",
   "status": "PROVEN",
@@ -91,11 +91,11 @@
       "pick_side": "home",
       "model_prob_home": 0.7246,
       "model_prob_away": 0.2754,
-      "market_prob_home": 0.4672,
-      "market_prob_away": 0.5328,
-      "market_line_home": 106,
+      "market_prob_home": 0.463,
+      "market_prob_away": 0.537,
+      "market_line_home": 108,
       "market_source": "pinnacle",
-      "edge_pp": 25.74,
+      "edge_pp": 26.16,
       "confidence_tier": "high",
       "result": null,
       "outcome": null,
@@ -162,6 +162,6 @@
   "summary": {
     "total_picks": 8,
     "high_confidence": 1,
-    "avg_edge_pp": 5.34
+    "avg_edge_pp": 5.39
   }
 }
