@@ -1640,11 +1640,12 @@ def run_nba():
         if at in b2b_teams: flags.append("A-B2B")
         flag_str = " ".join(flags) if flags else "—"
 
-        for pick_team, pick_side, model_p, nv_p, ep in [
-            (ht, "home", p_home, nv_h, ep_h),
-            (at, "away", p_away, nv_a, ep_a),
-        ]:
-            if ep < 1.0: continue  # removed model_p filter - away dogs can have p<0.50
+        # One pick per game: team model thinks wins (higher model prob)
+        if p_home >= p_away:
+            pick_team, pick_side, model_p, nv_p, ep = ht, "home", p_home, nv_h, ep_h
+        else:
+            pick_team, pick_side, model_p, nv_p, ep = at, "away", p_away, nv_a, ep_a
+        if True:
             all_picks.append({
                 "home_team":        ht,
                 "away_team":        at,
