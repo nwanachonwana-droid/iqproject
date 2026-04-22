@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-04-22T14:43:19.949819Z",
+  "generated_at": "2026-04-22T14:44:26.389736Z",
   "data_date": "2026-04-22",
   "status": "ACTIVE",
   "picks": [
@@ -44,8 +44,8 @@
       "projection": 7.1,
       "direction": "over",
       "model_prob": 0.8379,
-      "market_prob": 0.4911,
-      "edge_pp": 34.68,
+      "market_prob": 0.4957,
+      "edge_pp": 34.22,
       "games_used": 5,
       "confidence_tier": "high",
       "matchup": "New York Knicks @ Atlanta Hawks",
