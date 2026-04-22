@@ -658,6 +658,8 @@ def run_soccer():
         except: continue
         matched=0
         for g in games:
+            # Only today's games
+            if (g.get("commence_time") or "")[:10] != TODAY: continue
             ht=g["home_team"]; at=g["away_team"]
             isr_h=find_team_isr(ht,isr)
             isr_a=find_team_isr(at,isr)
@@ -1594,6 +1596,10 @@ def run_nba():
 
     all_picks = []
     for g in games:
+        # Only process today's games
+        game_date = (g.get("commence_time") or "")[:10]
+        if game_date != TODAY:
+            continue
         ht = NBA_NAME_MAP.get(g["home_team"], g["home_team"])
         at = NBA_NAME_MAP.get(g["away_team"], g["away_team"])
         isr_h = isr.get(ht)
