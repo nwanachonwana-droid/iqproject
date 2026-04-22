@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-04-22T18:39:27.158846Z",
+  "generated_at": "2026-04-22T18:43:45.046593Z",
   "data_date": "2026-04-22",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
@@ -21,11 +21,27 @@
       "game_time_utc": "2026-04-22T23:10:00Z",
       "outcome": null,
       "result": null
+    },
+    {
+      "home_team": "Oklahoma City Thunder",
+      "away_team": "Phoenix Suns",
+      "pick": "Phoenix Suns",
+      "pick_side": "away",
+      "model_prob_home": 0.5566,
+      "model_prob_away": 0.4434,
+      "market_prob_home": 0.9113,
+      "market_prob_away": 0.0887,
+      "edge_pp": 35.47,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-04-23T01:40:00Z",
+      "outcome": null,
+      "result": null
     }
   ],
   "summary": {
-    "total_picks": 1,
+    "total_picks": 2,
     "high_confidence": 0,
-    "avg_edge_pp": 21.58
+    "avg_edge_pp": 28.52
   }
 }

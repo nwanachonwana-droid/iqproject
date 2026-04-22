@@ -2,49 +2,9 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-04-22T18:39:33.542857Z",
+  "generated_at": "2026-04-22T18:43:51.123463Z",
   "data_date": "2026-04-22",
   "props": [
-    {
-      "pick_id": "mlb-props-2026-04-22-667755-k",
-      "sport": "mlb",
-      "market": "pitcher_strikeouts",
-      "game": "Toronto Blue Jays @ Los Angeles Angels",
-      "player": "Jos\u00e9 Soriano",
-      "pick": "Jos\u00e9 Soriano Over 5.5 Ks",
-      "pick_side": "Over",
-      "line": 5.5,
-      "proj_k": 6.92,
-      "umpire": "Chad Whitson",
-      "ump_adj": 0.0,
-      "opp_k_pct": 0.199,
-      "model_prob": 0.689,
-      "market_prob": 0.4928,
-      "edge_pp": 19.62,
-      "confidence_tier": "high",
-      "result": null,
-      "outcome": null
-    },
-    {
-      "pick_id": "mlb-props-2026-04-22-641778-k",
-      "sport": "mlb",
-      "market": "pitcher_strikeouts",
-      "game": "Toronto Blue Jays @ Los Angeles Angels",
-      "player": "Eric Lauer",
-      "pick": "Eric Lauer Over 4.5 Ks",
-      "pick_side": "Over",
-      "line": 4.5,
-      "proj_k": 5.5,
-      "umpire": "Chad Whitson",
-      "ump_adj": 0.0,
-      "opp_k_pct": 0.302,
-      "model_prob": 0.6426,
-      "market_prob": 0.5288,
-      "edge_pp": 11.38,
-      "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
-    },
     {
       "pick_id": "mlb-props-2026-04-22-621111-k",
       "sport": "mlb",
@@ -79,15 +39,15 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.279,
       "model_prob": 0.5689,
-      "market_prob": 0.4684,
-      "edge_pp": 10.05,
+      "market_prob": 0.4677,
+      "edge_pp": 10.12,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
     }
   ],
   "summary": {
-    "total_props": 4,
-    "high_confidence": 1
+    "total_props": 2,
+    "high_confidence": 0
   }
 }
