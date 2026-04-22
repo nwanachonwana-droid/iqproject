@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-22T18:20:11.142253+00:00",
+  "generated_at": "2026-04-22T18:21:11.543017+00:00",
   "data_date": "2026-04-22",
   "markets": [
     {
@@ -215,7 +215,7 @@
           "seed": 7,
           "isr": 0.5343,
           "model_prob": 0.0476,
-          "market_prob": 0.0121,
+          "market_prob": 0.012,
           "edge_pp": 3.6,
           "best_ml": 8000,
           "best_str": "+8000",
@@ -227,8 +227,8 @@
           "seed": 6,
           "isr": 0.5461,
           "model_prob": 0.0561,
-          "market_prob": 0.0221,
-          "edge_pp": 3.4,
+          "market_prob": 0.0213,
+          "edge_pp": 3.5,
           "best_ml": 6000,
           "best_str": "+6000",
           "kelly_pct": 1.01,
@@ -371,8 +371,8 @@
           "seed": 1,
           "isr": 0.579,
           "model_prob": 0.0973,
-          "market_prob": 0.1677,
-          "edge_pp": -7.0,
+          "market_prob": 0.1686,
+          "edge_pp": -7.1,
           "best_ml": 440,
           "best_str": "+440",
           "kelly_pct": 0,
