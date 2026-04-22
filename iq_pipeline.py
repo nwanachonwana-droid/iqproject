@@ -1662,8 +1662,16 @@ def run_nba():
                 "result":           None,
             })
 
-    print(f"  -> {len(all_picks)} picks | {len(games)} games")
-    write_picks("nba", all_picks, "EXPERIMENTAL")
+    # Deduplicate by home+away team
+    seen = set()
+    deduped = []
+    for p in all_picks:
+        key = f"{p['away_team']}@{p['home_team']}"
+        if key not in seen:
+            seen.add(key)
+            deduped.append(p)
+    print(f"  -> {len(deduped)} picks | {len(games)} games")
+    write_picks("nba", deduped, "EXPERIMENTAL")
 
 def run_nba_props():
     """NBA props — rolling average projection vs Odds API lines."""
