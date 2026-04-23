@@ -1,26 +1,26 @@
 {
   "schema_version": "1.0",
   "sport": "nhl",
-  "generated_at": "2026-04-22T19:20:52.034131Z",
-  "data_date": "2026-04-22",
+  "generated_at": "2026-04-23T11:37:35.034847Z",
+  "data_date": "2026-04-23",
   "model_version": "v1.0",
   "status": "ACTIVE",
   "picks": [
     {
-      "pick_id": "nhl-2026-04-22-2025030182",
-      "game_time_utc": "2026-04-23T02:00:00Z",
-      "home_team": "Edmonton Oilers",
-      "away_team": "Anaheim Ducks",
-      "pick": "Edmonton Oilers",
-      "pick_side": "home",
-      "model_prob_home": 0.5724,
-      "model_prob_away": 0.4276,
-      "market_prob_home": 0.6369,
-      "market_prob_away": 0.3631,
-      "market_line_home": -198,
+      "pick_id": "nhl-2026-04-23-2025030153",
+      "game_time_utc": "2026-04-24T02:00:00Z",
+      "home_team": "Los Angeles Kings",
+      "away_team": "Colorado Avalanche",
+      "pick": "Colorado Avalanche",
+      "pick_side": "away",
+      "model_prob_home": 0.336,
+      "model_prob_away": 0.664,
+      "market_prob_home": 0.4087,
+      "market_prob_away": 0.5913,
+      "market_line_home": 134,
       "market_source": "pinnacle",
-      "edge_pp": -6.45,
-      "confidence_tier": "low",
+      "edge_pp": 7.27,
+      "confidence_tier": "high",
       "result": null,
       "outcome": null,
       "settled_at": null
@@ -28,7 +28,7 @@
   ],
   "summary": {
     "total_picks": 1,
-    "high_confidence": 0,
-    "avg_edge_pp": -6.45
+    "high_confidence": 1,
+    "avg_edge_pp": 7.27
   }
 }
