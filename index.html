@@ -197,7 +197,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
   <div class="bar">
     <div class="blbl" id="today-lbl">—</div>
     <div class="filts">
-      <button class="filt on" onclick="setF('all',this)">All sports</button>
+
       <button class="filt" onclick="setF('nba',this)">NBA</button>
       <button class="filt" onclick="setF('ncaa_basketball',this)">NCAA Basketball</button>
       <button class="filt" onclick="setF('mlb',this)">MLB</button>
@@ -393,9 +393,10 @@ function setF(f,btn){
 
 function renderProps(){
   const body=document.getElementById('pb');
-  document.getElementById('pct').textContent=PROPS.length+' prop'+(PROPS.length!==1?'s':'');
-  if(!PROPS.length){body.innerHTML='<tr><td colspan="8" class="empty">No props today — run pipeline after noon for umpire data</td></tr>';return;}
-  body.innerHTML=PROPS.map((p,i)=>{
+  const showProps=PROPS.filter(p=>p.confidence_tier==='high'||p.confidence_tier==='medium');
+  document.getElementById('pct').textContent=showProps.length+' prop'+(showProps.length!==1?'s':'');
+  if(!showProps.length){body.innerHTML='<tr><td colspan="8" class="empty">No high/medium confidence props today</td></tr>';return;}
+  body.innerHTML=showProps.map((p,i)=>{
     const e=p.edge_pp;
     const ec=e>1.5?'ep':e<-1.5?'en':'ez';
     const star=p.confidence_tier==='high'?'★':' ';
