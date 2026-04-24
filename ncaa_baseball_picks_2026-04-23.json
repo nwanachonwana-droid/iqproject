@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "sport": "ncaa_baseball",
+  "generated_at": "2026-04-23T11:38:37.674828Z",
+  "data_date": "2026-04-23",
+  "model_version": "v1.0",
+  "status": "PROVEN",
+  "picks": [
+    {
+      "pick_id": "ncaabb-2026-04-23-33e3e5d9cd39d29bc86b90e4249a4cdf",
+      "game_time_utc": "2026-04-23T23:00:00Z",
+      "home_team": "Duke Blue Devils",
+      "away_team": "North Carolina Tar Heels",
+      "pick": "North Carolina Tar Heels",
+      "pick_side": "away",
+      "model_prob_home": 0.3416,
+      "model_prob_away": 0.6584,
+      "market_prob_home": 0.2007,
+      "market_prob_away": 0.7993,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -14.09,
+      "confidence_tier": "high",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-24T12:15:42.190122Z"
+    },
+    {
+      "pick_id": "ncaabb-2026-04-23-59b596a4e5ad1e1a485008d0f8d11ceb",
+      "game_time_utc": "2026-04-23T23:00:00Z",
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Alabama Crimson Tide",
+      "pick": "Tennessee Volunteers",
+      "pick_side": "home",
+      "model_prob_home": 0.5338,
+      "model_prob_away": 0.4662,
+      "market_prob_home": 0.5409,
+      "market_prob_away": 0.4591,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -0.71,
+      "confidence_tier": "low",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-24T12:15:42.190144Z"
+    }
+  ],
+  "summary": {
+    "total_picks": 2,
+    "high_confidence": 1,
+    "avg_edge_pp": -7.4
+  }
+}

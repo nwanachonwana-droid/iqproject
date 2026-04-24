@@ -2,12 +2,12 @@
   "schema_version": "1.0",
   "sport": "nba",
   "launch_date": "2026-04-23",
-  "last_updated": "2026-04-23",
+  "last_updated": "2026-04-24",
   "overall": {
-    "wins": 1,
+    "wins": 2,
     "losses": 0,
     "pushes": 0,
-    "total": 1,
+    "total": 2,
     "hit_rate": 100.0,
     "roi_flat": 90.9
   },
@@ -23,12 +23,29 @@
       "hit_rate": 0.0
     },
     "low": {
-      "wins": 1,
-      "total": 1,
+      "wins": 2,
+      "total": 2,
       "hit_rate": 100.0
     }
   },
   "recent": [
+    {
+      "home_team": "Atlanta Hawks",
+      "away_team": "New York Knicks",
+      "pick": "Atlanta Hawks",
+      "pick_side": "home",
+      "model_prob_home": 0.5006,
+      "model_prob_away": 0.4994,
+      "market_prob_home": 0.4873,
+      "market_prob_away": 0.5127,
+      "edge_pp": 1.34,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-04-23T23:10:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-04-24T12:15:42.251269Z"
+    },
     {
       "home_team": "Detroit Pistons",
       "away_team": "Orlando Magic",

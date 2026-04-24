@@ -2,20 +2,20 @@
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
   "launch_date": "2026-04-13",
-  "last_updated": "2026-04-23",
+  "last_updated": "2026-04-24",
   "overall": {
-    "wins": 236,
-    "losses": 65,
+    "wins": 237,
+    "losses": 66,
     "pushes": 0,
-    "total": 301,
-    "hit_rate": 78.41,
-    "roi_flat": 49.68
+    "total": 303,
+    "hit_rate": 78.22,
+    "roi_flat": 49.32
   },
   "by_confidence": {
     "high": {
-      "wins": 96,
-      "total": 104,
-      "hit_rate": 92.31
+      "wins": 97,
+      "total": 105,
+      "hit_rate": 92.38
     },
     "medium": {
       "wins": 105,
@@ -24,11 +24,49 @@
     },
     "low": {
       "wins": 35,
-      "total": 61,
-      "hit_rate": 57.38
+      "total": 62,
+      "hit_rate": 56.45
     }
   },
   "recent": [
+    {
+      "pick_id": "ncaabb-2026-04-23-59b596a4e5ad1e1a485008d0f8d11ceb",
+      "game_time_utc": "2026-04-23T23:00:00Z",
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Alabama Crimson Tide",
+      "pick": "Tennessee Volunteers",
+      "pick_side": "home",
+      "model_prob_home": 0.5338,
+      "model_prob_away": 0.4662,
+      "market_prob_home": 0.5409,
+      "market_prob_away": 0.4591,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -0.71,
+      "confidence_tier": "low",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-04-24T12:15:42.190144Z"
+    },
+    {
+      "pick_id": "ncaabb-2026-04-23-33e3e5d9cd39d29bc86b90e4249a4cdf",
+      "game_time_utc": "2026-04-23T23:00:00Z",
+      "home_team": "Duke Blue Devils",
+      "away_team": "North Carolina Tar Heels",
+      "pick": "North Carolina Tar Heels",
+      "pick_side": "away",
+      "model_prob_home": 0.3416,
+      "model_prob_away": 0.6584,
+      "market_prob_home": 0.2007,
+      "market_prob_away": 0.7993,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -14.09,
+      "confidence_tier": "high",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-24T12:15:42.190122Z"
+    },
     {
       "pick_id": "ncaabb-2026-04-22-401852300",
       "game_time_utc": "2026-04-22T23:00Z",
@@ -940,44 +978,6 @@
       "result": 1.0,
       "outcome": "WIN",
       "settled_at": "2026-04-22T11:01:26.231400Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-04-21-c3a86abd1837b5a110c3abe059989d1e",
-      "game_time_utc": "2026-04-21T23:00:00Z",
-      "home_team": "TCU Horned Frogs",
-      "away_team": "Dallas Baptist Patriots",
-      "pick": "TCU Horned Frogs",
-      "pick_side": "home",
-      "model_prob_home": 0.5645,
-      "model_prob_away": 0.4355,
-      "market_prob_home": 0.5803,
-      "market_prob_away": 0.4197,
-      "market_line_home": null,
-      "market_source": "pinnacle",
-      "edge_pp": -1.58,
-      "confidence_tier": "low",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-04-22T11:01:26.231394Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-04-21-401850237",
-      "game_time_utc": "2026-04-21T19:00Z",
-      "home_team": "Ball State Cardinals",
-      "away_team": "Indiana Hoosiers",
-      "pick": "Ball State Cardinals",
-      "pick_side": "home",
-      "model_prob_home": 0.5708,
-      "model_prob_away": 0.4292,
-      "market_prob_home": null,
-      "market_prob_away": null,
-      "market_line_home": null,
-      "market_source": null,
-      "edge_pp": null,
-      "confidence_tier": "low",
-      "result": 0.0,
-      "outcome": "LOSS",
-      "settled_at": "2026-04-22T11:01:26.231388Z"
     }
   ]
 }
