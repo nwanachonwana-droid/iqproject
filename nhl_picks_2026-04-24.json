@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "sport": "nhl",
+  "generated_at": "2026-04-24T12:15:46.959185Z",
+  "data_date": "2026-04-24",
+  "model_version": "v1.0",
+  "status": "ACTIVE",
+  "picks": [
+    {
+      "pick_id": "nhl-2026-04-24-2025030173",
+      "game_time_utc": "2026-04-25T01:30:00Z",
+      "home_team": "Utah Mammoth",
+      "away_team": "Vegas Golden Knights",
+      "pick": "Utah Mammoth",
+      "pick_side": "home",
+      "model_prob_home": 0.552,
+      "model_prob_away": 0.448,
+      "market_prob_home": 0.4957,
+      "market_prob_away": 0.5043,
+      "market_line_home": -108,
+      "market_source": "pinnacle",
+      "edge_pp": 5.63,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ],
+  "summary": {
+    "total_picks": 1,
+    "high_confidence": 0,
+    "avg_edge_pp": 5.63
+  }
+}
