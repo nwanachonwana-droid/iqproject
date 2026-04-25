@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-04-25T12:04:18.419806Z",
+  "generated_at": "2026-04-25T12:05:08.649171Z",
   "data_date": "2026-04-25",
   "status": "ACTIVE",
   "picks": [
@@ -50,6 +50,22 @@
       "confidence_tier": "high",
       "matchup": "San Antonio Spurs @ Portland Trail Blazers",
       "game_time_utc": "2026-04-26T19:40:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "player": "Anthony Black",
+      "stat": "REB",
+      "line": 2.5,
+      "projection": 4.1,
+      "direction": "over",
+      "model_prob": 0.7701,
+      "market_prob": 0.5113,
+      "edge_pp": 25.88,
+      "games_used": 5,
+      "confidence_tier": "high",
+      "matchup": "Detroit Pistons @ Orlando Magic",
+      "game_time_utc": "2026-04-25T17:10:00Z",
       "outcome": null,
       "result": null
     },
@@ -118,22 +134,6 @@
       "result": null
     },
     {
-      "player": "Anthony Black",
-      "stat": "REB",
-      "line": 2.5,
-      "projection": 4.1,
-      "direction": "over",
-      "model_prob": 0.7701,
-      "market_prob": 0.518,
-      "edge_pp": 25.2,
-      "games_used": 5,
-      "confidence_tier": "high",
-      "matchup": "Detroit Pistons @ Orlando Magic",
-      "game_time_utc": "2026-04-25T17:10:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
       "player": "Deni Avdija",
       "stat": "PTS",
       "line": 23.5,
@@ -188,8 +188,8 @@
       "projection": 4.8,
       "direction": "over",
       "model_prob": 0.7089,
-      "market_prob": 0.5055,
-      "edge_pp": 20.34,
+      "market_prob": 0.5075,
+      "edge_pp": 20.14,
       "games_used": 5,
       "confidence_tier": "high",
       "matchup": "Detroit Pistons @ Orlando Magic",
