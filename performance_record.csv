@@ -1,0 +1,71 @@
+date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,outcome,home_score,away_score,verified
+2026-04-24,mlb,Detroit Tigers @ Cincinnati Reds,Cincinnati Reds,home,0.5038,0.4573,4.65,low,WIN,9,8,ESPN
+2026-04-24,mlb,Boston Red Sox @ Baltimore Orioles,Baltimore Orioles,home,0.5845,0.5242,6.03,low,WIN,10,3,ESPN
+2026-04-24,mlb,Cleveland Guardians @ Toronto Blue Jays,Cleveland Guardians,away,0.5044,0.537,-3.26,low,WIN,6,8,ESPN
+2026-04-24,mlb,Colorado Rockies @ New York Mets,New York Mets,home,0.5185,0.666,-14.75,low,LOSS,3,4,ESPN
+2026-04-24,mlb,Minnesota Twins @ Tampa Bay Rays,Minnesota Twins,away,0.5098,0.4715,3.83,low,LOSS,6,2,ESPN
+2026-04-24,mlb,Philadelphia Phillies @ Atlanta Braves,Atlanta Braves,home,0.7691,0.5635,20.56,high,WIN,5,3,ESPN
+2026-04-24,mlb,Los Angeles Angels @ Kansas City Royals,Los Angeles Angels,away,0.5641,0.4911,7.3,low,LOSS,6,3,ESPN
+2026-04-24,mlb,Pittsburgh Pirates @ Milwaukee Brewers,Milwaukee Brewers,home,0.5466,0.4417,10.49,low,LOSS,,6,ESPN
+2026-04-24,nba,Boston Celtics @ Philadelphia 76ers,Boston Celtics,away,0.5167,0.7179,-20.12,low,WIN,100,108,ESPN
+2026-04-24,ncaa_baseball,Delaware Blue Hens @ Liberty Flames,Liberty Flames,home,0.7816,,,high,LOSS,4,5,ESPN
+2026-04-24,ncaa_baseball,New Mexico State Aggies @ Jacksonville State Gamecocks,Jacksonville State Gamecocks,home,0.7662,,,high,LOSS,3,6,ESPN
+2026-04-24,ncaa_baseball,Georgia Southern Eagles @ App State Mountaineers,App State Mountaineers,home,0.7131,,,high,WIN,16,3,ESPN
+2026-04-24,ncaa_baseball,Queens University Royals @ Jacksonville Dolphins,Jacksonville Dolphins,home,0.6916,,,high,WIN,10,1,ESPN
+2026-04-24,ncaa_baseball,Memphis Tigers @ UAB Blazers,UAB Blazers,home,0.6901,,,high,WIN,7,6,ESPN
+2026-04-24,ncaa_baseball,North Carolina Tar Heels @ Duke Blue Devils,North Carolina Tar Heels,away,0.669,0.7784,-10.94,high,LOSS,3,1,ESPN
+2026-04-24,ncaa_baseball,Butler Bulldogs @ Creighton Bluejays,Creighton Bluejays,home,0.6627,,,high,WIN,6,,ESPN
+2026-04-24,ncaa_baseball,California Golden Bears @ Miami Hurricanes,Miami Hurricanes,home,0.6622,0.7143,-5.21,high,LOSS,2,9,ESPN
+2026-04-24,ncaa_baseball,Cal State Fullerton Titans @ UC Santa Barbara Gauchos,UC Santa Barbara Gauchos,home,0.6585,,,high,WIN,8,3,ESPN
+2026-04-24,ncaa_baseball,LSU Tigers @ Mississippi St Bulldogs,Mississippi St Bulldogs,home,0.6577,0.6744,-1.67,high,PENDING,,,MANUAL
+2026-04-24,ncaa_baseball,Hofstra Pride @ Northeastern Huskies,Northeastern Huskies,home,0.6444,,,medium,WIN,8,,ESPN
+2026-04-24,ncaa_baseball,Wake Forest Demon Deacons @ Georgia Tech Yellow Jackets,Georgia Tech Yellow Jackets,home,0.6442,0.6432,0.1,medium,WIN,6,5,ESPN
+2026-04-24,ncaa_baseball,Houston Cougars @ TCU Horned Frogs,TCU Horned Frogs,home,0.6396,0.7143,-7.47,medium,WIN,8,3,ESPN
+2026-04-24,ncaa_baseball,Washington Huskies @ Michigan Wolverines,Michigan Wolverines,home,0.6381,0.6865,-4.84,medium,WIN,8,7,ESPN
+2026-04-24,ncaa_baseball,Northwestern Wildcats @ Minnesota Golden Gophers,Minnesota Golden Gophers,home,0.6258,,,medium,WIN,13,1,ESPN
+2026-04-24,ncaa_baseball,North Alabama Lions @ Eastern Kentucky Colonels,North Alabama Lions,away,0.6191,,,medium,WIN,6,10,ESPN
+2026-04-24,ncaa_baseball,James Madison Dukes @ UL Monroe Warhawks,UL Monroe Warhawks,home,0.617,,,medium,LOSS,3,11,ESPN
+2026-04-24,ncaa_baseball,Nebraska Cornhuskers @ Illinois Fighting Illini,Nebraska Cornhuskers,away,0.612,0.7048,-9.28,medium,LOSS,10,5,ESPN
+2026-04-24,ncaa_baseball,Dallas Baptist Patriots @ Florida International Panthers,Dallas Baptist Patriots,away,0.6032,,,medium,WIN,5,10,ESPN
+2026-04-24,ncaa_baseball,Rider Broncs @ Monmouth Hawks,Monmouth Hawks,home,0.5947,,,low,LOSS,4,14,ESPN
+2026-04-24,ncaa_baseball,Boston College Eagles @ Notre Dame Fighting Irish,Boston College Eagles,away,0.5904,0.5995,-0.91,low,LOSS,12,2,ESPN
+2026-04-24,ncaa_baseball,Texas State Bobcats @ Coastal Carolina Chanticleers,Coastal Carolina Chanticleers,home,0.5814,0.6951,-11.37,low,WIN,6,2,ESPN
+2026-04-24,ncaa_baseball,Texas Longhorns @ Vanderbilt Commodores,Texas Longhorns,away,0.5799,0.6744,-9.45,low,WIN,4,11,ESPN
+2026-04-24,ncaa_baseball,Kentucky Wildcats @ South Carolina Gamecocks,Kentucky Wildcats,away,0.5758,0.5803,-0.45,low,LOSS,10,9,ESPN
+2026-04-24,ncaa_baseball,Louisiana Ragin' Cajuns @ Arkansas St Red Wolves,Arkansas St Red Wolves,home,0.5712,0.6865,-11.53,low,PENDING,,,MANUAL
+2026-04-24,ncaa_baseball,North Florida Ospreys @ Florida Gulf Coast Eagles,Florida Gulf Coast Eagles,home,0.5645,,,low,LOSS,3,5,ESPN
+2026-04-24,ncaa_baseball,Kennesaw State Owls @ Western Kentucky Hilltoppers,Western Kentucky Hilltoppers,home,0.563,,,low,WIN,9,8,ESPN
+2026-04-24,ncaa_baseball,Texas A&M Aggies @ Florida Gators,Texas A&M Aggies,away,0.5534,0.5897,-3.63,low,LOSS,9,2,ESPN
+2026-04-24,ncaa_baseball,Campbell Fighting Camels @ Charleston Cougars,Campbell Fighting Camels,away,0.5523,,,low,WIN,1,16,ESPN
+2026-04-24,ncaa_baseball,Stony Brook Seawolves @ Towson Tigers,Towson Tigers,home,0.5493,,,low,LOSS,5,15,ESPN
+2026-04-24,ncaa_baseball,UConn Huskies @ Georgetown Hoyas,Georgetown Hoyas,home,0.5478,,,low,LOSS,2,14,ESPN
+2026-04-24,ncaa_baseball,NC State Wolfpack @ Virginia Tech Hokies,NC State Wolfpack,away,0.5447,0.6432,-9.85,low,LOSS,4,,ESPN
+2026-04-24,ncaa_baseball,Villanova Wildcats @ Seton Hall Pirates,Seton Hall Pirates,home,0.5441,,,low,WIN,9,3,ESPN
+2026-04-24,ncaa_baseball,William & Mary Tribe @ North Carolina A&T Aggies,William & Mary Tribe,away,0.5405,,,low,WIN,5,14,ESPN
+2026-04-24,ncaa_baseball,Oklahoma Sooners @ Auburn Tigers,Auburn Tigers,home,0.54,0.6156,-7.56,low,WIN,6,4,ESPN
+2026-04-24,ncaa_baseball,Rice Owls @ Wichita St Shockers,Wichita St Shockers,home,0.54,0.6234,-8.34,low,PENDING,,,MANUAL
+2026-04-24,ncaa_baseball,CSU Fullerton Titans @ UC Santa Barbara Gauchos,UC Santa Barbara Gauchos,home,0.54,0.7993,-25.93,low,WIN,8,3,ESPN
+2026-04-24,ncaa_baseball,Charlotte 49ers @ Florida Atlantic Owls,Florida Atlantic Owls,home,0.54,,,low,WIN,3,1,ESPN
+2026-04-24,ncaa_baseball,Iowa Hawkeyes @ Indiana Hoosiers,Iowa Hawkeyes,away,0.537,0.4695,6.75,low,WIN,2,12,ESPN
+2026-04-24,ncaa_baseball,UNC Wilmington Seahawks @ Elon Phoenix,UNC Wilmington Seahawks,away,0.5365,,,low,WIN,8,9,ESPN
+2026-04-24,ncaa_baseball,Central Arkansas Bears @ Bellarmine Knights,Central Arkansas Bears,away,0.5356,,,low,WIN,2,13,ESPN
+2026-04-24,ncaa_baseball,Old Dominion Monarchs @ Georgia State Panthers,Georgia State Panthers,home,0.5324,,,low,LOSS,2,10,ESPN
+2026-04-24,ncaa_baseball,Maryland Terrapins @ Michigan St Spartans,Maryland Terrapins,away,0.532,0.52,1.2,low,PENDING,,,MANUAL
+2026-04-24,ncaa_baseball,Stetson Hatters @ West Georgia Wolves,Stetson Hatters,away,0.5301,,,low,WIN,10,13,ESPN
+2026-04-24,ncaa_baseball,Missouri St Bears @ Louisiana Tech Bulldogs,Missouri St Bears,away,0.5277,0.6373,-10.96,low,LOSS,8,2,ESPN
+2026-04-24,ncaa_baseball,Ohio State Buckeyes @ Rutgers Scarlet Knights,Rutgers Scarlet Knights,home,0.5246,,,low,WIN,3,,ESPN
+2026-04-24,ncaa_baseball,Troy Trojans @ Marshall Thundering Herd,Marshall Thundering Herd,home,0.5241,,,low,WIN,7,4,ESPN
+2026-04-24,ncaa_baseball,Kansas Jayhawks @ Kansas St Wildcats,Kansas Jayhawks,away,0.5237,0.4413,8.24,low,PENDING,,,MANUAL
+2026-04-24,ncaa_baseball,Austin Peay Governors @ Lipscomb Bisons,Lipscomb Bisons,home,0.5234,,,low,WIN,6,5,ESPN
+2026-04-24,ncaa_baseball,Southern Miss Golden Eagles @ South Alabama Jaguars,Southern Miss Golden Eagles,away,0.5228,0.6061,-8.33,low,WIN,3,4,ESPN
+2026-04-24,ncaa_baseball,West Virginia Mountaineers @ Cincinnati Bearcats,West Virginia Mountaineers,away,0.5188,0.4893,2.95,low,PUSH,5,5,ESPN
+2026-04-24,ncaa_baseball,Alabama Crimson Tide @ Tennessee Volunteers,Tennessee Volunteers,home,0.5184,0.5409,-2.25,low,WIN,11,4,ESPN
+2026-04-24,ncaa_baseball,South Florida Bulls @ East Carolina Pirates,South Florida Bulls,away,0.5168,0.3844,13.24,low,LOSS,11,1,ESPN
+2026-04-24,ncaa_baseball,Cal State Bakersfield Roadrunners @ UC Riverside Highlanders,Cal State Bakersfield Roadrunners,away,0.5096,,,low,LOSS,11,5,ESPN
+2026-04-24,ncaa_baseball,Georgia Bulldogs @ Ole Miss Rebels,Ole Miss Rebels,home,0.5073,0.52,-1.27,low,PENDING,,,MANUAL
+2026-04-24,ncaa_baseball,Oklahoma St Cowboys @ Texas Tech Red Raiders,Oklahoma St Cowboys,away,0.5057,0.5,0.57,low,WIN,6,16,ESPN
+2026-04-24,ncaa_baseball,Middle Tennessee Blue Raiders @ Sam Houston Bearkats,Middle Tennessee Blue Raiders,away,0.5054,,,low,LOSS,6,3,ESPN
+2026-04-24,ncaa_baseball,St. John's Red Storm @ Xavier Musketeers,St. John's Red Storm,away,0.5052,,,low,WIN,7,12,ESPN
+2026-04-24,ncaa_baseball,Virginia Cavaliers @ Pittsburgh Panthers,Pittsburgh Panthers,home,0.5051,0.4591,4.6,low,WIN,7,5,ESPN
+2026-04-24,ncaa_baseball,Clemson Tigers @ Louisville Cardinals,Louisville Cardinals,home,0.5028,0.4893,1.35,low,WIN,13,10,ESPN
+2026-04-24,soccer,Nottingham Forest @ Sunderland,Sunderland,home,0.3956,0.3513,4.42,low,LOSS,,5,ESPN
