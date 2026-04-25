@@ -509,8 +509,11 @@ function renderMasters(d){
 
 function renderPicks(){
   let list=PICKS;
-  // Remove low confidence
-  list=list.filter(p=>p.confidence_tier==='high'||p.confidence_tier==='medium');
+  // Only high/medium confidence with market odds
+  list=list.filter(p=>
+    (p.confidence_tier==='high'||p.confidence_tier==='medium') &&
+    (p.market_prob_home||p.market_prob_away)
+  );
   // Sport filter
   if(AF!=='all')list=list.filter(p=>p.sport_id===AF);
   // Confidence filter: include high-conf props too

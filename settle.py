@@ -285,3 +285,62 @@ if pending:
     for r in pending: print(f"    {r['sport']:12} {r['pick']}")
 print(f"\nCSV: {CSV_FILE}")
 print(f"Daily command: python3 /workspaces/iqproject/settle.py\n")
+
+# ── WRITE PERF.JSON FOR WEBSITE ────────────────────────────────
+import json as _json
+
+# Load full CSV for running totals
+all_rows = []
+if os.path.exists(CSV_FILE):
+    with open(CSV_FILE) as f:
+        all_rows = list(csv.DictReader(f))
+
+all_settled = [r for r in all_rows if r['outcome'] in ('WIN','LOSS')]
+yest_settled = [r for r in all_settled if r['date'] == yesterday]
+
+def calc_stats(rows):
+    if not rows: return {"w":0,"l":0,"pct":None,"n":0}
+    w = sum(1 for r in rows if r['outcome']=='WIN')
+    l = len(rows)-w
+    return {"w":w,"l":l,"pct":round(w/len(rows)*100,1),"n":len(rows)}
+
+def build_breakdown(rows):
+    out = {}
+    for sport in ['mlb','nba','nhl','ncaa_baseball','soccer','mlb_props','nba_props']:
+        sub = [r for r in rows if r['sport']==sport]
+        if not sub: continue
+        out[sport] = {}
+        for tier in ['high','medium']:
+            t = [r for r in sub if r['confidence_tier']==tier]
+            if t: out[sport][tier] = calc_stats(t)
+    return out
+
+perf = {
+    "generated_at": datetime.datetime.now().isoformat(),
+    "yesterday": yesterday,
+    "yesterday_results": [
+        {"sport":r['sport'],"pick":r['pick'],"tier":r['confidence_tier'],
+         "outcome":r['outcome'],"actual":r.get('actual_value',''),
+         "line":r.get('line',''),"edge":r.get('edge_pp','')}
+        for r in sorted(yest_settled, key=lambda x: x['sport'])
+    ],
+    "yesterday_summary": build_breakdown(yest_settled),
+    "yesterday_overall": calc_stats([r for r in yest_settled if r['confidence_tier'] in ('high','medium')]),
+    "alltime_summary": build_breakdown(all_settled),
+    "alltime_overall": calc_stats([r for r in all_settled if r['confidence_tier'] in ('high','medium')]),
+    "alltime_by_tier": {
+        "high": calc_stats([r for r in all_settled if r['confidence_tier']=='high']),
+        "medium": calc_stats([r for r in all_settled if r['confidence_tier']=='medium']),
+    },
+    "pending": [
+        {"sport":r['sport'],"pick":r['pick'],"tier":r['confidence_tier']}
+        for r in all_rows if r['outcome']=='PENDING'
+    ]
+}
+
+perf_path = "/workspaces/iqproject/perf.json"
+with open(perf_path, 'w') as f:
+    _json.dump(perf, f, indent=2)
+print(f"\n✓ perf.json written")
+print(f"  Yesterday (H+M): {perf['yesterday_overall']['w']}W-{perf['yesterday_overall']['l']}L ({perf['yesterday_overall']['pct']}%)")
+print(f"  All-time  (H+M): {perf['alltime_overall']['w']}W-{perf['alltime_overall']['l']}L ({perf['alltime_overall']['pct']}%)")
