@@ -69,3 +69,12 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-04-24,ncaa_baseball,Virginia Cavaliers @ Pittsburgh Panthers,Pittsburgh Panthers,home,0.5051,0.4591,4.6,low,WIN,7,5,ESPN
 2026-04-24,ncaa_baseball,Clemson Tigers @ Louisville Cardinals,Louisville Cardinals,home,0.5028,0.4893,1.35,low,WIN,13,10,ESPN
 2026-04-24,soccer,Nottingham Forest @ Sunderland,Sunderland,home,0.3956,0.3513,4.42,low,LOSS,,5,ESPN
+2026-04-24,mlb_props,Colorado Rockies @ New York Mets,Michael Lorenzen UNDER 4.5K,under,0.7717,0.5765,19.52,high,WIN,3,4.5,MLB API
+2026-04-24,mlb_props,Chicago Cubs @ Los Angeles Dodgers,Jameson Taillon OVER 4.5K,over,0.6365,0.4498,18.67,medium,LOSS,4,4.5,MLB API
+2026-04-24,mlb_props,Pittsburgh Pirates @ Milwaukee Brewers,Brandon Woodruff UNDER 6.5K,under,0.7194,0.5497,16.97,high,WIN,3,6.5,MLB API
+2026-04-24,mlb_props,Miami Marlins @ San Francisco Giants,Adrian Houser UNDER 3.5K,under,0.6954,0.542,15.34,high,WIN,3,3.5,MLB API
+2026-04-24,mlb_props,Los Angeles Angels @ Kansas City Royals,Yusei Kikuchi OVER 4.5K,over,0.6673,0.5183,14.9,high,WIN,5,4.5,MLB API
+2026-04-24,mlb_props,Seattle Mariners @ St. Louis Cardinals,Andre Pallante UNDER 3.5K,under,0.6003,0.4844,11.59,medium,LOSS,8,3.5,MLB API
+2026-04-24,mlb_props,Athletics @ Texas Rangers,Luis Severino OVER 4.5K,over,0.6839,0.5742,10.97,high,WIN,5,4.5,MLB API
+2026-04-24,mlb_props,Miami Marlins @ San Francisco Giants,Sandy Alcantara UNDER 4.5K,under,0.6393,0.5406,9.87,medium,WIN,4,4.5,MLB API
+2026-04-24,mlb_props,Minnesota Twins @ Tampa Bay Rays,Drew Rasmussen OVER 4.5K,over,0.6099,0.5598,5.01,medium,WIN,6,4.5,MLB API

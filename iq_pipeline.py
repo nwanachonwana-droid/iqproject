@@ -1911,6 +1911,9 @@ def run_nba_props():
     path = os.path.join(DATA_DIR, "nba_props_today.json")
     with open(path, "w") as f:
         json.dump(out, f, indent=2)
+    # Archive for settlement
+    archive_path = os.path.join(DATA_DIR, f"nba_props_{TODAY}.json")
+    shutil.copy2(path, archive_path)
     site_path = os.path.join(SITE_DIR, "nba_props_today.json")
     shutil.copy2(path, site_path)
 
