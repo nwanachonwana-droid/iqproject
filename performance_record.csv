@@ -78,3 +78,55 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-04-24,mlb_props,Athletics @ Texas Rangers,Luis Severino OVER 4.5K,over,0.6839,0.5742,10.97,high,WIN,5,4.5,MLB API
 2026-04-24,mlb_props,Miami Marlins @ San Francisco Giants,Sandy Alcantara UNDER 4.5K,under,0.6393,0.5406,9.87,medium,WIN,4,4.5,MLB API
 2026-04-24,mlb_props,Minnesota Twins @ Tampa Bay Rays,Drew Rasmussen OVER 4.5K,over,0.6099,0.5598,5.01,medium,WIN,6,4.5,MLB API
+2026-04-25,mlb,Boston Red Sox @ Baltimore Orioles,Baltimore Orioles,home,0.6143,0.5154,9.89,medium,LOSS,17-1,,ESPN
+2026-04-25,mlb,Philadelphia Phillies @ Atlanta Braves,Atlanta Braves,home,0.7725,0.5427,22.98,high,LOSS,8-5,,ESPN
+2026-04-25,ncaa_baseball,Sacramento State Hornets @ UCLA Bruins,UCLA Bruins,home,0.8052,,,high,WIN,3-5,,ESPN
+2026-04-25,ncaa_baseball,Penn State Nittany Lions @ Oregon Ducks,Oregon Ducks,home,0.7846,,,high,WIN,4-5,,ESPN
+2026-04-25,ncaa_baseball,Delaware Blue Hens @ Liberty Flames,Liberty Flames,home,0.7659,,,high,WIN,5-11,,ESPN
+2026-04-25,ncaa_baseball,New Mexico State Aggies @ Jacksonville State Gamecocks,Jacksonville State Gamecocks,home,0.7498,,,high,WIN,0-4,,ESPN
+2026-04-25,ncaa_baseball,Georgia Southern Eagles @ App State Mountaineers,App State Mountaineers,home,0.7245,,,high,WIN,5-11,,ESPN
+2026-04-25,ncaa_baseball,Queens University Royals @ Jacksonville Dolphins,Jacksonville Dolphins,home,0.7035,,,high,WIN,2-6,,ESPN
+2026-04-25,ncaa_baseball,Memphis Tigers @ UAB Blazers,UAB Blazers,home,0.702,,,high,LOSS,13-9,,ESPN
+2026-04-25,ncaa_baseball,Butler Bulldogs @ Creighton Bluejays,Creighton Bluejays,home,0.6755,,,high,WIN,5-6,,ESPN
+2026-04-25,ncaa_baseball,Cal State Fullerton Titans @ UC Santa Barbara Gauchos,UC Santa Barbara Gauchos,home,0.6716,,,high,LOSS,9-7,,ESPN
+2026-04-25,ncaa_baseball,LSU Tigers @ Mississippi St Bulldogs,Mississippi St Bulldogs,home,0.6706,0.6635,0.71,high,PENDING,,,MANUAL
+2026-04-25,ncaa_baseball,Wake Forest Demon Deacons @ Georgia Tech Yellow Jackets,Georgia Tech Yellow Jackets,home,0.6582,0.7048,-4.66,high,WIN,11-14,,ESPN
+2026-04-25,ncaa_baseball,Hofstra Pride @ Northeastern Huskies,Northeastern Huskies,home,0.6582,,,high,WIN,6-8,,ESPN
+2026-04-25,ncaa_baseball,Houston Cougars @ TCU Horned Frogs,TCU Horned Frogs,home,0.6529,0.7143,-6.14,high,WIN,2-4,,ESPN
+2026-04-25,ncaa_baseball,North Carolina Tar Heels @ Duke Blue Devils,North Carolina Tar Heels,away,0.6525,0.7909,-13.84,high,WIN,22-5,,ESPN
+2026-04-25,ncaa_baseball,Washington Huskies @ Michigan Wolverines,Michigan Wolverines,home,0.6512,0.6635,-1.23,high,WIN,3-4,,ESPN
+2026-04-25,ncaa_baseball,California Golden Bears @ Miami Hurricanes,Miami Hurricanes,home,0.6453,0.6865,-4.12,medium,WIN,3-4,,ESPN
+2026-04-25,ncaa_baseball,Northwestern Wildcats @ Minnesota Golden Gophers,Minnesota Golden Gophers,home,0.6396,,,medium,WIN,3-7,,ESPN
+2026-04-25,ncaa_baseball,North Alabama Lions @ Eastern Kentucky Colonels,North Alabama Lions,away,0.6309,,,medium,WIN,11-8,,ESPN
+2026-04-25,ncaa_baseball,Dallas Baptist Patriots @ Florida International Panthers,Dallas Baptist Patriots,away,0.6153,,,medium,WIN,14-10,,ESPN
+2026-04-25,ncaa_baseball,James Madison Dukes @ UL Monroe Warhawks,UL Monroe Warhawks,home,0.6009,,,medium,WIN,4-6,,ESPN
+2026-04-25,mlb_props,Boston Red Sox @ Baltimore Orioles,Garrett Crochet UNDER 7.5K,under,0.6843,0.4928,19.15,high,WIN,7K,7.5,MLB API
+2026-04-25,mlb_props,Pittsburgh Pirates @ Milwaukee Brewers,Jacob Misiorowski OVER 7.5K,over,0.6498,0.4655,18.43,medium,WIN,9K,7.5,MLB API
+2026-04-25,mlb_props,Seattle Mariners @ St. Louis Cardinals,Matthew Liberatore UNDER 4.5K,under,0.7385,0.5543,18.42,high,WIN,3K,4.5,MLB API
+2026-04-25,mlb_props,Cleveland Guardians @ Toronto Blue Jays,Joey Cantillo OVER 4.5K,over,0.6923,0.5082,18.41,high,LOSS,4K,4.5,MLB API
+2026-04-25,mlb_props,Washington Nationals @ Chicago White Sox,Jake Irvin OVER 4.5K,over,0.6198,0.4464,17.34,medium,WIN,9K,4.5,MLB API
+2026-04-25,mlb_props,Athletics @ Texas Rangers,Jeffrey Springs OVER 4.5K,over,0.6819,0.525,15.69,high,LOSS,4K,4.5,MLB API
+2026-04-25,mlb_props,Pittsburgh Pirates @ Milwaukee Brewers,Mitch Keller UNDER 4.5K,under,0.6416,0.5103,13.13,medium,LOSS,6K,4.5,MLB API
+2026-04-25,mlb_props,San Diego Padres @ Arizona Diamondbacks,Zac Gallen UNDER 3.5K,under,0.6758,0.5618,11.4,high,WIN,3K,3.5,MLB API
+2026-04-25,mlb_props,Minnesota Twins @ Tampa Bay Rays,Shane McClanahan UNDER 5.5K,under,0.6559,0.5679,8.8,high,LOSS,7K,5.5,MLB API
+2026-04-25,mlb_props,Athletics @ Texas Rangers,MacKenzie Gore OVER 6.5K,over,0.6085,0.555,5.35,medium,WIN,7K,6.5,MLB API
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane AST UNDER 3.5,under,0.84,0.5112,32.88,high,PENDING,,3.5,MANUAL
+2026-04-25,nba_props,Oklahoma City Thunder @ Phoenix Suns,Oso Ighodaro AST OVER 2.5,over,0.7751,0.474,30.1,high,WIN,4.0,2.5,ESPN
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Scoot Henderson PTS OVER 14.5,over,0.7882,0.5165,27.17,high,PENDING,,14.5,MANUAL
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Anthony Black REB OVER 2.5,over,0.7701,0.5113,25.88,high,LOSS,1.0,2.5,ESPN
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Tristan da Silva REB OVER 2.5,over,0.7176,0.4593,25.83,high,PENDING,,2.5,MANUAL
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Jrue Holiday PTS OVER 16.5,over,0.7492,0.4924,25.68,high,PENDING,,16.5,MANUAL
+2026-04-25,nba_props,Oklahoma City Thunder @ Phoenix Suns,Oso Ighodaro PTS UNDER 5.5,under,0.7553,0.5004,25.49,high,LOSS,15.0,5.5,ESPN
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Deni Avdija AST OVER 6.5,over,0.7002,0.4468,25.35,high,PENDING,,6.5,MANUAL
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Deni Avdija PTS OVER 23.5,over,0.7281,0.4841,24.4,high,PENDING,,23.5,MANUAL
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Donovan Clingan PTS UNDER 8.5,under,0.7038,0.4972,20.67,high,PENDING,,8.5,MANUAL
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Paolo Banchero AST OVER 5.5,over,0.6727,0.4689,20.39,high,WIN,9.0,5.5,ESPN
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Goga Bitadze REB OVER 3.5,over,0.7089,0.5075,20.14,high,LOSS,2.0,3.5,ESPN
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Robert Williams PTS OVER 6.5,over,0.6514,0.4748,17.66,high,PENDING,,6.5,MANUAL
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Jalen Suggs REB OVER 4.5,over,0.636,0.4611,17.49,medium,LOSS,3.0,4.5,ESPN
+2026-04-25,nba_props,Oklahoma City Thunder @ Phoenix Suns,Oso Ighodaro REB UNDER 6.5,under,0.654,0.4802,17.38,high,WIN,3.0,6.5,ESPN
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane PTS UNDER 18.5,under,0.6628,0.4976,16.52,high,LOSS,25.0,18.5,ESPN
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Jrue Holiday REB OVER 4.5,over,0.6023,0.465,13.74,medium,PENDING,,4.5,MANUAL
+2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Deni Avdija REB UNDER 7.5,under,0.6493,0.5291,12.02,medium,PENDING,,7.5,MANUAL
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane REB OVER 3.5,over,0.6033,0.5201,8.31,medium,WIN,7.0,3.5,ESPN
+2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Goga Bitadze PTS OVER 3.5,over,0.6117,0.5291,8.26,medium,LOSS,2.0,3.5,ESPN

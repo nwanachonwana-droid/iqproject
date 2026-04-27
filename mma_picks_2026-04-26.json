@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "sport": "mma",
+  "generated_at": "2026-04-26T12:24:53.897172Z",
+  "data_date": "2026-04-26",
+  "model_version": "v1.0",
+  "status": "EXPERIMENTAL",
+  "picks": [
+    {
+      "home_team": "Wes Schultz",
+      "away_team": "Ben Johnston",
+      "pick": "Wes Schultz",
+      "pick_side": "home",
+      "model_prob_home": 0.4937,
+      "model_prob_away": 0.5063,
+      "market_prob_home": 0.3838,
+      "market_prob_away": 0.6162,
+      "edge_pp": 10.99,
+      "confidence_tier": "low",
+      "record": "8-3",
+      "game_time_utc": "2026-05-02T08:00:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "home_team": "Dom Mar Fan",
+      "away_team": "Kody Steele",
+      "pick": "Dom Mar Fan",
+      "pick_side": "home",
+      "model_prob_home": 0.5,
+      "model_prob_away": 0.5,
+      "market_prob_home": 0.3751,
+      "market_prob_away": 0.6249,
+      "edge_pp": 12.49,
+      "confidence_tier": "low",
+      "record": "9-2",
+      "game_time_utc": "2026-05-02T13:00:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "home_team": "Jack Della Maddalena",
+      "away_team": "Carlos Prates",
+      "pick": "Jack Della Maddalena",
+      "pick_side": "home",
+      "model_prob_home": 0.552,
+      "model_prob_away": 0.448,
+      "market_prob_home": 0.4758,
+      "market_prob_away": 0.5242,
+      "edge_pp": 7.62,
+      "confidence_tier": "low",
+      "record": "18-3",
+      "game_time_utc": "2026-05-02T13:15:00Z",
+      "outcome": null,
+      "result": null
+    }
+  ],
+  "summary": {
+    "total_picks": 3,
+    "high_confidence": 0,
+    "avg_edge_pp": 10.37
+  }
+}

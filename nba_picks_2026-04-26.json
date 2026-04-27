@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "sport": "nba",
+  "generated_at": "2026-04-26T12:24:54.398666Z",
+  "data_date": "2026-04-26",
+  "model_version": "v1.0",
+  "status": "EXPERIMENTAL",
+  "picks": [
+    {
+      "home_team": "Toronto Raptors",
+      "away_team": "Cleveland Cavaliers",
+      "pick": "Toronto Raptors",
+      "pick_side": "home",
+      "model_prob_home": 0.5125,
+      "model_prob_away": 0.4875,
+      "market_prob_home": 0.3917,
+      "market_prob_away": 0.6083,
+      "edge_pp": 12.08,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-04-26T17:10:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-04-27T12:08:58.855625Z"
+    },
+    {
+      "home_team": "Portland Trail Blazers",
+      "away_team": "San Antonio Spurs",
+      "pick": "San Antonio Spurs",
+      "pick_side": "away",
+      "model_prob_home": 0.4813,
+      "model_prob_away": 0.5187,
+      "market_prob_home": 0.3405,
+      "market_prob_away": 0.6595,
+      "edge_pp": -14.08,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-04-26T19:40:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-04-27T12:08:58.855646Z"
+    },
+    {
+      "home_team": "Philadelphia 76ers",
+      "away_team": "Boston Celtics",
+      "pick": "Boston Celtics",
+      "pick_side": "away",
+      "model_prob_home": 0.4833,
+      "model_prob_away": 0.5167,
+      "market_prob_home": 0.2755,
+      "market_prob_away": 0.7245,
+      "edge_pp": -20.77,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-04-26T23:10:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-04-27T12:08:58.855655Z"
+    },
+    {
+      "home_team": "Houston Rockets",
+      "away_team": "Los Angeles Lakers",
+      "pick": "Houston Rockets",
+      "pick_side": "home",
+      "model_prob_home": 0.5326,
+      "model_prob_away": 0.4674,
+      "market_prob_home": 0.6194,
+      "market_prob_away": 0.3806,
+      "edge_pp": -8.69,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-04-27T01:40:00Z",
+      "outcome": null,
+      "result": null
+    }
+  ],
+  "summary": {
+    "total_picks": 4,
+    "high_confidence": 0,
+    "avg_edge_pp": -7.87
+  }
+}
