@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iQ Parlay Builder</title>
+<style>
+  :root{--orange:#e85d04;--bg:#f5f3ee;--card:#fff;--border:#e0ddd6;--text:#1a1a1a;--muted:#666;--green:#2d7a3a;--red:#c0392b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);padding:2rem 1rem;min-height:100vh}
+  .wrap{max-width:860px;margin:0 auto}
+  .header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+  .logo{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+  .logo span{color:var(--orange)}
+  .date{font-size:.85rem;color:var(--muted)}
+  .controls{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem}
+  .controls label{font-size:.85rem;color:var(--muted);white-space:nowrap}
+  .controls input{padding:.4rem .75rem;border:1px solid var(--border);border-radius:6px;font-size:.9rem;width:100px;background:var(--card);color:var(--text)}
+  .btn{padding:.45rem 1.1rem;background:var(--orange);color:#fff;border:none;border-radius:6px;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;letter-spacing:.04em}
+  .btn:hover{opacity:.9}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:2rem}
+  .mcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem}
+  .mcard .lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem}
+  .mcard .val{font-size:1.5rem;font-weight:600}
+  .mcard .val.grn{color:var(--green)}
+  .mcard .val.red{color:var(--red)}
+  .section-title{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:1.75rem 0 .75rem}
+  .parlay-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:.75rem}
+  .parlay-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+  .parlay-num{font-size:.8rem;font-weight:600;color:var(--muted)}
+  .parlay-ev{font-size:.9rem;font-weight:700}
+  .parlay-ev.pos{color:var(--green)}
+  .parlay-ev.neg{color:var(--red)}
+  .parlay-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:var(--muted);margin-bottom:.5rem}
+  .parlay-meta strong{color:var(--text)}
+  .leg{display:flex;align-items:center;justify-content:space-between;padding:.45rem 0;border-top:1px solid var(--border)}
+  .leg-left .pick{font-size:.85rem;font-weight:500}
+  .leg-left .sport{font-size:.72rem;color:var(--muted);margin-top:2px}
+  .leg-prob{font-size:.85rem;font-weight:600}
+  .badge{display:inline-block;font-size:.65rem;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:5px;vertical-align:middle}
+  .badge-high{background:#d4edda;color:#155724}
+  .badge-med{background:#fff3cd;color:#856404}
+  .badge-2leg{background:#f8d7da;color:#721c24}
+  .badge-sgp{background:#cce5ff;color:#004085}
+  .singles-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+  .singles-table th{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:.65rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--bg)}
+  .singles-table td{padding:.65rem 1rem;font-size:.85rem;border-bottom:1px solid var(--border)}
+  .singles-table tr:last-child td{border-bottom:none}
+  .singles-table .stake{font-weight:700;text-align:right}
+  .singles-table .edge-pos{color:var(--green)}
+  .singles-table .edge-neg{color:var(--red)}
+  .warning{font-size:.8rem;color:#856404;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:.6rem 1rem;margin-top:1rem}
+  .loading{text-align:center;padding:3rem;color:var(--muted)}
+  .error{text-align:center;padding:2rem;color:var(--red)}
+  @media(max-width:600px){.grid4{grid-template-columns:repeat(2,1fr)}.parlay-meta{gap:.5rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="logo">the <span>iQ</span> parlay builder</div>
+    <div class="date" id="date-lbl"></div>
+  </div>
+  <div class="controls">
+    <label>Bankroll</label>
+    <input type="number" id="bankroll" value="300" min="50" step="50"/>
+    <label style="margin-left:.5rem">Max parlays</label>
+    <input type="number" id="maxp" value="10" min="3" max="20" style="width:70px"/>
+    <button class="btn" onclick="rebuild()">↺ Rebuild</button>
+    <span id="status" style="font-size:.8rem;color:var(--muted);margin-left:auto"></span>
+  </div>
+  <div id="output"><div class="loading">Loading picks...</div></div>
+</div>
+
+<script>
+const SPORT_LABELS={mlb:'MLB',nba:'NBA',nhl:'NHL',ncaa_baseball:'NCAA Baseball',soccer:'Soccer',mlb_props:'MLB Props',nba_props:'NBA Props'};
+
+function probToDecimal(p){return p>=0.5?1+(1-p)/p:1+p/(1-p)}
+function fmt(n){return typeof n==='number'?n.toFixed(2):'—'}
+function pct(n){return typeof n==='number'?(n*100).toFixed(1)+'%':'—'}
+
+async function loadPicks(){
+  const picks=[];
+  const sports=['mlb','nba','nhl','ncaa_baseball','soccer'];
+  for(const s of sports){
+    try{
+      const r=await fetch(s+'_picks_today.json?t='+Date.now());
+      if(!r.ok) continue;
+      const d=await r.json();
+      for(const p of (d.picks||[])){
+        const tier=p.confidence_tier;
+        if(tier!=='high'&&tier!=='medium') continue;
+        const side=p.pick_side;
+        const prob=side==='home'?p.model_prob_home:p.model_prob_away;
+        const mkt=side==='home'?p.market_prob_home:p.market_prob_away;
+        if(!mkt||prob<0.55) continue;
+        picks.push({pick:p.pick,sport:s,prob,mkt,tier,edge:p.edge_pp,game:`${p.away_team}@${p.home_team}`});
+      }
+    }catch(e){}
+  }
+  // MLB Props
+  try{
+    const r=await fetch('mlb_props_today.json?t='+Date.now());
+    if(r.ok){
+      const d=await r.json();
+      for(const p of (d.props||[])){
+        if(!['high','medium'].includes(p.confidence_tier)) continue;
+        picks.push({pick:p.pick,sport:'mlb_props',prob:p.model_prob,mkt:p.market_prob,tier:p.confidence_tier,edge:p.edge_pp,game:p.game||''});
+      }
+    }
+  }catch(e){}
+  // NBA Props
+  try{
+    const r=await fetch('nba_props_today.json?t='+Date.now());
+    if(r.ok){
+      const d=await r.json();
+      for(const p of (d.picks||[])){
+        if(!['high','medium'].includes(p.confidence_tier)) continue;
+        if(!p.market_prob||p.model_prob<0.65) continue;
+        const label=`${p.player} ${p.stat} ${p.direction} ${p.line}`;
+        picks.push({pick:label,sport:'nba_props',prob:p.model_prob,mkt:p.market_prob,tier:p.confidence_tier,edge:p.edge_pp,game:p.matchup||''});
+      }
+    }
+  }catch(e){}
+  return picks.sort((a,b)=>b.prob-a.prob);
+}
+
+function buildParlays(picks,bankroll,maxP){
+  const legs=picks.filter(p=>p.prob>=0.65);
+  const used=new Array(legs.length).fill(0);
+  const parlays=[];
+
+  for(let attempt=0;attempt<500&&parlays.length<maxP;attempt++){
+    const sorted=[...legs].map((l,i)=>({...l,i,score:used[i]})).sort((a,b)=>a.score-b.score||(b.prob-a.prob));
+    const combo=[];const usedGames=new Set();
+    for(const c of sorted){
+      if(combo.length>=3) break;
+      if(combo.find(x=>x.i===c.i)) continue;
+      const gk=c.game||c.pick;
+      if(usedGames.has(gk)) continue;
+      combo.push(c);usedGames.add(gk);
+    }
+    if(combo.length<2) break;
+    const key=combo.map(c=>c.i).sort().join('-');
+    if(parlays.find(p=>p.key===key)) continue;
+    const winProb=combo.reduce((a,c)=>a*c.prob,1);
+    const decOdds=combo.reduce((a,c)=>a*probToDecimal(c.mkt),1);
+    const ev=winProb*decOdds-1;
+    parlays.push({combo,winProb,decOdds,ev,key,twoLeg:combo.length===2});
+    combo.forEach(c=>used[c.i]++);
+  }
+  parlays.sort((a,b)=>b.ev-a.ev);
+  const totalStake=Math.min(bankroll*0.16,500);
+  const perParlay=totalStake/Math.max(parlays.length,1);
+  return{parlays,perParlay,totalStake};
+}
+
+function kellyStake(prob,mkt,bankroll){
+  const dec=probToDecimal(mkt);
+  const b=dec-1;const q=1-prob;
+  const k=Math.max(0,(b*prob-q)/b)/4;
+  return Math.min(bankroll*k,bankroll*0.07);
+}
+
+function rebuild(){
+  document.getElementById('output').innerHTML='<div class="loading">Building portfolio...</div>';
+  document.getElementById('status').textContent='';
+  const bankroll=parseFloat(document.getElementById('bankroll').value)||300;
+  const maxP=parseInt(document.getElementById('maxp').value)||10;
+  document.getElementById('date-lbl').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric'});
+
+  loadPicks().then(picks=>{
+    document.getElementById('status').textContent=picks.length+' picks loaded';
+    if(!picks.length){
+      document.getElementById('output').innerHTML='<div class="error">No picks found. Run the pipeline first.</div>';
+      return;
+    }
+    const{parlays,perParlay,totalStake}=buildParlays(picks,bankroll,maxP);
+    const portEV=parlays.reduce((a,p)=>a+(p.ev*perParlay),0);
+    const highCount=picks.filter(p=>p.prob>=0.65).length;
+
+    let html=`<div class="grid4">
+      <div class="mcard"><div class="lbl">Picks available</div><div class="val">${picks.length}</div></div>
+      <div class="mcard"><div class="lbl">High conf legs</div><div class="val">${highCount}</div></div>
+      <div class="mcard"><div class="lbl">Parlay stake</div><div class="val">$${fmt(totalStake)}</div></div>
+      <div class="mcard"><div class="lbl">Portfolio EV</div><div class="val ${portEV>=0?'grn':'red'}">${portEV>=0?'+':''}$${fmt(portEV)}</div></div>
+    </div>`;
+
+    html+=`<div class="section-title">Parlay portfolio — ${parlays.length} parlays, ranked by EV</div>`;
+    parlays.forEach((p,i)=>{
+      const evD=p.ev*perParlay;
+      const payout=p.decOdds*perParlay;
+      html+=`<div class="parlay-card">
+        <div class="parlay-header">
+          <span class="parlay-num">Parlay ${i+1}${p.twoLeg?' <span class="badge badge-2leg">2-leg</span>':''}</span>
+          <span class="parlay-ev ${evD>=0?'pos':'neg'}">${evD>=0?'+':''}$${fmt(evD)} EV</span>
+        </div>
+        <div class="parlay-meta">
+          <span>Win prob: <strong>${pct(p.winProb)}</strong></span>
+          <span>Payout odds: <strong>${fmt(p.decOdds)}x</strong></span>
+          <span>Stake: <strong>$${fmt(perParlay)}</strong></span>
+          <span>Payout if wins: <strong>$${fmt(payout)}</strong></span>
+        </div>`;
+      p.combo.forEach(leg=>{
+        html+=`<div class="leg">
+          <div class="leg-left">
+            <div class="pick">${leg.pick}<span class="badge badge-${leg.tier==='high'?'high':'med'}">${leg.tier}</span></div>
+            <div class="sport">${SPORT_LABELS[leg.sport]||leg.sport} · mkt ${pct(leg.mkt)}</div>
+          </div>
+          <div class="leg-prob">${pct(leg.prob)}</div>
+        </div>`;
+      });
+      html+=`</div>`;
+    });
+
+    html+=`<div class="section-title">Singles — ¼ Kelly sizing (largest bets)</div>`;
+    html+=`<table class="singles-table"><thead><tr>
+      <th>Pick</th><th>Sport</th><th>Model</th><th>Edge</th><th>Stake</th>
+    </tr></thead><tbody>`;
+    picks.filter(p=>p.prob>=0.60).slice(0,15).forEach(p=>{
+      const stake=kellyStake(p.prob,p.mkt,bankroll);
+      const e=p.edge||0;
+      html+=`<tr>
+        <td>${p.pick} <span class="badge badge-${p.tier==='high'?'high':'med'}">${p.tier}</span></td>
+        <td>${SPORT_LABELS[p.sport]||p.sport}</td>
+        <td>${pct(p.prob)}</td>
+        <td class="${e>=0?'edge-pos':'edge-neg'}">${e>=0?'+':''}${typeof e==='number'?e.toFixed(1):'—'}pp</td>
+        <td class="stake">$${fmt(stake)}</td>
+      </tr>`;
+    });
+    html+=`</tbody></table>`;
+
+    if(highCount<6) html+=`<div class="warning">⚠ Fewer than 6 high-confidence picks today — some parlay legs use medium confidence. Consider reducing parlay count.</div>`;
+    document.getElementById('output').innerHTML=html;
+  }).catch(e=>{
+    document.getElementById('output').innerHTML=`<div class="error">Error: ${e.message}</div>`;
+  });
+}
+rebuild();
+</script>
+</body>
+</html>
