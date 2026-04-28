@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "mlb",
-  "generated_at": "2026-04-28T13:47:14.871618Z",
+  "generated_at": "2026-04-28T13:48:32.988674Z",
   "data_date": "2026-04-28",
   "model_version": "v1.0",
   "status": "PROVEN",
@@ -58,25 +58,6 @@
       "market_line_home": -172,
       "market_source": "pinnacle",
       "edge_pp": 13.73,
-      "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
-    },
-    {
-      "pick_id": "mlb-2026-04-28-822823",
-      "game_time_utc": "2026-04-28T23:07:00Z",
-      "home_team": "Toronto Blue Jays",
-      "away_team": "Boston Red Sox",
-      "pick": "Boston Red Sox",
-      "pick_side": "away",
-      "model_prob_home": 0.4923,
-      "model_prob_away": 0.5077,
-      "market_prob_home": 0.5242,
-      "market_prob_away": 0.4758,
-      "market_line_home": -120,
-      "market_source": "pinnacle",
-      "edge_pp": 3.19,
       "confidence_tier": "low",
       "result": null,
       "outcome": null,
@@ -236,8 +217,8 @@
     }
   ],
   "summary": {
-    "total_picks": 12,
+    "total_picks": 11,
     "high_confidence": 1,
-    "avg_edge_pp": 4.19
+    "avg_edge_pp": 4.28
   }
 }
