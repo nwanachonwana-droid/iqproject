@@ -2457,6 +2457,7 @@ SPORT_RUNNERS = {
     "mlb_props":   run_mlb_props,
     "nba_props":   run_nba_props,
     "golf_masters": run_golf_masters,
+    "kalshi_markets": run_kalshi_markets,
     "futures":       run_futures,
 }
 def main():
@@ -2572,3 +2573,77 @@ if __name__ == "__main__":
 # ═══════════════════════════════════════════════════════════════════════════════
 # FUTURES ENGINE — Monte Carlo bracket simulation + devigged market comparison
 # ═══════════════════════════════════════════════════════════════════════════════
+
+def run_kalshi_markets():
+    """Fetch live Kalshi market prices and write to kalshi_markets.json"""
+    print("\n[Kalshi Markets — live prices]")
+    import hmac, hashlib, base64, time
+    
+    KEY = "2779b660-be48-4577-ab93-c1df0c5f192d"
+    BASE = "https://api.kalshi.com/trade-api/v2"
+    
+    def kfetch(path):
+        req = urllib.request.Request(
+            BASE + path,
+            headers={
+                "Authorization": f"Token {KEY}",
+                "Accept": "application/json",
+                "User-Agent": "iqproject/1.0"
+            }
+        )
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return json.loads(r.read())
+    
+    # Curated market tickers for the course
+    COURSE_TICKERS = [
+        "FED-25-MAY-31-A",
+        "KXCPI-26APR",
+        "KXPCECORE-26MAR", 
+        "KXUNEMP-26APR",
+        "KXNFP-26APR",
+        "KXGDP-26Q1",
+        "KXBTC-100K-26MAY",
+        "KXSPY-26JUN",
+        "KXHOUSE-REP-2026",
+        "KXGPT5-26JUL",
+    ]
+    
+    # First: discover real tickers by browsing categories
+    prices = {}
+    categories = ["Economics", "Politics", "Technology", "Climate", "Culture", "Finance"]
+    all_markets = []
+    
+    for cat in categories:
+        try:
+            d = kfetch(f"/markets?limit=100&status=open&category={cat}")
+            markets = d.get("markets", [])
+            all_markets.extend(markets)
+            print(f"  {cat}: {len(markets)} markets")
+        except Exception as e:
+            print(f"  {cat}: {e}")
+    
+    # Write all markets for browsing
+    out = {
+        "generated_at": TODAY,
+        "total": len(all_markets),
+        "markets": [{
+            "ticker": m.get("ticker"),
+            "title": m.get("title"),
+            "category": m.get("category"),
+            "yes_bid": m.get("yes_bid"),
+            "yes_ask": m.get("yes_ask"),
+            "last_price": m.get("last_price"),
+            "volume": m.get("volume"),
+            "close_time": m.get("close_time"),
+            "status": m.get("status"),
+        } for m in all_markets]
+    }
+    
+    path = os.path.join(DATA_DIR, "kalshi_markets.json")
+    with open(path, "w") as f:
+        json.dump(out, f, indent=2)
+    site_path = os.path.join(SITE_DIR, "kalshi_markets.json")
+    import shutil
+    shutil.copy2(path, site_path)
+    print(f"  -> {len(all_markets)} markets written to kalshi_markets.json")
+
