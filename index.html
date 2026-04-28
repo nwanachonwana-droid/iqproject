@@ -1686,7 +1686,6 @@ function initParlay(){
     plBody.innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3)">Building...</div>';
     loadPicks().then(picks=>{
       document.getElementById('pl-status').textContent=picks.length+' picks loaded';
-      {
       if(!picks.length){plBody.innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3)">No picks found. Run pipeline first.</div>';return;}
       const{parlays,perParlay,totalStake}=buildParlays(picks,bankroll,maxP);
       const portEV=parlays.reduce((a,p)=>a+(p.ev*perParlay),0);
