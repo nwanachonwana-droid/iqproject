@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "sport": "ncaa_baseball",
+  "generated_at": "2026-04-27T12:09:06.823196Z",
+  "data_date": "2026-04-27",
+  "model_version": "v1.0",
+  "status": "PROVEN",
+  "picks": [
+    {
+      "pick_id": "ncaabb-2026-04-27-ff7cd7f5087e18fd93f4b8793efe4bbb",
+      "game_time_utc": "2026-04-27T20:00:00Z",
+      "home_team": "Grand Canyon Antelopes",
+      "away_team": "BYU Cougars",
+      "pick": "Grand Canyon Antelopes",
+      "pick_side": "home",
+      "model_prob_home": 0.54,
+      "model_prob_away": 0.46,
+      "market_prob_home": 0.3713,
+      "market_prob_away": 0.6287,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": 16.87,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "pick_id": "ncaabb-2026-04-27-401848575",
+      "game_time_utc": "2026-04-27T20:00Z",
+      "home_team": "Grand Canyon Lopes",
+      "away_team": "BYU Cougars",
+      "pick": "Grand Canyon Lopes",
+      "pick_side": "home",
+      "model_prob_home": 0.5251,
+      "model_prob_away": 0.4749,
+      "market_prob_home": null,
+      "market_prob_away": null,
+      "market_line_home": null,
+      "market_source": null,
+      "edge_pp": null,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-28T11:31:21.408292Z"
+    }
+  ],
+  "summary": {
+    "total_picks": 2,
+    "high_confidence": 0,
+    "avg_edge_pp": 8.44
+  }
+}

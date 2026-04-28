@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
   "launch_date": "2026-04-13",
-  "last_updated": "2026-04-27",
+  "last_updated": "2026-04-28",
   "overall": {
-    "wins": 354,
+    "wins": 355,
     "losses": 127,
     "pushes": 0,
-    "total": 481,
-    "hit_rate": 73.6,
-    "roi_flat": 40.5
+    "total": 482,
+    "hit_rate": 73.65,
+    "roi_flat": 40.6
   },
   "by_confidence": {
     "high": {
@@ -23,12 +23,31 @@
       "hit_rate": 76.92
     },
     "low": {
-      "wins": 109,
-      "total": 182,
-      "hit_rate": 59.89
+      "wins": 110,
+      "total": 183,
+      "hit_rate": 60.11
     }
   },
   "recent": [
+    {
+      "pick_id": "ncaabb-2026-04-27-401848575",
+      "game_time_utc": "2026-04-27T20:00Z",
+      "home_team": "Grand Canyon Lopes",
+      "away_team": "BYU Cougars",
+      "pick": "Grand Canyon Lopes",
+      "pick_side": "home",
+      "model_prob_home": 0.5251,
+      "model_prob_away": 0.4749,
+      "market_prob_home": null,
+      "market_prob_away": null,
+      "market_line_home": null,
+      "market_source": null,
+      "edge_pp": null,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-04-28T11:31:21.408292Z"
+    },
     {
       "pick_id": "ncaabb-2026-04-26-401853609",
       "game_time_utc": "2026-04-26T17:00Z",
@@ -959,25 +978,6 @@
       "result": 1.0,
       "outcome": "WIN",
       "settled_at": "2026-04-27T12:08:58.830433Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-04-26-401856284",
-      "game_time_utc": "2026-04-26T20:05Z",
-      "home_team": "UC Santa Barbara Gauchos",
-      "away_team": "Cal State Fullerton Titans",
-      "pick": "UC Santa Barbara Gauchos",
-      "pick_side": "home",
-      "model_prob_home": 0.6549,
-      "model_prob_away": 0.3451,
-      "market_prob_home": null,
-      "market_prob_away": null,
-      "market_line_home": null,
-      "market_source": null,
-      "edge_pp": null,
-      "confidence_tier": "high",
-      "result": 0.0,
-      "outcome": "LOSS",
-      "settled_at": "2026-04-27T12:08:58.830426Z"
     }
   ]
 }
