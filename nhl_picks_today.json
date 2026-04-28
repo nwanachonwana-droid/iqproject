@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nhl",
-  "generated_at": "2026-04-28T11:31:26.000689Z",
+  "generated_at": "2026-04-28T13:39:10.175500Z",
   "data_date": "2026-04-28",
   "model_version": "v1.0",
   "status": "ACTIVE",
@@ -24,11 +24,49 @@
       "result": null,
       "outcome": null,
       "settled_at": null
+    },
+    {
+      "pick_id": "nhl-2026-04-28-2025030165",
+      "game_time_utc": "2026-04-29T00:00:00Z",
+      "home_team": "Dallas Stars",
+      "away_team": "Minnesota Wild",
+      "pick": "Dallas Stars",
+      "pick_side": "home",
+      "model_prob_home": 0.5658,
+      "model_prob_away": 0.4342,
+      "market_prob_home": 0.5333,
+      "market_prob_away": 0.4667,
+      "market_line_home": -126,
+      "market_source": "pinnacle",
+      "edge_pp": 3.25,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "pick_id": "nhl-2026-04-28-2025030185",
+      "game_time_utc": "2026-04-29T02:00:00Z",
+      "home_team": "Edmonton Oilers",
+      "away_team": "Anaheim Ducks",
+      "pick": "Edmonton Oilers",
+      "pick_side": "home",
+      "model_prob_home": 0.5724,
+      "model_prob_away": 0.4276,
+      "market_prob_home": 0.6048,
+      "market_prob_away": 0.3952,
+      "market_line_home": -172,
+      "market_source": "pinnacle",
+      "edge_pp": -3.24,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
     }
   ],
   "summary": {
-    "total_picks": 1,
+    "total_picks": 3,
     "high_confidence": 0,
-    "avg_edge_pp": -3.44
+    "avg_edge_pp": -1.14
   }
 }
