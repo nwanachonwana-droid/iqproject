@@ -187,6 +187,7 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
     <button class="tab"    id="t-futures" onclick="showTab('futures')">Futures</button>
     <button class="tab"    id="t-splash" onclick="showTab('splash')">Solver</button>
     <button class="tab"    id="t-parlay" onclick="showTab('parlay')">Parlays</button>
+    <button class="tab"    id="t-markets" onclick="showTab('markets')">Markets</button>
 
   </nav>
   <div class="mright">
@@ -298,6 +299,9 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 <div id="panel-futures" style="display:none;padding:2rem 1.5rem;max-width:1200px;margin:0 auto">
     <div id="masters-section"></div><div id="futures-section"></div></div>
 <div id="panel-splash" style="display:none;padding:2rem 1.5rem;max-width:1100px;margin:0 auto"></div>
+<div id="panel-markets" style="display:none;padding:2rem 1.5rem;max-width:1000px;margin:0 auto">
+  <div id="markets-root"></div>
+</div>
 <div id="panel-parlay" style="display:none;padding:2rem 1.5rem;max-width:900px;margin:0 auto">
   <div id="parlay-root"><div style="text-align:center;padding:3rem;color:var(--ink3)">Loading parlay builder...</div></div>
 </div>
@@ -356,6 +360,7 @@ let PICKS=[],PROPS=[],PERF={},AF='all',PS='mlb',HC=false;
 
 function showTab(t){
   if(t==='parlay'&&!window._parlayInited){window._parlayInited=true;initParlay();}
+  if(t==='markets'&&!window._marketsInited){window._marketsInited=true;initMarkets();}
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
   document.getElementById('t-'+t).classList.add('on');
   document.getElementById('pred').style.display=t==='pred'?'block':'none';
@@ -373,6 +378,8 @@ function showTab(t){
   if(t==='splash' && !window._splashInited){window._splashInited=true;splashLoad();}
   const pp=document.getElementById('panel-parlay');
   if(pp) pp.style.display=t==='parlay'?'block':'none';
+  const mp=document.getElementById('panel-markets');
+  if(mp) mp.style.display=t==='markets'?'block':'none';
 }
 function toggleHC(btn){
   HC=!HC;
@@ -1736,6 +1743,439 @@ function initParlay(){
     });
   };
   rebuildParlay();
+}
+
+
+// ── MARKETS & LEADERBOARD ─────────────────────────────────────
+const KALSHI_KEY = "2779b660-be48-4577-ab93-c1df0c5f192d";
+const COURSE_CODE = "IQ2026";
+const KALSHI_BASE = "https://api.kalshi.com/trade-api/v2";
+
+const CURATED_MARKETS = [
+  {id:"fed-may-2026", ticker:"FED-25-MAY-31-A", event_ticker:"FED",
+   title:"Fed Rate Decision — May 2026",
+   question:"Will the Fed cut rates at the May 2026 FOMC meeting?",
+   category:"Monetary Policy", difficulty:"Intermediate",
+   deadline:"2026-05-07", resolution:"2026-05-07",
+   datasets:[
+     {name:"FRED Fed Funds Rate", url:"https://fred.stlouisfed.org/series/FEDFUNDS"},
+     {name:"CME FedWatch", url:"https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"},
+     {name:"Fed Meeting Calendar", url:"https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"}
+   ],
+   description:"Model Fed rate cut probability using dot plots, inflation data, and Fed communications.",
+   resolved:false, outcome:null},
+
+  {id:"cpi-april-2026", ticker:"CPI-26APR", event_ticker:"KXCPI",
+   title:"CPI — April 2026",
+   question:"What will US CPI inflation print for April 2026?",
+   category:"Inflation", difficulty:"Intermediate",
+   deadline:"2026-05-12", resolution:"2026-05-13",
+   datasets:[
+     {name:"BLS CPI Data", url:"https://www.bls.gov/cpi/"},
+     {name:"FRED CPI Series", url:"https://fred.stlouisfed.org/series/CPIAUCSL"},
+     {name:"Cleveland Fed Nowcast", url:"https://www.clevelandfed.org/indicators-and-data/inflation-nowcasting"}
+   ],
+   description:"Forecast CPI using component-level price data, energy prices, and shelter costs.",
+   resolved:false, outcome:null},
+
+  {id:"gdp-q1-2026", ticker:"GDPC1-26Q1", event_ticker:"KXGDP",
+   title:"GDP Growth — Q1 2026",
+   question:"What will US GDP growth be in Q1 2026?",
+   category:"Economic Growth", difficulty:"Advanced",
+   deadline:"2026-04-29", resolution:"2026-04-30",
+   datasets:[
+     {name:"Atlanta Fed GDPNow", url:"https://www.atlantafed.org/cqer/research/gdpnow"},
+     {name:"NY Fed Nowcast", url:"https://www.newyorkfed.org/research/policy/nowcast"},
+     {name:"BEA GDP Release", url:"https://www.bea.gov/data/gdp/gross-domestic-product"}
+   ],
+   description:"Use nowcasting models to forecast quarterly GDP. Most rigorous market on the board.",
+   resolved:false, outcome:null},
+
+  {id:"unemployment-april-2026", ticker:"UNEMP-26APR", event_ticker:"KXUNEMP",
+   title:"Unemployment Rate — April 2026",
+   question:"What will the US unemployment rate be for April 2026?",
+   category:"Labor Market", difficulty:"Beginner",
+   deadline:"2026-05-01", resolution:"2026-05-02",
+   datasets:[
+     {name:"BLS Jobs Report", url:"https://www.bls.gov/news.release/empsit.toc.htm"},
+     {name:"FRED Unemployment", url:"https://fred.stlouisfed.org/series/UNRATE"},
+     {name:"ADP Employment", url:"https://adpemploymentreport.com/"}
+   ],
+   description:"Good entry point. Use ADP, jobless claims, and JOLTS as leading indicators.",
+   resolved:false, outcome:null},
+
+  {id:"nfp-april-2026", ticker:"NFP-26APR", event_ticker:"KXNFP",
+   title:"Nonfarm Payrolls — April 2026",
+   question:"Will nonfarm payrolls exceed 150,000 in April 2026?",
+   category:"Labor Market", difficulty:"Intermediate",
+   deadline:"2026-05-01", resolution:"2026-05-02",
+   datasets:[
+     {name:"BLS Employment Situation", url:"https://www.bls.gov/news.release/empsit.toc.htm"},
+     {name:"ADP National Employment", url:"https://adpemploymentreport.com/"},
+     {name:"Indeed Job Postings", url:"https://www.indeed.com/jobtrends"}
+   ],
+   description:"Forecast monthly job creation using leading labor market and alternative data.",
+   resolved:false, outcome:null},
+
+  {id:"pce-march-2026", ticker:"PCECORE-26MAR", event_ticker:"KXPCE",
+   title:"Core PCE — March 2026",
+   question:"How much will Core PCE increase in March 2026?",
+   category:"Inflation", difficulty:"Advanced",
+   deadline:"2026-04-29", resolution:"2026-04-30",
+   datasets:[
+     {name:"BEA PCE Data", url:"https://www.bea.gov/data/personal-consumption-expenditures-price-index"},
+     {name:"FRED Core PCE", url:"https://fred.stlouisfed.org/series/PCEPILFE"}
+   ],
+   description:"The Fed's preferred inflation gauge. Requires component-level decomposition.",
+   resolved:false, outcome:null},
+
+  {id:"bitcoin-may-2026", ticker:"BTC-100K-26MAY", event_ticker:"KXBTC",
+   title:"Bitcoin > $100K — May 2026",
+   question:"Will Bitcoin exceed $100,000 at any point in May 2026?",
+   category:"Crypto", difficulty:"Beginner",
+   deadline:"2026-05-30", resolution:"2026-05-31",
+   datasets:[
+     {name:"CoinGecko", url:"https://www.coingecko.com/en/coins/bitcoin"},
+     {name:"Glassnode On-chain", url:"https://glassnode.com/"},
+     {name:"FRED Bitcoin", url:"https://fred.stlouisfed.org/series/CBBTCUSD"}
+   ],
+   description:"Model using on-chain metrics, macro conditions, and sentiment signals.",
+   resolved:false, outcome:null},
+
+  {id:"house-2026", ticker:"HOUSE-REP-2026", event_ticker:"KXHOUSE",
+   title:"2026 House Majority",
+   question:"Will Republicans retain House control after 2026 midterms?",
+   category:"Politics", difficulty:"Advanced",
+   deadline:"2026-11-03", resolution:"2026-11-04",
+   datasets:[
+     {name:"Cook Political Report", url:"https://www.cookpolitical.com/"},
+     {name:"FiveThirtyEight", url:"https://projects.fivethirtyeight.com/"},
+     {name:"270toWin Kalshi Odds", url:"https://www.270towin.com/2026-house-election/kalshi-2026-house-prediction-market-prices"}
+   ],
+   description:"Build a district-level model using polling, presidential approval, and historical patterns.",
+   resolved:false, outcome:null},
+
+  {id:"sp500-june-2026", ticker:"SPX-26JUN", event_ticker:"KXSPX",
+   title:"S&P 500 — June 30, 2026",
+   question:"Will the S&P 500 close above its April 30 level on June 30, 2026?",
+   category:"Equities", difficulty:"Intermediate",
+   deadline:"2026-06-29", resolution:"2026-06-30",
+   datasets:[
+     {name:"Yahoo Finance SPY", url:"https://finance.yahoo.com/quote/SPY/"},
+     {name:"FRED SP500", url:"https://fred.stlouisfed.org/series/SP500"},
+     {name:"Shiller CAPE Ratio", url:"http://www.econ.yale.edu/~shiller/data.htm"}
+   ],
+   description:"Forecast equity direction using earnings, macro, valuations, and technical signals.",
+   resolved:false, outcome:null},
+
+  {id:"ai-gpt5-2026", ticker:"GPT5-26JUL", event_ticker:"KXGPT5",
+   title:"GPT-5 Release — Before July 2026",
+   question:"Will OpenAI release GPT-5 before July 1, 2026?",
+   category:"Technology", difficulty:"Beginner",
+   deadline:"2026-06-28", resolution:"2026-07-01",
+   datasets:[
+     {name:"OpenAI Blog", url:"https://openai.com/blog"},
+     {name:"Metaculus AI", url:"https://www.metaculus.com/questions/?topic=AI"},
+     {name:"AI News Aggregator", url:"https://news.ycombinator.com/?q=openai"}
+   ],
+   description:"Use release pattern analysis, compute signals, and competitive dynamics.",
+   resolved:false, outcome:null}
+];
+
+async function kalshiFetch(path){
+  try{
+    const r = await fetch(KALSHI_BASE + path, {
+      headers: {
+        "Authorization": `Token ${KALSHI_KEY}`,
+        "Accept": "application/json"
+      }
+    });
+    if(!r.ok) return null;
+    return await r.json();
+  }catch(e){ return null; }
+}
+
+async function getMarketPrice(ticker){
+  const d = await kalshiFetch(`/markets/${ticker}`);
+  if(!d || !d.market) return null;
+  const m = d.market;
+  return {
+    yes_bid: m.yes_bid,
+    yes_ask: m.yes_ask,
+    last_price: m.last_price,
+    volume: m.volume,
+    close_time: m.close_time,
+    status: m.status
+  };
+}
+
+// Persistent storage for submissions
+async function getSubmissions(){
+  try{
+    const r = await window.storage.get('iq-submissions');
+    return r ? JSON.parse(r.value) : [];
+  }catch(e){ return []; }
+}
+
+async function saveSubmission(sub){
+  const subs = await getSubmissions();
+  subs.push(sub);
+  await window.storage.set('iq-submissions', JSON.stringify(subs));
+}
+
+function brierScore(predictions){
+  // Lower = better. Perfect = 0, worst = 1
+  const settled = predictions.filter(p => p.outcome !== null);
+  if(!settled.length) return null;
+  const sum = settled.reduce((acc, p) => {
+    const o = p.outcome ? 1 : 0;
+    return acc + Math.pow(p.probability - o, 2);
+  }, 0);
+  return Math.round((sum / settled.length) * 1000) / 1000;
+}
+
+function initMarkets(){
+  const root = document.getElementById('markets-root');
+  if(!root) return;
+
+  // Tab state: 'board' | 'submit' | 'leaderboard'
+  let activeView = 'board';
+  let allSubs = [];
+  let marketPrices = {};
+
+  async function loadPrices(){
+    for(const m of CURATED_MARKETS){
+      const p = await getMarketPrice(m.ticker);
+      if(p) marketPrices[m.id] = p;
+    }
+  }
+
+  function renderNav(){
+    return `<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line);padding-bottom:.75rem">
+      ${['board','submit','leaderboard'].map(v=>`
+        <button onclick="marketsView('${v}')" style="padding:.4rem 1rem;border:1px solid ${activeView===v?'var(--accent)':'var(--line)'};border-radius:6px;background:${activeView===v?'var(--accent)':'transparent'};color:${activeView===v?'#000':'var(--ink)'};font-size:.82rem;font-weight:600;cursor:pointer;letter-spacing:.04em;text-transform:uppercase">
+          ${v==='board'?'Markets Board':v==='submit'?'Submit Prediction':'Leaderboard'}
+        </button>`).join('')}
+      <span style="margin-left:auto;font-size:.75rem;color:var(--ink3);align-self:center">Course: <strong style="color:var(--ink)">${COURSE_CODE}</strong> · Kuhiro × iQ Project</span>
+    </div>`;
+  }
+
+  function renderBoard(){
+    const diffColor = {Beginner:'#d4edda', Intermediate:'#fff3cd', Advanced:'#f8d7da'};
+    const diffText = {Beginner:'#155724', Intermediate:'#856404', Advanced:'#721c24'};
+    let h = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem">`;
+    for(const m of CURATED_MARKETS){
+      const price = marketPrices[m.id];
+      const yesPrice = price ? `${Math.round(price.yes_bid * 100)}¢` : '—';
+      const impliedProb = price ? `${Math.round(price.yes_bid * 100)}%` : 'Loading...';
+      const deadlineFmt = new Date(m.deadline).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      h += `<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem;display:flex;flex-direction:column;gap:.5rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="font-size:.68rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em">${m.category}</span>
+          <span style="font-size:.65rem;padding:2px 7px;border-radius:3px;background:${diffColor[m.difficulty]||'#eee'};color:${diffText[m.difficulty]||'#333'};font-weight:600">${m.difficulty}</span>
+        </div>
+        <div style="font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.3">${m.title}</div>
+        <div style="font-size:.78rem;color:var(--ink3);line-height:1.4">${m.question}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.25rem;padding-top:.5rem;border-top:1px solid var(--line)">
+          <div>
+            <div style="font-size:.68rem;color:var(--ink3)">Kalshi market price</div>
+            <div style="font-size:1.2rem;font-weight:700;color:var(--accent)">${impliedProb}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:.68rem;color:var(--ink3)">Deadline</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--ink)">${deadlineFmt}</div>
+          </div>
+        </div>
+        <div style="margin-top:.25rem">
+          <div style="font-size:.68rem;color:var(--ink3);margin-bottom:.35rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em">Datasets</div>
+          ${m.datasets.map(ds=>`<a href="${ds.url}" target="_blank" style="display:inline-block;font-size:.7rem;color:var(--accent);margin-right:.4rem;margin-bottom:.2rem;text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:1px 6px">${ds.name} ↗</a>`).join('')}
+        </div>
+        <div style="font-size:.72rem;color:var(--ink3);margin-top:.1rem;line-height:1.4">${m.description}</div>
+        ${m.resolved ? `<div style="font-size:.75rem;font-weight:600;color:${m.outcome?'var(--accent)':'#ef4444'};margin-top:.25rem">Resolved: ${m.outcome?'YES':'NO'}</div>` : ''}
+      </div>`;
+    }
+    h += `</div>`;
+    return h;
+  }
+
+  function renderSubmit(){
+    return `<div style="max-width:560px">
+      <div style="font-size:.82rem;color:var(--ink3);margin-bottom:1.25rem;line-height:1.6">
+        Submit your probability prediction before the market deadline. All submissions are timestamped and locked — no editing after submission. Your Brier score updates when markets resolve.
+      </div>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.25rem;display:flex;flex-direction:column;gap:1rem">
+        <div>
+          <label style="font-size:.75rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:.35rem">Course Code</label>
+          <input id="sub-code" type="text" placeholder="e.g. IQ2026" style="width:100%;padding:.5rem .75rem;border:1px solid var(--line);border-radius:6px;font-size:.9rem;background:var(--card);color:var(--ink)"/>
+        </div>
+        <div>
+          <label style="font-size:.75rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:.35rem">Your Name</label>
+          <input id="sub-name" type="text" placeholder="First Last" style="width:100%;padding:.5rem .75rem;border:1px solid var(--line);border-radius:6px;font-size:.9rem;background:var(--card);color:var(--ink)"/>
+        </div>
+        <div>
+          <label style="font-size:.75rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:.35rem">Market</label>
+          <select id="sub-market" style="width:100%;padding:.5rem .75rem;border:1px solid var(--line);border-radius:6px;font-size:.88rem;background:var(--card);color:var(--ink)">
+            <option value="">Select a market...</option>
+            ${CURATED_MARKETS.filter(m=>!m.resolved).map(m=>`<option value="${m.id}">${m.title} (deadline: ${new Date(m.deadline).toLocaleDateString('en-US',{month:'short',day:'numeric'})})</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label style="font-size:.75rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:.35rem">Your Probability Estimate (YES) %</label>
+          <div style="display:flex;align-items:center;gap:.75rem">
+            <input id="sub-prob" type="range" min="1" max="99" value="50" step="1" style="flex:1" oninput="document.getElementById('sub-prob-val').textContent=this.value+'%'"/>
+            <span id="sub-prob-val" style="font-size:1.1rem;font-weight:700;color:var(--accent);min-width:42px">50%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--ink3);margin-top:.2rem"><span>Very unlikely</span><span>50/50</span><span>Very likely</span></div>
+        </div>
+        <div>
+          <label style="font-size:.75rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:.35rem">Methodology Note (required)</label>
+          <textarea id="sub-method" rows="3" placeholder="Briefly describe how you arrived at this estimate — data sources, model approach, key assumptions..." style="width:100%;padding:.5rem .75rem;border:1px solid var(--line);border-radius:6px;font-size:.85rem;background:var(--card);color:var(--ink);resize:vertical"></textarea>
+        </div>
+        <button onclick="submitPrediction()" style="padding:.6rem 1.25rem;background:var(--accent);color:#000;border:none;border-radius:6px;font-size:.88rem;font-weight:700;cursor:pointer;letter-spacing:.04em">Submit Prediction →</button>
+        <div id="sub-status" style="font-size:.8rem;color:var(--ink3)"></div>
+      </div>
+    </div>`;
+  }
+
+  async function renderLeaderboard(){
+    const subs = await getSubmissions();
+    allSubs = subs;
+
+    // Group by student
+    const students = {};
+    for(const s of subs){
+      if(!students[s.name]) students[s.name] = [];
+      students[s.name].push(s);
+    }
+
+    // Calculate scores
+    const ranked = Object.entries(students).map(([name, preds])=>{
+      const bs = brierScore(preds);
+      const settled = preds.filter(p=>p.outcome!==null).length;
+      const total = preds.length;
+      return {name, brier:bs, settled, total, preds};
+    }).filter(s=>s.total>0).sort((a,b)=>{
+      if(a.brier===null&&b.brier===null) return b.total-a.total;
+      if(a.brier===null) return 1;
+      if(b.brier===null) return -1;
+      return a.brier-b.brier;
+    });
+
+    if(!ranked.length) return `<div style="text-align:center;padding:3rem;color:var(--ink3)">No submissions yet. Be the first to submit a prediction!</div>`;
+
+    let h = `<div style="margin-bottom:1rem;font-size:.8rem;color:var(--ink3)">Ranked by Brier score (lower = better calibration). Updates as markets resolve.</div>`;
+    h += `<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+      <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+        <thead><tr style="background:var(--bg);border-bottom:1px solid var(--line)">
+          <th style="padding:.6rem 1rem;text-align:left;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">#</th>
+          <th style="padding:.6rem 1rem;text-align:left;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Student</th>
+          <th style="padding:.6rem 1rem;text-align:center;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Brier Score</th>
+          <th style="padding:.6rem 1rem;text-align:center;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Submissions</th>
+          <th style="padding:.6rem 1rem;text-align:center;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Resolved</th>
+        </tr></thead>
+        <tbody>
+          ${ranked.map((s,i)=>`<tr style="border-bottom:1px solid var(--line);${i===0?'background:rgba(232,93,4,0.05)':''}">
+            <td style="padding:.6rem 1rem;font-weight:700;color:${i===0?'var(--accent)':'var(--ink3)'}">${i===0?'🏆':i+1}</td>
+            <td style="padding:.6rem 1rem;font-weight:${i<3?'700':'400'};color:var(--ink)">${s.name}</td>
+            <td style="padding:.6rem 1rem;text-align:center;font-weight:700;color:${s.brier===null?'var(--ink3)':s.brier<0.2?'var(--accent)':'var(--ink)'}">${s.brier!==null?s.brier.toFixed(3):'Pending'}</td>
+            <td style="padding:.6rem 1rem;text-align:center;color:var(--ink3)">${s.total}</td>
+            <td style="padding:.6rem 1rem;text-align:center;color:var(--ink3)">${s.settled}/${s.total}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:1rem;font-size:.72rem;color:var(--ink3)">
+      Brier Score = average of (probability − outcome)². Range: 0 (perfect) to 1 (worst). A score below 0.2 is excellent. Kalshi market average is typically 0.15–0.25.
+    </div>`;
+
+    // Show all submissions detail
+    if(subs.length){
+      h += `<div style="margin-top:1.5rem;font-size:.75rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">All Submissions</div>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse;font-size:.8rem">
+          <thead><tr style="background:var(--bg);border-bottom:1px solid var(--line)">
+            <th style="padding:.5rem .85rem;text-align:left;font-size:.68rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Student</th>
+            <th style="padding:.5rem .85rem;text-align:left;font-size:.68rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Market</th>
+            <th style="padding:.5rem .85rem;text-align:center;font-size:.68rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Prob</th>
+            <th style="padding:.5rem .85rem;text-align:center;font-size:.68rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Outcome</th>
+            <th style="padding:.5rem .85rem;text-align:left;font-size:.68rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Submitted</th>
+          </tr></thead>
+          <tbody>
+            ${subs.map(s=>{
+              const mkt = CURATED_MARKETS.find(m=>m.id===s.market_id);
+              return `<tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:.5rem .85rem;color:var(--ink)">${s.name}</td>
+                <td style="padding:.5rem .85rem;color:var(--ink3)">${mkt?mkt.title:s.market_id}</td>
+                <td style="padding:.5rem .85rem;text-align:center;font-weight:600;color:var(--accent)">${Math.round(s.probability*100)}%</td>
+                <td style="padding:.5rem .85rem;text-align:center">${s.outcome===null?'<span style="color:var(--ink3)">Pending</span>':s.outcome?'<span style="color:var(--accent)">YES</span>':'<span style="color:#ef4444">NO</span>'}</td>
+                <td style="padding:.5rem .85rem;color:var(--ink3)">${new Date(s.submitted_at).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>`;
+    }
+    return h;
+  }
+
+  window.marketsView = async function(v){
+    activeView = v;
+    await renderAll();
+  };
+
+  window.submitPrediction = async function(){
+    const code = document.getElementById('sub-code').value.trim().toUpperCase();
+    const name = document.getElementById('sub-name').value.trim();
+    const marketId = document.getElementById('sub-market').value;
+    const prob = parseInt(document.getElementById('sub-prob').value) / 100;
+    const method = document.getElementById('sub-method').value.trim();
+    const status = document.getElementById('sub-status');
+
+    if(code !== COURSE_CODE){ status.textContent = '✗ Invalid course code.'; status.style.color='#ef4444'; return; }
+    if(!name){ status.textContent = '✗ Please enter your name.'; status.style.color='#ef4444'; return; }
+    if(!marketId){ status.textContent = '✗ Please select a market.'; status.style.color='#ef4444'; return; }
+    if(!method){ status.textContent = '✗ Please include a methodology note.'; status.style.color='#ef4444'; return; }
+
+    // Check deadline
+    const mkt = CURATED_MARKETS.find(m=>m.id===marketId);
+    if(mkt && new Date() > new Date(mkt.deadline)){
+      status.textContent = '✗ This market deadline has passed.'; status.style.color='#ef4444'; return;
+    }
+
+    // Check for duplicate
+    const existing = await getSubmissions();
+    const dup = existing.find(s=>s.name===name&&s.market_id===marketId);
+    if(dup){ status.textContent = '✗ You already submitted for this market.'; status.style.color='#ef4444'; return; }
+
+    const sub = {
+      name, market_id:marketId, probability:prob,
+      methodology:method, submitted_at:new Date().toISOString(),
+      outcome:null
+    };
+
+    await saveSubmission(sub);
+    status.textContent = `✓ Submitted! ${name} → ${mkt.title}: ${Math.round(prob*100)}% YES`;
+    status.style.color = 'var(--accent)';
+    document.getElementById('sub-name').value='';
+    document.getElementById('sub-market').value='';
+    document.getElementById('sub-method').value='';
+    document.getElementById('sub-prob').value=50;
+    document.getElementById('sub-prob-val').textContent='50%';
+  };
+
+  async function renderAll(){
+    let content = '';
+    if(activeView==='board') content = renderBoard();
+    else if(activeView==='submit') content = renderSubmit();
+    else if(activeView==='leaderboard') content = await renderLeaderboard();
+    root.innerHTML = renderNav() + content;
+  }
+
+  // Load prices then render
+  root.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--ink3)">Loading markets...</div>`;
+  loadPrices().then(()=>renderAll());
+  // Refresh prices every 5 minutes
+  setInterval(()=>loadPrices().then(()=>{ if(activeView==='board') renderBoard(); }), 300000);
 }
 
 </script>
