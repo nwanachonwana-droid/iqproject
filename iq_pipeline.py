@@ -1504,6 +1504,7 @@ def run_golf_masters():
         "schema_version": "1.0",
         "sport": "golf",
         "tournament": event_name or "PGA Tour 2026",
+        "is_major": bool(odds_sport_key),
         "generated_at": ts,
         "data_date": TODAY,
         "status": "ACTIVE",
@@ -1516,7 +1517,7 @@ def run_golf_masters():
             "market": "Devigged Pinnacle/DK/FD/BetMGM outrights",
             "note": "Run pre-round for best edge — market lags during round, model lags live scores",
         },
-        "picks": [r for r in results if r.get("edge_pp") and r["edge_pp"] >= 1.0],
+        "picks": [r for r in results if r.get("edge_pp") and r["edge_pp"] >= 1.0] if odds_sport_key else results[:20],
         "field": results,
         "summary": {
             "total_players": len(results),
