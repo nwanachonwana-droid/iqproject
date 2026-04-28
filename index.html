@@ -1682,17 +1682,11 @@ function initParlay(){
   window.rebuildParlay = function(){
     const bankroll=parseFloat(document.getElementById('pl-bankroll').value)||300;
     const maxP=parseInt(document.getElementById('pl-maxp').value)||10;
-    document.getElementById('pl-body').innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3)">Building...</div>';
+    const plBody=document.getElementById('pl-body');
+    plBody.innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3)">Building...</div>';
     loadPicks().then(picks=>{
       document.getElementById('pl-status').textContent=picks.length+' picks loaded';
-      const body=document.getElementById('pl-body');
-      const saved=root.innerHTML;
-      root.innerHTML=saved;
-      // Re-render into pl-body
-      const tmpRoot={innerHTML:''};
-      const oldRoot=root;
-      // render directly into pl-body
-      const plBody=document.getElementById('pl-body');
+      {
       if(!picks.length){plBody.innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3)">No picks found. Run pipeline first.</div>';return;}
       const{parlays,perParlay,totalStake}=buildParlays(picks,bankroll,maxP);
       const portEV=parlays.reduce((a,p)=>a+(p.ev*perParlay),0);
