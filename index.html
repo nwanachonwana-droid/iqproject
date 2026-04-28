@@ -453,59 +453,69 @@ function mkRow(p,i){
 }
 
 function renderMasters(d){
-  const picks = d.picks || [];
-  const r3 = d.r3_model_picks || [];
-  if(!picks.length) return;
-
-  // Find or create golf section in today's picks area
   const el = document.getElementById('masters-section');
   if(!el) return;
+  const isMajor = d.is_major;
+  const tournament = d.tournament || 'Golf';
+  const field = d.field || [];
+  const picks = d.picks || field;
+  const display = picks.slice(0, 15);
+  if(!display.length){ el.innerHTML=''; return; }
 
-  const recColor = {VALUE:'var(--accent)', HOLD:'var(--ink2)', FADE:'#ef4444'};
+  let html = `<div style="font-family:var(--M);font-size:0.65rem;color:var(--ink3);letter-spacing:.08em;margin-bottom:0.75rem">
+    ⛳ ${tournament.toUpperCase()} · ROUND ${d.current_round||1} · ${d.last_updated||''}
+  </div>`;
 
-  el.innerHTML = `
-    <div style="font-family:var(--M);font-size:0.65rem;color:var(--ink3);letter-spacing:.08em;margin-bottom:0.75rem">
-      ⛳ MASTERS 2026 — AFTER ROUND ${d.current_round||2} · ${d.last_updated||''}
-    </div>
-    ${r3.length ? `
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0.75rem;margin-bottom:1.5rem">
-      ${r3.map(p=>`
-      <div style="border:1px solid var(--line);border-radius:6px;padding:0.85rem;background:var(--card)">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">
-          <span style="font-weight:700;font-size:0.9rem;color:var(--ink)">${p.player}</span>
-          <span style="font-size:0.65rem;font-weight:700;color:${recColor[p.rec]||'var(--ink2)'};letter-spacing:.06em">${p.rec}</span>
-        </div>
-        <div style="font-size:0.72rem;color:var(--ink3);line-height:1.4">${p.rationale}</div>
-      </div>`).join('')}
-    </div>` : ''}
-    <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
+  if(isMajor){
+    // Major: show edge picks with score/ML
+    const recColor={VALUE:'var(--accent)',HOLD:'var(--ink2)',FADE:'#ef4444'};
+    html += `<table style="width:100%;border-collapse:collapse;font-size:0.78rem">
       <thead><tr style="border-bottom:1px solid var(--line)">
         <th style="text-align:left;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Pos</th>
         <th style="text-align:left;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Player</th>
-        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">R1</th>
-        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">R2</th>
-        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Total</th>
-        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Win ML</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Score</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Model</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Market</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Edge</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Top 10</th>
+      </tr></thead><tbody>
+      ${display.map((p,i)=>{
+        const edgeColor = p.edge_pp >= 3 ? 'color:var(--accent)' : p.edge_pp < -3 ? 'color:#ef4444' : 'color:var(--ink3)';
+        const edgeStr = p.edge_pp != null ? (p.edge_pp>0?'+':'')+p.edge_pp.toFixed(1)+'pp' : '—';
+        return `<tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:0.45rem 0.5rem;color:var(--ink3)">${p.pos||'—'}</td>
+          <td style="padding:0.45rem 0.5rem;font-weight:${i<3?'700':'400'};color:var(--ink)">${p.player}</td>
+          <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.score!=null?(p.score>0?'+'+p.score:p.score):'—'}</td>
+          <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink)">${p.model_prob!=null?(p.model_prob*100).toFixed(1)+'%':'—'}</td>
+          <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.market_prob!=null?(p.market_prob*100).toFixed(1)+'%':'—'}</td>
+          <td style="padding:0.45rem 0.5rem;text-align:right;${edgeColor}">${edgeStr}</td>
+          <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.dg_top10!=null?(p.dg_top10*100).toFixed(0)+'%':'—'}</td>
+        </tr>`;
+      }).join('')}
+      </tbody></table>`;
+  } else {
+    // Non-major: show field ranked by model probability
+    html += `<div style="font-size:0.72rem;color:var(--ink3);margin-bottom:0.5rem">Model win probability ranking — no market odds available for this event</div>`;
+    html += `<table style="width:100%;border-collapse:collapse;font-size:0.78rem">
+      <thead><tr style="border-bottom:1px solid var(--line)">
+        <th style="text-align:left;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">#</th>
+        <th style="text-align:left;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Player</th>
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Win %</th>
         <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Top 5</th>
         <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Top 10</th>
-      </tr></thead>
-      <tbody>
-        ${picks.slice(0,12).map((p,i)=>{
-          const sc = p.score <= -8 ? 'color:var(--accent)' : p.score <= -4 ? 'color:var(--ink)' : 'color:var(--ink3)';
-          const ml = p.win_ml > 0 ? '+'+p.win_ml : p.win_ml;
-          return `<tr style="border-bottom:1px solid var(--line);${i===0?'background:var(--card)':''}">
-            <td style="padding:0.45rem 0.5rem;color:var(--ink3)">${p.pos}</td>
-            <td style="padding:0.45rem 0.5rem;font-weight:${i<3?'700':'400'};color:var(--ink)">${p.player}</td>
-            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.R1||'—'}</td>
-            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.R2||'—'}</td>
-            <td style="padding:0.45rem 0.5rem;text-align:right;font-weight:600;${sc}">${p.score>0?'+'+p.score:p.score}</td>
-            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink2)">${ml}</td>
-            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.top5_ml||'—'}</td>
-            <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.top10_ml||'—'}</td>
-          </tr>`;
-        }).join('')}
-      </tbody>
-    </table>`;
+        <th style="text-align:right;padding:0.4rem 0.5rem;color:var(--ink3);font-weight:500">Make Cut</th>
+      </tr></thead><tbody>
+      ${display.map((p,i)=>`<tr style="border-bottom:1px solid var(--line)">
+        <td style="padding:0.45rem 0.5rem;color:var(--ink3)">${i+1}</td>
+        <td style="padding:0.45rem 0.5rem;font-weight:${i<3?'700':'400'};color:var(--ink)">${p.player}</td>
+        <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--accent);font-weight:600">${p.model_prob!=null?(p.model_prob*100).toFixed(1)+'%':'—'}</td>
+        <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.dg_top10!=null?(p.dg_top10*100).toFixed(0)+'%':'—'}</td>
+        <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.dg_top10!=null?(p.dg_top10*100).toFixed(0)+'%':'—'}</td>
+        <td style="padding:0.45rem 0.5rem;text-align:right;color:var(--ink3)">${p.sg_total!=null?p.sg_total.toFixed(2):'—'}</td>
+      </tr>`).join('')}
+      </tbody></table>`;
+  }
+  el.innerHTML = html;
 }
 
 function renderPicks(){
