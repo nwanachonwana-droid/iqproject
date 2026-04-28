@@ -130,3 +130,36 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-04-25,nba_props,San Antonio Spurs @ Portland Trail Blazers,Deni Avdija REB UNDER 7.5,under,0.6493,0.5291,12.02,medium,PENDING,,7.5,MANUAL
 2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane REB OVER 3.5,over,0.6033,0.5201,8.31,medium,WIN,7.0,3.5,ESPN
 2026-04-25,nba_props,Detroit Pistons @ Orlando Magic,Goga Bitadze PTS OVER 3.5,over,0.6117,0.5291,8.26,medium,LOSS,2.0,3.5,ESPN
+2026-04-27,mlb,St. Louis Cardinals @ Pittsburgh Pirates,Pittsburgh Pirates,home,0.623,0.5427,8.03,medium,LOSS,4-2,,ESPN
+2026-04-27,mlb_props,Miami Marlins @ Los Angeles Dodgers,Yoshinobu Yamamoto UNDER 6.5K,under,0.7351,0.5515,18.36,high,WIN,4K,6.5,MLB API
+2026-04-27,mlb_props,New York Yankees @ Texas Rangers,Max Fried UNDER 5.5K,under,0.6203,0.4721,14.82,medium,WIN,5K,5.5,MLB API
+2026-04-27,mlb_props,Tampa Bay Rays @ Cleveland Guardians,Parker Messick OVER 4.5K,over,0.6492,0.5333,11.59,medium,WIN,9K,4.5,MLB API
+2026-04-27,mlb_props,New York Yankees @ Texas Rangers,Jack Leiter OVER 5.5K,over,0.6007,0.541,5.97,medium,LOSS,4K,5.5,MLB API
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George REB UNDER 5.5,under,0.8489,0.5112,33.77,high,PENDING,,5.5,MANUAL
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe PTS OVER 12.5,over,0.8216,0.4895,33.21,high,PENDING,,12.5,MANUAL
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Royce O'Neale PTS OVER 5.5,over,0.8267,0.5019,32.47,high,WIN,8.0,5.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane AST UNDER 3.5,under,0.8409,0.5348,30.61,high,WIN,1.0,3.5,ESPN
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe AST UNDER 3.5,under,0.7936,0.5016,29.2,high,PENDING,,3.5,MANUAL
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe REB OVER 5.5,over,0.7869,0.5101,27.67,high,PENDING,,5.5,MANUAL
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Devin Booker AST UNDER 6.5,under,0.7689,0.5021,26.67,high,WIN,6.0,6.5,ESPN
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,Tyrese Maxey REB UNDER 3.5,under,0.7554,0.4956,25.98,high,PENDING,,3.5,MANUAL
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Dillon Brooks PTS OVER 18.5,over,0.7461,0.4968,24.93,high,WIN,23.0,18.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Anthony Black REB OVER 2.5,over,0.7478,0.5018,24.6,high,LOSS,2.0,2.5,ESPN
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Oso Ighodaro REB UNDER 6.5,under,0.7357,0.4929,24.28,high,LOSS,8.0,6.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Franz Wagner PTS UNDER 17.5,under,0.7091,0.4943,21.49,high,LOSS,19.0,17.5,ESPN
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Oso Ighodaro AST OVER 2.5,over,0.7337,0.5224,21.14,high,WIN,4.0,2.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Paolo Banchero REB UNDER 8.5,under,0.7256,0.5199,20.58,high,WIN,8.0,8.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Anthony Black PTS UNDER 9.5,under,0.6736,0.5066,16.7,high,WIN,2.0,9.5,ESPN
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,Tyrese Maxey PTS OVER 24.5,over,0.6724,0.5106,16.18,high,PENDING,,24.5,MANUAL
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George PTS OVER 15.5,over,0.6394,0.4779,16.15,medium,PENDING,,15.5,MANUAL
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Devin Booker PTS UNDER 22.5,under,0.6626,0.5052,15.74,high,LOSS,24.0,22.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane REB OVER 4.5,over,0.6041,0.4517,15.23,medium,WIN,5.0,4.5,ESPN
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Dillon Brooks REB OVER 4.5,over,0.6399,0.4972,14.27,medium,LOSS,4.0,4.5,ESPN
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes REB OVER 2.5,over,0.6783,0.5396,13.87,high,PENDING,,2.5,MANUAL
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Royce O'Neale REB OVER 4.5,over,0.6496,0.5172,13.24,medium,WIN,7.0,4.5,ESPN
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Collin Gillespie REB OVER 3.5,over,0.6449,0.5146,13.03,medium,LOSS,2.0,3.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Franz Wagner REB OVER 4.5,over,0.6474,0.5225,12.49,medium,WIN,5.0,4.5,ESPN
+2026-04-27,nba_props,Oklahoma City Thunder @ Phoenix Suns,Dillon Brooks AST OVER 1.5,over,0.6245,0.5057,11.87,medium,WIN,3.0,1.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Jalen Suggs PTS UNDER 13.5,under,0.6403,0.5234,11.69,medium,WIN,5.0,13.5,ESPN
+2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane PTS OVER 19.5,over,0.6007,0.4948,10.59,medium,WIN,22.0,19.5,ESPN
+2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes PTS UNDER 6.5,under,0.6172,0.5202,9.7,medium,PENDING,,6.5,MANUAL

@@ -1417,15 +1417,21 @@ def run_golf_masters():
 
         field_data = fetch(f"https://feeds.datagolf.com/field-updates?tour=pga&file_format=json&key={DG_KEY}")
         field = field_data.get("field", [])
-        print(f"  Field: {len(field)} players | Event: {field_data.get('event_name','?')}")
+        event_name = field_data.get('event_name','')
+        print(f"  Field: {len(field)} players | Event: {event_name or '?'}")
     except Exception as e:
         print(f"  ! DataGolf fetch error: {e}")
         return
 
-    # Market odds
+    # Market odds — detect current tournament dynamically
     market_prob = {}; best_price = {}
     try:
-        odds_raw = fetch(f"https://api.the-odds-api.com/v4/sports/golf_masters_tournament_winner/odds"
+        # Find active golf outright market
+        all_sports = fetch(f"https://api.the-odds-api.com/v4/sports?apiKey={ODDS_KEY}")
+        golf_sports = [s["key"] for s in all_sports if "golf" in s["key"] and s.get("active")]
+        print(f"  Active golf markets: {golf_sports}")
+        golf_key = golf_sports[0] if golf_sports else "golf_masters_tournament_winner"
+        odds_raw = fetch(f"https://api.the-odds-api.com/v4/sports/{golf_key}/odds"
                          f"?apiKey={ODDS_KEY}&regions=us,uk&markets=outrights&oddsFormat=american")
         raw_imp = {}
         for market in odds_raw:
@@ -1452,7 +1458,9 @@ def run_golf_masters():
         sk = skills.get(dg_id, {})
 
         dg_base = ip_data.get("win", pt_data.get("win", 0)) or 0
-        fit_adj = AUGUSTA_FIT.get(dg_name, 0.0)
+        # Augusta fit only applies to Masters
+        is_masters = "master" in event_name.lower() if event_name else False
+        fit_adj = AUGUSTA_FIT.get(dg_name, 0.0) if is_masters else 0.0
         raw_model = max(0.0001, dg_base + fit_adj * 0.03)
 
         mkt = market_prob.get(std_name)
@@ -1494,7 +1502,7 @@ def run_golf_masters():
     out = {
         "schema_version": "1.0",
         "sport": "golf",
-        "tournament": "Masters Tournament 2026",
+        "tournament": event_name or "PGA Tour 2026",
         "generated_at": ts,
         "data_date": TODAY,
         "status": "ACTIVE",
@@ -1515,7 +1523,7 @@ def run_golf_masters():
             "top_picks": [r["player"] for r in results if r.get("edge_pp") and r["edge_pp"] >= 1.0][:5],
         }
     }
-    path = os.path.join(DATA_DIR, "golf_masters_picks.json")
+    path = os.path.join(DATA_DIR, "golf_masters_picks.json")  # keep same filename for site compatibility
     with open(path, "w") as f: json.dump(out, f, indent=2)
 
     picks = out["picks"]
