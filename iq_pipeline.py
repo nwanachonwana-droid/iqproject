@@ -1423,32 +1423,50 @@ def run_golf_masters():
         print(f"  ! DataGolf fetch error: {e}")
         return
 
-    # Market odds — detect current tournament dynamically
+    # Market odds — majors use Odds API, non-majors use DataGolf history fit
     market_prob = {}; best_price = {}
-    try:
-        # Find active golf outright market
-        all_sports = fetch(f"https://api.the-odds-api.com/v4/sports?apiKey={ODDS_KEY}")
-        golf_sports = [s["key"] for s in all_sports if "golf" in s["key"] and s.get("active")]
-        print(f"  Active golf markets: {golf_sports}")
-        golf_key = golf_sports[0] if golf_sports else "golf_masters_tournament_winner"
-        odds_raw = fetch(f"https://api.the-odds-api.com/v4/sports/{golf_key}/odds"
-                         f"?apiKey={ODDS_KEY}&regions=us,uk&markets=outrights&oddsFormat=american")
-        raw_imp = {}
-        for market in odds_raw:
-            for bk in market.get("bookmakers", []):
-                if bk["key"] not in ("pinnacle","draftkings","fanduel","betmgm","williamhill"): continue
-                for mk in bk.get("markets", []):
-                    for o in mk.get("outcomes", []):
-                        n = o["name"]; p = o["price"]
-                        if n not in raw_imp: raw_imp[n] = []
-                        raw_imp[n].append(to_imp(p))
-                        if n not in best_price or (p > 0 and (best_price[n] < 0 or p > best_price[n])):
-                            best_price[n] = p
-        total_imp = sum(sum(v)/len(v) for v in raw_imp.values())
-        market_prob = {n: sum(v)/len(v)/total_imp for n, v in raw_imp.items()}
-        print(f"  Odds: {len(market_prob)} players priced")
-    except Exception as e:
-        print(f"  ! Odds fetch error: {e}")
+    MAJOR_MAP = {
+        "masters": "golf_masters_tournament_winner",
+        "pga championship": "golf_pga_championship_winner",
+        "u.s. open": "golf_us_open_winner",
+        "the open": "golf_the_open_championship_winner",
+    }
+    odds_sport_key = None
+    for kw, mk in MAJOR_MAP.items():
+        if event_name and kw in event_name.lower():
+            odds_sport_key = mk
+            break
+
+    if odds_sport_key:
+        try:
+            odds_raw = fetch(f"https://api.the-odds-api.com/v4/sports/{odds_sport_key}/odds"
+                             f"?apiKey={ODDS_KEY}&regions=us,uk&markets=outrights&oddsFormat=american")
+            raw_imp = {}
+            for market in odds_raw:
+                for bk in market.get("bookmakers", []):
+                    if bk["key"] not in ("pinnacle","draftkings","fanduel","betmgm","williamhill"): continue
+                    for mk2 in bk.get("markets", []):
+                        for o in mk2.get("outcomes", []):
+                            n = o["name"]; pr = o["price"]
+                            if n not in raw_imp: raw_imp[n] = []
+                            raw_imp[n].append(to_imp(pr))
+                            if n not in best_price or (pr>0 and (best_price[n]<0 or pr>best_price[n])):
+                                best_price[n] = pr
+            total_imp = sum(sum(v)/len(v) for v in raw_imp.values())
+            market_prob = {n: sum(v)/len(v)/total_imp for n,v in raw_imp.items()}
+            print(f"  Odds: {len(market_prob)} players priced (Odds API — major)")
+        except Exception as e:
+            print(f"  ! Odds API error: {e}")
+    else:
+        try:
+            fit_players = pt.get("baseline_history_fit", [])
+            total_fit = sum(p2.get("win", 0) for p2 in fit_players)
+            if total_fit > 0:
+                for p2 in fit_players:
+                    market_prob[p2["dg_id"]] = round(p2.get("win", 0) / total_fit, 6)
+            print(f"  Odds: {len(market_prob)} players priced (DataGolf history fit — non-major)")
+        except Exception as e:
+            print(f"  ! DataGolf fit error: {e}")
 
     results = []
     for p in field:
