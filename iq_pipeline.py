@@ -1463,7 +1463,8 @@ def run_golf_masters():
         fit_adj = AUGUSTA_FIT.get(dg_name, 0.0) if is_masters else 0.0
         raw_model = max(0.0001, dg_base + fit_adj * 0.03)
 
-        mkt = market_prob.get(std_name)
+        # Non-majors: market_prob keyed by dg_id; majors: by player name
+        mkt = market_prob.get(std_name) if odds_sport_key else market_prob.get(dg_id)
         results.append({
             "pick_id":     f"golf-masters-2026-{dg_id}",
             "player":      std_name,
