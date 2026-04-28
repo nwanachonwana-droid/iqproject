@@ -186,7 +186,8 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 
     <button class="tab"    id="t-futures" onclick="showTab('futures')">Futures</button>
     <button class="tab"    id="t-splash" onclick="showTab('splash')">Solver</button>
-    <a class="tab" href="/parlay.html" style="text-decoration:none;display:inline-flex;align-items:center">Parlays</a>
+    <button class="tab"    id="t-parlay" onclick="showTab('parlay')">Parlays</button>
+
   </nav>
   <div class="mright">
     
@@ -297,6 +298,9 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 <div id="panel-futures" style="display:none;padding:2rem 1.5rem;max-width:1200px;margin:0 auto">
     <div id="masters-section"></div><div id="futures-section"></div></div>
 <div id="panel-splash" style="display:none;padding:2rem 1.5rem;max-width:1100px;margin:0 auto"></div>
+<div id="panel-parlay" style="display:none;padding:2rem 1.5rem;max-width:900px;margin:0 auto">
+  <div id="parlay-root"><div style="text-align:center;padding:3rem;color:var(--ink3)">Loading parlay builder...</div></div>
+</div>
 <footer>
   <div class="fw">the <b>iQ</b> project</div>
   <div class="fm">Walk-forward validated · No retroactive edits · All predictions time-stamped</div>
@@ -351,6 +355,7 @@ const SPORTS=Object.keys(META).filter(s=>s!=='props');
 let PICKS=[],PROPS=[],PERF={},AF='all',PS='mlb',HC=false;
 
 function showTab(t){
+  if(t==='parlay'&&!window._parlayInited){window._parlayInited=true;initParlay();}
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
   document.getElementById('t-'+t).classList.add('on');
   document.getElementById('pred').style.display=t==='pred'?'block':'none';
@@ -366,6 +371,8 @@ function showTab(t){
   const sp=document.getElementById('panel-splash');
   if(sp) sp.style.display=t==='splash'?'block':'none';
   if(t==='splash' && !window._splashInited){window._splashInited=true;splashLoad();}
+  const pp=document.getElementById('panel-parlay');
+  if(pp) pp.style.display=t==='parlay'?'block':'none';
 }
 function toggleHC(btn){
   HC=!HC;
@@ -1511,6 +1518,231 @@ function splashSolve(){
       else res.innerHTML='<div style="padding:1rem;color:var(--ink3)">Could not load futures data. Load picks from a sport above.</div>';
     });
   }
+}
+
+
+function initParlay(){
+  const root=document.getElementById('parlay-root');
+  if(!root) return;
+
+  const SPORT_LABELS={mlb:'MLB',nba:'NBA',nhl:'NHL',ncaa_baseball:'NCAA Baseball',
+    soccer:'Soccer',mlb_props:'MLB Props',nba_props:'NBA Props'};
+
+  function probToDecimal(p){return p>=0.5?1+(1-p)/p:1+p/(1-p)}
+  function fmt(n){return typeof n==='number'?n.toFixed(2):'—'}
+  function pct(n){return typeof n==='number'?(n*100).toFixed(1)+'%':'—'}
+
+  async function loadPicks(){
+    const picks=[];
+    for(const s of ['mlb','nba','nhl','ncaa_baseball','soccer']){
+      try{
+        const r=await fetch(s+'_picks_today.json?t='+Date.now());
+        if(!r.ok) continue;
+        const d=await r.json();
+        for(const p of (d.picks||[])){
+          if(!['high','medium'].includes(p.confidence_tier)) continue;
+          const side=p.pick_side;
+          const prob=side==='home'?p.model_prob_home:p.model_prob_away;
+          const mkt=side==='home'?p.market_prob_home:p.market_prob_away;
+          if(!mkt||prob<0.55) continue;
+          picks.push({pick:p.pick,sport:s,prob,mkt,tier:p.confidence_tier,edge:p.edge_pp,game:`${p.away_team}@${p.home_team}`});
+        }
+      }catch(e){}
+    }
+    try{
+      const r=await fetch('mlb_props_today.json?t='+Date.now());
+      if(r.ok){const d=await r.json();for(const p of(d.props||[])){if(!['high','medium'].includes(p.confidence_tier)) continue;picks.push({pick:p.pick,sport:'mlb_props',prob:p.model_prob,mkt:p.market_prob,tier:p.confidence_tier,edge:p.edge_pp,game:p.game||''});}}
+    }catch(e){}
+    try{
+      const r=await fetch('nba_props_today.json?t='+Date.now());
+      if(r.ok){const d=await r.json();for(const p of(d.picks||[])){if(!['high','medium'].includes(p.confidence_tier)) continue;if(!p.market_prob||p.model_prob<0.65) continue;picks.push({pick:`${p.player} ${p.stat} ${p.direction} ${p.line}`,sport:'nba_props',prob:p.model_prob,mkt:p.market_prob,tier:p.confidence_tier,edge:p.edge_pp,game:p.matchup||''});}}
+    }catch(e){}
+    return picks.sort((a,b)=>b.prob-a.prob);
+  }
+
+  function buildParlays(picks,bankroll,maxP){
+    const legs=picks.filter(p=>p.prob>=0.65);
+    const used=new Array(legs.length).fill(0);
+    const parlays=[];
+    for(let attempt=0;attempt<500&&parlays.length<maxP;attempt++){
+      const sorted=[...legs].map((l,i)=>({...l,i,score:used[i]})).sort((a,b)=>a.score-b.score||(b.prob-a.prob));
+      const combo=[];const usedGames=new Set();
+      for(const c of sorted){
+        if(combo.length>=3) break;
+        if(combo.find(x=>x.i===c.i)) continue;
+        const gk=c.game||c.pick;
+        if(usedGames.has(gk)) continue;
+        combo.push(c);usedGames.add(gk);
+      }
+      if(combo.length<2) break;
+      const key=combo.map(c=>c.i).sort().join('-');
+      if(parlays.find(p=>p.key===key)) continue;
+      const winProb=combo.reduce((a,c)=>a*c.prob,1);
+      const decOdds=combo.reduce((a,c)=>a*probToDecimal(c.mkt),1);
+      const ev=winProb*decOdds-1;
+      parlays.push({combo,winProb,decOdds,ev,key,twoLeg:combo.length===2});
+      combo.forEach(c=>used[c.i]++);
+    }
+    parlays.sort((a,b)=>b.ev-a.ev);
+    const totalStake=Math.min(bankroll*0.16,500);
+    const perParlay=totalStake/Math.max(parlays.length,1);
+    return{parlays,perParlay,totalStake};
+  }
+
+  function kellyStake(prob,mkt,bankroll){
+    const dec=probToDecimal(mkt);
+    const b=dec-1;const q=1-prob;
+    const k=Math.max(0,(b*prob-q)/b)/4;
+    return Math.min(bankroll*k,bankroll*0.07);
+  }
+
+  function render(picks,bankroll,maxP){
+    if(!picks.length){root.innerHTML='<div style="text-align:center;padding:3rem;color:var(--ink3)">No high/medium confidence picks with market odds. Run the pipeline first.</div>';return;}
+    const{parlays,perParlay,totalStake}=buildParlays(picks,bankroll,maxP);
+    const portEV=parlays.reduce((a,p)=>a+(p.ev*perParlay),0);
+    const highCount=picks.filter(p=>p.prob>=0.65).length;
+
+    let h=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem">
+      ${[['Picks available',picks.length],['High conf legs',highCount],['Parlay stake','$'+fmt(totalStake)],['Portfolio EV',(portEV>=0?'+':'')+' $'+fmt(portEV)]].map(([l,v],i)=>`
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem">
+        <div style="font-size:.72rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem">${l}</div>
+        <div style="font-size:1.4rem;font-weight:600;color:${i===3?(portEV>=0?'var(--accent)':'#ef4444'):'var(--ink)'}">${v}</div>
+      </div>`).join('')}
+    </div>`;
+
+    h+=`<div style="font-size:.72rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin:1.5rem 0 .75rem">Parlay portfolio — ${parlays.length} parlays ranked by EV</div>`;
+
+    parlays.forEach((p,i)=>{
+      const evD=p.ev*perParlay;
+      h+=`<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.75rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+          <span style="font-size:.8rem;font-weight:600;color:var(--ink3)">Parlay ${i+1}${p.twoLeg?' <span style="font-size:.65rem;padding:1px 6px;border-radius:3px;background:#f8d7da;color:#721c24">2-leg</span>':''}</span>
+          <span style="font-size:.9rem;font-weight:700;color:${evD>=0?'var(--accent)':'#ef4444'}">${evD>=0?'+':''}$${fmt(evD)} EV</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:var(--ink3);margin-bottom:.5rem">
+          <span>Win prob: <strong style="color:var(--ink)">${pct(p.winProb)}</strong></span>
+          <span>Odds: <strong style="color:var(--ink)">${fmt(p.decOdds)}x</strong></span>
+          <span>Stake: <strong style="color:var(--ink)">$${fmt(perParlay)}</strong></span>
+          <span>Payout: <strong style="color:var(--ink)">$${fmt(p.decOdds*perParlay)}</strong></span>
+        </div>
+        ${p.combo.map(leg=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-top:1px solid var(--line)">
+          <div>
+            <div style="font-size:.85rem;font-weight:500;color:var(--ink)">${leg.pick} <span style="font-size:.65rem;padding:1px 6px;border-radius:3px;background:${leg.tier==='high'?'#d4edda':'#fff3cd'};color:${leg.tier==='high'?'#155724':'#856404'}">${leg.tier}</span></div>
+            <div style="font-size:.72rem;color:var(--ink3);margin-top:2px">${SPORT_LABELS[leg.sport]||leg.sport} · mkt ${pct(leg.mkt)}</div>
+          </div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--ink)">${pct(leg.prob)}</div>
+        </div>`).join('')}
+      </div>`;
+    });
+
+    h+=`<div style="font-size:.72rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin:1.5rem 0 .75rem">Singles — ¼ Kelly sizing</div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+      <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+        <thead><tr style="border-bottom:1px solid var(--line);background:var(--bg)">
+          <th style="padding:.6rem 1rem;text-align:left;font-size:.72rem;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Pick</th>
+          <th style="padding:.6rem 1rem;text-align:left;font-size:.72rem;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Sport</th>
+          <th style="padding:.6rem 1rem;text-align:right;font-size:.72rem;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Model</th>
+          <th style="padding:.6rem 1rem;text-align:right;font-size:.72rem;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Edge</th>
+          <th style="padding:.6rem 1rem;text-align:right;font-size:.72rem;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Stake</th>
+        </tr></thead>
+        <tbody>
+          ${picks.filter(p=>p.prob>=0.60).slice(0,15).map(p=>{
+            const stake=kellyStake(p.prob,p.mkt,bankroll);
+            const e=p.edge||0;
+            return `<tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:.6rem 1rem;color:var(--ink)">${p.pick} <span style="font-size:.65rem;padding:1px 5px;border-radius:3px;background:${p.tier==='high'?'#d4edda':'#fff3cd'};color:${p.tier==='high'?'#155724':'#856404'}">${p.tier}</span></td>
+              <td style="padding:.6rem 1rem;color:var(--ink3)">${SPORT_LABELS[p.sport]||p.sport}</td>
+              <td style="padding:.6rem 1rem;text-align:right;color:var(--ink)">${pct(p.prob)}</td>
+              <td style="padding:.6rem 1rem;text-align:right;color:${e>=0?'var(--accent)':'#ef4444'}">${e>=0?'+':''}${typeof e==='number'?e.toFixed(1):'—'}pp</td>
+              <td style="padding:.6rem 1rem;text-align:right;font-weight:700;color:var(--ink)">$${fmt(stake)}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>`;
+
+    if(highCount<6) h+=`<div style="font-size:.8rem;color:#856404;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:.6rem 1rem;margin-top:1rem">⚠ Fewer than 6 high-confidence picks — some parlay legs use medium confidence.</div>`;
+    root.innerHTML=h;
+  }
+
+  // Controls
+  const bankrollVal = 300;
+  const maxPVal = 10;
+  root.innerHTML=`
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem 1.25rem">
+      <label style="font-size:.85rem;color:var(--ink3)">Bankroll $</label>
+      <input type="number" id="pl-bankroll" value="${bankrollVal}" min="50" step="50" style="width:90px;padding:.4rem .6rem;border:1px solid var(--line);border-radius:6px;font-size:.9rem;background:var(--card);color:var(--ink)"/>
+      <label style="font-size:.85rem;color:var(--ink3)">Max parlays</label>
+      <input type="number" id="pl-maxp" value="${maxPVal}" min="3" max="20" style="width:65px;padding:.4rem .6rem;border:1px solid var(--line);border-radius:6px;font-size:.9rem;background:var(--card);color:var(--ink)"/>
+      <button onclick="rebuildParlay()" style="padding:.45rem 1.1rem;background:var(--accent);color:#000;border:none;border-radius:6px;font-size:.85rem;font-weight:700;cursor:pointer;letter-spacing:.04em">↺ Rebuild</button>
+      <span id="pl-status" style="font-size:.8rem;color:var(--ink3);margin-left:auto"></span>
+    </div>
+    <div id="pl-body"><div style="text-align:center;padding:2rem;color:var(--ink3)">Building portfolio...</div></div>`;
+
+  window.rebuildParlay = function(){
+    const bankroll=parseFloat(document.getElementById('pl-bankroll').value)||300;
+    const maxP=parseInt(document.getElementById('pl-maxp').value)||10;
+    document.getElementById('pl-body').innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3)">Building...</div>';
+    loadPicks().then(picks=>{
+      document.getElementById('pl-status').textContent=picks.length+' picks loaded';
+      const body=document.getElementById('pl-body');
+      const saved=root.innerHTML;
+      root.innerHTML=saved;
+      // Re-render into pl-body
+      const tmpRoot={innerHTML:''};
+      const oldRoot=root;
+      // render directly into pl-body
+      const plBody=document.getElementById('pl-body');
+      if(!picks.length){plBody.innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3)">No picks found. Run pipeline first.</div>';return;}
+      const{parlays,perParlay,totalStake}=buildParlays(picks,bankroll,maxP);
+      const portEV=parlays.reduce((a,p)=>a+(p.ev*perParlay),0);
+      const highCount=picks.filter(p=>p.prob>=0.65).length;
+      let h=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem">
+        ${[['Picks',picks.length],['High conf',highCount],['Stake','$'+fmt(totalStake)],['EV',(portEV>=0?'+':'')+' $'+fmt(portEV)]].map(([l,v],i)=>`
+        <div style="background:var(--bg);border-radius:8px;padding:.85rem 1rem">
+          <div style="font-size:.7rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">${l}</div>
+          <div style="font-size:1.3rem;font-weight:600;color:${i===3?(portEV>=0?'var(--accent)':'#ef4444'):'var(--ink)'}">${v}</div>
+        </div>`).join('')}
+      </div>`;
+      parlays.forEach((p,i)=>{
+        const evD=p.ev*perParlay;
+        h+=`<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.75rem">
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem">
+            <span style="font-size:.8rem;font-weight:600;color:var(--ink3)">Parlay ${i+1}${p.twoLeg?' <span style="font-size:.65rem;padding:1px 5px;border-radius:3px;background:#f8d7da;color:#721c24">2-leg</span>':''}</span>
+            <span style="font-weight:700;color:${evD>=0?'var(--accent)':'#ef4444'}">${evD>=0?'+':''}$${fmt(evD)} EV</span>
+          </div>
+          <div style="font-size:.78rem;color:var(--ink3);margin-bottom:.4rem">Win: <strong>${pct(p.winProb)}</strong> · Odds: <strong>${fmt(p.decOdds)}x</strong> · Stake: <strong>$${fmt(perParlay)}</strong> · Payout: <strong>$${fmt(p.decOdds*perParlay)}</strong></div>
+          ${p.combo.map(leg=>`<div style="display:flex;justify-content:space-between;padding:.35rem 0;border-top:1px solid var(--line)">
+            <div style="font-size:.83rem;color:var(--ink)">${leg.pick} <span style="font-size:.62rem;padding:1px 5px;border-radius:3px;background:${leg.tier==='high'?'#d4edda':'#fff3cd'};color:${leg.tier==='high'?'#155724':'#856404'}">${leg.tier}</span><span style="font-size:.72rem;color:var(--ink3);margin-left:6px">${SPORT_LABELS[leg.sport]||leg.sport}</span></div>
+            <div style="font-size:.83rem;font-weight:600">${pct(leg.prob)}</div>
+          </div>`).join('')}
+        </div>`;
+      });
+      h+=`<div style="font-size:.72rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin:1.25rem 0 .6rem">Singles — ¼ Kelly sizing</div>
+      <table style="width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.83rem">
+        <thead><tr style="background:var(--bg);border-bottom:1px solid var(--line)">
+          <th style="padding:.5rem .85rem;text-align:left;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Pick</th>
+          <th style="padding:.5rem .85rem;text-align:left;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Sport</th>
+          <th style="padding:.5rem .85rem;text-align:right;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Model</th>
+          <th style="padding:.5rem .85rem;text-align:right;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Edge</th>
+          <th style="padding:.5rem .85rem;text-align:right;font-size:.7rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Stake</th>
+        </tr></thead><tbody>
+        ${picks.filter(p=>p.prob>=0.60).slice(0,12).map(p=>{
+          const stake=kellyStake(p.prob,p.mkt,bankroll);
+          const e=p.edge||0;
+          return `<tr style="border-bottom:1px solid var(--line)">
+            <td style="padding:.5rem .85rem">${p.pick} <span style="font-size:.62rem;padding:1px 5px;border-radius:3px;background:${p.tier==='high'?'#d4edda':'#fff3cd'};color:${p.tier==='high'?'#155724':'#856404'}">${p.tier}</span></td>
+            <td style="padding:.5rem .85rem;color:var(--ink3)">${SPORT_LABELS[p.sport]||p.sport}</td>
+            <td style="padding:.5rem .85rem;text-align:right">${pct(p.prob)}</td>
+            <td style="padding:.5rem .85rem;text-align:right;color:${e>=0?'var(--accent)':'#ef4444'}">${e>=0?'+':''}${typeof e==='number'?e.toFixed(1):'—'}pp</td>
+            <td style="padding:.5rem .85rem;text-align:right;font-weight:700">$${fmt(stake)}</td>
+          </tr>`;
+        }).join('')}
+        </tbody></table>`;
+      plBody.innerHTML=h;
+    });
+  };
+  rebuildParlay();
 }
 
 </script>
