@@ -1967,7 +1967,7 @@ function initMarkets(){
     for(const m of CURATED_MARKETS){
       const price = marketPrices[m.id];
       const yesPrice = price ? `${Math.round(price.yes_bid * 100)}¢` : '—';
-      const impliedProb = price ? `${Math.round(price.yes_bid * 100)}%` : 'Loading...';
+      const impliedProb = price ? `${Math.round(price.yes_bid * 100)}%` : (m.last_known_price ? `~${Math.round(m.last_known_price * 100)}%` : '—');
       const deadlineFmt = new Date(m.deadline).toLocaleDateString('en-US',{month:'short',day:'numeric'});
       h += `<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem;display:flex;flex-direction:column;gap:.5rem">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
