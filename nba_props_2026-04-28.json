@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-04-28T13:43:24.212808Z",
+  "generated_at": "2026-04-28T13:44:15.163733Z",
   "data_date": "2026-04-28",
   "status": "ACTIVE",
   "picks": [
@@ -172,8 +172,8 @@
       "projection": 1.8,
       "direction": "under",
       "model_prob": 0.7248,
-      "market_prob": 0.4922,
-      "edge_pp": 23.26,
+      "market_prob": 0.4973,
+      "edge_pp": 22.75,
       "games_used": 5,
       "confidence_tier": "high",
       "matchup": "Portland Trail Blazers @ San Antonio Spurs",
