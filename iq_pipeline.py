@@ -2457,7 +2457,6 @@ SPORT_RUNNERS = {
     "mlb_props":   run_mlb_props,
     "nba_props":   run_nba_props,
     "golf_masters": run_golf_masters,
-    "kalshi_markets": run_kalshi_markets,
     "futures":       run_futures,
 }
 def main():
