@@ -163,3 +163,66 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Jalen Suggs PTS UNDER 13.5,under,0.6403,0.5234,11.69,medium,WIN,5.0,13.5,ESPN
 2026-04-27,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane PTS OVER 19.5,over,0.6007,0.4948,10.59,medium,WIN,22.0,19.5,ESPN
 2026-04-27,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes PTS UNDER 6.5,under,0.6172,0.5202,9.7,medium,PENDING,,6.5,MANUAL
+2026-04-28,mlb,Detroit Tigers @ Atlanta Braves,Atlanta Braves,home,0.6487,0.5328,11.59,medium,WIN,2-5,,ESPN
+2026-04-28,ncaa_baseball,West Georgia Wolves @ Tennessee Volunteers,Tennessee Volunteers,home,0.785,,,high,WIN,0-13,,ESPN
+2026-04-28,ncaa_baseball,Sam Houston Bearkats @ Texas Longhorns,Texas Longhorns,home,0.7392,,,high,WIN,14-15,,ESPN
+2026-04-28,ncaa_baseball,Tarleton State Texans @ Texas A&M Aggies,Texas A&M Aggies,home,0.7294,,,high,WIN,7-9,,ESPN
+2026-04-28,ncaa_baseball,Eastern Kentucky Colonels @ Northern Kentucky Norse,Northern Kentucky Norse,home,0.7139,,,high,LOSS,16-6,,ESPN
+2026-04-28,ncaa_baseball,Troy Trojans @ Georgia Bulldogs,Georgia Bulldogs,home,0.7043,0.7634,-5.91,high,WIN,1-11,,ESPN
+2026-04-28,ncaa_baseball,Gonzaga Bulldogs @ Oregon Ducks,Oregon Ducks,home,0.6944,0.6287,6.57,high,WIN,3-4,,ESPN
+2026-04-28,ncaa_baseball,Charlotte 49ers @ Liberty Flames,Liberty Flames,home,0.6908,0.669,2.18,high,WIN,2-12,,ESPN
+2026-04-28,ncaa_baseball,North Carolina A&T Aggies @ Winthrop Eagles,Winthrop Eagles,home,0.6893,,,high,LOSS,9-3,,ESPN
+2026-04-28,ncaa_baseball,Georgia Tech Yellow Jackets @ Kennesaw State Owls,Georgia Tech Yellow Jackets,away,0.6857,,,high,WIN,10-7,,ESPN
+2026-04-28,ncaa_baseball,Delaware Blue Hens @ Delaware State Hornets,Delaware State Hornets,home,0.6704,,,high,LOSS,7-5,,ESPN
+2026-04-28,ncaa_baseball,Jacksonville St Gamecocks @ Samford Bulldogs,Jacksonville St Gamecocks,away,0.6529,0.6635,-1.06,high,PENDING,,,MANUAL
+2026-04-28,ncaa_baseball,High Point Panthers @ Campbell Fighting Camels,Campbell Fighting Camels,home,0.6503,0.5409,10.94,high,WIN,4-5,,ESPN
+2026-04-28,ncaa_baseball,Florida International Panthers @ Bethune-Cookman Wildcats,Bethune-Cookman Wildcats,home,0.6503,,,high,PENDING,,,MANUAL
+2026-04-28,ncaa_baseball,Incarnate Word Cardinals @ UTSA Roadrunners,UTSA Roadrunners,home,0.6503,,,high,WIN,10-22,,ESPN
+2026-04-28,ncaa_baseball,Kansas St Wildcats @ Nebraska Cornhuskers,Nebraska Cornhuskers,home,0.6453,0.5995,4.58,medium,WIN,6-7,,ESPN
+2026-04-28,ncaa_baseball,Indiana Hoosiers @ Louisville Cardinals,Louisville Cardinals,home,0.6404,0.669,-2.86,medium,LOSS,10-6,,ESPN
+2026-04-28,ncaa_baseball,UCLA Bruins @ UC Santa Barbara Gauchos,UCLA Bruins,away,0.6368,0.7234,-8.66,medium,WIN,15-3,,ESPN
+2026-04-28,ncaa_baseball,George Mason Patriots @ Virginia Cavaliers,Virginia Cavaliers,home,0.6329,,,medium,WIN,1-5,,ESPN
+2026-04-28,ncaa_baseball,Northwestern State Demons @ Arkansas Razorbacks,Arkansas Razorbacks,home,0.6329,,,medium,PENDING,,,MANUAL
+2026-04-28,ncaa_baseball,Coastal Carolina Chanticleers @ North Carolina Tar Heels,North Carolina Tar Heels,home,0.6267,0.6635,-3.68,medium,LOSS,12-2,,ESPN
+2026-04-28,ncaa_baseball,Florida Atlantic Owls @ Florida Gulf Coast Eagles,Florida Gulf Coast Eagles,home,0.6218,,,medium,LOSS,8-1,,ESPN
+2026-04-28,ncaa_baseball,Memphis Tigers @ Murray State Racers,Murray State Racers,home,0.6146,,,medium,WIN,5-9,,ESPN
+2026-04-28,ncaa_baseball,Illinois State Redbirds @ Iowa Hawkeyes,Iowa Hawkeyes,home,0.6146,,,medium,LOSS,13-6,,ESPN
+2026-04-28,ncaa_baseball,Texas A&M-Corpus Christi Islanders @ Texas State Bobcats,Texas State Bobcats,home,0.6125,,,medium,LOSS,7-2,,ESPN
+2026-04-28,ncaa_baseball,North Dakota State Bison @ Creighton Bluejays,Creighton Bluejays,home,0.6082,,,medium,LOSS,13-6,,ESPN
+2026-04-28,ncaa_baseball,Little Rock Trojans @ Arkansas State Red Wolves,Arkansas State Red Wolves,home,0.6062,,,medium,PENDING,,,MANUAL
+2026-04-28,ncaa_baseball,St. Thomas-Minnesota Tommies @ Minnesota Golden Gophers,Minnesota Golden Gophers,home,0.6062,,,medium,WIN,1-12,,ESPN
+2026-04-28,ncaa_baseball,Stony Brook Seawolves @ Fairfield Stags,Fairfield Stags,home,0.6015,,,medium,LOSS,12-10,,ESPN
+2026-04-28,mlb_props,Boston Red Sox @ Toronto Blue Jays,Trey Yesavage UNDER 5.5K,under,0.6856,0.4877,19.79,high,WIN,3K,5.5,MLB API
+2026-04-28,mlb_props,Chicago Cubs @ San Diego Padres,Edward Cabrera UNDER 5.5K,under,0.703,0.5088,19.42,high,LOSS,7K,5.5,MLB API
+2026-04-28,mlb_props,Los Angeles Angels @ Chicago White Sox,José Soriano OVER 5.5K,over,0.7481,0.5604,18.77,high,WIN,6K,5.5,MLB API
+2026-04-28,mlb_props,St. Louis Cardinals @ Pittsburgh Pirates,Kyle Leahy UNDER 3.5K,under,0.6001,0.423,17.71,medium,LOSS,7K,3.5,MLB API
+2026-04-28,mlb_props,San Francisco Giants @ Philadelphia Phillies,Tyler Mahle OVER 4.5K,over,0.6103,0.4986,11.17,medium,LOSS,3K,4.5,MLB API
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Toumani Camara AST UNDER 1.5,under,0.8288,0.4248,40.4,high,LOSS,2.0,1.5,ESPN
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe PTS OVER 12.5,over,0.8216,0.4952,32.64,high,LOSS,10.0,12.5,ESPN
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Deni Avdija PTS OVER 22.5,over,0.8156,0.4966,31.9,high,LOSS,22.0,22.5,ESPN
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe REB OVER 5.5,over,0.7869,0.4942,29.27,high,WIN,7.0,5.5,ESPN
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe AST UNDER 3.5,under,0.7936,0.5125,28.12,high,WIN,3.0,3.5,ESPN
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Scoot Henderson AST UNDER 2.5,under,0.7675,0.5077,25.98,high,PENDING,,2.5,MANUAL
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George REB UNDER 4.5,under,0.7131,0.4594,25.37,high,LOSS,9.0,4.5,ESPN
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,Tyrese Maxey REB UNDER 3.5,under,0.7554,0.5147,24.06,high,LOSS,10.0,3.5,ESPN
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Jalen Suggs PTS UNDER 13.5,under,0.7276,0.4869,24.06,high,PENDING,,13.5,MANUAL
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Jerami Grant REB UNDER 2.5,under,0.7248,0.4922,23.26,high,WIN,1.0,2.5,ESPN
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Anthony Black REB OVER 2.5,over,0.7018,0.4825,21.93,high,PENDING,,2.5,MANUAL
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Scoot Henderson PTS OVER 13.5,over,0.7247,0.51,21.47,high,LOSS,5.0,13.5,ESPN
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes REB OVER 2.5,over,0.6783,0.4857,19.26,high,LOSS,2.0,2.5,ESPN
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Toumani Camara PTS UNDER 8.5,under,0.6808,0.4891,19.16,high,WIN,7.0,8.5,ESPN
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Desmond Bane PTS OVER 18.5,over,0.6884,0.4976,19.09,high,PENDING,,18.5,MANUAL
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Donovan Clingan REB OVER 7.5,over,0.6932,0.5106,18.26,high,LOSS,5.0,7.5,ESPN
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,Tyrese Maxey PTS OVER 24.5,over,0.6724,0.4917,18.07,high,WIN,25.0,24.5,ESPN
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Jrue Holiday PTS OVER 16.5,over,0.6757,0.4963,17.94,high,LOSS,8.0,16.5,ESPN
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Franz Wagner PTS UNDER 17.5,under,0.6664,0.4992,16.73,high,PENDING,,17.5,MANUAL
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Jalen Suggs AST UNDER 4.5,under,0.6309,0.4706,16.03,medium,PENDING,,4.5,MANUAL
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Desmond Bane AST UNDER 2.5,under,0.6928,0.5441,14.88,high,PENDING,,2.5,MANUAL
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Paolo Banchero AST OVER 4.5,over,0.6721,0.5276,14.45,high,PENDING,,4.5,MANUAL
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Scoot Henderson REB UNDER 2.5,under,0.6829,0.5395,14.33,high,WIN,2.0,2.5,ESPN
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Anthony Black PTS UNDER 8.5,under,0.6637,0.5236,14.01,high,PENDING,,8.5,MANUAL
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George PTS OVER 15.5,over,0.6394,0.5048,13.46,medium,WIN,16.0,15.5,ESPN
+2026-04-28,nba_props,Portland Trail Blazers @ San Antonio Spurs,Jrue Holiday AST OVER 5.5,over,0.6603,0.5432,11.72,high,WIN,7.0,5.5,ESPN
+2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes PTS UNDER 6.5,under,0.6172,0.5079,10.93,medium,LOSS,18.0,6.5,ESPN
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Desmond Bane REB OVER 4.5,over,0.6016,0.4948,10.68,medium,PENDING,,4.5,MANUAL
+2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Franz Wagner REB OVER 4.5,over,0.6385,0.5645,7.4,medium,PENDING,,4.5,MANUAL
