@@ -297,7 +297,8 @@ footer{border-top:2px solid var(--ink);padding:.85rem 2rem;display:flex;align-it
 </div>
 
 <div id="panel-futures" style="display:none;padding:2rem 1.5rem;max-width:1200px;margin:0 auto">
-    <div id="masters-section"></div><div id="futures-section"></div></div>
+    <div id="derby-section" style="margin-bottom:2rem"></div>
+  <div id="masters-section"></div><div id="futures-section"></div></div>
 <div id="panel-splash" style="display:none;padding:2rem 1.5rem;max-width:1100px;margin:0 auto"></div>
 <div id="panel-markets" style="display:none;padding:2rem 1.5rem;max-width:1000px;margin:0 auto">
   <div id="markets-root"></div>
@@ -821,6 +822,7 @@ async function init(){
 
   // Load Masters golf picks
   try {
+    loadDerby();
     const gr = await fetch('golf_masters_picks.json?t=' + Date.now());
     if(gr.ok){
       const gd = await gr.json();
@@ -2299,6 +2301,98 @@ function initMarkets(){
   loadPrices().then(()=>renderAll());
   // Refresh prices every 5 minutes
   setInterval(()=>loadPrices().then(()=>{ if(activeView==='board') renderBoard(); }), 300000);
+}
+
+
+// ── KENTUCKY DERBY 2026 ───────────────────────────────────────
+async function loadDerby(){
+  try{
+    const r=await fetch('kentucky_derby_2026.json?t='+Date.now());
+    if(!r.ok) return;
+    const d=await r.json();
+    renderDerby(d);
+  }catch(e){ console.log('Derby error:',e); }
+}
+
+function renderDerby(d){
+  const el=document.getElementById('derby-section');
+  if(!el) return;
+  const beyer100=['Further Ado','Commandment','The Puma','So Happy','Chief Wallabee'];
+  const recStyle={
+    WIN:'background:#d4edda;color:#155724',
+    VALUE:'background:#cce5ff;color:#004085',
+    HOLD:'background:#e2e3e5;color:#383d41',
+    PLACE:'background:#d4edda;color:#155724',
+    FADE:'background:#f8d7da;color:#721c24',
+    PASS:'background:#f8f9fa;color:#666',
+    LONGSHOT:'background:#fff3cd;color:#856404'
+  };
+
+  let h=`<div style="font-family:var(--M);font-size:.65rem;color:var(--ink3);letter-spacing:.08em;margin-bottom:1rem">
+    🏇 ${d.tournament.toUpperCase()} · ${d.race_date} · ${d.post_time} · ${d.distance}
+  </div>`;
+
+  // Top picks
+  h+=`<div style="font-size:.72rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem">Model Top Picks</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.5rem">
+  ${d.top_picks.map(p=>`<div style="background:var(--card);border:1.5px solid var(--accent);border-radius:8px;padding:.85rem 1rem">
+    <div style="display:flex;justify-content:space-between;margin-bottom:.25rem">
+      <span style="font-size:.68rem;color:var(--ink3)">Post ${p.post} · BSF ${p.beyer||'N/A'}</span>
+      <span style="font-size:.72rem;font-weight:700;color:var(--accent)">${p.odds}</span>
+    </div>
+    <div style="font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.2rem">${p.horse}</div>
+    <div style="font-size:.7rem;color:var(--ink3);margin-bottom:.35rem;line-height:1.4">${p.note}</div>
+    <span style="font-size:.65rem;padding:2px 7px;border-radius:3px;font-weight:700;${recStyle[p.rec]||''}">${p.rec}</span>
+  </div>`).join('')}
+  </div>`;
+
+  // Strong fades
+  h+=`<div style="font-size:.72rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Strong Fades</div>
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem">
+  ${d.strong_fades.map(p=>`<div style="background:#fff5f5;border:1px solid #f8d7da;border-radius:8px;padding:.6rem .9rem;flex:1;min-width:180px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:.2rem">
+      <span style="font-size:.88rem;font-weight:700;color:#721c24">${p.horse}</span>
+      <span style="font-size:.75rem;color:var(--ink3)">${p.odds}</span>
+    </div>
+    <div style="font-size:.7rem;color:var(--ink3)">${p.reason}</div>
+  </div>`).join('')}
+  </div>`;
+
+  // Full field table
+  const sorted=[...d.field].sort((a,b)=>b.model_prob-a.model_prob);
+  h+=`<div style="font-size:.72rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Full Field — Ranked by Model</div>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:.75rem">
+  <table style="width:100%;border-collapse:collapse;font-size:.78rem">
+    <thead><tr style="background:var(--bg);border-bottom:1px solid var(--line)">
+      <th style="padding:.5rem .6rem;text-align:left;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Post</th>
+      <th style="padding:.5rem .6rem;text-align:left;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Horse</th>
+      <th style="padding:.5rem .6rem;text-align:left;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Trainer / Jockey</th>
+      <th style="padding:.5rem .6rem;text-align:right;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">ML</th>
+      <th style="padding:.5rem .6rem;text-align:right;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Beyer</th>
+      <th style="padding:.5rem .6rem;text-align:right;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Model</th>
+      <th style="padding:.5rem .6rem;text-align:right;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Edge</th>
+      <th style="padding:.5rem .6rem;text-align:center;font-size:.65rem;color:var(--ink3);font-weight:600;text-transform:uppercase">Rec</th>
+    </tr></thead>
+    <tbody>
+    ${sorted.map((h2,i)=>`<tr style="border-bottom:1px solid var(--line);${i<2?'background:rgba(232,93,4,0.04)':''}">
+      <td style="padding:.4rem .6rem;color:var(--ink3)">${h2.post}</td>
+      <td style="padding:.4rem .6rem;font-weight:${i<3?'700':'400'};color:var(--ink)">${h2.horse}</td>
+      <td style="padding:.4rem .6rem;color:var(--ink3);font-size:.7rem">${h2.trainer}<br><span style="color:var(--ink2)">${h2.jockey}</span></td>
+      <td style="padding:.4rem .6rem;text-align:right;color:var(--ink3)">${h2.ml_odds}</td>
+      <td style="padding:.4rem .6rem;text-align:right;font-weight:600;color:${h2.best_beyer>=100?'var(--accent)':h2.best_beyer>=95?'var(--ink)':'var(--ink3)'}">${h2.best_beyer||'—'}</td>
+      <td style="padding:.4rem .6rem;text-align:right;font-weight:600;color:var(--ink)">${(h2.model_prob*100).toFixed(1)}%</td>
+      <td style="padding:.4rem .6rem;text-align:right;color:${h2.edge_pp>1?'var(--accent)':h2.edge_pp<-3?'#ef4444':'var(--ink3)'}">${h2.edge_pp>0?'+':''}${h2.edge_pp.toFixed(1)}pp</td>
+      <td style="padding:.4rem .6rem;text-align:center"><span style="font-size:.63rem;padding:2px 5px;border-radius:3px;font-weight:700;${recStyle[h2.rec]||''}">${h2.rec}</span></td>
+    </tr>`).join('')}
+    </tbody>
+  </table></div>
+  <div style="font-size:.68rem;color:var(--ink3);line-height:1.6">
+    <strong>Key filter:</strong> ${d.key_filter}<br>
+    <strong>Beyer-qualified (100+):</strong> ${d.beyer_qualified.join(' · ')}<br>
+    <strong>Sources:</strong> ${d.data_sources.join(', ')}
+  </div>`;
+
+  el.innerHTML=h;
 }
 
 </script>
