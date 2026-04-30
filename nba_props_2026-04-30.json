@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-04-30T11:56:38.823149Z",
+  "generated_at": "2026-04-30T11:57:25.242190Z",
   "data_date": "2026-04-30",
   "status": "ACTIVE",
   "picks": [
@@ -1190,22 +1190,6 @@
       "result": null
     },
     {
-      "player": "Quentin Grimes",
-      "stat": "REB",
-      "line": 2.5,
-      "projection": 3.1,
-      "direction": "over",
-      "model_prob": 0.6039,
-      "market_prob": 0.4691,
-      "edge_pp": 13.48,
-      "games_used": 5,
-      "confidence_tier": "medium",
-      "matchup": "Boston Celtics @ Philadelphia 76ers",
-      "game_time_utc": "2026-05-01T00:10:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
       "player": "VJ Edgecombe",
       "stat": "REB",
       "line": 5.5,
@@ -1314,6 +1298,22 @@
       "confidence_tier": "medium",
       "matchup": "New York Knicks @ Atlanta Hawks",
       "game_time_utc": "2026-04-30T23:10:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "player": "Quentin Grimes",
+      "stat": "REB",
+      "line": 2.5,
+      "projection": 3.1,
+      "direction": "over",
+      "model_prob": 0.6039,
+      "market_prob": 0.4786,
+      "edge_pp": 12.53,
+      "games_used": 5,
+      "confidence_tier": "medium",
+      "matchup": "Boston Celtics @ Philadelphia 76ers",
+      "game_time_utc": "2026-05-01T00:10:00Z",
       "outcome": null,
       "result": null
     },
