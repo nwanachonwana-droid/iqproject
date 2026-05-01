@@ -279,3 +279,34 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Dyson Daniels REB OVER 6.5,over,0.6341,0.5076,12.65,medium,PENDING,,6.5,MANUAL
 2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Franz Wagner REB OVER 4.5,over,0.6385,0.5126,12.59,medium,PENDING,,4.5,MANUAL
 2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Desmond Bane REB OVER 4.5,over,0.6016,0.5162,8.54,medium,WIN,5.0,4.5,ESPN
+2026-04-30,mlb,Detroit Tigers @ Atlanta Braves,Atlanta Braves,home,0.6614,0.5242,13.72,high,LOSS,5-2,,ESPN
+2026-04-30,mlb,Arizona Diamondbacks @ Milwaukee Brewers,Milwaukee Brewers,home,0.6167,0.5328,8.39,medium,WIN,1-13,,ESPN
+2026-04-30,mlb_props,Colorado Rockies @ Cincinnati Reds,Michael Lorenzen UNDER 4.5K,under,0.7394,0.5594,18.0,high,LOSS,5K,4.5,MLB API
+2026-04-30,mlb_props,Detroit Tigers @ Atlanta Braves,Framber Valdez UNDER 4.5K,under,0.6398,0.4816,15.82,medium,LOSS,8K,4.5,MLB API
+2026-04-30,mlb_props,Toronto Blue Jays @ Minnesota Twins,Kevin Gausman OVER 5.5K,over,0.6498,0.5033,14.65,medium,LOSS,2K,5.5,MLB API
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Mikal Bridges AST UNDER 2.5,under,0.8292,0.5399,28.93,high,LOSS,3.0,2.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,C.J. McCollum PTS OVER 18.5,over,0.7755,0.4985,27.7,high,PENDING,,18.5,MANUAL
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,OG Anunoby PTS OVER 16.5,over,0.7652,0.4927,27.25,high,WIN,29.0,16.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,OG Anunoby AST UNDER 1.5,under,0.7482,0.4817,26.65,high,LOSS,2.0,1.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,C.J. McCollum AST UNDER 3.5,under,0.7666,0.5005,26.6,high,PENDING,,3.5,MANUAL
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Mikal Bridges REB UNDER 2.5,under,0.8265,0.567,25.95,high,LOSS,5.0,2.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Dyson Daniels PTS UNDER 9.5,under,0.7684,0.5118,25.67,high,WIN,3.0,9.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jalen Johnson REB UNDER 9.5,under,0.7672,0.5205,24.67,high,WIN,8.0,9.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Josh Hart REB OVER 8.5,over,0.7264,0.4889,23.74,high,LOSS,5.0,8.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Nickeil Alexander-Walker PTS UNDER 16.5,under,0.7439,0.5084,23.55,high,WIN,11.0,16.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Josh Hart PTS UNDER 11.5,under,0.735,0.5093,22.57,high,LOSS,14.0,11.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Miles McBride PTS UNDER 7.5,under,0.6933,0.4928,20.06,high,WIN,3.0,7.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Onyeka Okongwu AST UNDER 2.5,under,0.7525,0.5539,19.87,high,LOSS,5.0,2.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jonathan Kuminga REB UNDER 4.5,under,0.6958,0.498,19.78,high,WIN,2.0,4.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Karl-Anthony Towns AST OVER 3.5,over,0.7201,0.5239,19.62,high,WIN,10.0,3.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Onyeka Okongwu PTS OVER 12.5,over,0.6884,0.493,19.54,high,LOSS,4.0,12.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,OG Anunoby REB OVER 7.5,over,0.6579,0.4844,17.35,high,LOSS,7.0,7.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jalen Johnson AST UNDER 5.5,under,0.6544,0.4827,17.17,high,LOSS,6.0,5.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Karl-Anthony Towns REB UNDER 12.5,under,0.6863,0.5179,16.84,high,WIN,11.0,12.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jonathan Kuminga PTS OVER 12.5,over,0.6511,0.4926,15.86,high,LOSS,11.0,12.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Karl-Anthony Towns PTS OVER 18.5,over,0.6532,0.4947,15.85,high,LOSS,12.0,18.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jordan Clarkson PTS OVER 6.5,over,0.6564,0.4997,15.68,high,WIN,7.0,6.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jalen Brunson REB UNDER 3.5,under,0.6978,0.5455,15.23,high,WIN,2.0,3.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Mikal Bridges PTS UNDER 8.5,under,0.6617,0.512,14.97,high,LOSS,24.0,8.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jalen Brunson AST UNDER 6.5,under,0.6256,0.4842,14.14,medium,LOSS,8.0,6.5,ESPN
+2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Dyson Daniels REB OVER 6.5,over,0.6341,0.5071,12.71,medium,PENDING,,6.5,MANUAL

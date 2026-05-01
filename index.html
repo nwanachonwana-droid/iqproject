@@ -543,7 +543,7 @@ function renderPicks(){
       _is_prop:true,
       sport_id:p.sport||'props',
       home_team:p.game||p.matchup||'',away_team:'',
-      home:p.game||p.matchup||'',away:'',
+      home:(p.game||p.matchup||'').replace(/^@\s*/,''),away:'',
       pick:p.pick||(p.player+' '+(p.stat||p.market||'')+' '+(p.pick_side||p.direction||'')+(p.line?' '+p.line:'')),
       pick_side:'home',
       model_prob_home:p.model_prob||0.5,
