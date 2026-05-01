@@ -965,7 +965,7 @@ async function splashFetch(sport){
         own:mto(p.pick_side==='home'?p.market_prob_home:p.market_prob_away),
         edge:p.edge_pp||0, tier:p.confidence_tier||'low',
         matchup:(p.away_team||'')+' @ '+(p.home_team||''),
-        home:p.home_team||'', away:p.away_team||''
+        home:'', away:''
       }));
     }
   }catch(e){}
