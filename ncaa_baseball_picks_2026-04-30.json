@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "sport": "ncaa_baseball",
+  "generated_at": "2026-04-30T11:57:05.907939Z",
+  "data_date": "2026-04-30",
+  "model_version": "v1.0",
+  "status": "PROVEN",
+  "picks": [
+    {
+      "pick_id": "ncaabb-2026-04-30-f6ca10546d5d28d6fe45782d87605aab",
+      "game_time_utc": "2026-04-30T23:00:00Z",
+      "home_team": "Alabama Crimson Tide",
+      "away_team": "Vanderbilt Commodores",
+      "pick": "Alabama Crimson Tide",
+      "pick_side": "home",
+      "model_prob_home": 0.5773,
+      "model_prob_away": 0.4227,
+      "market_prob_home": 0.5305,
+      "market_prob_away": 0.4695,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": 4.68,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-05-01T12:12:47.898768Z"
+    },
+    {
+      "pick_id": "ncaabb-2026-04-30-32b3b2f42948e35453ffa1162fa2abb0",
+      "game_time_utc": "2026-04-30T22:00:00Z",
+      "home_team": "Wake Forest Demon Deacons",
+      "away_team": "Louisville Cardinals",
+      "pick": "Wake Forest Demon Deacons",
+      "pick_side": "home",
+      "model_prob_home": 0.5751,
+      "model_prob_away": 0.4249,
+      "market_prob_home": 0.6579,
+      "market_prob_away": 0.3421,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -8.28,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-05-01T12:12:47.899279Z"
+    },
+    {
+      "pick_id": "ncaabb-2026-04-30-401856354",
+      "game_time_utc": "2026-04-30T04:30Z",
+      "home_team": "Hawai'i Rainbow Warriors",
+      "away_team": "Hawai\u02bbi Hilo Vulcans",
+      "pick": "Hawai'i Rainbow Warriors",
+      "pick_side": "home",
+      "model_prob_home": 0.5554,
+      "model_prob_away": 0.4446,
+      "market_prob_home": null,
+      "market_prob_away": null,
+      "market_line_home": null,
+      "market_source": null,
+      "edge_pp": null,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-05-01T12:12:47.899305Z"
+    }
+  ],
+  "summary": {
+    "total_picks": 3,
+    "high_confidence": 0,
+    "avg_edge_pp": -1.2
+  }
+}

@@ -226,3 +226,56 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-04-28,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes PTS UNDER 6.5,under,0.6172,0.5079,10.93,medium,LOSS,18.0,6.5,ESPN
 2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Desmond Bane REB OVER 4.5,over,0.6016,0.4948,10.68,medium,PENDING,,4.5,MANUAL
 2026-04-28,nba_props,Orlando Magic @ Detroit Pistons,Franz Wagner REB OVER 4.5,over,0.6385,0.5645,7.4,medium,PENDING,,4.5,MANUAL
+2026-04-29,mlb,Detroit Tigers @ Atlanta Braves,Atlanta Braves,home,0.659,0.4329,22.61,high,WIN,3-4,,ESPN
+2026-04-29,mlb,Arizona Diamondbacks @ Milwaukee Brewers,Milwaukee Brewers,home,0.6338,0.5242,10.96,medium,LOSS,6-2,,ESPN
+2026-04-29,ncaa_baseball,Queens University Royals @ North Carolina Tar Heels,North Carolina Tar Heels,home,0.8402,,,high,PENDING,,,MANUAL
+2026-04-29,ncaa_baseball,West Virginia Mountaineers @ Penn State Nittany Lions,West Virginia Mountaineers,away,0.6968,0.8117,-11.49,high,PENDING,,,MANUAL
+2026-04-29,ncaa_baseball,Georgia Southern Eagles @ Mercer Bears,Mercer Bears,home,0.6704,0.8189,-14.85,high,WIN,9-10,,ESPN
+2026-04-29,ncaa_baseball,Stetson Hatters @ UCF Knights,UCF Knights,home,0.6664,,,high,WIN,5-6,,ESPN
+2026-04-29,ncaa_baseball,Kent State Golden Flashes @ Pittsburgh Panthers,Pittsburgh Panthers,home,0.6445,0.6506,-0.61,medium,LOSS,13-5,,ESPN
+2026-04-29,ncaa_baseball,Norfolk State Spartans @ Virginia Cavaliers,Virginia Cavaliers,home,0.6386,,,medium,PENDING,,,MANUAL
+2026-04-29,ncaa_baseball,Southern Indiana Screaming Eagles @ Purdue Boilermakers,Purdue Boilermakers,home,0.6356,,,medium,WIN,1-5,,ESPN
+2026-04-29,ncaa_baseball,UT Arlington Mavericks @ TCU Horned Frogs,TCU Horned Frogs,home,0.6356,,,medium,WIN,1-12,,ESPN
+2026-04-29,ncaa_baseball,Northwestern St Demons @ Arkansas Razorbacks,Arkansas Razorbacks,home,0.6329,0.7909,-15.8,medium,WIN,2-5,,ESPN
+2026-04-29,mlb_props,Colorado Rockies @ Cincinnati Reds,Brandon Williamson UNDER 4.5K,under,0.7755,0.5773,19.82,high,WIN,4K,4.5,MLB API
+2026-04-29,mlb_props,Miami Marlins @ Los Angeles Dodgers,Sandy Alcantara UNDER 4.5K,under,0.6294,0.4662,16.32,medium,WIN,4K,4.5,MLB API
+2026-04-29,mlb_props,Kansas City Royals @ Athletics,Luis Severino OVER 4.5K,over,0.6454,0.4875,15.79,medium,WIN,8K,4.5,MLB API
+2026-04-29,mlb_props,Arizona Diamondbacks @ Milwaukee Brewers,Eduardo Rodriguez UNDER 4.5K,under,0.6871,0.5513,13.58,high,WIN,4K,4.5,MLB API
+2026-04-29,mlb_props,Tampa Bay Rays @ Cleveland Guardians,Drew Rasmussen OVER 4.5K,over,0.606,0.4747,13.13,medium,WIN,6K,4.5,MLB API
+2026-04-29,mlb_props,Seattle Mariners @ Minnesota Twins,George Kirby UNDER 5.5K,under,0.6752,0.547,12.82,high,WIN,5K,5.5,MLB API
+2026-04-29,mlb_props,Seattle Mariners @ Minnesota Twins,Taj Bradley OVER 5.5K,over,0.644,0.5666,7.74,medium,WIN,7K,5.5,MLB API
+2026-04-29,mlb_props,St. Louis Cardinals @ Pittsburgh Pirates,Andre Pallante OVER 3.5K,over,0.6267,0.5723,5.44,medium,WIN,6K,3.5,MLB API
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,OG Anunoby PTS OVER 15.5,over,0.8324,0.5038,32.87,high,PENDING,,15.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Mikal Bridges REB UNDER 2.5,under,0.8265,0.5515,27.5,high,PENDING,,2.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Jalen Johnson REB UNDER 9.5,under,0.7672,0.506,26.12,high,PENDING,,9.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,C.J. McCollum AST UNDER 3.5,under,0.7666,0.5094,25.72,high,PENDING,,3.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,OG Anunoby AST UNDER 1.5,under,0.7482,0.4924,25.58,high,PENDING,,1.5,MANUAL
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Anthony Black PTS UNDER 9.5,under,0.7779,0.5234,25.45,high,LOSS,19.0,9.5,ESPN
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Josh Hart REB OVER 8.5,over,0.7264,0.4746,25.18,high,PENDING,,8.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Nickeil Alexander-Walker PTS UNDER 16.5,under,0.7439,0.5071,23.68,high,PENDING,,16.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,C.J. McCollum PTS OVER 19.5,over,0.7033,0.4761,22.71,high,PENDING,,19.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Karl-Anthony Towns AST OVER 3.5,over,0.7201,0.4951,22.5,high,PENDING,,3.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Josh Hart PTS UNDER 11.5,under,0.735,0.5188,21.62,high,PENDING,,11.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Jonathan Kuminga REB UNDER 4.5,under,0.6958,0.4829,21.29,high,PENDING,,4.5,MANUAL
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Jalen Suggs PTS UNDER 13.5,under,0.7276,0.5173,21.03,high,WIN,10.0,13.5,ESPN
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Franz Wagner AST OVER 2.5,over,0.7401,0.5341,20.6,high,PENDING,,2.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Onyeka Okongwu AST UNDER 2.5,under,0.7525,0.5513,20.13,high,PENDING,,2.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,OG Anunoby REB OVER 7.5,over,0.6579,0.46,19.79,high,PENDING,,7.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Dyson Daniels AST OVER 4.5,over,0.7455,0.5479,19.77,high,PENDING,,4.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Jalen Johnson AST UNDER 5.5,under,0.6544,0.4628,19.16,high,PENDING,,5.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Onyeka Okongwu PTS OVER 12.5,over,0.6884,0.498,19.04,high,PENDING,,12.5,MANUAL
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Anthony Black REB OVER 2.5,over,0.7018,0.5133,18.85,high,WIN,5.0,2.5,ESPN
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Desmond Bane PTS OVER 18.5,over,0.6884,0.501,18.74,high,LOSS,18.0,18.5,ESPN
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Miles McBride PTS UNDER 7.5,under,0.6933,0.5158,17.75,high,PENDING,,7.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Jalen Brunson REB UNDER 3.5,under,0.6978,0.5209,17.69,high,PENDING,,3.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Karl-Anthony Towns PTS OVER 18.5,over,0.6532,0.4788,17.43,high,PENDING,,18.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Karl-Anthony Towns REB UNDER 12.5,under,0.6863,0.5235,16.28,high,PENDING,,12.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Mikal Bridges PTS UNDER 8.5,under,0.6617,0.5056,15.61,high,PENDING,,8.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Jonathan Kuminga PTS OVER 12.5,over,0.6511,0.5023,14.88,high,PENDING,,12.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Jalen Brunson AST UNDER 6.5,under,0.6256,0.4806,14.49,medium,PENDING,,6.5,MANUAL
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Dyson Daniels PTS UNDER 8.5,under,0.6524,0.5086,14.38,high,PENDING,,8.5,MANUAL
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Jalen Suggs AST UNDER 4.5,under,0.6309,0.4872,14.36,medium,LOSS,5.0,4.5,ESPN
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Paolo Banchero AST OVER 4.5,over,0.6721,0.5367,13.54,high,WIN,7.0,4.5,ESPN
+2026-04-29,nba_props,New York Knicks @ Atlanta Hawks,Dyson Daniels REB OVER 6.5,over,0.6341,0.5076,12.65,medium,PENDING,,6.5,MANUAL
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Franz Wagner REB OVER 4.5,over,0.6385,0.5126,12.59,medium,PENDING,,4.5,MANUAL
+2026-04-29,nba_props,Orlando Magic @ Detroit Pistons,Desmond Bane REB OVER 4.5,over,0.6016,0.5162,8.54,medium,WIN,5.0,4.5,ESPN
