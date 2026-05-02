@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "nba",
   "launch_date": "2026-04-23",
-  "last_updated": "2026-05-01",
+  "last_updated": "2026-05-02",
   "overall": {
-    "wins": 9,
+    "wins": 11,
     "losses": 4,
     "pushes": 0,
-    "total": 13,
-    "hit_rate": 69.23,
-    "roi_flat": 32.16
+    "total": 15,
+    "hit_rate": 73.33,
+    "roi_flat": 39.99
   },
   "by_confidence": {
     "high": {
@@ -23,12 +23,46 @@
       "hit_rate": 0.0
     },
     "low": {
-      "wins": 9,
-      "total": 13,
-      "hit_rate": 69.23
+      "wins": 11,
+      "total": 15,
+      "hit_rate": 73.33
     }
   },
   "recent": [
+    {
+      "home_team": "Toronto Raptors",
+      "away_team": "Cleveland Cavaliers",
+      "pick": "Toronto Raptors",
+      "pick_side": "home",
+      "model_prob_home": 0.5125,
+      "model_prob_away": 0.4875,
+      "market_prob_home": 0.392,
+      "market_prob_away": 0.608,
+      "edge_pp": 12.04,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-01T23:40:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-05-02T10:13:10.041930Z"
+    },
+    {
+      "home_team": "Orlando Magic",
+      "away_team": "Detroit Pistons",
+      "pick": "Detroit Pistons",
+      "pick_side": "away",
+      "model_prob_home": 0.4857,
+      "model_prob_away": 0.5143,
+      "market_prob_home": 0.4028,
+      "market_prob_away": 0.5972,
+      "edge_pp": -8.28,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-01T23:10:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-05-02T10:13:10.041913Z"
+    },
     {
       "home_team": "Atlanta Hawks",
       "away_team": "New York Knicks",

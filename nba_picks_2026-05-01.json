@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "sport": "nba",
+  "generated_at": "2026-05-01T12:13:07.477235Z",
+  "data_date": "2026-05-01",
+  "model_version": "v1.0",
+  "status": "EXPERIMENTAL",
+  "picks": [
+    {
+      "home_team": "Orlando Magic",
+      "away_team": "Detroit Pistons",
+      "pick": "Detroit Pistons",
+      "pick_side": "away",
+      "model_prob_home": 0.4857,
+      "model_prob_away": 0.5143,
+      "market_prob_home": 0.4028,
+      "market_prob_away": 0.5972,
+      "edge_pp": -8.28,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-01T23:10:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-05-02T10:13:10.041913Z"
+    },
+    {
+      "home_team": "Toronto Raptors",
+      "away_team": "Cleveland Cavaliers",
+      "pick": "Toronto Raptors",
+      "pick_side": "home",
+      "model_prob_home": 0.5125,
+      "model_prob_away": 0.4875,
+      "market_prob_home": 0.392,
+      "market_prob_away": 0.608,
+      "edge_pp": 12.04,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-01T23:40:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-05-02T10:13:10.041930Z"
+    },
+    {
+      "home_team": "Houston Rockets",
+      "away_team": "Los Angeles Lakers",
+      "pick": "Houston Rockets",
+      "pick_side": "home",
+      "model_prob_home": 0.5326,
+      "model_prob_away": 0.4674,
+      "market_prob_home": 0.5999,
+      "market_prob_away": 0.4001,
+      "edge_pp": -6.74,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-02T01:40:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "home_team": "Boston Celtics",
+      "away_team": "Philadelphia 76ers",
+      "pick": "Boston Celtics",
+      "pick_side": "home",
+      "model_prob_home": 0.5516,
+      "model_prob_away": 0.4484,
+      "market_prob_home": 0.7111,
+      "market_prob_away": 0.2889,
+      "edge_pp": -15.95,
+      "confidence_tier": "low",
+      "flags": "H-B2B A-B2B",
+      "game_time_utc": "2026-05-02T23:40:00Z",
+      "outcome": null,
+      "result": null
+    }
+  ],
+  "summary": {
+    "total_picks": 4,
+    "high_confidence": 0,
+    "avg_edge_pp": -4.73
+  }
+}
