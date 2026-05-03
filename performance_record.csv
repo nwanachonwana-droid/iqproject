@@ -310,3 +310,106 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Mikal Bridges PTS UNDER 8.5,under,0.6617,0.512,14.97,high,LOSS,24.0,8.5,ESPN
 2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Jalen Brunson AST UNDER 6.5,under,0.6256,0.4842,14.14,medium,LOSS,8.0,6.5,ESPN
 2026-04-30,nba_props,New York Knicks @ Atlanta Hawks,Dyson Daniels REB OVER 6.5,over,0.6341,0.5071,12.71,medium,PENDING,,6.5,MANUAL
+2026-05-01,mlb,Arizona Diamondbacks @ Chicago Cubs,Chicago Cubs,home,0.6505,0.5583,9.22,high,WIN,5-6,,ESPN
+2026-05-01,mlb,Baltimore Orioles @ New York Yankees,New York Yankees,home,0.6604,0.6097,5.07,high,WIN,2-7,,ESPN
+2026-05-01,mlb,Philadelphia Phillies @ Miami Marlins,Miami Marlins,home,0.6313,0.4573,17.4,medium,LOSS,6-5,,ESPN
+2026-05-01,ncaa_baseball,North Carolina A&T Aggies @ Campbell Fighting Camels,Campbell Fighting Camels,home,0.7801,,,high,WIN,1-11,,ESPN
+2026-05-01,ncaa_baseball,Xavier Musketeers @ Georgia Tech Yellow Jackets,Georgia Tech Yellow Jackets,home,0.7797,,,high,LOSS,8-4,,ESPN
+2026-05-01,ncaa_baseball,Arizona Wildcats @ Kansas Jayhawks,Kansas Jayhawks,home,0.7728,0.7634,0.94,high,WIN,2-4,,ESPN
+2026-05-01,ncaa_baseball,UCLA Bruins @ Michigan St Spartans,UCLA Bruins,away,0.7672,0.8731,-10.59,high,PENDING,,,MANUAL
+2026-05-01,ncaa_baseball,Missouri Tigers @ Georgia Bulldogs,Georgia Bulldogs,home,0.7217,0.7993,-7.76,high,WIN,0-4,,ESPN
+2026-05-01,ncaa_baseball,Coastal Carolina Chanticleers @ Georgia Southern Eagles,Coastal Carolina Chanticleers,away,0.7085,0.8731,-16.46,high,WIN,8-7,,ESPN
+2026-05-01,ncaa_baseball,Minnesota Golden Gophers @ Penn State Nittany Lions,Minnesota Golden Gophers,away,0.654,0.7377,-8.37,high,PENDING,,,MANUAL
+2026-05-01,ncaa_baseball,Murray State Racers @ Purdue Boilermakers,Purdue Boilermakers,home,0.6414,,,medium,WIN,5-7,,ESPN
+2026-05-01,ncaa_baseball,Florida Atlantic Owls @ South Florida Bulls,South Florida Bulls,home,0.627,,,medium,LOSS,12-9,,ESPN
+2026-05-01,ncaa_baseball,Nebraska Cornhuskers @ Ohio State Buckeyes,Nebraska Cornhuskers,away,0.6243,0.7634,-13.91,medium,LOSS,1-2,,ESPN
+2026-05-01,ncaa_baseball,Villanova Wildcats @ Georgetown Hoyas,Georgetown Hoyas,home,0.619,,,medium,LOSS,11-7,,ESPN
+2026-05-01,ncaa_baseball,East Carolina Pirates @ Memphis Tigers,East Carolina Pirates,away,0.6155,0.7909,-17.54,medium,WIN,12-0,,ESPN
+2026-05-01,ncaa_baseball,Wichita St Shockers @ UTSA Roadrunners,UTSA Roadrunners,home,0.6152,0.7143,-9.91,medium,PENDING,,,MANUAL
+2026-05-01,ncaa_baseball,Kansas St Wildcats @ West Virginia Mountaineers,West Virginia Mountaineers,home,0.6149,0.5897,2.52,medium,WIN,0-7,,ESPN
+2026-05-01,ncaa_baseball,Charleston Cougars @ UNC Wilmington Seahawks,UNC Wilmington Seahawks,home,0.6132,,,medium,LOSS,6-2,,ESPN
+2026-05-01,ncaa_baseball,Georgia St Panthers @ Louisiana Ragin' Cajuns,Louisiana Ragin' Cajuns,home,0.6043,0.6635,-5.92,medium,PENDING,,,MANUAL
+2026-05-01,ncaa_baseball,Lipscomb Bisons @ Eastern Kentucky Colonels,Lipscomb Bisons,away,0.6037,,,medium,WIN,9-3,,ESPN
+2026-05-01,mlb_props,Milwaukee Brewers @ Washington Nationals,Jacob Misiorowski OVER 6.5K,over,0.7679,0.5688,19.91,high,WIN,8K,6.5,MLB API
+2026-05-01,mlb_props,Kansas City Royals @ Seattle Mariners,Bryan Woo UNDER 5.5K,under,0.6788,0.4856,19.32,high,WIN,2K,5.5,MLB API
+2026-05-01,mlb_props,Atlanta Braves @ Colorado Rockies,Jose Quintana UNDER 2.5K,under,0.6105,0.4297,18.08,medium,LOSS,3K,2.5,MLB API
+2026-05-01,mlb_props,Kansas City Royals @ Seattle Mariners,Cole Ragans UNDER 6.5K,under,0.6298,0.4495,18.03,medium,LOSS,8K,6.5,MLB API
+2026-05-01,mlb_props,Baltimore Orioles @ New York Yankees,Will Warren OVER 5.5K,over,0.641,0.5577,8.33,medium,WIN,9K,5.5,MLB API
+2026-05-01,mlb_props,Texas Rangers @ Detroit Tigers,Jack Flaherty UNDER 5.5K,under,0.6222,0.5771,4.51,medium,WIN,4K,5.5,MLB API
+2026-05-01,mlb_props,San Francisco Giants @ Tampa Bay Rays,Shane McClanahan UNDER 5.5K,under,0.6014,0.5569,4.45,medium,WIN,5K,5.5,MLB API
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Max Strus PTS OVER 8.5,over,0.8332,0.4952,33.8,high,LOSS,6.0,8.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Collin Murray-Boyles PTS OVER 11.5,over,0.8456,0.5081,33.75,high,WIN,17.0,11.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Derrick White PTS UNDER 11.5,under,0.8289,0.5009,32.8,high,PENDING,,11.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Cade Cunningham AST UNDER 9.5,under,0.8275,0.505,32.25,high,WIN,3.0,9.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane AST UNDER 2.5,under,0.7914,0.4708,32.06,high,WIN,1.0,2.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Reed Sheppard PTS UNDER 15.5,under,0.8112,0.4911,32.02,high,WIN,10.0,15.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Luke Kennard REB OVER 2.5,over,0.8273,0.5201,30.72,high,WIN,3.0,2.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Jamal Cain PTS UNDER 7.5,under,0.81,0.5028,30.71,high,WIN,3.0,7.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Rui Hachimura PTS OVER 11.5,over,0.8046,0.5053,29.94,high,WIN,21.0,11.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Brandon Ingram REB UNDER 4.5,under,0.7848,0.4965,28.83,high,PENDING,,4.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Jamal Cain REB UNDER 3.5,under,0.7586,0.4785,28.01,high,LOSS,4.0,3.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe PTS OVER 11.5,over,0.7686,0.4965,27.21,high,PENDING,,11.5,MANUAL
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Scottie Barnes PTS OVER 20.5,over,0.7697,0.5008,26.9,high,WIN,25.0,20.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Jaylen Brown AST UNDER 4.5,under,0.7797,0.5246,25.51,high,PENDING,,4.5,MANUAL
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Max Strus AST UNDER 2.5,under,0.7935,0.5423,25.12,high,LOSS,3.0,2.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Tristan da Silva PTS UNDER 5.5,under,0.7608,0.5125,24.84,high,LOSS,10.0,5.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Jamal Shead AST UNDER 5.5,under,0.7622,0.5213,24.08,high,LOSS,6.0,5.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George REB UNDER 5.5,under,0.7838,0.5501,23.37,high,PENDING,,5.5,MANUAL
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Nikola Vucevic AST OVER 1.5,over,0.6868,0.4567,23.01,high,PENDING,,1.5,MANUAL
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Jaxson Hayes REB UNDER 3.5,under,0.7736,0.5439,22.98,high,LOSS,4.0,3.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Sam Hauser REB OVER 3.5,over,0.6765,0.4532,22.33,high,PENDING,,3.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Anthony Black AST UNDER 2.5,under,0.6955,0.4738,22.17,high,WIN,1.0,2.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George PTS OVER 15.5,over,0.7126,0.4926,22.0,high,PENDING,,15.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane REB OVER 4.5,over,0.6815,0.4622,21.92,high,LOSS,3.0,4.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Josh Okogie REB UNDER 2.5,under,0.7333,0.5148,21.85,high,LOSS,4.0,2.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Jaylen Brown REB UNDER 6.5,under,0.7159,0.4989,21.71,high,PENDING,,6.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Desmond Bane PTS UNDER 19.5,under,0.7098,0.4944,21.54,high,WIN,17.0,19.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Nikola Vucevic PTS UNDER 7.5,under,0.7109,0.5056,20.53,high,PENDING,,7.5,MANUAL
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Ja'Kobe Walter PTS UNDER 9.5,under,0.7175,0.5124,20.51,high,LOSS,24.0,9.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Jarrett Allen REB UNDER 7.5,under,0.7032,0.5003,20.29,high,WIN,7.0,7.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Jarrett Allen PTS UNDER 10.5,under,0.7015,0.5096,19.2,high,LOSS,14.0,10.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Donovan Mitchell PTS UNDER 26.5,under,0.6898,0.4984,19.14,high,WIN,24.0,26.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Tyrese Maxey PTS OVER 23.5,over,0.6829,0.4947,18.82,high,PENDING,,23.5,MANUAL
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe REB OVER 5.5,over,0.6845,0.4967,18.77,high,PENDING,,5.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Ausar Thompson REB OVER 7.5,over,0.6749,0.4875,18.73,high,WIN,10.0,7.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Cade Cunningham PTS OVER 29.5,over,0.6915,0.5043,18.72,high,WIN,32.0,29.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Payton Pritchard AST OVER 3.5,over,0.7115,0.5334,17.81,high,PENDING,,3.5,MANUAL
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Donovan Mitchell AST UNDER 4.5,under,0.6867,0.5113,17.54,high,WIN,2.0,4.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Payton Pritchard PTS OVER 12.5,over,0.6693,0.4941,17.52,high,PENDING,,12.5,MANUAL
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Reed Sheppard AST OVER 4.5,over,0.6458,0.4752,17.06,medium,LOSS,1.0,4.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Tobias Harris REB OVER 6.5,over,0.6372,0.4675,16.96,medium,WIN,10.0,6.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Derrick White REB UNDER 3.5,under,0.668,0.5048,16.32,high,PENDING,,3.5,MANUAL
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Jaylon Tyson REB UNDER 2.5,under,0.717,0.562,15.49,high,LOSS,4.0,2.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Josh Okogie PTS OVER 4.5,over,0.6082,0.4536,15.45,medium,LOSS,3.0,4.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Jalen Duren REB UNDER 9.5,under,0.6772,0.5237,15.35,high,WIN,9.0,9.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Duncan Robinson AST OVER 1.5,over,0.6983,0.5454,15.29,high,WIN,3.0,1.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Duncan Robinson REB UNDER 2.5,under,0.6852,0.5324,15.28,high,LOSS,5.0,2.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Ja'Kobe Walter REB UNDER 3.5,under,0.6934,0.5412,15.22,high,LOSS,5.0,3.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Tobias Harris PTS OVER 17.5,over,0.6529,0.5042,14.88,high,WIN,22.0,17.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe AST UNDER 3.5,under,0.6828,0.5384,14.44,high,PENDING,,3.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Ausar Thompson PTS OVER 8.5,over,0.6397,0.4959,14.38,medium,LOSS,4.0,8.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,R.J. Barrett PTS OVER 22.5,over,0.6425,0.5017,14.08,medium,PENDING,,22.5,MANUAL
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes PTS OVER 6.5,over,0.6361,0.4973,13.88,medium,PENDING,,6.5,MANUAL
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,James Harden PTS OVER 20.5,over,0.63,0.4969,13.31,medium,LOSS,16.0,20.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Evan Mobley AST OVER 2.5,over,0.6804,0.5534,12.7,high,WIN,3.0,2.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Evan Mobley REB UNDER 8.5,under,0.6369,0.5105,12.63,medium,LOSS,14.0,8.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Jaylon Tyson PTS OVER 5.5,over,0.6311,0.5061,12.5,medium,LOSS,5.0,5.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Evan Mobley PTS OVER 16.5,over,0.605,0.4826,12.24,medium,WIN,26.0,16.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,LeBron James AST OVER 7.5,over,0.638,0.5211,11.69,medium,WIN,8.0,7.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Jakob Poeltl PTS UNDER 7.5,under,0.6119,0.4955,11.64,medium,WIN,2.0,7.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Sam Hauser PTS OVER 6.5,over,0.6129,0.4982,11.47,medium,PENDING,,6.5,MANUAL
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,R.J. Barrett REB OVER 5.5,over,0.6616,0.5472,11.44,high,PENDING,,5.5,MANUAL
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Paolo Banchero PTS OVER 23.5,over,0.6029,0.4903,11.26,medium,LOSS,17.0,23.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,LeBron James REB OVER 6.5,over,0.6238,0.512,11.19,medium,WIN,7.0,6.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Amen Thompson AST OVER 5.5,over,0.6158,0.5053,11.05,medium,LOSS,3.0,5.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Jamal Shead PTS OVER 7.5,over,0.619,0.5095,10.94,medium,LOSS,7.0,7.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Jalen Duren AST OVER 1.5,over,0.637,0.5283,10.87,medium,LOSS,1.0,1.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Cade Cunningham REB UNDER 6.5,under,0.6454,0.5373,10.8,medium,LOSS,10.0,6.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Sandro Mamukelashvili PTS OVER 4.5,over,0.6149,0.5073,10.76,medium,LOSS,2.0,4.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Deandre Ayton REB OVER 8.5,over,0.6004,0.4937,10.67,medium,WIN,16.0,8.5,ESPN
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Amen Thompson REB UNDER 7.5,under,0.6262,0.5247,10.15,medium,LOSS,8.0,7.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Max Strus REB OVER 3.5,over,0.6456,0.5482,9.74,medium,WIN,5.0,3.5,ESPN
+2026-05-01,nba_props,Cleveland Cavaliers @ Toronto Raptors,Dean Wade REB OVER 3.5,over,0.601,0.504,9.71,medium,WIN,5.0,3.5,ESPN
+2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Jayson Tatum PTS UNDER 24.5,under,0.6009,0.5051,9.59,medium,PENDING,,24.5,MANUAL
+2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Deandre Ayton PTS OVER 11.5,over,0.6079,0.5147,9.32,medium,LOSS,7.0,11.5,ESPN
+2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Paolo Banchero REB UNDER 8.5,under,0.6007,0.5264,7.43,medium,LOSS,10.0,8.5,ESPN

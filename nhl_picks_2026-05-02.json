@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "sport": "nhl",
+  "generated_at": "2026-05-02T10:13:13.348941Z",
+  "data_date": "2026-05-02",
+  "model_version": "v1.0",
+  "status": "ACTIVE",
+  "picks": [
+    {
+      "pick_id": "nhl-2026-05-02-2025030221",
+      "game_time_utc": "2026-05-03T00:00:00Z",
+      "home_team": "Carolina Hurricanes",
+      "away_team": "Philadelphia Flyers",
+      "pick": "Carolina Hurricanes",
+      "pick_side": "home",
+      "model_prob_home": 0.6057,
+      "model_prob_away": 0.3943,
+      "market_prob_home": 0.6482,
+      "market_prob_away": 0.3518,
+      "market_line_home": -210,
+      "market_source": "pinnacle",
+      "edge_pp": -4.25,
+      "confidence_tier": "medium",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ],
+  "summary": {
+    "total_picks": 1,
+    "high_confidence": 0,
+    "avg_edge_pp": -4.25
+  }
+}
