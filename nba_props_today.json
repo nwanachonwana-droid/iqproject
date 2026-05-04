@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-05-04T12:45:58.170506Z",
+  "generated_at": "2026-05-04T12:47:03.746546Z",
   "data_date": "2026-05-04",
   "status": "ACTIVE",
   "picks": [
@@ -774,22 +774,6 @@
       "result": null
     },
     {
-      "player": "Jaylon Tyson",
-      "stat": "PTS",
-      "line": 6.5,
-      "projection": 7.5,
-      "direction": "over",
-      "model_prob": 0.6219,
-      "market_prob": 0.482,
-      "edge_pp": 13.99,
-      "games_used": 6,
-      "confidence_tier": "medium",
-      "matchup": "Cleveland Cavaliers @ Detroit Pistons",
-      "game_time_utc": "2026-05-05T23:10:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
       "player": "Dean Wade",
       "stat": "REB",
       "line": 3.5,
@@ -800,6 +784,22 @@
       "edge_pp": 13.8,
       "games_used": 6,
       "confidence_tier": "high",
+      "matchup": "Cleveland Cavaliers @ Detroit Pistons",
+      "game_time_utc": "2026-05-05T23:10:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "player": "Jaylon Tyson",
+      "stat": "PTS",
+      "line": 6.5,
+      "projection": 7.5,
+      "direction": "over",
+      "model_prob": 0.6219,
+      "market_prob": 0.484,
+      "edge_pp": 13.78,
+      "games_used": 6,
+      "confidence_tier": "medium",
       "matchup": "Cleveland Cavaliers @ Detroit Pistons",
       "game_time_utc": "2026-05-05T23:10:00Z",
       "outcome": null,
