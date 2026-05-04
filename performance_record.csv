@@ -413,3 +413,59 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-01,nba_props,Philadelphia 76ers @ Boston Celtics,Jayson Tatum PTS UNDER 24.5,under,0.6009,0.5051,9.59,medium,PENDING,,24.5,MANUAL
 2026-05-01,nba_props,Los Angeles Lakers @ Houston Rockets,Deandre Ayton PTS OVER 11.5,over,0.6079,0.5147,9.32,medium,LOSS,7.0,11.5,ESPN
 2026-05-01,nba_props,Detroit Pistons @ Orlando Magic,Paolo Banchero REB UNDER 8.5,under,0.6007,0.5264,7.43,medium,LOSS,10.0,8.5,ESPN
+2026-05-02,mlb,Baltimore Orioles @ New York Yankees,New York Yankees,home,0.6765,0.5934,8.31,high,WIN,4-9,,ESPN
+2026-05-02,mlb,Arizona Diamondbacks @ Chicago Cubs,Chicago Cubs,home,0.6517,0.6097,4.2,high,WIN,0-2,,ESPN
+2026-05-02,mlb,Cincinnati Reds @ Pittsburgh Pirates,Pittsburgh Pirates,home,0.6007,0.5583,4.24,medium,WIN,7-17,,ESPN
+2026-05-02,mlb,Philadelphia Phillies @ Miami Marlins,Miami Marlins,home,0.6254,0.5089,11.65,medium,WIN,0-4,,ESPN
+2026-05-02,mlb,San Francisco Giants @ Tampa Bay Rays,Tampa Bay Rays,home,0.6099,0.4955,11.44,medium,WIN,1-5,,ESPN
+2026-05-02,ncaa_baseball,North Carolina A&T Aggies @ Campbell Fighting Camels,Campbell Fighting Camels,home,0.7888,,,high,WIN,0-8,,ESPN
+2026-05-02,ncaa_baseball,Arizona Wildcats @ Kansas Jayhawks,Kansas Jayhawks,home,0.7818,0.7525,2.93,high,WIN,2-7,,ESPN
+2026-05-02,ncaa_baseball,UCLA Bruins @ Michigan St Spartans,UCLA Bruins,away,0.7741,0.8642,-9.01,high,PENDING,,,MANUAL
+2026-05-02,ncaa_baseball,Xavier Musketeers @ Georgia Tech Yellow Jackets,Georgia Tech Yellow Jackets,home,0.7641,,,high,WIN,5-7,,ESPN
+2026-05-02,ncaa_baseball,Missouri Tigers @ Georgia Bulldogs,Georgia Bulldogs,home,0.7322,0.8117,-7.95,high,WIN,3-13,,ESPN
+2026-05-02,ncaa_baseball,Coastal Carolina Chanticleers @ Georgia Southern Eagles,Coastal Carolina Chanticleers,away,0.7169,0.8427,-12.58,high,PENDING,,,MANUAL
+2026-05-02,ncaa_baseball,Rutgers Scarlet Knights @ USC Trojans,USC Trojans,home,0.7123,0.7945,-8.22,high,WIN,1-11,,ESPN
+2026-05-02,ncaa_baseball,UC Riverside Highlanders @ Hawai'i Rainbow Warriors,Hawai'i Rainbow Warriors,home,0.6772,,,high,WIN,0-1,,ESPN
+2026-05-02,ncaa_baseball,Minnesota Golden Gophers @ Penn State Nittany Lions,Minnesota Golden Gophers,away,0.654,,,high,WIN,5-3,,ESPN
+2026-05-02,ncaa_baseball,Murray State Racers @ Purdue Boilermakers,Purdue Boilermakers,home,0.6471,,,medium,WIN,4-11,,ESPN
+2026-05-02,ncaa_baseball,UL Monroe Warhawks @ Southern Miss Golden Eagles,Southern Miss Golden Eagles,home,0.6411,,,medium,WIN,1-3,,ESPN
+2026-05-02,ncaa_baseball,Bellarmine Knights @ North Alabama Lions,North Alabama Lions,home,0.6406,,,medium,LOSS,15-8,,ESPN
+2026-05-02,ncaa_baseball,Liberty Flames @ New Mexico State Aggies,Liberty Flames,away,0.6291,,,medium,WIN,9-7,,ESPN
+2026-05-02,ncaa_baseball,Kansas St Wildcats @ West Virginia Mountaineers,West Virginia Mountaineers,home,0.6285,0.5803,4.82,medium,WIN,1-9,,ESPN
+2026-05-02,ncaa_baseball,East Carolina Pirates @ Memphis Tigers,East Carolina Pirates,away,0.6266,0.7634,-13.68,medium,LOSS,3-5,,ESPN
+2026-05-02,ncaa_baseball,Auburn Tigers @ Texas A&M Aggies,Texas A&M Aggies,home,0.6164,,,medium,LOSS,5-4,,ESPN
+2026-05-02,ncaa_baseball,Lipscomb Bisons @ Eastern Kentucky Colonels,Lipscomb Bisons,away,0.6157,,,medium,LOSS,0-2,,ESPN
+2026-05-02,ncaa_baseball,Wichita State Shockers @ UTSA Roadrunners,UTSA Roadrunners,home,0.6152,,,medium,WIN,1-8,,ESPN
+2026-05-02,ncaa_baseball,Illinois Fighting Illini @ Iowa Hawkeyes,Iowa Hawkeyes,home,0.6125,0.5512,6.13,medium,WIN,5-6,,ESPN
+2026-05-02,ncaa_baseball,Florida Atlantic Owls @ South Florida Bulls,South Florida Bulls,home,0.6116,,,medium,LOSS,6-5,,ESPN
+2026-05-02,ncaa_baseball,Nebraska Cornhuskers @ Ohio State Buckeyes,Nebraska Cornhuskers,away,0.6083,0.7307,-12.24,medium,LOSS,3-7,,ESPN
+2026-05-02,ncaa_baseball,Georgia State Panthers @ Louisiana Ragin' Cajuns,Louisiana Ragin' Cajuns,home,0.6043,,,medium,WIN,1-5,,ESPN
+2026-05-02,ncaa_baseball,Vanderbilt Commodores @ Alabama Crimson Tide,Alabama Crimson Tide,home,0.6042,0.52,8.42,medium,WIN,5-8,,ESPN
+2026-05-02,ncaa_baseball,Villanova Wildcats @ Georgetown Hoyas,Georgetown Hoyas,home,0.6031,,,medium,LOSS,9-3,,ESPN
+2026-05-02,ncaa_baseball,Louisville Cardinals @ Wake Forest Demon Deacons,Wake Forest Demon Deacons,home,0.602,0.6432,-4.12,medium,WIN,5-7,,ESPN
+2026-05-02,mlb_props,Houston Astros @ Boston Red Sox,Spencer Arrighetti OVER 5.5K,over,0.6453,0.4647,18.06,medium,LOSS,4K,5.5,MLB API
+2026-05-02,mlb_props,San Francisco Giants @ Tampa Bay Rays,Landen Roupp OVER 4.5K,over,0.7297,0.5583,17.14,high,WIN,6K,4.5,MLB API
+2026-05-02,mlb_props,Kansas City Royals @ Seattle Mariners,Emerson Hancock OVER 4.5K,over,0.6487,0.4778,17.09,medium,WIN,14K,4.5,MLB API
+2026-05-02,mlb_props,Cleveland Guardians @ Athletics,Jacob Lopez UNDER 4.5K,under,0.6976,0.5327,16.49,high,LOSS,5K,4.5,MLB API
+2026-05-02,mlb_props,Atlanta Braves @ Colorado Rockies,Chris Sale UNDER 7.5K,under,0.6377,0.5485,8.92,medium,LOSS,11K,7.5,MLB API
+2026-05-02,mlb_props,Cleveland Guardians @ Athletics,Slade Cecconi OVER 3.5K,over,0.6383,0.5588,7.95,medium,LOSS,3K,3.5,MLB API
+2026-05-02,mlb_props,Arizona Diamondbacks @ Chicago Cubs,Ryne Nelson UNDER 4.5K,under,0.61,0.534,7.6,medium,WIN,4K,4.5,MLB API
+2026-05-02,mlb_props,Toronto Blue Jays @ Minnesota Twins,Connor Prielipp OVER 4.5K,over,0.6116,0.5485,6.31,medium,LOSS,4K,4.5,MLB API
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Derrick White PTS UNDER 11.5,under,0.8289,0.5125,31.64,high,LOSS,26.0,11.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Sam Hauser REB OVER 2.5,over,0.8388,0.5242,31.46,high,WIN,3.0,2.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe PTS OVER 11.5,over,0.7686,0.4935,27.51,high,WIN,23.0,11.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Nikola Vucevic AST OVER 1.5,over,0.6868,0.4146,27.21,high,PENDING,,1.5,MANUAL
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Baylor Scheierman PTS OVER 3.5,over,0.7402,0.4747,26.55,high,PENDING,,3.5,MANUAL
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Sam Hauser PTS OVER 5.5,over,0.7514,0.502,24.94,high,WIN,11.0,5.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George REB UNDER 5.5,under,0.7838,0.5549,22.89,high,WIN,3.0,5.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Paul George PTS OVER 15.5,over,0.7126,0.4926,22.0,high,LOSS,13.0,15.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Jayson Tatum AST OVER 5.5,over,0.7081,0.5128,19.54,high,PENDING,,5.5,MANUAL
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Payton Pritchard AST OVER 3.5,over,0.7115,0.5342,17.73,high,WIN,7.0,3.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Derrick White REB UNDER 3.5,under,0.668,0.5023,16.57,high,LOSS,6.0,3.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Payton Pritchard PTS OVER 12.5,over,0.6693,0.5076,16.16,high,WIN,13.0,12.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe REB OVER 5.5,over,0.6845,0.5249,15.96,high,WIN,6.0,5.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Baylor Scheierman REB OVER 1.5,over,0.6665,0.5163,15.01,high,WIN,6.0,1.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,VJ Edgecombe AST UNDER 3.5,under,0.6828,0.5389,14.39,high,LOSS,4.0,3.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Quentin Grimes PTS OVER 6.5,over,0.6361,0.5048,13.13,medium,LOSS,3.0,6.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Tyrese Maxey PTS OVER 24.5,over,0.6083,0.5015,10.68,medium,WIN,30.0,24.5,ESPN
+2026-05-02,nba_props,Philadelphia 76ers @ Boston Celtics,Jayson Tatum PTS UNDER 24.5,under,0.6009,0.5048,9.61,medium,PENDING,,24.5,MANUAL

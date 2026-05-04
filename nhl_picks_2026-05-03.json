@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "sport": "nfl",
-  "generated_at": "2026-05-04T12:45:47.588473Z",
-  "data_date": "2026-05-04",
+  "sport": "nhl",
+  "generated_at": "2026-05-03T12:49:33.667227Z",
+  "data_date": "2026-05-03",
   "model_version": "v1.0",
-  "status": "RESEARCH",
+  "status": "ACTIVE",
   "picks": [],
   "summary": {
     "total_picks": 0,

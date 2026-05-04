@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "sport": "soccer",
+  "generated_at": "2026-05-03T12:49:47.016644Z",
+  "data_date": "2026-05-03",
+  "model_version": "v1.0",
+  "status": "ACTIVE",
+  "picks": [
+    {
+      "home_team": "SC Freiburg",
+      "away_team": "VfL Wolfsburg",
+      "league": "Bundesliga",
+      "pick": "SC Freiburg",
+      "pick_side": "home",
+      "model_prob_home": 0.4183,
+      "model_prob_away": 0.3092,
+      "market_prob_home": 0.3764,
+      "market_prob_away": 0.3542,
+      "draw_prob": 0.2694,
+      "edge_pp": 4.18,
+      "confidence_tier": "low",
+      "game_time_utc": "2026-05-03T17:30:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "home_team": "Strasbourg",
+      "away_team": "Toulouse",
+      "league": "Ligue 1",
+      "pick": "Strasbourg",
+      "pick_side": "home",
+      "model_prob_home": 0.4039,
+      "model_prob_away": 0.3217,
+      "market_prob_home": 0.3277,
+      "market_prob_away": 0.3998,
+      "draw_prob": 0.2725,
+      "edge_pp": 7.63,
+      "confidence_tier": "low",
+      "game_time_utc": "2026-05-03T15:15:00Z",
+      "outcome": null,
+      "result": null
+    }
+  ],
+  "summary": {
+    "total_picks": 2,
+    "high_confidence": 0,
+    "avg_edge_pp": 5.9
+  }
+}
