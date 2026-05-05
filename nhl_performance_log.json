@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "nhl",
   "launch_date": "2026-04-15",
-  "last_updated": "2026-04-29",
+  "last_updated": "2026-05-05",
   "overall": {
-    "wins": 3,
+    "wins": 4,
     "losses": 5,
     "pushes": 0,
-    "total": 8,
-    "hit_rate": 37.5,
-    "roi_flat": -28.41
+    "total": 9,
+    "hit_rate": 44.44,
+    "roi_flat": -15.16
   },
   "by_confidence": {
     "high": {
@@ -18,9 +18,9 @@
       "hit_rate": 50.0
     },
     "medium": {
-      "wins": 0,
-      "total": 1,
-      "hit_rate": 0.0
+      "wins": 1,
+      "total": 2,
+      "hit_rate": 50.0
     },
     "low": {
       "wins": 2,
@@ -29,6 +29,25 @@
     }
   },
   "recent": [
+    {
+      "pick_id": "nhl-2026-05-04-2025030222",
+      "game_time_utc": "2026-05-04T23:00:00Z",
+      "home_team": "Carolina Hurricanes",
+      "away_team": "Philadelphia Flyers",
+      "pick": "Carolina Hurricanes",
+      "pick_side": "home",
+      "model_prob_home": 0.6057,
+      "model_prob_away": 0.3943,
+      "market_prob_home": 0.6908,
+      "market_prob_away": 0.3092,
+      "market_line_home": -258,
+      "market_source": "pinnacle",
+      "edge_pp": -8.51,
+      "confidence_tier": "medium",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-05-05T11:57:49.537712Z"
+    },
     {
       "pick_id": "nhl-2026-04-28-2025030115",
       "game_time_utc": "2026-04-28T23:30:00Z",
