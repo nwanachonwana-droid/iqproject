@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-05-05T11:57:13.558156Z",
+  "generated_at": "2026-05-05T11:58:11.057461Z",
   "data_date": "2026-05-05",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
@@ -45,9 +45,9 @@
       "pick_side": "home",
       "model_prob_home": 0.5457,
       "model_prob_away": 0.4543,
-      "market_prob_home": 0.7025,
-      "market_prob_away": 0.2975,
-      "edge_pp": -15.68,
+      "market_prob_home": 0.7031,
+      "market_prob_away": 0.2969,
+      "edge_pp": -15.73,
       "confidence_tier": "low",
       "flags": "H-B2B A-B2B",
       "game_time_utc": "2026-05-06T23:10:00Z",
@@ -58,6 +58,6 @@
   "summary": {
     "total_picks": 3,
     "high_confidence": 0,
-    "avg_edge_pp": -17.03
+    "avg_edge_pp": -17.05
   }
 }
