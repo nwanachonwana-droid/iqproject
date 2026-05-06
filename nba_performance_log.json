@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "nba",
   "launch_date": "2026-04-23",
-  "last_updated": "2026-05-04",
+  "last_updated": "2026-05-06",
   "overall": {
-    "wins": 13,
+    "wins": 14,
     "losses": 5,
     "pushes": 0,
-    "total": 18,
-    "hit_rate": 72.22,
-    "roi_flat": 37.87
+    "total": 19,
+    "hit_rate": 73.68,
+    "roi_flat": 40.66
   },
   "by_confidence": {
     "high": {
@@ -23,12 +23,29 @@
       "hit_rate": 0.0
     },
     "low": {
-      "wins": 13,
-      "total": 18,
-      "hit_rate": 72.22
+      "wins": 14,
+      "total": 19,
+      "hit_rate": 73.68
     }
   },
   "recent": [
+    {
+      "home_team": "Detroit Pistons",
+      "away_team": "Cleveland Cavaliers",
+      "pick": "Detroit Pistons",
+      "pick_side": "home",
+      "model_prob_home": 0.5344,
+      "model_prob_away": 0.4656,
+      "market_prob_home": 0.5703,
+      "market_prob_away": 0.4297,
+      "edge_pp": -3.59,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-05T23:10:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-05-06T11:03:19.047657Z"
+    },
     {
       "home_team": "Cleveland Cavaliers",
       "away_team": "Toronto Raptors",
