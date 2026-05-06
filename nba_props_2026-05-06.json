@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-05-06T11:02:57.081073Z",
+  "generated_at": "2026-05-06T11:03:46.489064Z",
   "data_date": "2026-05-06",
   "status": "ACTIVE",
   "picks": [
@@ -524,8 +524,8 @@
       "projection": 4.3,
       "direction": "under",
       "model_prob": 0.7444,
-      "market_prob": 0.5486,
-      "edge_pp": 19.58,
+      "market_prob": 0.5533,
+      "edge_pp": 19.11,
       "games_used": 5,
       "confidence_tier": "high",
       "matchup": "Philadelphia 76ers @ New York Knicks",
