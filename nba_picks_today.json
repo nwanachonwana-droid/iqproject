@@ -1,43 +1,11 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-05-07T13:10:42.973782Z",
-  "data_date": "2026-05-07",
+  "generated_at": "2026-05-08T12:17:45.769048Z",
+  "data_date": "2026-05-08",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
   "picks": [
-    {
-      "home_team": "Detroit Pistons",
-      "away_team": "Cleveland Cavaliers",
-      "pick": "Detroit Pistons",
-      "pick_side": "home",
-      "model_prob_home": 0.5344,
-      "model_prob_away": 0.4656,
-      "market_prob_home": 0.5916,
-      "market_prob_away": 0.4084,
-      "edge_pp": -5.72,
-      "confidence_tier": "low",
-      "flags": "\u2014",
-      "game_time_utc": "2026-05-07T23:10:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "home_team": "Oklahoma City Thunder",
-      "away_team": "Los Angeles Lakers",
-      "pick": "Oklahoma City Thunder",
-      "pick_side": "home",
-      "model_prob_home": 0.5554,
-      "model_prob_away": 0.4446,
-      "market_prob_home": 0.865,
-      "market_prob_away": 0.135,
-      "edge_pp": -30.96,
-      "confidence_tier": "low",
-      "flags": "\u2014",
-      "game_time_utc": "2026-05-08T01:40:00Z",
-      "outcome": null,
-      "result": null
-    },
     {
       "home_team": "Philadelphia 76ers",
       "away_team": "New York Knicks",
@@ -45,12 +13,44 @@
       "pick_side": "away",
       "model_prob_home": 0.4892,
       "model_prob_away": 0.5108,
-      "market_prob_home": 0.5064,
-      "market_prob_away": 0.4936,
-      "edge_pp": 1.72,
+      "market_prob_home": 0.5247,
+      "market_prob_away": 0.4753,
+      "edge_pp": 3.55,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-08T23:10:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "home_team": "Minnesota Timberwolves",
+      "away_team": "San Antonio Spurs",
+      "pick": "San Antonio Spurs",
+      "pick_side": "away",
+      "model_prob_home": 0.4973,
+      "model_prob_away": 0.5027,
+      "market_prob_home": 0.3586,
+      "market_prob_away": 0.6414,
+      "edge_pp": -13.87,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-09T01:40:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "home_team": "Cleveland Cavaliers",
+      "away_team": "Detroit Pistons",
+      "pick": "Cleveland Cavaliers",
+      "pick_side": "home",
+      "model_prob_home": 0.5005,
+      "model_prob_away": 0.4995,
+      "market_prob_home": 0.6177,
+      "market_prob_away": 0.3823,
+      "edge_pp": -11.72,
       "confidence_tier": "low",
       "flags": "H-B2B A-B2B",
-      "game_time_utc": "2026-05-08T23:10:00Z",
+      "game_time_utc": "2026-05-09T19:10:00Z",
       "outcome": null,
       "result": null
     }
@@ -58,6 +58,6 @@
   "summary": {
     "total_picks": 3,
     "high_confidence": 0,
-    "avg_edge_pp": -11.65
+    "avg_edge_pp": -7.35
   }
 }
