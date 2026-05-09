@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "nba",
   "launch_date": "2026-04-23",
-  "last_updated": "2026-05-08",
+  "last_updated": "2026-05-09",
   "overall": {
-    "wins": 16,
+    "wins": 17,
     "losses": 5,
     "pushes": 0,
-    "total": 21,
-    "hit_rate": 76.19,
-    "roi_flat": 45.45
+    "total": 22,
+    "hit_rate": 77.27,
+    "roi_flat": 47.51
   },
   "by_confidence": {
     "high": {
@@ -23,12 +23,29 @@
       "hit_rate": 0.0
     },
     "low": {
-      "wins": 16,
-      "total": 21,
-      "hit_rate": 76.19
+      "wins": 17,
+      "total": 22,
+      "hit_rate": 77.27
     }
   },
   "recent": [
+    {
+      "home_team": "Philadelphia 76ers",
+      "away_team": "New York Knicks",
+      "pick": "New York Knicks",
+      "pick_side": "away",
+      "model_prob_home": 0.4892,
+      "model_prob_away": 0.5108,
+      "market_prob_home": 0.5247,
+      "market_prob_away": 0.4753,
+      "edge_pp": 3.55,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-08T23:10:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-05-09T11:44:20.723072Z"
+    },
     {
       "home_team": "Detroit Pistons",
       "away_team": "Cleveland Cavaliers",
