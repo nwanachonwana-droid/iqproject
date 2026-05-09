@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-05-09T11:43:49.856014Z",
+  "generated_at": "2026-05-09T11:44:47.652098Z",
   "data_date": "2026-05-09",
   "props": [
     {
@@ -306,6 +306,26 @@
       "outcome": null
     },
     {
+      "pick_id": "mlb-props-2026-05-09-608379-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Detroit Tigers @ Kansas City Royals",
+      "player": "Michael Wacha",
+      "pick": "Michael Wacha Over 4.5 Ks",
+      "pick_side": "Over",
+      "line": 4.5,
+      "proj_k": 5.04,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.25,
+      "model_prob": 0.5666,
+      "market_prob": 0.4898,
+      "edge_pp": 7.68,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null
+    },
+    {
       "pick_id": "mlb-props-2026-05-09-690986-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -321,26 +341,6 @@
       "model_prob": 0.5696,
       "market_prob": 0.4949,
       "edge_pp": 7.47,
-      "confidence_tier": "low",
-      "result": null,
-      "outcome": null
-    },
-    {
-      "pick_id": "mlb-props-2026-05-09-608379-k",
-      "sport": "mlb",
-      "market": "pitcher_strikeouts",
-      "game": "Detroit Tigers @ Kansas City Royals",
-      "player": "Michael Wacha",
-      "pick": "Michael Wacha Over 4.5 Ks",
-      "pick_side": "Over",
-      "line": 4.5,
-      "proj_k": 5.04,
-      "umpire": "Unknown",
-      "ump_adj": 0.0,
-      "opp_k_pct": 0.25,
-      "model_prob": 0.5666,
-      "market_prob": 0.4924,
-      "edge_pp": 7.42,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
