@@ -1,43 +1,11 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-05-09T11:44:41.299452Z",
-  "data_date": "2026-05-09",
+  "generated_at": "2026-05-10T04:06:19.363944Z",
+  "data_date": "2026-05-10",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
   "picks": [
-    {
-      "home_team": "Cleveland Cavaliers",
-      "away_team": "Detroit Pistons",
-      "pick": "Cleveland Cavaliers",
-      "pick_side": "home",
-      "model_prob_home": 0.5005,
-      "model_prob_away": 0.4995,
-      "market_prob_home": 0.6198,
-      "market_prob_away": 0.3802,
-      "edge_pp": -11.93,
-      "confidence_tier": "low",
-      "flags": "\u2014",
-      "game_time_utc": "2026-05-09T19:10:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "home_team": "Los Angeles Lakers",
-      "away_team": "Oklahoma City Thunder",
-      "pick": "Oklahoma City Thunder",
-      "pick_side": "away",
-      "model_prob_home": 0.4794,
-      "model_prob_away": 0.5206,
-      "market_prob_home": 0.2395,
-      "market_prob_away": 0.7605,
-      "edge_pp": -23.99,
-      "confidence_tier": "low",
-      "flags": "\u2014",
-      "game_time_utc": "2026-05-10T00:40:00Z",
-      "outcome": null,
-      "result": null
-    },
     {
       "home_team": "Philadelphia 76ers",
       "away_team": "New York Knicks",
@@ -45,11 +13,11 @@
       "pick_side": "away",
       "model_prob_home": 0.4892,
       "model_prob_away": 0.5108,
-      "market_prob_home": 0.4837,
-      "market_prob_away": 0.5163,
-      "edge_pp": -0.54,
+      "market_prob_home": 0.4779,
+      "market_prob_away": 0.5221,
+      "edge_pp": -1.13,
       "confidence_tier": "low",
-      "flags": "H-B2B A-B2B",
+      "flags": "\u2014",
       "game_time_utc": "2026-05-10T19:40:00Z",
       "outcome": null,
       "result": null
@@ -61,19 +29,19 @@
       "pick_side": "away",
       "model_prob_home": 0.4973,
       "model_prob_away": 0.5027,
-      "market_prob_home": 0.3799,
-      "market_prob_away": 0.6201,
-      "edge_pp": -11.74,
+      "market_prob_home": 0.3774,
+      "market_prob_away": 0.6226,
+      "edge_pp": -12.0,
       "confidence_tier": "low",
-      "flags": "H-B2B A-B2B",
+      "flags": "\u2014",
       "game_time_utc": "2026-05-10T23:40:00Z",
       "outcome": null,
       "result": null
     }
   ],
   "summary": {
-    "total_picks": 4,
+    "total_picks": 2,
     "high_confidence": 0,
-    "avg_edge_pp": -12.05
+    "avg_edge_pp": -6.56
   }
 }
