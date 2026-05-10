@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-05-10T04:06:32.206411Z",
+  "generated_at": "2026-05-10T04:08:03.349245Z",
   "data_date": "2026-05-10",
   "status": "ACTIVE",
   "picks": [
@@ -374,6 +374,22 @@
       "result": null
     },
     {
+      "player": "Terrence Shannon Jr.",
+      "stat": "REB",
+      "line": 2.5,
+      "projection": 3.7,
+      "direction": "over",
+      "model_prob": 0.7206,
+      "market_prob": 0.5064,
+      "edge_pp": 21.42,
+      "games_used": 5,
+      "confidence_tier": "high",
+      "matchup": "San Antonio Spurs @ Minnesota Timberwolves",
+      "game_time_utc": "2026-05-10T23:40:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
       "player": "Max Strus",
       "stat": "REB",
       "line": 3.5,
@@ -402,22 +418,6 @@
       "confidence_tier": "high",
       "matchup": "New York Knicks @ Philadelphia 76ers",
       "game_time_utc": "2026-05-10T19:40:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "player": "Terrence Shannon Jr.",
-      "stat": "REB",
-      "line": 2.5,
-      "projection": 3.7,
-      "direction": "over",
-      "model_prob": 0.7206,
-      "market_prob": 0.5153,
-      "edge_pp": 20.53,
-      "games_used": 5,
-      "confidence_tier": "high",
-      "matchup": "San Antonio Spurs @ Minnesota Timberwolves",
-      "game_time_utc": "2026-05-10T23:40:00Z",
       "outcome": null,
       "result": null
     },

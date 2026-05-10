@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-05-10T04:06:26.085361Z",
+  "generated_at": "2026-05-10T04:07:58.015091Z",
   "data_date": "2026-05-10",
   "props": [
     {
@@ -46,26 +46,6 @@
       "outcome": null
     },
     {
-      "pick_id": "mlb-props-2026-05-10-592791-k",
-      "sport": "mlb",
-      "market": "pitcher_strikeouts",
-      "game": "Chicago Cubs @ Texas Rangers",
-      "player": "Jameson Taillon",
-      "pick": "Jameson Taillon Over 4.5 Ks",
-      "pick_side": "Over",
-      "line": 4.5,
-      "proj_k": 5.47,
-      "umpire": "Unknown",
-      "ump_adj": 0.0,
-      "opp_k_pct": 0.267,
-      "model_prob": 0.6381,
-      "market_prob": 0.5392,
-      "edge_pp": 9.89,
-      "confidence_tier": "medium",
-      "result": null,
-      "outcome": null
-    },
-    {
       "pick_id": "mlb-props-2026-05-10-645261-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -86,6 +66,26 @@
       "outcome": null
     },
     {
+      "pick_id": "mlb-props-2026-05-10-592791-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Chicago Cubs @ Texas Rangers",
+      "player": "Jameson Taillon",
+      "pick": "Jameson Taillon Over 4.5 Ks",
+      "pick_side": "Over",
+      "line": 4.5,
+      "proj_k": 5.47,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.267,
+      "model_prob": 0.6381,
+      "market_prob": 0.5439,
+      "edge_pp": 9.42,
+      "confidence_tier": "medium",
+      "result": null,
+      "outcome": null
+    },
+    {
       "pick_id": "mlb-props-2026-05-10-676917-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -99,8 +99,8 @@
       "ump_adj": 0.0,
       "opp_k_pct": 0.247,
       "model_prob": 0.5792,
-      "market_prob": 0.5391,
-      "edge_pp": 4.01,
+      "market_prob": 0.5344,
+      "edge_pp": 4.48,
       "confidence_tier": "low",
       "result": null,
       "outcome": null
