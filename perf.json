@@ -1,73 +1,325 @@
 {
-  "generated_at": "2026-05-09T11:45:19.988266",
-  "yesterday": "2026-05-08",
+  "generated_at": "2026-05-10T04:08:27.979751",
+  "yesterday": "2026-05-09",
   "yesterday_results": [
     {
       "sport": "mlb_props",
-      "pick": "Nick Lodolo UNDER 5.5K",
+      "pick": "Spencer Arrighetti OVER 5.5K",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "19.9"
+    },
+    {
+      "sport": "mlb_props",
+      "pick": "Spencer Strider UNDER 5.5K",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "19.55"
+    },
+    {
+      "sport": "mlb_props",
+      "pick": "Cam Schlittler OVER 5.5K",
       "tier": "high",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "17.64"
+      "edge": "17.43"
     },
     {
       "sport": "mlb_props",
-      "pick": "Max Fried UNDER 5.5K",
+      "pick": "Chase Burns UNDER 7.5K",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "17.04"
+      "edge": "16.73"
     },
     {
       "sport": "mlb_props",
-      "pick": "Jes\u00fas Luzardo UNDER 8.5K",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "14.42"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Chase Dollander UNDER 5.5K",
+      "pick": "Dustin May UNDER 4.5K",
       "tier": "high",
-      "outcome": "WIN",
+      "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "13.76"
+      "edge": "14.6"
     },
     {
       "sport": "mlb_props",
-      "pick": "Jacob Lopez UNDER 4.5K",
+      "pick": "Tanner Bibee UNDER 5.5K",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "13.49"
+    },
+    {
+      "sport": "mlb_props",
+      "pick": "Landen Roupp OVER 5.5K",
+      "tier": "medium",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "12.54"
+    },
+    {
+      "sport": "mlb_props",
+      "pick": "Luis Castillo UNDER 5.5K",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "11.82"
+    },
+    {
+      "sport": "mlb_props",
+      "pick": "Trey Yesavage UNDER 5.5K",
       "tier": "medium",
       "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "12.77"
+      "edge": "9.78"
     },
     {
       "sport": "mlb_props",
-      "pick": "Jacob Misiorowski OVER 7.5K",
+      "pick": "Shane Baz UNDER 5.5K",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "11.76"
+      "edge": "9.64"
     },
     {
       "sport": "mlb_props",
-      "pick": "Keider Montero OVER 3.5K",
+      "pick": "Anthony Kay OVER 3.5K",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "11.65"
+      "edge": "9.32"
     },
     {
       "sport": "mlb_props",
-      "pick": "Parker Messick OVER 5.5K",
+      "pick": "Aaron Civale UNDER 4.5K",
+      "tier": "medium",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "7.33"
+    },
+    {
+      "sport": "mlb_props",
+      "pick": "Joe Ryan UNDER 5.5K",
+      "tier": "medium",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "6.8"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jaxson Hayes PTS UNDER 4.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "32.84"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Donovan Mitchell AST UNDER 3.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "32.25"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Dean Wade PTS OVER 4.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "31.47"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jalen Duren PTS UNDER 13.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "30.91"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Cade Cunningham AST UNDER 9.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "29.17"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Ausar Thompson REB OVER 6.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "25.95"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Max Strus REB OVER 3.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "25.04"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Rui Hachimura AST OVER 0.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "24.96"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Cade Cunningham PTS OVER 26.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "24.52"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "James Harden REB OVER 4.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "24.35"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jarrett Allen REB OVER 7.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "23.54"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Donovan Mitchell PTS UNDER 25.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "23.29"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Tobias Harris REB OVER 6.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "21.28"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jaylon Tyson PTS UNDER 7.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "20.16"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Rui Hachimura PTS OVER 13.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "19.96"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Marcus Smart REB OVER 3.5",
+      "tier": "medium",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "18.11"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Donovan Mitchell REB OVER 3.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "18.03"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Daniss Jenkins AST UNDER 3.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "17.25"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jaylon Tyson REB OVER 3.5",
+      "tier": "high",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": "17.24"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Marcus Smart PTS UNDER 11.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "16.23"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Daniss Jenkins PTS UNDER 9.5",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "15.96"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Max Strus PTS UNDER 8.5",
+      "tier": "medium",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "14.02"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "James Harden PTS UNDER 19.5",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
@@ -75,301 +327,40 @@
       "edge": "10.64"
     },
     {
-      "sport": "mlb_props",
-      "pick": "Dylan Cease OVER 7.5K",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "10.18"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Ryne Nelson UNDER 4.5K",
+      "sport": "nba_props",
+      "pick": "Dean Wade REB OVER 3.5",
       "tier": "medium",
       "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "7.04"
+      "edge": "10.33"
     },
     {
       "sport": "nba_props",
-      "pick": "Luke Kornet PTS OVER 3.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "36.03"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Karl-Anthony Towns AST OVER 5.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "35.02"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Josh Hart REB UNDER 9.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "33.72"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Luke Kornet REB OVER 3.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "32.78"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Rudy Gobert AST OVER 1.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "31.65"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Karl-Anthony Towns PTS UNDER 20.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "30.88"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Josh Hart AST UNDER 5.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "30.16"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Dylan Harper REB OVER 3.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "30.11"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Rudy Gobert PTS UNDER 7.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "29.69"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Terrence Shannon Jr. PTS OVER 10.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "29.46"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Mikal Bridges REB UNDER 4.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "29.24"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Naz Reid REB OVER 6.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "25.71"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Paul George REB UNDER 5.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "24.92"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Karl-Anthony Towns REB UNDER 12.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "24.69"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Mikal Bridges AST UNDER 3.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "24.09"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Naz Reid PTS OVER 11.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "22.45"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Joel Embiid AST OVER 4.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "21.56"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Jaden McDaniels PTS OVER 14.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "20.77"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Tyrese Maxey REB OVER 3.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "19.59"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Devin Vassell REB OVER 3.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "18.54"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Stephon Castle AST UNDER 6.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "17.99"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Jaden McDaniels REB OVER 4.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "17.57"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Dylan Harper AST UNDER 3.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "17.42"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "De'Aaron Fox PTS OVER 17.5",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "14.55"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Jalen Brunson AST UNDER 6.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "12.99"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Keldon Johnson REB OVER 3.5",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "12.87"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Jordan Clarkson PTS OVER 5.5",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "12.38"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Mike Conley REB OVER 1.5",
+      "pick": "Max Strus AST OVER 1.5",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "11.27"
+      "edge": "9.19"
     },
     {
       "sport": "nba_props",
-      "pick": "Keldon Johnson PTS UNDER 8.5",
+      "pick": "Jalen Duren AST OVER 1.5",
       "tier": "medium",
       "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "11.12"
+      "edge": "9.17"
     },
     {
       "sport": "nba_props",
-      "pick": "Julius Randle REB OVER 6.5",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "11.09"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Julian Champagnie REB OVER 4.5",
+      "pick": "Duncan Robinson AST OVER 1.5",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "7.05"
+      "edge": "4.95"
     },
     {
       "sport": "ncaa_baseball",
@@ -387,13 +378,22 @@
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "-10.68"
+      "edge": "-10.58"
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "USC Trojans",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "-8.99"
     },
     {
       "sport": "ncaa_baseball",
       "pick": "Jacksonville State Gamecocks",
       "tier": "high",
-      "outcome": "LOSS",
+      "outcome": "WIN",
       "actual": "",
       "line": "",
       "edge": ""
@@ -405,25 +405,7 @@
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "6.74"
-    },
-    {
-      "sport": "ncaa_baseball",
-      "pick": "Austin Peay Governors",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": ""
-    },
-    {
-      "sport": "ncaa_baseball",
-      "pick": "Georgia Bulldogs",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "2.37"
+      "edge": "7.8"
     },
     {
       "sport": "ncaa_baseball",
@@ -432,7 +414,16 @@
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "-8.92"
+      "edge": "-6.62"
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "Georgia Bulldogs",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "1.12"
     },
     {
       "sport": "ncaa_baseball",
@@ -445,39 +436,75 @@
     },
     {
       "sport": "ncaa_baseball",
-      "pick": "Miami Hurricanes",
+      "pick": "Campbell Fighting Camels",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": ""
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "Saint Mary's Gaels",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": ""
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "Austin Peay Governors",
       "tier": "high",
       "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "4.12"
+      "edge": ""
     },
     {
       "sport": "ncaa_baseball",
       "pick": "Coastal Carolina Chanticleers",
       "tier": "high",
-      "outcome": "WIN",
+      "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "-19.24"
-    },
-    {
-      "sport": "ncaa_baseball",
-      "pick": "UNC Wilmington Seahawks",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": ""
+      "edge": "-18.07"
     },
     {
       "sport": "ncaa_baseball",
       "pick": "Northeastern Huskies",
-      "tier": "medium",
+      "tier": "high",
       "outcome": "WIN",
       "actual": "",
       "line": "",
       "edge": ""
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "UNC Wilmington Seahawks",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": ""
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "Southern Miss Golden Eagles",
+      "tier": "high",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "-18.38"
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "Miami Hurricanes",
+      "tier": "medium",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "2.64"
     },
     {
       "sport": "ncaa_baseball",
@@ -490,30 +517,39 @@
     },
     {
       "sport": "ncaa_baseball",
-      "pick": "Southern Miss Golden Eagles",
+      "pick": "Ohio State Buckeyes",
       "tier": "medium",
-      "outcome": "WIN",
+      "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "-17.81"
+      "edge": "8.5"
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "North Florida Ospreys",
+      "tier": "medium",
+      "outcome": "LOSS",
+      "actual": "",
+      "line": "",
+      "edge": ""
     },
     {
       "sport": "ncaa_baseball",
       "pick": "UTSA Roadrunners",
       "tier": "medium",
-      "outcome": "LOSS",
+      "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "-13.82"
+      "edge": "-15.29"
     },
     {
       "sport": "ncaa_baseball",
       "pick": "Virginia Cavaliers",
       "tier": "medium",
-      "outcome": "LOSS",
+      "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "-7.78"
+      "edge": "-6.47"
     },
     {
       "sport": "ncaa_baseball",
@@ -522,34 +558,7 @@
       "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "-8.3"
-    },
-    {
-      "sport": "ncaa_baseball",
-      "pick": "Ohio State Buckeyes",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "9.04"
-    },
-    {
-      "sport": "ncaa_baseball",
-      "pick": "North Florida Ospreys",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": ""
-    },
-    {
-      "sport": "ncaa_baseball",
-      "pick": "UAB Blazers",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "9.76"
+      "edge": "-7.0"
     },
     {
       "sport": "ncaa_baseball",
@@ -558,39 +567,48 @@
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "-5.47"
+      "edge": "-7.01"
     },
     {
       "sport": "ncaa_baseball",
-      "pick": "Creighton Bluejays",
+      "pick": "Lipscomb Bisons",
       "tier": "medium",
-      "outcome": "LOSS",
+      "outcome": "WIN",
       "actual": "",
       "line": "",
       "edge": ""
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "Alabama Crimson Tide",
+      "tier": "medium",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "-3.31"
     }
   ],
   "yesterday_summary": {
     "ncaa_baseball": {
       "high": {
+        "w": 13,
+        "l": 2,
+        "pct": 86.7,
+        "n": 15
+      },
+      "medium": {
         "w": 7,
         "l": 3,
         "pct": 70.0,
         "n": 10
-      },
-      "medium": {
-        "w": 7,
-        "l": 5,
-        "pct": 58.3,
-        "n": 12
       }
     },
     "mlb_props": {
       "high": {
-        "w": 3,
-        "l": 0,
-        "pct": 100.0,
-        "n": 3
+        "w": 1,
+        "l": 5,
+        "pct": 16.7,
+        "n": 6
       },
       "medium": {
         "w": 5,
@@ -601,24 +619,24 @@
     },
     "nba_props": {
       "high": {
-        "w": 16,
+        "w": 12,
         "l": 8,
-        "pct": 66.7,
-        "n": 24
+        "pct": 60.0,
+        "n": 20
       },
       "medium": {
-        "w": 2,
-        "l": 5,
-        "pct": 28.6,
+        "w": 4,
+        "l": 3,
+        "pct": 57.1,
         "n": 7
       }
     }
   },
   "yesterday_overall": {
-    "w": 40,
+    "w": 42,
     "l": 23,
-    "pct": 63.5,
-    "n": 63
+    "pct": 64.6,
+    "n": 65
   },
   "alltime_summary": {
     "mlb": {
@@ -646,66 +664,66 @@
     },
     "ncaa_baseball": {
       "high": {
-        "w": 63,
-        "l": 21,
-        "pct": 75.0,
-        "n": 84
+        "w": 76,
+        "l": 23,
+        "pct": 76.8,
+        "n": 99
       },
       "medium": {
-        "w": 54,
-        "l": 33,
-        "pct": 62.1,
-        "n": 87
+        "w": 61,
+        "l": 36,
+        "pct": 62.9,
+        "n": 97
       }
     },
     "soccer": {},
     "mlb_props": {
       "high": {
-        "w": 32,
-        "l": 10,
-        "pct": 76.2,
-        "n": 42
+        "w": 33,
+        "l": 15,
+        "pct": 68.8,
+        "n": 48
       },
       "medium": {
-        "w": 28,
-        "l": 27,
-        "pct": 50.9,
-        "n": 55
+        "w": 33,
+        "l": 29,
+        "pct": 53.2,
+        "n": 62
       }
     },
     "nba_props": {
       "high": {
-        "w": 132,
-        "l": 105,
-        "pct": 55.7,
-        "n": 237
+        "w": 144,
+        "l": 113,
+        "pct": 56.0,
+        "n": 257
       },
       "medium": {
-        "w": 36,
-        "l": 40,
-        "pct": 47.4,
-        "n": 76
+        "w": 40,
+        "l": 43,
+        "pct": 48.2,
+        "n": 83
       }
     }
   },
   "alltime_overall": {
-    "w": 365,
-    "l": 247,
-    "pct": 59.6,
-    "n": 612
+    "w": 407,
+    "l": 270,
+    "pct": 60.1,
+    "n": 677
   },
   "alltime_by_tier": {
     "high": {
-      "w": 239,
-      "l": 139,
+      "w": 265,
+      "l": 154,
       "pct": 63.2,
-      "n": 378
+      "n": 419
     },
     "medium": {
-      "w": 126,
-      "l": 108,
-      "pct": 53.8,
-      "n": 234
+      "w": 142,
+      "l": 116,
+      "pct": 55.0,
+      "n": 258
     }
   },
   "pending": [
@@ -1747,6 +1765,171 @@
     {
       "sport": "nba_props",
       "pick": "Max Strus AST OVER 1.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "ncaa_baseball",
+      "pick": "Boston College Eagles",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Karl-Anthony Towns AST OVER 5.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Karl-Anthony Towns PTS UNDER 19.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Josh Hart PTS UNDER 12.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Josh Hart REB UNDER 9.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Tobias Harris AST UNDER 1.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Quentin Grimes AST OVER 1.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Mitchell Robinson REB UNDER 7.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Rudy Gobert PTS UNDER 8.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Victor Wembanyama PTS UNDER 25.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Dylan Harper AST UNDER 3.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Naz Reid PTS OVER 11.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Naz Reid REB OVER 6.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Quentin Grimes PTS OVER 6.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jaden McDaniels REB OVER 4.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Mikal Bridges REB UNDER 3.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Julian Champagnie REB OVER 4.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Tyrese Maxey REB OVER 3.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Mitchell Robinson PTS OVER 4.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Joel Embiid AST OVER 4.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "VJ Edgecombe REB OVER 4.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Josh Hart AST UNDER 4.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "VJ Edgecombe AST UNDER 3.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Devin Vassell REB OVER 3.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Tyrese Maxey PTS UNDER 25.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Victor Wembanyama REB OVER 12.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "De'Aaron Fox PTS OVER 17.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Victor Wembanyama AST UNDER 3.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jalen Brunson AST UNDER 6.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Karl-Anthony Towns REB UNDER 11.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jaden McDaniels PTS OVER 15.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Paul George REB UNDER 5.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Julius Randle REB OVER 6.5",
       "tier": "medium"
     }
   ]

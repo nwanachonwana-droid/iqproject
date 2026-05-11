@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "sport": "nba",
+  "generated_at": "2026-05-10T04:07:50.409284Z",
+  "data_date": "2026-05-10",
+  "model_version": "v1.0",
+  "status": "EXPERIMENTAL",
+  "picks": [
+    {
+      "home_team": "Philadelphia 76ers",
+      "away_team": "New York Knicks",
+      "pick": "New York Knicks",
+      "pick_side": "away",
+      "model_prob_home": 0.4892,
+      "model_prob_away": 0.5108,
+      "market_prob_home": 0.4779,
+      "market_prob_away": 0.5221,
+      "edge_pp": -1.13,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-10T19:40:00Z",
+      "outcome": "WIN",
+      "result": 1.0,
+      "settled_at": "2026-05-11T08:29:07.137152Z"
+    },
+    {
+      "home_team": "Minnesota Timberwolves",
+      "away_team": "San Antonio Spurs",
+      "pick": "San Antonio Spurs",
+      "pick_side": "away",
+      "model_prob_home": 0.4973,
+      "model_prob_away": 0.5027,
+      "market_prob_home": 0.3774,
+      "market_prob_away": 0.6226,
+      "edge_pp": -12.0,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-05-10T23:40:00Z",
+      "outcome": "LOSS",
+      "result": 0.0,
+      "settled_at": "2026-05-11T08:29:07.137176Z"
+    }
+  ],
+  "summary": {
+    "total_picks": 2,
+    "high_confidence": 0,
+    "avg_edge_pp": -6.56
+  }
+}

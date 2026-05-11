@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "sport": "soccer",
+  "generated_at": "2026-05-10T04:07:54.619679Z",
+  "data_date": "2026-05-10",
+  "model_version": "v1.0",
+  "status": "ACTIVE",
+  "picks": [
+    {
+      "home_team": "Mallorca",
+      "away_team": "Villarreal",
+      "league": "La Liga",
+      "pick": "Villarreal",
+      "pick_side": "away",
+      "model_prob_home": 0.3256,
+      "model_prob_away": 0.3996,
+      "market_prob_home": 0.3929,
+      "market_prob_away": 0.342,
+      "draw_prob": 0.2651,
+      "edge_pp": 5.75,
+      "confidence_tier": "low",
+      "game_time_utc": "2026-05-10T12:00:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "home_team": "Oviedo",
+      "away_team": "Getafe",
+      "league": "La Liga",
+      "pick": "Getafe",
+      "pick_side": "away",
+      "model_prob_home": 0.333,
+      "model_prob_away": 0.391,
+      "market_prob_home": 0.3483,
+      "market_prob_away": 0.3414,
+      "draw_prob": 0.3103,
+      "edge_pp": 4.97,
+      "confidence_tier": "low",
+      "game_time_utc": "2026-05-10T16:30:00Z",
+      "outcome": null,
+      "result": null
+    }
+  ],
+  "summary": {
+    "total_picks": 2,
+    "high_confidence": 0,
+    "avg_edge_pp": 5.36
+  }
+}
