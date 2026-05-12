@@ -2,20 +2,20 @@
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
   "launch_date": "2026-04-13",
-  "last_updated": "2026-05-11",
+  "last_updated": "2026-05-12",
   "overall": {
-    "wins": 676,
-    "losses": 349,
+    "wins": 677,
+    "losses": 351,
     "pushes": 0,
-    "total": 1025,
-    "hit_rate": 65.95,
-    "roi_flat": 25.9
+    "total": 1028,
+    "hit_rate": 65.86,
+    "roi_flat": 25.72
   },
   "by_confidence": {
     "high": {
       "wins": 201,
-      "total": 245,
-      "hit_rate": 82.04
+      "total": 246,
+      "hit_rate": 81.71
     },
     "medium": {
       "wins": 177,
@@ -23,12 +23,69 @@
       "hit_rate": 68.08
     },
     "low": {
-      "wins": 298,
-      "total": 520,
-      "hit_rate": 57.31
+      "wins": 299,
+      "total": 522,
+      "hit_rate": 57.28
     }
   },
   "recent": [
+    {
+      "pick_id": "ncaabb-2026-05-11-5cf6d3d408f02c438c4b00f8dd277145",
+      "game_time_utc": "2026-05-11T23:35:00Z",
+      "home_team": "UC Santa Barbara Gauchos",
+      "away_team": "Cal Baptist Lancers",
+      "pick": "UC Santa Barbara Gauchos",
+      "pick_side": "home",
+      "model_prob_home": 0.54,
+      "model_prob_away": 0.46,
+      "market_prob_home": 0.5897,
+      "market_prob_away": 0.4103,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -4.97,
+      "confidence_tier": "low",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-05-12T11:37:10.209958Z"
+    },
+    {
+      "pick_id": "ncaabb-2026-05-11-90d63d3794bf72aab91edf21daf1d7db",
+      "game_time_utc": "2026-05-11T17:05:00Z",
+      "home_team": "Bucknell Bison",
+      "away_team": "Navy Midshipmen",
+      "pick": "Bucknell Bison",
+      "pick_side": "home",
+      "model_prob_home": 0.54,
+      "model_prob_away": 0.46,
+      "market_prob_home": 0.3713,
+      "market_prob_away": 0.6287,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": 16.87,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-05-12T11:37:10.209947Z"
+    },
+    {
+      "pick_id": "ncaabb-2026-05-11-401857366",
+      "game_time_utc": "2026-05-11T23:35Z",
+      "home_team": "UC Santa Barbara Gauchos",
+      "away_team": "California Baptist Lancers",
+      "pick": "UC Santa Barbara Gauchos",
+      "pick_side": "home",
+      "model_prob_home": 0.6684,
+      "model_prob_away": 0.3316,
+      "market_prob_home": null,
+      "market_prob_away": null,
+      "market_line_home": null,
+      "market_source": null,
+      "edge_pp": null,
+      "confidence_tier": "high",
+      "result": 0.0,
+      "outcome": "LOSS",
+      "settled_at": "2026-05-12T11:37:10.209917Z"
+    },
     {
       "pick_id": "ncaabb-2026-05-10-401856360",
       "game_time_utc": "2026-05-10T20:00Z",
@@ -921,63 +978,6 @@
       "result": 1.0,
       "outcome": "WIN",
       "settled_at": "2026-05-11T08:29:07.114728Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-05-10-2cc7b5f75414399fc3de202ed014826f",
-      "game_time_utc": "2026-05-10T17:00:00Z",
-      "home_team": "Ohio State Buckeyes",
-      "away_team": "Michigan St Spartans",
-      "pick": "Ohio State Buckeyes",
-      "pick_side": "home",
-      "model_prob_home": 0.6288,
-      "model_prob_away": 0.3712,
-      "market_prob_home": 0.5714,
-      "market_prob_away": 0.4286,
-      "market_line_home": null,
-      "market_source": "pinnacle",
-      "edge_pp": 5.74,
-      "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-05-11T08:29:07.114721Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-05-10-1b7741ffb131693b46591ceb2613d974",
-      "game_time_utc": "2026-05-10T19:00:00Z",
-      "home_team": "Nebraska Cornhuskers",
-      "away_team": "Iowa Hawkeyes",
-      "pick": "Nebraska Cornhuskers",
-      "pick_side": "home",
-      "model_prob_home": 0.629,
-      "model_prob_away": 0.371,
-      "market_prob_home": 0.6865,
-      "market_prob_away": 0.3135,
-      "market_line_home": null,
-      "market_source": "pinnacle",
-      "edge_pp": -5.75,
-      "confidence_tier": "medium",
-      "result": 1.0,
-      "outcome": "WIN",
-      "settled_at": "2026-05-11T08:29:07.114715Z"
-    },
-    {
-      "pick_id": "ncaabb-2026-05-10-3af7b4289337f98e45021561255fa5aa",
-      "game_time_utc": "2026-05-10T17:00:00Z",
-      "home_team": "Virginia Cavaliers",
-      "away_team": "California Golden Bears",
-      "pick": "Virginia Cavaliers",
-      "pick_side": "home",
-      "model_prob_home": 0.6339,
-      "model_prob_away": 0.3661,
-      "market_prob_home": 0.6865,
-      "market_prob_away": 0.3135,
-      "market_line_home": null,
-      "market_source": "pinnacle",
-      "edge_pp": -5.26,
-      "confidence_tier": "medium",
-      "result": 0.0,
-      "outcome": "LOSS",
-      "settled_at": "2026-05-11T08:29:07.114708Z"
     }
   ]
 }
