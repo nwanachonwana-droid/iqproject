@@ -1028,3 +1028,44 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-10,nba_props,San Antonio Spurs @ Minnesota Timberwolves,Julius Randle PTS OVER 17.5,over,0.6163,0.4972,11.91,medium,LOSS,12.0,17.5,ESPN
 2026-05-10,nba_props,New York Knicks @ Philadelphia 76ers,Karl-Anthony Towns REB UNDER 11.5,under,0.6059,0.4996,10.63,medium,WIN,4.0,11.5,ESPN
 2026-05-10,nba_props,New York Knicks @ Philadelphia 76ers,Paul George REB UNDER 5.5,under,0.6301,0.5433,8.68,medium,WIN,1.0,5.5,ESPN
+2026-05-11,mlb,New York Yankees @ Baltimore Orioles,New York Yankees,away,0.6423,0.6068,3.55,medium,LOSS,2-3,,ESPN
+2026-05-11,ncaa_baseball,California Baptist Lancers @ UC Santa Barbara Gauchos,UC Santa Barbara Gauchos,home,0.6684,,,high,LOSS,8-3,,ESPN
+2026-05-11,mlb_props,New York Yankees @ Baltimore Orioles,Ryan Weathers OVER 5.5K,over,0.6823,0.5236,15.87,high,WIN,9K,5.5,MLB API
+2026-05-11,mlb_props,Arizona Diamondbacks @ Texas Rangers,Michael Soroka OVER 5.5K,over,0.6103,0.4629,14.74,medium,LOSS,5K,5.5,MLB API
+2026-05-11,mlb_props,Seattle Mariners @ Houston Astros,George Kirby UNDER 5.5K,under,0.6971,0.5509,14.62,high,LOSS,7K,5.5,MLB API
+2026-05-11,mlb_props,New York Yankees @ Baltimore Orioles,Brandon Young UNDER 4.5K,under,0.6789,0.5762,10.27,high,LOSS,5K,4.5,MLB API
+2026-05-11,mlb_props,Los Angeles Angels @ Cleveland Guardians,Joey Cantillo UNDER 5.5K,under,0.611,0.5549,5.61,medium,WIN,4K,5.5,MLB API
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Tobias Harris AST UNDER 1.5,under,0.8474,0.4701,37.73,high,LOSS,5.0,1.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,LeBron James REB UNDER 6.5,under,0.8472,0.5108,33.64,high,LOSS,12.0,6.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Dennis Schroder REB UNDER 1.5,under,0.7833,0.4537,32.95,high,LOSS,2.0,1.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Dennis Schroder PTS OVER 6.5,over,0.8047,0.4881,31.66,high,WIN,7.0,6.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,James Harden REB OVER 4.5,over,0.8291,0.5232,30.59,high,PENDING,,4.5,MANUAL
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Cade Cunningham AST UNDER 9.5,under,0.806,0.511,29.5,high,WIN,6.0,9.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Tobias Harris PTS OVER 18.5,over,0.7928,0.5003,29.25,high,LOSS,16.0,18.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Ausar Thompson PTS UNDER 9.5,under,0.7881,0.5078,28.03,high,WIN,4.0,9.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Jalen Duren PTS UNDER 13.5,under,0.7724,0.4921,28.02,high,WIN,8.0,13.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Austin Reaves PTS UNDER 21.5,under,0.7672,0.5049,26.22,high,LOSS,27.0,21.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Marcus Smart REB OVER 3.5,over,0.7007,0.4458,25.49,high,LOSS,2.0,3.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,LeBron James PTS OVER 21.5,over,0.7358,0.5003,23.55,high,WIN,24.0,21.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Rui Hachimura PTS OVER 14.5,over,0.7353,0.503,23.23,high,WIN,25.0,14.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Jaylon Tyson PTS UNDER 6.5,under,0.7259,0.494,23.2,high,WIN,1.0,6.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Ausar Thompson AST OVER 2.5,over,0.7738,0.5573,21.65,high,LOSS,1.0,2.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Ausar Thompson REB OVER 7.5,over,0.663,0.4512,21.18,high,LOSS,4.0,7.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Donovan Mitchell PTS UNDER 27.5,under,0.7158,0.511,20.48,high,LOSS,43.0,27.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Cade Cunningham PTS OVER 27.5,over,0.6903,0.4949,19.54,high,LOSS,19.0,27.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Deandre Ayton PTS OVER 8.5,over,0.6842,0.4889,19.52,high,LOSS,6.0,8.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Austin Reaves REB UNDER 4.5,under,0.7309,0.5421,18.88,high,LOSS,7.0,4.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Max Strus REB OVER 3.5,over,0.7375,0.5548,18.27,high,WIN,4.0,3.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,James Harden AST UNDER 6.5,under,0.6533,0.4709,18.24,high,LOSS,11.0,6.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Jaxson Hayes PTS UNDER 3.5,under,0.6744,0.4983,17.61,high,LOSS,18.0,3.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Tobias Harris REB OVER 6.5,over,0.6391,0.4679,17.13,medium,WIN,8.0,6.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Daniss Jenkins PTS UNDER 9.5,under,0.6857,0.5189,16.68,high,WIN,2.0,9.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Evan Mobley PTS OVER 15.5,over,0.6502,0.487,16.32,high,WIN,17.0,15.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Jarrett Allen PTS OVER 12.5,over,0.647,0.4872,15.97,medium,LOSS,9.0,12.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Jaylon Tyson REB OVER 3.5,over,0.6133,0.46,15.33,medium,LOSS,3.0,3.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Duncan Robinson PTS OVER 11.5,over,0.6351,0.4846,15.04,medium,LOSS,4.0,11.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Donovan Mitchell REB OVER 4.5,over,0.6065,0.4674,13.91,medium,WIN,5.0,4.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Austin Reaves AST UNDER 6.5,under,0.6756,0.5495,12.61,high,WIN,6.0,6.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Jalen Duren REB UNDER 10.5,under,0.6324,0.5142,11.82,medium,WIN,2.0,10.5,ESPN
+2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,James Harden PTS UNDER 19.5,under,0.6229,0.5168,10.61,medium,LOSS,24.0,19.5,ESPN
+2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Rui Hachimura REB OVER 3.5,over,0.6057,0.5257,8.0,medium,WIN,5.0,3.5,ESPN
