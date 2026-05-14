@@ -1069,3 +1069,49 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,Jalen Duren REB UNDER 10.5,under,0.6324,0.5142,11.82,medium,WIN,2.0,10.5,ESPN
 2026-05-11,nba_props,Detroit Pistons @ Cleveland Cavaliers,James Harden PTS UNDER 19.5,under,0.6229,0.5168,10.61,medium,LOSS,24.0,19.5,ESPN
 2026-05-11,nba_props,Oklahoma City Thunder @ Los Angeles Lakers,Rui Hachimura REB OVER 3.5,over,0.6057,0.5257,8.0,medium,WIN,5.0,3.5,ESPN
+2026-05-12,mlb,New York Yankees @ Baltimore Orioles,New York Yankees,away,0.6382,0.5965,4.17,medium,WIN,6-2,,ESPN
+2026-05-12,mlb,Colorado Rockies @ Pittsburgh Pirates,Pittsburgh Pirates,home,0.6475,0.7369,-8.94,medium,WIN,1-3,,ESPN
+2026-05-12,mlb,Chicago Cubs @ Atlanta Braves,Atlanta Braves,home,0.6076,0.5328,7.48,medium,WIN,2-5,,ESPN
+2026-05-12,mlb,San Diego Padres @ Milwaukee Brewers,Milwaukee Brewers,home,0.6307,0.537,9.37,medium,WIN,4-6,,ESPN
+2026-05-12,ncaa_baseball,Mercer Bears @ Georgia Tech Yellow Jackets,Georgia Tech Yellow Jackets,home,0.7667,0.7634,0.33,high,LOSS,12-9,,ESPN
+2026-05-12,ncaa_baseball,Penn State Nittany Lions @ Pittsburgh Panthers,Pittsburgh Panthers,home,0.7017,,,high,WIN,7-11,,ESPN
+2026-05-12,ncaa_baseball,UMass Lowell River Hawks @ Boston College Eagles,Boston College Eagles,home,0.6618,,,high,PENDING,,,MANUAL
+2026-05-12,ncaa_baseball,UT Martin Skyhawks @ Ole Miss Rebels,Ole Miss Rebels,home,0.6569,,,high,WIN,6-17,,ESPN
+2026-05-12,ncaa_baseball,The Citadel Bulldogs @ Coastal Carolina Chanticleers,Coastal Carolina Chanticleers,home,0.6518,0.6744,-2.26,high,WIN,3-5,,ESPN
+2026-05-12,ncaa_baseball,Belmont Bruins @ Tennessee Volunteers,Tennessee Volunteers,home,0.6439,,,medium,WIN,1-11,,ESPN
+2026-05-12,ncaa_baseball,Richmond Spiders @ Virginia Cavaliers,Virginia Cavaliers,home,0.6387,0.7377,-9.9,medium,WIN,6-18,,ESPN
+2026-05-12,ncaa_baseball,North Carolina Tar Heels @ UNC Wilmington Seahawks,North Carolina Tar Heels,away,0.6353,0.7377,-10.24,medium,WIN,13-7,,ESPN
+2026-05-12,ncaa_baseball,Florida Atlantic Owls @ Florida Gulf Coast Eagles,Florida Gulf Coast Eagles,home,0.6277,0.5897,3.8,medium,LOSS,9-3,,ESPN
+2026-05-12,ncaa_baseball,Bellarmine Knights @ Louisville Cardinals,Louisville Cardinals,home,0.627,,,medium,WIN,7-14,,ESPN
+2026-05-12,ncaa_baseball,Northern Kentucky Norse @ Kentucky Wildcats,Kentucky Wildcats,home,0.6222,,,medium,PENDING,,,MANUAL
+2026-05-12,ncaa_baseball,New Mexico State Aggies @ New Mexico Lobos,New Mexico Lobos,home,0.62,,,medium,WIN,6-12,,ESPN
+2026-05-12,ncaa_baseball,Seattle U Redhawks @ Washington State Cougars,Washington State Cougars,home,0.6186,,,medium,LOSS,12-11,,ESPN
+2026-05-12,ncaa_baseball,Bethune-Cookman Wildcats @ UCF Knights,UCF Knights,home,0.6085,,,medium,PENDING,,,MANUAL
+2026-05-12,ncaa_baseball,Auburn Tigers @ Jacksonville St Gamecocks,Jacksonville St Gamecocks,home,0.604,0.3766,22.74,medium,PENDING,,,MANUAL
+2026-05-12,ncaa_baseball,Charleston Cougars @ Georgia Southern Eagles,Charleston Cougars,away,0.6029,,,medium,LOSS,5-9,,ESPN
+2026-05-12,mlb_props,Seattle Mariners @ Houston Astros,Bryan Woo UNDER 5.5K,under,0.6455,0.448,19.75,medium,LOSS,9K,5.5,MLB API
+2026-05-12,mlb_props,Washington Nationals @ Cincinnati Reds,Miles Mikolas OVER 3.5K,over,0.6287,0.4737,15.5,medium,LOSS,2K,3.5,MLB API
+2026-05-12,mlb_props,Philadelphia Phillies @ Boston Red Sox,Zack Wheeler UNDER 6.5K,under,0.6173,0.4913,12.6,medium,WIN,4K,6.5,MLB API
+2026-05-12,mlb_props,San Francisco Giants @ Los Angeles Dodgers,Adrian Houser UNDER 3.5K,under,0.6995,0.5759,12.36,high,LOSS,4K,3.5,MLB API
+2026-05-12,mlb_props,Detroit Tigers @ New York Mets,Freddy Peralta UNDER 6.5K,under,0.6786,0.5655,11.31,high,LOSS,7K,6.5,MLB API
+2026-05-12,mlb_props,St. Louis Cardinals @ Athletics,Andre Pallante OVER 3.5K,over,0.6234,0.5168,10.66,medium,WIN,4K,3.5,MLB API
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Terrence Shannon Jr. REB OVER 2.5,over,0.7999,0.4047,39.53,high,PENDING,,2.5,MANUAL
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Jaden McDaniels PTS OVER 15.5,over,0.7973,0.4918,30.55,high,WIN,17.0,15.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Mike Conley AST OVER 1.5,over,0.8004,0.5101,29.03,high,WIN,2.0,1.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Julius Randle AST UNDER 3.5,under,0.7407,0.4551,28.56,high,WIN,1.0,3.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Julian Champagnie REB OVER 4.5,over,0.8054,0.5307,27.47,high,LOSS,4.0,4.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Naz Reid PTS OVER 11.5,over,0.7459,0.4833,26.26,high,WIN,12.0,11.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Stephon Castle AST UNDER 7.5,under,0.7633,0.5336,22.97,high,WIN,6.0,7.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Jaden McDaniels REB OVER 4.5,over,0.7638,0.5464,21.74,high,WIN,6.0,4.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Julian Champagnie AST OVER 1.5,over,0.6299,0.4291,20.08,medium,PENDING,,1.5,MANUAL
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Dylan Harper AST UNDER 3.5,under,0.7687,0.5735,19.52,high,WIN,2.0,3.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Devin Vassell REB UNDER 4.5,under,0.7194,0.5295,19.0,high,WIN,3.0,4.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Dylan Harper REB OVER 3.5,over,0.7042,0.5159,18.83,high,WIN,10.0,3.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,De'Aaron Fox REB UNDER 3.5,under,0.7427,0.5566,18.61,high,LOSS,4.0,3.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Keldon Johnson REB OVER 3.5,over,0.6548,0.4742,18.06,high,LOSS,2.0,3.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Stephon Castle REB UNDER 5.5,under,0.741,0.5651,17.59,high,WIN,4.0,5.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Victor Wembanyama AST UNDER 3.5,under,0.7364,0.5612,17.52,high,LOSS,5.0,3.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Rudy Gobert PTS OVER 7.5,over,0.6795,0.5129,16.66,high,LOSS,4.0,7.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Naz Reid AST OVER 1.5,over,0.7558,0.6042,15.17,high,WIN,2.0,1.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Julius Randle PTS UNDER 16.5,under,0.6111,0.4997,11.14,medium,LOSS,17.0,16.5,ESPN
+2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Keldon Johnson PTS OVER 7.5,over,0.6156,0.5223,9.33,medium,WIN,21.0,7.5,ESPN
