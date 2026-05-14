@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "mlb",
   "market_type": "player_props",
-  "generated_at": "2026-05-14T10:33:24.762521Z",
+  "generated_at": "2026-05-14T10:37:23.950667Z",
   "data_date": "2026-05-14",
   "props": [
     {
@@ -126,6 +126,26 @@
       "outcome": null
     },
     {
+      "pick_id": "mlb-props-2026-05-14-682052-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "St. Louis Cardinals @ Athletics",
+      "player": "Jacob Lopez",
+      "pick": "Jacob Lopez Under 4.5 Ks",
+      "pick_side": "Under",
+      "line": 4.5,
+      "proj_k": 4.1,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.249,
+      "model_prob": 0.6102,
+      "market_prob": 0.4783,
+      "edge_pp": 13.19,
+      "confidence_tier": "medium",
+      "result": null,
+      "outcome": null
+    },
+    {
       "pick_id": "mlb-props-2026-05-14-519242-k",
       "sport": "mlb",
       "market": "pitcher_strikeouts",
@@ -142,26 +162,6 @@
       "market_prob": 0.4674,
       "edge_pp": 13.16,
       "confidence_tier": "low",
-      "result": null,
-      "outcome": null
-    },
-    {
-      "pick_id": "mlb-props-2026-05-14-682052-k",
-      "sport": "mlb",
-      "market": "pitcher_strikeouts",
-      "game": "St. Louis Cardinals @ Athletics",
-      "player": "Jacob Lopez",
-      "pick": "Jacob Lopez Under 4.5 Ks",
-      "pick_side": "Under",
-      "line": 4.5,
-      "proj_k": 4.1,
-      "umpire": "Unknown",
-      "ump_adj": 0.0,
-      "opp_k_pct": 0.249,
-      "model_prob": 0.6102,
-      "market_prob": 0.4796,
-      "edge_pp": 13.06,
-      "confidence_tier": "medium",
       "result": null,
       "outcome": null
     },
@@ -241,6 +241,26 @@
       "model_prob": 0.6096,
       "market_prob": 0.5403,
       "edge_pp": 6.93,
+      "confidence_tier": "medium",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "pick_id": "mlb-props-2026-05-14-666200-k",
+      "sport": "mlb",
+      "market": "pitcher_strikeouts",
+      "game": "Philadelphia Phillies @ Boston Red Sox",
+      "player": "Jes\u00fas Luzardo",
+      "pick": "Jes\u00fas Luzardo Over 6.5 Ks",
+      "pick_side": "Over",
+      "line": 6.5,
+      "proj_k": 7.45,
+      "umpire": "Unknown",
+      "ump_adj": 0.0,
+      "opp_k_pct": 0.252,
+      "model_prob": 0.6151,
+      "market_prob": 0.5499,
+      "edge_pp": 6.52,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null
@@ -327,7 +347,7 @@
     }
   ],
   "summary": {
-    "total_props": 16,
+    "total_props": 17,
     "high_confidence": 2
   }
 }
