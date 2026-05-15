@@ -1115,3 +1115,40 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Naz Reid AST OVER 1.5,over,0.7558,0.6042,15.17,high,WIN,2.0,1.5,ESPN
 2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Julius Randle PTS UNDER 16.5,under,0.6111,0.4997,11.14,medium,LOSS,17.0,16.5,ESPN
 2026-05-12,nba_props,Minnesota Timberwolves @ San Antonio Spurs,Keldon Johnson PTS OVER 7.5,over,0.6156,0.5223,9.33,medium,WIN,21.0,7.5,ESPN
+2026-05-13,mlb,New York Yankees @ Baltimore Orioles,New York Yankees,away,0.6471,0.5996,4.75,medium,LOSS,0-7,,ESPN
+2026-05-13,mlb,Colorado Rockies @ Pittsburgh Pirates,Pittsburgh Pirates,home,0.6531,0.6155,3.76,high,LOSS,10-4,,ESPN
+2026-05-13,mlb,Chicago Cubs @ Atlanta Braves,Atlanta Braves,home,0.6163,0.4329,18.34,medium,WIN,1-4,,ESPN
+2026-05-13,mlb,San Diego Padres @ Milwaukee Brewers,Milwaukee Brewers,home,0.6358,0.5707,6.51,medium,LOSS,3-1,,ESPN
+2026-05-13,mlb_props,Detroit Tigers @ New York Mets,Framber Valdez UNDER 5.5K,under,0.7187,0.5187,20.0,high,LOSS,7K,5.5,MLB API
+2026-05-13,mlb_props,Colorado Rockies @ Pittsburgh Pirates,Mitch Keller UNDER 5.5K,under,0.6559,0.4712,18.47,high,WIN,3K,5.5,MLB API
+2026-05-13,mlb_props,St. Louis Cardinals @ Athletics,Matthew Liberatore UNDER 4.5K,under,0.678,0.4989,17.91,high,LOSS,5K,4.5,MLB API
+2026-05-13,mlb_props,Washington Nationals @ Cincinnati Reds,Nick Lodolo UNDER 5.5K,under,0.6873,0.5166,17.07,high,LOSS,6K,5.5,MLB API
+2026-05-13,mlb_props,Miami Marlins @ Minnesota Twins,Max Meyer OVER 4.5K,over,0.6951,0.5331,16.2,high,WIN,9K,4.5,MLB API
+2026-05-13,mlb_props,San Diego Padres @ Milwaukee Brewers,Jacob Misiorowski OVER 7.5K,over,0.6925,0.5324,16.01,high,WIN,10K,7.5,MLB API
+2026-05-13,mlb_props,Chicago Cubs @ Atlanta Braves,Shota Imanaga OVER 5.5K,over,0.6495,0.5005,14.9,medium,WIN,6K,5.5,MLB API
+2026-05-13,mlb_props,Washington Nationals @ Cincinnati Reds,Jake Irvin OVER 4.5K,over,0.6484,0.5237,12.47,medium,LOSS,4K,4.5,MLB API
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Dean Wade PTS OVER 3.5,over,0.8321,0.4673,36.48,high,PENDING,,3.5,MANUAL
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Cade Cunningham AST UNDER 9.5,under,0.7945,0.5008,29.37,high,WIN,9.0,9.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Tobias Harris PTS OVER 18.5,over,0.7814,0.4904,29.1,high,LOSS,13.0,18.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Dennis Schroder PTS OVER 6.5,over,0.778,0.4992,27.88,high,LOSS,5.0,6.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Donovan Mitchell AST UNDER 3.5,under,0.7798,0.5135,26.63,high,WIN,3.0,3.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Dean Wade REB OVER 2.5,over,0.719,0.4773,24.17,high,WIN,6.0,2.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,James Harden REB OVER 4.5,over,0.7442,0.5043,23.98,high,WIN,8.0,4.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Evan Mobley PTS OVER 14.5,over,0.7281,0.5094,21.87,high,WIN,19.0,14.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Jaylon Tyson PTS OVER 3.5,over,0.699,0.488,21.1,high,PENDING,,3.5,MANUAL
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Jarrett Allen PTS OVER 11.5,over,0.7007,0.4919,20.88,high,WIN,16.0,11.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Ausar Thompson REB OVER 6.5,over,0.7281,0.5248,20.33,high,WIN,7.0,6.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Cade Cunningham PTS OVER 27.5,over,0.685,0.4907,19.42,high,WIN,39.0,27.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Ausar Thompson PTS UNDER 8.5,under,0.6887,0.4954,19.33,high,WIN,6.0,8.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Max Strus AST OVER 1.5,over,0.7126,0.5269,18.56,high,LOSS,1.0,1.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Max Strus REB OVER 3.5,over,0.7218,0.5373,18.45,high,WIN,8.0,3.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Tobias Harris REB OVER 6.5,over,0.6879,0.5197,16.81,high,LOSS,6.0,6.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Dennis Schroder AST UNDER 2.5,under,0.6813,0.5163,16.5,high,LOSS,5.0,2.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Ausar Thompson AST OVER 3.5,over,0.6384,0.4746,16.38,medium,WIN,5.0,3.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Duncan Robinson PTS OVER 11.5,over,0.6589,0.5076,15.14,high,PENDING,,11.5,MANUAL
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Jalen Duren PTS UNDER 11.5,under,0.6293,0.504,12.53,medium,WIN,9.0,11.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Duncan Robinson REB OVER 2.5,over,0.612,0.5077,10.43,medium,PENDING,,2.5,MANUAL
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Cade Cunningham REB UNDER 5.5,under,0.637,0.5421,9.49,medium,LOSS,7.0,5.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Jarrett Allen REB UNDER 7.5,under,0.6045,0.512,9.24,medium,LOSS,10.0,7.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Donovan Mitchell REB OVER 4.5,over,0.6049,0.5232,8.17,medium,LOSS,4.0,4.5,ESPN
+2026-05-13,nba_props,Cleveland Cavaliers @ Detroit Pistons,Daniss Jenkins AST OVER 2.5,over,0.6295,0.5483,8.12,medium,WIN,3.0,2.5,ESPN
