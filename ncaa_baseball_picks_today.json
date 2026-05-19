@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-05-19T13:41:58.332923Z",
+  "generated_at": "2026-05-19T13:42:48.951325Z",
   "data_date": "2026-05-19",
   "model_version": "v1.0",
   "status": "PROVEN",
@@ -91,11 +91,11 @@
       "pick_side": "home",
       "model_prob_home": 0.6409,
       "model_prob_away": 0.3591,
-      "market_prob_home": 0.8811,
-      "market_prob_away": 0.1189,
+      "market_prob_home": 0.8731,
+      "market_prob_away": 0.1269,
       "market_line_home": null,
       "market_source": "pinnacle",
-      "edge_pp": -24.02,
+      "edge_pp": -23.22,
       "confidence_tier": "medium",
       "result": null,
       "outcome": null,
@@ -352,6 +352,6 @@
   "summary": {
     "total_picks": 18,
     "high_confidence": 4,
-    "avg_edge_pp": 1.12
+    "avg_edge_pp": 1.16
   }
 }
