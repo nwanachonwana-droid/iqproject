@@ -1272,3 +1272,33 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-16,nba_props,San Antonio Spurs @ Minnesota Timberwolves,Rudy Gobert AST OVER 1.5,over,0.6129,0.474,13.89,medium,PENDING,,1.5,MANUAL
 2026-05-16,nba_props,San Antonio Spurs @ Minnesota Timberwolves,Stephon Castle REB UNDER 5.5,under,0.6856,0.5533,13.22,high,PENDING,,5.5,MANUAL
 2026-05-16,nba_props,San Antonio Spurs @ Minnesota Timberwolves,De'Aaron Fox PTS UNDER 17.5,under,0.6269,0.5137,11.31,medium,PENDING,,17.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Dylan Harper REB OVER 3.5,over,0.8481,0.5247,32.34,high,WIN,11.0,3.5,ESPN
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Julian Champagnie PTS OVER 8.5,over,0.8162,0.5142,30.19,high,WIN,11.0,8.5,ESPN
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Jarrett Allen PTS OVER 11.5,over,0.7967,0.5157,28.11,high,PENDING,,11.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Dean Wade REB OVER 2.5,over,0.7342,0.4731,26.11,high,PENDING,,2.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Evan Mobley REB UNDER 8.5,under,0.768,0.5094,25.87,high,PENDING,,8.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Cade Cunningham REB UNDER 5.5,under,0.7914,0.5445,24.69,high,PENDING,,5.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Donovan Mitchell AST UNDER 3.5,under,0.7642,0.5185,24.57,high,PENDING,,3.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Stephon Castle PTS OVER 16.5,over,0.7352,0.4912,24.4,high,WIN,17.0,16.5,ESPN
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Tobias Harris REB OVER 5.5,over,0.7065,0.4653,24.12,high,PENDING,,5.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Tobias Harris PTS OVER 16.5,over,0.7311,0.4961,23.5,high,PENDING,,16.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Max Strus PTS OVER 8.5,over,0.7204,0.5043,21.62,high,PENDING,,8.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Caris LeVert PTS OVER 6.5,over,0.716,0.5073,20.86,high,PENDING,,6.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Max Strus REB OVER 4.5,over,0.6875,0.5013,18.62,high,PENDING,,4.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Evan Mobley AST OVER 3.5,over,0.6655,0.4879,17.77,high,PENDING,,3.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Ausar Thompson REB UNDER 7.5,under,0.6814,0.5073,17.41,high,PENDING,,7.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Duncan Robinson REB OVER 1.5,over,0.7452,0.5829,16.22,high,PENDING,,1.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Devin Vassell AST OVER 2.5,over,0.6148,0.4566,15.82,medium,LOSS,2.0,2.5,ESPN
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,De'Aaron Fox REB UNDER 3.5,under,0.6829,0.5333,14.97,high,PENDING,,3.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Devin Vassell REB OVER 3.5,over,0.6174,0.4767,14.07,medium,WIN,6.0,3.5,ESPN
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Evan Mobley PTS UNDER 15.5,under,0.6394,0.5022,13.72,medium,PENDING,,15.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Donovan Mitchell PTS OVER 25.5,over,0.6354,0.5058,12.96,medium,PENDING,,25.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,De'Aaron Fox PTS OVER 15.5,over,0.6236,0.4986,12.5,medium,PENDING,,15.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Luke Kornet PTS OVER 2.5,over,0.6541,0.5319,12.22,high,PENDING,,2.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Keldon Johnson PTS OVER 8.5,over,0.6073,0.4907,11.67,medium,WIN,13.0,8.5,ESPN
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,James Harden AST UNDER 6.5,under,0.6531,0.5413,11.18,high,PENDING,,6.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,James Harden REB OVER 4.5,over,0.6199,0.5107,10.92,medium,PENDING,,4.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,De'Aaron Fox AST UNDER 5.5,under,0.6453,0.5384,10.68,medium,PENDING,,5.5,MANUAL
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Jalen Duren AST OVER 1.5,over,0.6573,0.5536,10.37,high,PENDING,,1.5,MANUAL
+2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Stephon Castle REB OVER 4.5,over,0.6275,0.5272,10.03,medium,WIN,6.0,4.5,ESPN
+2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Max Strus AST OVER 1.5,over,0.6137,0.5244,8.93,medium,PENDING,,1.5,MANUAL

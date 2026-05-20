@@ -1,14 +1,34 @@
 {
   "schema_version": "1.0",
   "sport": "nhl",
-  "generated_at": "2026-05-19T13:42:48.806495Z",
-  "data_date": "2026-05-19",
+  "generated_at": "2026-05-20T04:51:37.530204Z",
+  "data_date": "2026-05-20",
   "model_version": "v1.0",
   "status": "ACTIVE",
-  "picks": [],
+  "picks": [
+    {
+      "pick_id": "nhl-2026-05-20-2025030321",
+      "game_time_utc": "2026-05-21T00:00:00Z",
+      "home_team": "Colorado Avalanche",
+      "away_team": "Vegas Golden Knights",
+      "pick": "Colorado Avalanche",
+      "pick_side": "home",
+      "model_prob_home": 0.6671,
+      "model_prob_away": 0.3329,
+      "market_prob_home": 0.6291,
+      "market_prob_away": 0.3709,
+      "market_line_home": -192,
+      "market_source": "pinnacle",
+      "edge_pp": 3.8,
+      "confidence_tier": "high",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ],
   "summary": {
-    "total_picks": 0,
-    "high_confidence": 0,
-    "avg_edge_pp": 0
+    "total_picks": 1,
+    "high_confidence": 1,
+    "avg_edge_pp": 3.8
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "sport": "soccer",
-  "generated_at": "2026-05-20T04:51:56.683567Z",
-  "data_date": "2026-05-20",
+  "sport": "mma",
+  "generated_at": "2026-05-19T13:42:55.709350Z",
+  "data_date": "2026-05-19",
   "model_version": "v1.0",
-  "status": "ACTIVE",
+  "status": "EXPERIMENTAL",
   "picks": [],
   "summary": {
     "total_picks": 0,
