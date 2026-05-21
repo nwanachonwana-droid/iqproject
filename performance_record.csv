@@ -1302,3 +1302,34 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Jalen Duren AST OVER 1.5,over,0.6573,0.5536,10.37,high,PENDING,,1.5,MANUAL
 2026-05-18,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Stephon Castle REB OVER 4.5,over,0.6275,0.5272,10.03,medium,WIN,6.0,4.5,ESPN
 2026-05-18,nba_props,Cleveland Cavaliers @ Detroit Pistons,Max Strus AST OVER 1.5,over,0.6137,0.5244,8.93,medium,PENDING,,1.5,MANUAL
+2026-05-19,mlb,Baltimore Orioles @ Tampa Bay Rays,Tampa Bay Rays,home,0.669,0.5154,15.36,high,WIN,1-4,,ESPN
+2026-05-19,mlb,Toronto Blue Jays @ New York Yankees,New York Yankees,home,0.6638,0.5635,10.03,high,WIN,4-5,,ESPN
+2026-05-19,mlb,Houston Astros @ Minnesota Twins,Minnesota Twins,home,0.6109,0.5635,4.74,medium,LOSS,2-1,,ESPN
+2026-05-19,ncaa_baseball,South Carolina Gamecocks @ Tennessee Volunteers,Tennessee Volunteers,home,0.7193,0.6744,4.49,high,WIN,6-11,,ESPN
+2026-05-19,ncaa_baseball,Michigan St Spartans @ Purdue Boilermakers,Purdue Boilermakers,home,0.7026,0.5803,12.23,high,LOSS,8-4,,ESPN
+2026-05-19,ncaa_baseball,Missouri Tigers @ Ole Miss Rebels,Ole Miss Rebels,home,0.6811,0.7048,-2.37,high,LOSS,10-8,,ESPN
+2026-05-19,ncaa_baseball,Marshall Thundering Herd @ Louisiana Ragin' Cajuns,Louisiana Ragin' Cajuns,home,0.6697,0.669,0.07,high,WIN,1-11,,ESPN
+2026-05-19,ncaa_baseball,Duke Blue Devils @ NC State Wolfpack,NC State Wolfpack,home,0.6409,0.8731,-23.22,medium,LOSS,21-12,,ESPN
+2026-05-19,ncaa_baseball,Stetson Hatters @ Central Arkansas Bears,Central Arkansas Bears,home,0.6214,,,medium,WIN,4-6,,ESPN
+2026-05-19,ncaa_baseball,Rutgers Scarlet Knights @ Michigan Wolverines,Michigan Wolverines,home,0.6157,0.5512,6.45,medium,WIN,0-10,,ESPN
+2026-05-19,ncaa_baseball,Austin Peay Governors @ Jacksonville Dolphins,Jacksonville Dolphins,home,0.6097,0.5714,3.83,medium,WIN,1-7,,ESPN
+2026-05-19,mlb_props,Toronto Blue Jays @ New York Yankees,Dylan Cease OVER 7.5K,over,0.6551,0.457,19.81,high,WIN,9K,7.5,MLB API
+2026-05-19,mlb_props,Athletics @ Los Angeles Angels,Jacob Lopez UNDER 5.5K,under,0.7718,0.5748,19.7,high,WIN,2K,5.5,MLB API
+2026-05-19,mlb_props,Toronto Blue Jays @ New York Yankees,Will Warren OVER 5.5K,over,0.6217,0.4379,18.38,medium,LOSS,3K,5.5,MLB API
+2026-05-19,mlb_props,Baltimore Orioles @ Tampa Bay Rays,Kyle Bradish OVER 4.5K,over,0.6643,0.4831,18.12,high,WIN,6K,4.5,MLB API
+2026-05-19,mlb_props,New York Mets @ Washington Nationals,Nolan McLean OVER 5.5K,over,0.7376,0.5611,17.65,high,LOSS,5K,5.5,MLB API
+2026-05-19,mlb_props,Milwaukee Brewers @ Chicago Cubs,Ben Brown OVER 4.5K,over,0.6626,0.4985,16.41,high,WIN,6K,4.5,MLB API
+2026-05-19,mlb_props,Pittsburgh Pirates @ St. Louis Cardinals,Matthew Liberatore UNDER 4.5K,under,0.6352,0.476,15.92,medium,LOSS,9K,4.5,MLB API
+2026-05-19,mlb_props,Houston Astros @ Minnesota Twins,Zebby Matthews UNDER 5.5K,under,0.7002,0.5538,14.64,high,LOSS,6K,5.5,MLB API
+2026-05-19,mlb_props,San Francisco Giants @ Arizona Diamondbacks,Ryne Nelson UNDER 5.5K,under,0.6464,0.503,14.34,medium,WIN,3K,5.5,MLB API
+2026-05-19,mlb_props,Cleveland Guardians @ Detroit Tigers,Parker Messick OVER 5.5K,over,0.667,0.5499,11.71,high,WIN,6K,5.5,MLB API
+2026-05-19,mlb_props,Texas Rangers @ Colorado Rockies,Kumar Rocker UNDER 4.5K,under,0.6212,0.5088,11.24,medium,LOSS,7K,4.5,MLB API
+2026-05-19,mlb_props,Los Angeles Dodgers @ San Diego Padres,Emmet Sheehan OVER 5.5K,over,0.6169,0.5435,7.34,medium,LOSS,2K,5.5,MLB API
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Max Strus AST UNDER 2.5,under,0.8164,0.4876,32.88,high,WIN,1.0,2.5,ESPN
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Jarrett Allen REB UNDER 7.5,under,0.7421,0.4971,24.5,high,WIN,7.0,7.5,ESPN
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Evan Mobley AST OVER 3.5,over,0.7083,0.4931,21.52,high,LOSS,3.0,3.5,ESPN
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Evan Mobley REB UNDER 8.5,under,0.7022,0.5021,20.0,high,LOSS,14.0,8.5,ESPN
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Donovan Mitchell REB OVER 4.5,over,0.6593,0.4721,18.72,high,WIN,5.0,4.5,ESPN
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Jarrett Allen PTS OVER 12.5,over,0.6541,0.4879,16.61,high,LOSS,10.0,12.5,ESPN
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Donovan Mitchell PTS OVER 26.5,over,0.6319,0.4929,13.89,medium,WIN,29.0,26.5,ESPN
+2026-05-19,nba_props,Cleveland Cavaliers @ New York Knicks,Sam Merrill PTS OVER 6.5,over,0.6364,0.5052,13.12,medium,WIN,12.0,6.5,ESPN
