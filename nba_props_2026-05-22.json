@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-05-22T11:24:39.196633Z",
+  "generated_at": "2026-05-22T11:25:13.607737Z",
   "data_date": "2026-05-22",
   "status": "ACTIVE",
   "picks": [
@@ -12,8 +12,8 @@
       "projection": 15.5,
       "direction": "over",
       "model_prob": 0.8465,
-      "market_prob": 0.4922,
-      "edge_pp": 35.43,
+      "market_prob": 0.4921,
+      "edge_pp": 35.44,
       "games_used": 6,
       "confidence_tier": "high",
       "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
@@ -198,22 +198,6 @@
       "result": null
     },
     {
-      "player": "Julian Champagnie",
-      "stat": "PTS",
-      "line": 10.5,
-      "projection": 9.5,
-      "direction": "under",
-      "model_prob": 0.6472,
-      "market_prob": 0.5152,
-      "edge_pp": 13.2,
-      "games_used": 6,
-      "confidence_tier": "medium",
-      "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
-      "game_time_utc": "2026-05-23T00:40:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
       "player": "Max Strus",
       "stat": "PTS",
       "line": 9.5,
@@ -226,6 +210,22 @@
       "confidence_tier": "medium",
       "matchup": "New York Knicks @ Cleveland Cavaliers",
       "game_time_utc": "2026-05-24T00:10:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "player": "Julian Champagnie",
+      "stat": "PTS",
+      "line": 10.5,
+      "projection": 9.5,
+      "direction": "under",
+      "model_prob": 0.6472,
+      "market_prob": 0.5179,
+      "edge_pp": 12.93,
+      "games_used": 6,
+      "confidence_tier": "medium",
+      "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
+      "game_time_utc": "2026-05-23T00:40:00Z",
       "outcome": null,
       "result": null
     },
