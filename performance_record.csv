@@ -1357,3 +1357,32 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-20,nba_props,Cleveland Cavaliers @ New York Knicks,Jarrett Allen PTS OVER 12.5,over,0.6541,0.4879,16.61,high,PENDING,,12.5,MANUAL
 2026-05-20,nba_props,Cleveland Cavaliers @ New York Knicks,Donovan Mitchell PTS OVER 26.5,over,0.6319,0.4929,13.89,medium,PENDING,,26.5,MANUAL
 2026-05-20,nba_props,Cleveland Cavaliers @ New York Knicks,Sam Merrill PTS OVER 6.5,over,0.6364,0.5052,13.12,medium,PENDING,,6.5,MANUAL
+2026-05-21,mlb,Atlanta Braves @ Miami Marlins,Atlanta Braves,away,0.6205,0.5545,6.6,medium,WIN,9-3,,ESPN
+2026-05-21,mlb,Toronto Blue Jays @ New York Yankees,New York Yankees,home,0.6615,0.6068,5.47,high,LOSS,2-0,,ESPN
+2026-05-21,ncaa_baseball,Cal State Fullerton Titans @ UC Santa Barbara Gauchos,UC Santa Barbara Gauchos,home,0.7091,,,high,WIN,4-7,,ESPN
+2026-05-21,ncaa_baseball,Virginia Cavaliers @ Georgia Tech Yellow Jackets,Georgia Tech Yellow Jackets,home,0.6819,0.7377,-5.58,high,WIN,10-16,,ESPN
+2026-05-21,ncaa_baseball,Kansas State Wildcats @ West Virginia Mountaineers,West Virginia Mountaineers,home,0.6775,,,high,WIN,2-4,,ESPN
+2026-05-21,ncaa_baseball,Hofstra Pride @ Northeastern Huskies,Northeastern Huskies,home,0.6751,,,high,LOSS,6-0,,ESPN
+2026-05-21,ncaa_baseball,UNC Wilmington Seahawks @ Campbell Fighting Camels,Campbell Fighting Camels,home,0.6747,,,high,WIN,1-3,,ESPN
+2026-05-21,ncaa_baseball,Baylor Bears @ Kansas Jayhawks,Kansas Jayhawks,home,0.6664,0.6744,-0.8,high,WIN,7-8,,ESPN
+2026-05-21,ncaa_baseball,Jacksonville St Gamecocks @ Middle Tennessee Blue Raiders,Jacksonville St Gamecocks,away,0.6623,0.7525,-9.02,high,WIN,9-3,,ESPN
+2026-05-21,ncaa_baseball,Kennesaw State Owls @ Missouri State Bears,Missouri State Bears,home,0.6458,,,medium,PENDING,,,MANUAL
+2026-05-21,ncaa_baseball,Memphis Tigers @ UAB Blazers,UAB Blazers,home,0.639,,,medium,LOSS,7-3,,ESPN
+2026-05-21,ncaa_baseball,Liberty Flames @ Sam Houston Bearkats,Liberty Flames,away,0.6227,,,medium,WIN,10-4,,ESPN
+2026-05-21,ncaa_baseball,Saint Mary's Gaels @ Gonzaga Bulldogs,Gonzaga Bulldogs,home,0.6147,,,medium,LOSS,13-4,,ESPN
+2026-05-21,ncaa_baseball,Wichita St Shockers @ Rice Owls,Rice Owls,home,0.602,0.5,10.2,medium,WIN,4-5,,ESPN
+2026-05-21,mlb_props,Cleveland Guardians @ Detroit Tigers,Casey Mize OVER 4.5K,over,0.6614,0.475,18.64,high,LOSS,4K,4.5,MLB API
+2026-05-21,mlb_props,Pittsburgh Pirates @ St. Louis Cardinals,Dustin May UNDER 4.5K,under,0.6118,0.4634,14.84,medium,LOSS,7K,4.5,MLB API
+2026-05-21,mlb_props,Athletics @ Los Angeles Angels,Luis Severino UNDER 6.5K,under,0.6179,0.4753,14.26,medium,LOSS,10K,6.5,MLB API
+2026-05-21,mlb_props,Colorado Rockies @ Arizona Diamondbacks,Eduardo Rodriguez UNDER 5.5K,under,0.6825,0.5421,14.04,high,WIN,4K,5.5,MLB API
+2026-05-21,mlb_props,New York Mets @ Washington Nationals,Cade Cavalli OVER 4.5K,over,0.6073,0.5285,7.88,medium,WIN,9K,4.5,MLB API
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Sam Merrill PTS OVER 7.5,over,0.7762,0.5089,26.73,high,LOSS,4.0,7.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Evan Mobley AST OVER 3.5,over,0.6711,0.4445,22.66,high,LOSS,3.0,3.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Donovan Mitchell REB OVER 4.5,over,0.6986,0.4757,22.29,high,LOSS,4.0,4.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Donovan Mitchell PTS OVER 26.5,over,0.7117,0.5004,21.12,high,LOSS,26.0,26.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,James Harden AST UNDER 6.5,under,0.6395,0.4764,16.31,medium,WIN,2.0,6.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Jarrett Allen REB UNDER 7.5,under,0.6385,0.5011,13.74,medium,LOSS,10.0,7.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Evan Mobley REB UNDER 8.5,under,0.6547,0.5182,13.65,high,WIN,6.0,8.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Dennis Schroder PTS UNDER 5.5,under,0.629,0.5177,11.13,medium,WIN,4.0,5.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Dennis Schroder AST OVER 2.5,over,0.6285,0.5189,10.96,medium,WIN,3.0,2.5,ESPN
+2026-05-21,nba_props,Cleveland Cavaliers @ New York Knicks,Dean Wade REB OVER 3.5,over,0.6276,0.5653,6.23,medium,LOSS,3.0,3.5,ESPN

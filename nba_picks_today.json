@@ -1,24 +1,24 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-05-22T11:25:05.981076Z",
-  "data_date": "2026-05-22",
+  "generated_at": "2026-05-23T13:30:56.262058Z",
+  "data_date": "2026-05-23",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
   "picks": [
     {
-      "home_team": "San Antonio Spurs",
-      "away_team": "Oklahoma City Thunder",
-      "pick": "San Antonio Spurs",
+      "home_team": "Cleveland Cavaliers",
+      "away_team": "New York Knicks",
+      "pick": "Cleveland Cavaliers",
       "pick_side": "home",
-      "model_prob_home": 0.5063,
-      "model_prob_away": 0.4937,
-      "market_prob_home": 0.5393,
-      "market_prob_away": 0.4607,
-      "edge_pp": -3.3,
+      "model_prob_home": 0.5078,
+      "model_prob_away": 0.4922,
+      "market_prob_home": 0.5519,
+      "market_prob_away": 0.4481,
+      "edge_pp": -4.41,
       "confidence_tier": "low",
       "flags": "\u2014",
-      "game_time_utc": "2026-05-23T00:40:00Z",
+      "game_time_utc": "2026-05-24T00:10:00Z",
       "outcome": null,
       "result": null
     }
@@ -26,6 +26,6 @@
   "summary": {
     "total_picks": 1,
     "high_confidence": 0,
-    "avg_edge_pp": -3.3
+    "avg_edge_pp": -4.41
   }
 }
