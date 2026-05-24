@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "sport": "nhl",
   "launch_date": "2026-04-15",
-  "last_updated": "2026-05-15",
+  "last_updated": "2026-05-24",
   "overall": {
-    "wins": 4,
+    "wins": 5,
     "losses": 6,
     "pushes": 0,
-    "total": 10,
-    "hit_rate": 40.0,
-    "roi_flat": -23.64
+    "total": 11,
+    "hit_rate": 45.45,
+    "roi_flat": -13.23
   },
   "by_confidence": {
     "high": {
@@ -23,12 +23,31 @@
       "hit_rate": 50.0
     },
     "low": {
-      "wins": 2,
-      "total": 6,
-      "hit_rate": 33.33
+      "wins": 3,
+      "total": 7,
+      "hit_rate": 42.86
     }
   },
   "recent": [
+    {
+      "pick_id": "nhl-2026-05-23-2025030312",
+      "game_time_utc": "2026-05-23T23:00:00Z",
+      "home_team": "Carolina Hurricanes",
+      "away_team": "Montr\u00e9al Canadiens",
+      "pick": "Carolina Hurricanes",
+      "pick_side": "home",
+      "model_prob_home": 0.5758,
+      "model_prob_away": 0.4242,
+      "market_prob_home": 0.6482,
+      "market_prob_away": 0.3518,
+      "market_line_home": -210,
+      "market_source": "pinnacle",
+      "edge_pp": -7.24,
+      "confidence_tier": "low",
+      "result": 1.0,
+      "outcome": "WIN",
+      "settled_at": "2026-05-24T13:23:54.336765Z"
+    },
     {
       "pick_id": "nhl-2026-05-14-2025030215",
       "game_time_utc": "2026-05-14T23:00:00Z",
