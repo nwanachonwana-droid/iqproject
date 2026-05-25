@@ -1419,3 +1419,25 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-22,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Julian Champagnie PTS UNDER 10.5,under,0.6472,0.5179,12.93,medium,WIN,10.0,10.5,ESPN
 2026-05-22,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Stephon Castle PTS OVER 18.5,over,0.6144,0.4914,12.29,medium,LOSS,14.0,18.5,ESPN
 2026-05-22,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Keldon Johnson PTS UNDER 10.5,under,0.61,0.5197,9.03,medium,WIN,5.0,10.5,ESPN
+2026-05-23,mlb,Houston Astros @ Chicago Cubs,Chicago Cubs,home,0.6499,0.5707,7.92,medium,LOSS,3-0,,ESPN
+2026-05-23,mlb,Washington Nationals @ Atlanta Braves,Atlanta Braves,home,0.7066,0.6274,7.92,high,LOSS,2-0,,ESPN
+2026-05-23,ncaa_baseball,Hofstra Pride @ Campbell Fighting Camels,Campbell Fighting Camels,home,0.7261,,,high,LOSS,7-4,,ESPN
+2026-05-23,ncaa_baseball,Washington Huskies @ Oregon Ducks,Oregon Ducks,home,0.7205,0.7234,-0.29,high,WIN,4-9,,ESPN
+2026-05-23,ncaa_baseball,TBD @ Southern Miss Golden Eagles,Southern Miss Golden Eagles,home,0.7128,,,high,LOSS,9-6,,ESPN
+2026-05-23,ncaa_baseball,TBD @ Nebraska Cornhuskers,Nebraska Cornhuskers,home,0.7128,,,high,LOSS,8-0,,ESPN
+2026-05-23,ncaa_baseball,Pittsburgh Panthers @ North Carolina Tar Heels,North Carolina Tar Heels,home,0.7021,,,high,WIN,5-13,,ESPN
+2026-05-23,ncaa_baseball,Dallas Baptist Patriots @ Jacksonville St Gamecocks,Jacksonville St Gamecocks,home,0.6912,0.5803,11.09,high,PENDING,,,MANUAL
+2026-05-23,ncaa_baseball,UC San Diego Tritons @ UC Santa Barbara Gauchos,UC Santa Barbara Gauchos,home,0.6833,0.7143,-3.1,high,PENDING,,,MANUAL
+2026-05-23,ncaa_baseball,Miami Hurricanes @ Georgia Tech Yellow Jackets,Georgia Tech Yellow Jackets,home,0.6538,0.6865,-3.27,high,WIN,3-9,,ESPN
+2026-05-23,ncaa_baseball,USC Trojans @ UCLA Bruins,UCLA Bruins,home,0.6535,,,high,WIN,5-7,,ESPN
+2026-05-23,ncaa_baseball,TBD @ Northeastern Huskies,Northeastern Huskies,home,0.6338,,,medium,WIN,4-5,,ESPN
+2026-05-23,ncaa_baseball,Florida Gators @ Georgia Bulldogs,Georgia Bulldogs,home,0.6173,0.5803,3.7,medium,WIN,7-8,,ESPN
+2026-05-23,ncaa_baseball,San Francisco Dons @ Saint Mary's Gaels,Saint Mary's Gaels,home,0.607,0.7377,-13.07,medium,LOSS,9-8,,ESPN
+2026-05-23,mlb_props,Detroit Tigers @ Baltimore Orioles,Brandon Young UNDER 4.5K,under,0.6642,0.5281,13.61,high,PENDING,,4.5,MANUAL
+2026-05-23,mlb_props,Detroit Tigers @ Baltimore Orioles,Framber Valdez UNDER 5.5K,under,0.6453,0.5526,9.27,medium,PENDING,,5.5,MANUAL
+2026-05-23,mlb_props,St. Louis Cardinals @ Cincinnati Reds,Kyle Leahy UNDER 4.5K,under,0.6226,0.5412,8.14,medium,LOSS,8K,4.5,MLB API
+2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,James Harden PTS OVER 17.5,over,0.7199,0.5075,21.24,high,WIN,19.0,17.5,ESPN
+2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,Jarrett Allen PTS OVER 12.5,over,0.7011,0.497,20.42,high,WIN,17.0,12.5,ESPN
+2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,Evan Mobley AST OVER 3.5,over,0.6629,0.482,18.09,high,LOSS,2.0,3.5,ESPN
+2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,Donovan Mitchell REB OVER 4.5,over,0.667,0.4895,17.75,high,LOSS,1.0,4.5,ESPN
+2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,Max Strus PTS UNDER 9.5,under,0.6316,0.4935,13.81,medium,LOSS,13.0,9.5,ESPN
