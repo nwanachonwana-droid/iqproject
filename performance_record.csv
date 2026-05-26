@@ -1441,3 +1441,27 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,Evan Mobley AST OVER 3.5,over,0.6629,0.482,18.09,high,LOSS,2.0,3.5,ESPN
 2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,Donovan Mitchell REB OVER 4.5,over,0.667,0.4895,17.75,high,LOSS,1.0,4.5,ESPN
 2026-05-23,nba_props,New York Knicks @ Cleveland Cavaliers,Max Strus PTS UNDER 9.5,under,0.6316,0.4935,13.81,medium,LOSS,13.0,9.5,ESPN
+2026-05-24,mlb,Washington Nationals @ Atlanta Braves,Atlanta Braves,home,0.7015,0.5965,10.5,high,LOSS,2-1,,ESPN
+2026-05-24,ncaa_baseball,TBD @ Jacksonville State Gamecocks,Jacksonville State Gamecocks,home,0.7328,,,high,WIN,0-10,,ESPN
+2026-05-24,ncaa_baseball,Oregon Ducks @ UCLA Bruins,UCLA Bruins,home,0.6789,0.6865,-0.76,high,WIN,2-3,,ESPN
+2026-05-24,ncaa_baseball,Arkansas Razorbacks @ Georgia Bulldogs,Georgia Bulldogs,home,0.6294,0.6156,1.38,medium,WIN,1-11,,ESPN
+2026-05-24,ncaa_baseball,Southern Miss Golden Eagles @ Troy Trojans,Southern Miss Golden Eagles,away,0.6033,,,medium,PENDING,,,MANUAL
+2026-05-24,mlb_props,St. Louis Cardinals @ Cincinnati Reds,Brady Singer UNDER 4.5K,under,0.7314,0.5342,19.72,high,PENDING,,4.5,MANUAL
+2026-05-24,mlb_props,Chicago White Sox @ San Francisco Giants,Robbie Ray UNDER 6.5K,under,0.6965,0.5104,18.61,high,WIN,3K,6.5,MLB API
+2026-05-24,mlb_props,Seattle Mariners @ Kansas City Royals,Bryan Woo OVER 4.5K,over,0.6678,0.4818,18.6,high,LOSS,4K,4.5,MLB API
+2026-05-24,mlb_props,Washington Nationals @ Atlanta Braves,Foster Griffin OVER 4.5K,over,0.6356,0.4565,17.91,medium,WIN,6K,4.5,MLB API
+2026-05-24,mlb_props,Tampa Bay Rays @ New York Yankees,Ryan Weathers OVER 5.5K,over,0.6562,0.5131,14.31,high,LOSS,4K,5.5,MLB API
+2026-05-24,mlb_props,Pittsburgh Pirates @ Toronto Blue Jays,Dylan Cease OVER 7.5K,over,0.6559,0.5372,11.87,high,WIN,8K,7.5,MLB API
+2026-05-24,mlb_props,Pittsburgh Pirates @ Toronto Blue Jays,Mitch Keller UNDER 4.5K,under,0.6255,0.5154,11.01,medium,LOSS,5K,4.5,MLB API
+2026-05-24,mlb_props,Cleveland Guardians @ Philadelphia Phillies,Parker Messick OVER 5.5K,over,0.6509,0.5643,8.66,high,WIN,6K,5.5,MLB API
+2026-05-24,mlb_props,Los Angeles Dodgers @ Milwaukee Brewers,Yoshinobu Yamamoto UNDER 6.5K,under,0.6109,0.5265,8.44,medium,WIN,3K,6.5,MLB API
+2026-05-24,mlb_props,Texas Rangers @ Los Angeles Angels,MacKenzie Gore UNDER 6.5K,under,0.612,0.5295,8.25,medium,LOSS,7K,6.5,MLB API
+2026-05-24,mlb_props,Seattle Mariners @ Kansas City Royals,Seth Lugo OVER 4.5K,over,0.6358,0.5648,7.1,medium,LOSS,3K,4.5,MLB API
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Luke Kornet REB OVER 2.5,over,0.7565,0.4704,28.61,high,WIN,7.0,2.5,ESPN
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Stephon Castle PTS OVER 17.5,over,0.7641,0.4919,27.22,high,LOSS,13.0,17.5,ESPN
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Victor Wembanyama PTS UNDER 24.5,under,0.7298,0.5059,22.38,high,LOSS,33.0,24.5,ESPN
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Luke Kornet PTS OVER 2.5,over,0.6957,0.4778,21.79,high,WIN,6.0,2.5,ESPN
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Carter Bryant REB OVER 1.5,over,0.7294,0.5282,20.12,high,LOSS,1.0,1.5,ESPN
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Victor Wembanyama REB UNDER 13.5,under,0.7113,0.5212,19.0,high,WIN,8.0,13.5,ESPN
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Keldon Johnson PTS OVER 7.5,over,0.6629,0.4989,16.4,high,LOSS,6.0,7.5,ESPN
+2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Devin Vassell PTS OVER 13.5,over,0.6134,0.4963,11.71,medium,LOSS,13.0,13.5,ESPN
