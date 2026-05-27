@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sport": "nba_props",
-  "generated_at": "2026-05-27T08:37:00.955359Z",
+  "generated_at": "2026-05-27T08:37:43.081946Z",
   "data_date": "2026-05-27",
   "status": "ACTIVE",
   "picks": [
@@ -102,6 +102,22 @@
       "result": null
     },
     {
+      "player": "Jared McCain",
+      "stat": "REB",
+      "line": 2.5,
+      "projection": 3.4,
+      "direction": "over",
+      "model_prob": 0.6658,
+      "market_prob": 0.4561,
+      "edge_pp": 20.97,
+      "games_used": 5,
+      "confidence_tier": "high",
+      "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
+      "game_time_utc": "2026-05-29T00:40:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
       "player": "Luke Kornet",
       "stat": "PTS",
       "line": 2.5,
@@ -134,38 +150,6 @@
       "result": null
     },
     {
-      "player": "Jared McCain",
-      "stat": "REB",
-      "line": 2.5,
-      "projection": 3.4,
-      "direction": "over",
-      "model_prob": 0.6658,
-      "market_prob": 0.4671,
-      "edge_pp": 19.88,
-      "games_used": 5,
-      "confidence_tier": "high",
-      "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
-      "game_time_utc": "2026-05-29T00:40:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
-      "player": "Luke Kornet",
-      "stat": "REB",
-      "line": 2.5,
-      "projection": 3.6,
-      "direction": "over",
-      "model_prob": 0.701,
-      "market_prob": 0.5024,
-      "edge_pp": 19.86,
-      "games_used": 6,
-      "confidence_tier": "high",
-      "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
-      "game_time_utc": "2026-05-29T00:40:00Z",
-      "outcome": null,
-      "result": null
-    },
-    {
       "player": "Chet Holmgren",
       "stat": "PTS",
       "line": 13.5,
@@ -191,6 +175,22 @@
       "market_prob": 0.4818,
       "edge_pp": 18.48,
       "games_used": 5,
+      "confidence_tier": "high",
+      "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
+      "game_time_utc": "2026-05-29T00:40:00Z",
+      "outcome": null,
+      "result": null
+    },
+    {
+      "player": "Luke Kornet",
+      "stat": "REB",
+      "line": 2.5,
+      "projection": 3.6,
+      "direction": "over",
+      "model_prob": 0.701,
+      "market_prob": 0.5228,
+      "edge_pp": 17.83,
+      "games_used": 6,
       "confidence_tier": "high",
       "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
       "game_time_utc": "2026-05-29T00:40:00Z",
