@@ -1465,3 +1465,27 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Victor Wembanyama REB UNDER 13.5,under,0.7113,0.5212,19.0,high,WIN,8.0,13.5,ESPN
 2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Keldon Johnson PTS OVER 7.5,over,0.6629,0.4989,16.4,high,LOSS,6.0,7.5,ESPN
 2026-05-24,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Devin Vassell PTS OVER 13.5,over,0.6134,0.4963,11.71,medium,LOSS,13.0,13.5,ESPN
+2026-05-25,mlb,Houston Astros @ Texas Rangers,Texas Rangers,home,0.6138,0.5427,7.11,medium,LOSS,9-0,,ESPN
+2026-05-25,mlb_props,New York Yankees @ Kansas City Royals,Will Warren OVER 5.5K,over,0.606,0.4322,17.38,medium,LOSS,3K,5.5,MLB API
+2026-05-25,mlb_props,Arizona Diamondbacks @ San Francisco Giants,Merrill Kelly UNDER 4.5K,under,0.6462,0.4757,17.05,medium,WIN,4K,4.5,MLB API
+2026-05-25,mlb_props,St. Louis Cardinals @ Milwaukee Brewers,Matthew Liberatore OVER 3.5K,over,0.6378,0.4815,15.63,medium,WIN,10K,3.5,MLB API
+2026-05-25,mlb_props,Seattle Mariners @ Athletics,Luis Castillo OVER 4.5K,over,0.6233,0.4756,14.77,medium,WIN,6K,4.5,MLB API
+2026-05-25,mlb_props,Chicago Cubs @ Pittsburgh Pirates,Carmen Mlodzinski OVER 4.5K,over,0.6313,0.4928,13.85,medium,LOSS,2K,4.5,MLB API
+2026-05-25,mlb_props,Cincinnati Reds @ New York Mets,Nolan McLean OVER 6.5K,over,0.6013,0.4714,12.99,medium,LOSS,6K,6.5,MLB API
+2026-05-25,mlb_props,Miami Marlins @ Toronto Blue Jays,Trey Yesavage UNDER 6.5K,under,0.6047,0.4765,12.82,medium,WIN,6K,6.5,MLB API
+2026-05-25,mlb_props,Seattle Mariners @ Athletics,Aaron Civale UNDER 4.5K,under,0.6384,0.5383,10.01,medium,WIN,2K,4.5,MLB API
+2026-05-25,mlb_props,Colorado Rockies @ Los Angeles Dodgers,Emmet Sheehan UNDER 6.5K,under,0.6008,0.5042,9.66,medium,LOSS,8K,6.5,MLB API
+2026-05-25,mlb_props,New York Yankees @ Kansas City Royals,Michael Wacha OVER 4.5K,over,0.6511,0.5596,9.15,high,WIN,5K,4.5,MLB API
+2026-05-25,mlb_props,Washington Nationals @ Cleveland Guardians,Tanner Bibee UNDER 5.5K,under,0.6336,0.5471,8.65,medium,WIN,3K,5.5,MLB API
+2026-05-25,mlb_props,Minnesota Twins @ Chicago White Sox,Zebby Matthews UNDER 5.5K,under,0.6108,0.5523,5.85,medium,LOSS,6K,5.5,MLB API
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Jaylon Tyson PTS UNDER 2.5,under,0.8096,0.521,28.86,high,WIN,2.0,2.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Max Strus AST UNDER 2.5,under,0.7799,0.5203,25.96,high,WIN,2.0,2.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Sam Merrill REB UNDER 1.5,under,0.7613,0.5033,25.8,high,WIN,1.0,1.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,James Harden PTS OVER 17.5,over,0.7308,0.493,23.78,high,LOSS,12.0,17.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Dennis Schroder PTS UNDER 4.5,under,0.7059,0.5128,19.3,high,PENDING,,4.5,MANUAL
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Dean Wade REB OVER 3.5,over,0.6481,0.4599,18.81,medium,LOSS,1.0,3.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Jarrett Allen PTS OVER 12.5,over,0.6606,0.4941,16.65,high,LOSS,6.0,12.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Evan Mobley PTS OVER 16.5,over,0.6418,0.4899,15.19,medium,LOSS,15.0,16.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Evan Mobley AST OVER 3.5,over,0.6359,0.4853,15.05,medium,WIN,4.0,3.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,Sam Merrill PTS OVER 8.5,over,0.6087,0.488,12.07,medium,LOSS,5.0,8.5,ESPN
+2026-05-25,nba_props,New York Knicks @ Cleveland Cavaliers,James Harden AST UNDER 6.5,under,0.6591,0.5575,10.16,high,WIN,2.0,6.5,ESPN

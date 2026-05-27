@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "sport": "nhl",
-  "generated_at": "2026-05-27T08:36:46.970750Z",
-  "data_date": "2026-05-27",
+  "sport": "soccer",
+  "generated_at": "2026-05-26T11:29:43.542996Z",
+  "data_date": "2026-05-26",
   "model_version": "v1.0",
   "status": "ACTIVE",
   "picks": [],
