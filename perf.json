@@ -1,225 +1,91 @@
 {
-  "generated_at": "2026-05-26T11:30:12.209460",
-  "yesterday": "2026-05-25",
+  "generated_at": "2026-05-27T08:38:07.790271",
+  "yesterday": "2026-05-26",
   "yesterday_results": [
     {
       "sport": "mlb",
-      "pick": "Texas Rangers",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "7.11"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Will Warren OVER 5.5K",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "17.38"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Merrill Kelly UNDER 4.5K",
+      "pick": "Atlanta Braves",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "17.05"
+      "edge": "12.61"
     },
     {
-      "sport": "mlb_props",
-      "pick": "Matthew Liberatore OVER 3.5K",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "15.63"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Luis Castillo OVER 4.5K",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "14.77"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Carmen Mlodzinski OVER 4.5K",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "13.85"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Nolan McLean OVER 6.5K",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "12.99"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Trey Yesavage UNDER 6.5K",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "12.82"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Aaron Civale UNDER 4.5K",
-      "tier": "medium",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "10.01"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Emmet Sheehan UNDER 6.5K",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "9.66"
-    },
-    {
-      "sport": "mlb_props",
-      "pick": "Michael Wacha OVER 4.5K",
+      "sport": "mlb",
+      "pick": "Milwaukee Brewers",
       "tier": "high",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "9.15"
+      "edge": "4.08"
     },
     {
       "sport": "mlb_props",
-      "pick": "Tanner Bibee UNDER 5.5K",
+      "pick": "Tyler Mahle OVER 4.5K",
       "tier": "medium",
-      "outcome": "WIN",
+      "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "8.65"
+      "edge": "16.73"
     },
     {
       "sport": "mlb_props",
-      "pick": "Zebby Matthews UNDER 5.5K",
+      "pick": "Braxton Ashcraft OVER 5.5K",
       "tier": "medium",
       "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "5.85"
+      "edge": "11.5"
     },
     {
-      "sport": "nba_props",
-      "pick": "Jaylon Tyson PTS UNDER 2.5",
+      "sport": "mlb_props",
+      "pick": "Cade Cavalli OVER 4.5K",
       "tier": "high",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "28.86"
+      "edge": "9.94"
     },
     {
-      "sport": "nba_props",
-      "pick": "Max Strus AST UNDER 2.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "25.96"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Sam Merrill REB UNDER 1.5",
-      "tier": "high",
-      "outcome": "WIN",
-      "actual": "",
-      "line": "",
-      "edge": "25.8"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "James Harden PTS OVER 17.5",
+      "sport": "mlb_props",
+      "pick": "Keider Montero UNDER 4.5K",
       "tier": "high",
       "outcome": "LOSS",
       "actual": "",
       "line": "",
-      "edge": "23.78"
+      "edge": "8.22"
     },
     {
-      "sport": "nba_props",
-      "pick": "Dean Wade REB OVER 3.5",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "18.81"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Jarrett Allen PTS OVER 12.5",
-      "tier": "high",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "16.65"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Evan Mobley PTS OVER 16.5",
-      "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "15.19"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "Evan Mobley AST OVER 3.5",
+      "sport": "mlb_props",
+      "pick": "Sean Burke OVER 4.5K",
       "tier": "medium",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "15.05"
+      "edge": "7.68"
     },
     {
-      "sport": "nba_props",
-      "pick": "Sam Merrill PTS OVER 8.5",
+      "sport": "mlb_props",
+      "pick": "Jack Kochanowicz OVER 3.5K",
       "tier": "medium",
-      "outcome": "LOSS",
-      "actual": "",
-      "line": "",
-      "edge": "12.07"
-    },
-    {
-      "sport": "nba_props",
-      "pick": "James Harden AST UNDER 6.5",
-      "tier": "high",
       "outcome": "WIN",
       "actual": "",
       "line": "",
-      "edge": "10.16"
+      "edge": "6.12"
+    },
+    {
+      "sport": "mlb_props",
+      "pick": "Sandy Alcantara UNDER 4.5K",
+      "tier": "medium",
+      "outcome": "WIN",
+      "actual": "",
+      "line": "",
+      "edge": "4.89"
     }
   ],
   "yesterday_summary": {
     "mlb": {
-      "medium": {
-        "w": 0,
-        "l": 1,
-        "pct": 0.0,
-        "n": 1
-      }
-    },
-    "mlb_props": {
       "high": {
         "w": 1,
         "l": 0,
@@ -227,46 +93,46 @@
         "n": 1
       },
       "medium": {
-        "w": 6,
-        "l": 5,
-        "pct": 54.5,
-        "n": 11
+        "w": 1,
+        "l": 0,
+        "pct": 100.0,
+        "n": 1
       }
     },
-    "nba_props": {
+    "mlb_props": {
       "high": {
-        "w": 4,
-        "l": 2,
-        "pct": 66.7,
-        "n": 6
+        "w": 1,
+        "l": 1,
+        "pct": 50.0,
+        "n": 2
       },
       "medium": {
-        "w": 1,
-        "l": 3,
-        "pct": 25.0,
-        "n": 4
+        "w": 3,
+        "l": 2,
+        "pct": 60.0,
+        "n": 5
       }
     }
   },
   "yesterday_overall": {
-    "w": 12,
-    "l": 11,
-    "pct": 52.2,
-    "n": 23
+    "w": 6,
+    "l": 3,
+    "pct": 66.7,
+    "n": 9
   },
   "alltime_summary": {
     "mlb": {
       "high": {
-        "w": 17,
+        "w": 18,
         "l": 10,
-        "pct": 63.0,
-        "n": 27
+        "pct": 64.3,
+        "n": 28
       },
       "medium": {
-        "w": 15,
+        "w": 16,
         "l": 18,
-        "pct": 45.5,
-        "n": 33
+        "pct": 47.1,
+        "n": 34
       }
     },
     "nba": {},
@@ -295,16 +161,16 @@
     "soccer": {},
     "mlb_props": {
       "high": {
-        "w": 53,
-        "l": 30,
-        "pct": 63.9,
-        "n": 83
+        "w": 54,
+        "l": 31,
+        "pct": 63.5,
+        "n": 85
       },
       "medium": {
-        "w": 55,
-        "l": 57,
-        "pct": 49.1,
-        "n": 112
+        "w": 58,
+        "l": 59,
+        "pct": 49.6,
+        "n": 117
       }
     },
     "nba_props": {
@@ -323,23 +189,23 @@
     }
   },
   "alltime_overall": {
-    "w": 666,
-    "l": 456,
+    "w": 672,
+    "l": 459,
     "pct": 59.4,
-    "n": 1122
+    "n": 1131
   },
   "alltime_by_tier": {
     "high": {
-      "w": 425,
-      "l": 249,
+      "w": 427,
+      "l": 250,
       "pct": 63.1,
-      "n": 674
+      "n": 677
     },
     "medium": {
-      "w": 241,
-      "l": 207,
-      "pct": 53.8,
-      "n": 448
+      "w": 245,
+      "l": 209,
+      "pct": 54.0,
+      "n": 454
     }
   },
   "pending": [
@@ -1951,6 +1817,61 @@
     {
       "sport": "nba_props",
       "pick": "Dennis Schroder PTS UNDER 4.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jaylon Tyson PTS UNDER 2.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Max Strus AST UNDER 2.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Sam Merrill REB UNDER 1.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "James Harden PTS OVER 17.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Dennis Schroder PTS UNDER 4.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Dean Wade REB OVER 3.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Jarrett Allen PTS OVER 12.5",
+      "tier": "high"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Evan Mobley PTS OVER 16.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Evan Mobley AST OVER 3.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "Sam Merrill PTS OVER 8.5",
+      "tier": "medium"
+    },
+    {
+      "sport": "nba_props",
+      "pick": "James Harden AST UNDER 6.5",
       "tier": "high"
     }
   ]
