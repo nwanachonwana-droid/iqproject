@@ -1,31 +1,14 @@
 {
   "schema_version": "1.0",
   "sport": "nba",
-  "generated_at": "2026-05-28T04:56:07.391526Z",
-  "data_date": "2026-05-28",
+  "generated_at": "2026-05-29T13:53:17.196042Z",
+  "data_date": "2026-05-29",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
-  "picks": [
-    {
-      "home_team": "San Antonio Spurs",
-      "away_team": "Oklahoma City Thunder",
-      "pick": "San Antonio Spurs",
-      "pick_side": "home",
-      "model_prob_home": 0.5063,
-      "model_prob_away": 0.4937,
-      "market_prob_home": 0.5905,
-      "market_prob_away": 0.4095,
-      "edge_pp": -8.41,
-      "confidence_tier": "low",
-      "flags": "\u2014",
-      "game_time_utc": "2026-05-29T00:40:00Z",
-      "outcome": null,
-      "result": null
-    }
-  ],
+  "picks": [],
   "summary": {
-    "total_picks": 1,
+    "total_picks": 0,
     "high_confidence": 0,
-    "avg_edge_pp": -8.41
+    "avg_edge_pp": 0
   }
 }
