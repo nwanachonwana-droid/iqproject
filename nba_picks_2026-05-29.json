@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "sport": "mma",
-  "generated_at": "2026-06-02T12:17:16.572246Z",
-  "data_date": "2026-06-02",
+  "sport": "nba",
+  "generated_at": "2026-05-29T13:54:04.794475Z",
+  "data_date": "2026-05-29",
   "model_version": "v1.0",
   "status": "EXPERIMENTAL",
   "picks": [],

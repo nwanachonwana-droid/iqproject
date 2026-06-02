@@ -1,34 +1,14 @@
 {
   "schema_version": "1.0",
   "sport": "nhl",
-  "generated_at": "2026-05-29T13:53:50.104065Z",
-  "data_date": "2026-05-29",
+  "generated_at": "2026-06-02T12:17:13.798534Z",
+  "data_date": "2026-06-02",
   "model_version": "v1.0",
   "status": "ACTIVE",
-  "picks": [
-    {
-      "pick_id": "nhl-2026-05-29-2025030315",
-      "game_time_utc": "2026-05-30T00:00:00Z",
-      "home_team": "Carolina Hurricanes",
-      "away_team": "Montr\u00e9al Canadiens",
-      "pick": "Carolina Hurricanes",
-      "pick_side": "home",
-      "model_prob_home": 0.5758,
-      "model_prob_away": 0.4242,
-      "market_prob_home": 0.6791,
-      "market_prob_away": 0.3209,
-      "market_line_home": -245,
-      "market_source": "pinnacle",
-      "edge_pp": -10.33,
-      "confidence_tier": "low",
-      "result": null,
-      "outcome": null,
-      "settled_at": null
-    }
-  ],
+  "picks": [],
   "summary": {
-    "total_picks": 1,
+    "total_picks": 0,
     "high_confidence": 0,
-    "avg_edge_pp": -10.33
+    "avg_edge_pp": 0
   }
 }

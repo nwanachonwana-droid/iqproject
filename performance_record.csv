@@ -1520,3 +1520,21 @@ date,sport,game,pick,pick_side,model_prob,market_prob,edge_pp,confidence_tier,ou
 2026-05-27,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Keldon Johnson REB UNDER 2.5,under,0.7146,0.4926,22.2,high,PENDING,,2.5,MANUAL
 2026-05-27,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Julian Champagnie PTS OVER 8.5,over,0.6567,0.4889,16.78,high,PENDING,,8.5,MANUAL
 2026-05-27,nba_props,San Antonio Spurs @ Oklahoma City Thunder,Devin Vassell PTS OVER 13.5,over,0.6073,0.4901,11.73,medium,PENDING,,13.5,MANUAL
+2026-05-28,mlb,Atlanta Braves @ Boston Red Sox,Atlanta Braves,away,0.6027,0.5583,4.44,medium,WIN,10-2,,ESPN
+2026-05-28,mlb_props,Toronto Blue Jays @ Baltimore Orioles,Patrick Corbin UNDER 4.5K,under,0.6728,0.4926,18.02,high,WIN,4K,4.5,MLB API
+2026-05-28,mlb_props,Minnesota Twins @ Chicago White Sox,Davis Martin OVER 5.5K,over,0.6635,0.5191,14.44,high,LOSS,5K,5.5,MLB API
+2026-05-28,mlb_props,Atlanta Braves @ Boston Red Sox,Payton Tolle OVER 5.5K,over,0.6245,0.4821,14.24,medium,WIN,7K,5.5,MLB API
+2026-05-28,mlb_props,Los Angeles Angels @ Detroit Tigers,Jack Flaherty UNDER 6.5K,under,0.6908,0.5537,13.71,high,LOSS,9K,6.5,MLB API
+2026-05-28,mlb_props,Los Angeles Angels @ Detroit Tigers,Grayson Rodriguez UNDER 5.5K,under,0.6613,0.5648,9.65,high,WIN,5K,5.5,MLB API
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Stephon Castle PTS OVER 17.5,over,0.797,0.4912,30.58,high,LOSS,17.0,17.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Dylan Harper REB OVER 3.5,over,0.7924,0.5017,29.07,high,WIN,6.0,3.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Julian Champagnie PTS OVER 9.5,over,0.7518,0.4858,26.61,high,WIN,10.0,9.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Luguentz Dort AST OVER 0.5,over,0.7784,0.5355,24.29,high,PENDING,,0.5,MANUAL
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Cason Wallace REB OVER 3.5,over,0.6905,0.4704,22.01,high,LOSS,3.0,3.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Luguentz Dort REB OVER 2.5,over,0.7163,0.504,21.23,high,LOSS,1.0,2.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Luke Kornet REB OVER 2.5,over,0.701,0.4907,21.03,high,WIN,5.0,2.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Luke Kornet PTS OVER 2.5,over,0.6642,0.4718,19.24,high,WIN,3.0,2.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Cason Wallace PTS OVER 7.5,over,0.648,0.4972,15.08,medium,WIN,11.0,7.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Jared McCain REB OVER 2.5,over,0.6658,0.5158,15.01,high,LOSS,2.0,2.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Chet Holmgren REB UNDER 7.5,under,0.6346,0.4914,14.32,medium,LOSS,11.0,7.5,ESPN
+2026-05-28,nba_props,Oklahoma City Thunder @ San Antonio Spurs,Devin Vassell REB OVER 4.5,over,0.6159,0.4902,12.57,medium,LOSS,1.0,4.5,ESPN
