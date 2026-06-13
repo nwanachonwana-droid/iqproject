@@ -1,14 +1,34 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-06-02T12:17:50.313418Z",
-  "data_date": "2026-06-02",
+  "generated_at": "2026-06-13T15:41:11.723238Z",
+  "data_date": "2026-06-13",
   "model_version": "v1.0",
   "status": "PROVEN",
-  "picks": [],
+  "picks": [
+    {
+      "pick_id": "ncaabb-2026-06-13-1858235556cc7f446d1e27e02c588c19",
+      "game_time_utc": "2026-06-13T19:00:00Z",
+      "home_team": "Alabama Crimson Tide",
+      "away_team": "Oklahoma Sooners",
+      "pick": "Alabama Crimson Tide",
+      "pick_side": "home",
+      "model_prob_home": 0.5817,
+      "model_prob_away": 0.4183,
+      "market_prob_home": 0.5,
+      "market_prob_away": 0.5,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": 8.17,
+      "confidence_tier": "low",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ],
   "summary": {
-    "total_picks": 0,
+    "total_picks": 1,
     "high_confidence": 0,
-    "avg_edge_pp": 0
+    "avg_edge_pp": 8.17
   }
 }
