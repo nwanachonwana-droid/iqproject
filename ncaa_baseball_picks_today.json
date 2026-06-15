@@ -1,25 +1,44 @@
 {
   "schema_version": "1.0",
   "sport": "ncaa_baseball",
-  "generated_at": "2026-06-13T15:41:48.259499Z",
-  "data_date": "2026-06-13",
+  "generated_at": "2026-06-15T12:12:19.883182Z",
+  "data_date": "2026-06-15",
   "model_version": "v1.0",
   "status": "PROVEN",
   "picks": [
     {
-      "pick_id": "ncaabb-2026-06-13-1858235556cc7f446d1e27e02c588c19",
-      "game_time_utc": "2026-06-13T19:00:00Z",
-      "home_team": "Alabama Crimson Tide",
-      "away_team": "Oklahoma Sooners",
-      "pick": "Alabama Crimson Tide",
+      "pick_id": "ncaabb-2026-06-15-5772b27f13a1b7e3b7d1b3debb8e1955",
+      "game_time_utc": "2026-06-15T18:00:00Z",
+      "home_team": "Texas Longhorns",
+      "away_team": "Alabama Crimson Tide",
+      "pick": "Texas Longhorns",
       "pick_side": "home",
-      "model_prob_home": 0.5817,
-      "model_prob_away": 0.4183,
-      "market_prob_home": 0.5,
-      "market_prob_away": 0.5,
+      "model_prob_home": 0.6041,
+      "model_prob_away": 0.3959,
+      "market_prob_home": 0.6635,
+      "market_prob_away": 0.3365,
       "market_line_home": null,
       "market_source": "pinnacle",
-      "edge_pp": 8.17,
+      "edge_pp": -5.94,
+      "confidence_tier": "medium",
+      "result": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "pick_id": "ncaabb-2026-06-15-04a35e71f3170b225d8e152d707e04e1",
+      "game_time_utc": "2026-06-15T23:00:00Z",
+      "home_team": "Oklahoma Sooners",
+      "away_team": "Georgia Bulldogs",
+      "pick": "Georgia Bulldogs",
+      "pick_side": "away",
+      "model_prob_home": 0.4018,
+      "model_prob_away": 0.5982,
+      "market_prob_home": 0.3256,
+      "market_prob_away": 0.6744,
+      "market_line_home": null,
+      "market_source": "pinnacle",
+      "edge_pp": -7.62,
       "confidence_tier": "low",
       "result": null,
       "outcome": null,
@@ -27,8 +46,8 @@
     }
   ],
   "summary": {
-    "total_picks": 1,
+    "total_picks": 2,
     "high_confidence": 0,
-    "avg_edge_pp": 8.17
+    "avg_edge_pp": -6.78
   }
 }

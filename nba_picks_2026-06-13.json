@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "sport": "nba",
+  "generated_at": "2026-06-13T15:41:50.342722Z",
+  "data_date": "2026-06-13",
+  "model_version": "v1.0",
+  "status": "EXPERIMENTAL",
+  "picks": [
+    {
+      "home_team": "San Antonio Spurs",
+      "away_team": "New York Knicks",
+      "pick": "San Antonio Spurs",
+      "pick_side": "home",
+      "model_prob_home": 0.5249,
+      "model_prob_away": 0.4751,
+      "market_prob_home": 0.6413,
+      "market_prob_away": 0.3587,
+      "edge_pp": -11.64,
+      "confidence_tier": "low",
+      "flags": "\u2014",
+      "game_time_utc": "2026-06-14T00:40:00Z",
+      "outcome": null,
+      "result": null
+    }
+  ],
+  "summary": {
+    "total_picks": 1,
+    "high_confidence": 0,
+    "avg_edge_pp": -11.64
+  }
+}
